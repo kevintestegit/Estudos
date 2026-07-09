@@ -1,0 +1,388 @@
+{
+  "aulas": [
+    {
+      "id": "aula-pt-01",
+      "titulo": "Interpretação de textos — base",
+      "materia": "Português",
+      "duracao": 40,
+      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf",
+      "notas": "Leia o texto antes das alternativas."
+    },
+    {
+      "id": "aula-pt-02",
+      "titulo": "Ortografia e acentuação",
+      "materia": "Português",
+      "duracao": 35,
+      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf",
+      "notas": "Foque nas regras de proparoxítonas e hiatos."
+    },
+    {
+      "id": "aula-pt-03",
+      "titulo": "Morfossintaxe essencial",
+      "materia": "Português",
+      "duracao": 45,
+      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf",
+      "notas": ""
+    },
+    {
+      "id": "aula-pt-04",
+      "titulo": "Concordância verbal e nominal",
+      "materia": "Português",
+      "duracao": 40,
+      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf",
+      "notas": ""
+    },
+    {
+      "id": "aula-pt-05",
+      "titulo": "Regência e crase",
+      "materia": "Português",
+      "duracao": 40,
+      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf",
+      "notas": ""
+    },
+    {
+      "id": "aula-pt-06",
+      "titulo": "Pontuação e coerência",
+      "materia": "Português",
+      "duracao": 30,
+      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf",
+      "notas": ""
+    },
+    {
+      "id": "aula-rl-01",
+      "titulo": "Proposições e conectivos",
+      "materia": "Raciocínio Lógico",
+      "duracao": 45,
+      "url": "biblioteca.html",
+      "notas": ""
+    },
+    {
+      "id": "aula-rl-02",
+      "titulo": "Equivalências e negações",
+      "materia": "Raciocínio Lógico",
+      "duracao": 45,
+      "url": "biblioteca.html",
+      "notas": ""
+    },
+    {
+      "id": "aula-rl-03",
+      "titulo": "Diagramas lógicos",
+      "materia": "Raciocínio Lógico",
+      "duracao": 40,
+      "url": "biblioteca.html",
+      "notas": ""
+    },
+    {
+      "id": "aula-rl-04",
+      "titulo": "Contagem e probabilidade",
+      "materia": "Raciocínio Lógico",
+      "duracao": 40,
+      "url": "biblioteca.html",
+      "notas": ""
+    },
+    {
+      "id": "aula-inf-01",
+      "titulo": "Hardware e software",
+      "materia": "Informática",
+      "duracao": 30,
+      "url": "https://www.gov.br/governodigital/pt-br",
+      "notas": ""
+    },
+    {
+      "id": "aula-inf-02",
+      "titulo": "Sistemas operacionais",
+      "materia": "Informática",
+      "duracao": 30,
+      "url": "https://www.gov.br/governodigital/pt-br",
+      "notas": ""
+    },
+    {
+      "id": "aula-inf-03",
+      "titulo": "Internet e segurança",
+      "materia": "Informática",
+      "duracao": 30,
+      "url": "https://www.gov.br/governodigital/pt-br",
+      "notas": ""
+    },
+    {
+      "id": "aula-inf-04",
+      "titulo": "Pacote Office",
+      "materia": "Informática",
+      "duracao": 35,
+      "url": "https://www.gov.br/governodigital/pt-br",
+      "notas": ""
+    },
+    {
+      "id": "aula-et-01",
+      "titulo": "Ética no serviço público",
+      "materia": "Ética",
+      "duracao": 30,
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto/d1171.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-et-02",
+      "titulo": "Cidadania e ética profissional",
+      "materia": "Ética",
+      "duracao": 30,
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto/d1171.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-dc-01",
+      "titulo": "Direitos fundamentais",
+      "materia": "Direito Constitucional",
+      "duracao": 50,
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-dc-02",
+      "titulo": "Organização do Estado",
+      "materia": "Direito Constitucional",
+      "duracao": 45,
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-dc-03",
+      "titulo": "Administração Pública na CF",
+      "materia": "Direito Constitucional",
+      "duracao": 45,
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-dc-04",
+      "titulo": "Poderes da União",
+      "materia": "Direito Constitucional",
+      "duracao": 45,
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-da-01",
+      "titulo": "Organização da Administração",
+      "materia": "Direito Administrativo",
+      "duracao": 45,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-da-02",
+      "titulo": "Atos administrativos",
+      "materia": "Direito Administrativo",
+      "duracao": 50,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-da-03",
+      "titulo": "Licitações — noções",
+      "materia": "Direito Administrativo",
+      "duracao": 45,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-da-04",
+      "titulo": "Poderes administrativos",
+      "materia": "Direito Administrativo",
+      "duracao": 45,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-da-05",
+      "titulo": "Agentes e responsabilidade",
+      "materia": "Direito Administrativo",
+      "duracao": 40,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-da-06",
+      "titulo": "Controle da Administração",
+      "materia": "Direito Administrativo",
+      "duracao": 40,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-prev-01",
+      "titulo": "Seguridade Social — conceitos",
+      "materia": "Direito Previdenciário",
+      "duracao": 50,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
+      "notas": "Saúde, previdência e assistência."
+    },
+    {
+      "id": "aula-prev-02",
+      "titulo": "Segurados e dependentes",
+      "materia": "Direito Previdenciário",
+      "duracao": 50,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-prev-03",
+      "titulo": "Filiação e inscrição",
+      "materia": "Direito Previdenciário",
+      "duracao": 40,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-prev-04",
+      "titulo": "Carência e qualidade de segurado",
+      "materia": "Direito Previdenciário",
+      "duracao": 50,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-prev-05",
+      "titulo": "Salário de contribuição",
+      "materia": "Direito Previdenciário",
+      "duracao": 40,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-prev-06",
+      "titulo": "Aposentadorias",
+      "materia": "Direito Previdenciário",
+      "duracao": 55,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-prev-07",
+      "titulo": "Auxílios e salário-maternidade",
+      "materia": "Direito Previdenciário",
+      "duracao": 45,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-prev-08",
+      "titulo": "Pensão por morte e BPC",
+      "materia": "Direito Previdenciário",
+      "duracao": 50,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-prev-09",
+      "titulo": "Processo administrativo no INSS",
+      "materia": "Direito Previdenciário",
+      "duracao": 40,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-prev-10",
+      "titulo": "Custeio da Seguridade",
+      "materia": "Direito Previdenciário",
+      "duracao": 50,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-prev-11",
+      "titulo": "Tempo de contribuição",
+      "materia": "Direito Previdenciário",
+      "duracao": 45,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-prev-12",
+      "titulo": "Regras de transição",
+      "materia": "Direito Previdenciário",
+      "duracao": 50,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-prev-13",
+      "titulo": "Leis 8.212 e 8.213",
+      "materia": "Direito Previdenciário",
+      "duracao": 55,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-prev-14",
+      "titulo": "Mapa de benefícios",
+      "materia": "Direito Previdenciário",
+      "duracao": 40,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-ctb-01",
+      "titulo": "CTB — princípios",
+      "materia": "Legislação de Trânsito",
+      "duracao": 45,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-ctb-02",
+      "titulo": "Infrações e penalidades",
+      "materia": "Legislação de Trânsito",
+      "duracao": 50,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-ctb-03",
+      "titulo": "Sinalização e veículos",
+      "materia": "Legislação de Trânsito",
+      "duracao": 40,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-ctb-04",
+      "titulo": "Habilitação e documentos",
+      "materia": "Legislação de Trânsito",
+      "duracao": 40,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-pen-01",
+      "titulo": "Crimes de trânsito",
+      "materia": "Direito Penal",
+      "duracao": 40,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+      "notas": ""
+    },
+    {
+      "id": "aula-ps-01",
+      "titulo": "Primeiros socorros básicos",
+      "materia": "Primeiros Socorros",
+      "duracao": 35,
+      "url": "biblioteca.html",
+      "notas": ""
+    },
+    {
+      "id": "aula-fis-01",
+      "titulo": "Física aplicada ao trânsito",
+      "materia": "Física/Mecânica",
+      "duracao": 35,
+      "url": "biblioteca.html",
+      "notas": ""
+    },
+    {
+      "id": "aula-geo-01",
+      "titulo": "Geografia e malha rodoviária",
+      "materia": "Geografia",
+      "duracao": 30,
+      "url": "biblioteca.html",
+      "notas": ""
+    }
+  ]
+}

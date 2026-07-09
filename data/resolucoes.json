@@ -1,0 +1,54 @@
+{
+  "itens": [
+    {
+      "id": "res-metodo-cebraspe",
+      "concurso": "Comum",
+      "ano": 2026,
+      "titulo": "Método CEBRASPE C/E — leia o enunciado literalmente",
+      "materia": "Estratégia",
+      "tipo": "orientacao",
+      "url": "questoes.html",
+      "fonte": "Portal"
+    },
+    {
+      "id": "res-ciclo-erros",
+      "concurso": "Comum",
+      "ano": 2026,
+      "titulo": "Ciclo de erros D+1 / D+7 / D+30",
+      "materia": "Estratégia",
+      "tipo": "orientacao",
+      "url": "caderno-erros.html",
+      "fonte": "Portal"
+    },
+    {
+      "id": "res-prova-real",
+      "concurso": "INSS",
+      "ano": 2022,
+      "titulo": "Treino com prova real INSS 2022 + gabarito",
+      "materia": "Prova",
+      "tipo": "resolucao",
+      "url": "provas.html",
+      "fonte": "Portal"
+    },
+    {
+      "id": "res-prf-ctb",
+      "concurso": "PRF Administrativo",
+      "ano": 2026,
+      "titulo": "Priorize CTB + ética + DA na reta final PRF Adm",
+      "materia": "Estratégia",
+      "tipo": "orientacao",
+      "url": "biblioteca.html",
+      "fonte": "Portal"
+    },
+    {
+      "id": "res-prev-leis",
+      "concurso": "INSS",
+      "ano": 2026,
+      "titulo": "Leitura dirigida: 8.213 + 8.212 + 3.048 + EC 103",
+      "materia": "Direito Previdenciário",
+      "tipo": "orientacao",
+      "url": "biblioteca.html",
+      "fonte": "Portal"
+    }
+  ]
+}

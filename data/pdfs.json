@@ -1,0 +1,375 @@
+{
+  "pdfs": [
+    {
+      "id": "pdf-pt-01",
+      "titulo": "Resumo — Interpretação",
+      "materia": "Português",
+      "paginas": 8,
+      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf"
+    },
+    {
+      "id": "pdf-pt-02",
+      "titulo": "Resumo — Ortografia",
+      "materia": "Português",
+      "paginas": 6,
+      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf"
+    },
+    {
+      "id": "pdf-pt-03",
+      "titulo": "Resumo — Morfossintaxe",
+      "materia": "Português",
+      "paginas": 10,
+      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf"
+    },
+    {
+      "id": "pdf-pt-04",
+      "titulo": "Resumo — Concordância",
+      "materia": "Português",
+      "paginas": 7,
+      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf"
+    },
+    {
+      "id": "pdf-pt-05",
+      "titulo": "Resumo — Regência e crase",
+      "materia": "Português",
+      "paginas": 6,
+      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf"
+    },
+    {
+      "id": "pdf-pt-06",
+      "titulo": "Resumo — Pontuação",
+      "materia": "Português",
+      "paginas": 5,
+      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf"
+    },
+    {
+      "id": "pdf-rl-01",
+      "titulo": "Mapa — Proposições",
+      "materia": "Raciocínio Lógico",
+      "paginas": 5,
+      "url": "biblioteca.html"
+    },
+    {
+      "id": "pdf-rl-02",
+      "titulo": "Mapa — Equivalências",
+      "materia": "Raciocínio Lógico",
+      "paginas": 6,
+      "url": "biblioteca.html"
+    },
+    {
+      "id": "pdf-rl-03",
+      "titulo": "Mapa — Diagramas",
+      "materia": "Raciocínio Lógico",
+      "paginas": 5,
+      "url": "biblioteca.html"
+    },
+    {
+      "id": "pdf-rl-04",
+      "titulo": "Mapa — Probabilidade",
+      "materia": "Raciocínio Lógico",
+      "paginas": 6,
+      "url": "biblioteca.html"
+    },
+    {
+      "id": "pdf-inf-01",
+      "titulo": "Resumo — Hardware/Software",
+      "materia": "Informática",
+      "paginas": 4,
+      "url": "https://www.gov.br/governodigital/pt-br"
+    },
+    {
+      "id": "pdf-inf-02",
+      "titulo": "Resumo — SO",
+      "materia": "Informática",
+      "paginas": 5,
+      "url": "https://www.gov.br/governodigital/pt-br"
+    },
+    {
+      "id": "pdf-inf-03",
+      "titulo": "Resumo — Internet",
+      "materia": "Informática",
+      "paginas": 5,
+      "url": "https://www.gov.br/governodigital/pt-br"
+    },
+    {
+      "id": "pdf-inf-04",
+      "titulo": "Resumo — Office",
+      "materia": "Informática",
+      "paginas": 8,
+      "url": "https://www.gov.br/governodigital/pt-br"
+    },
+    {
+      "id": "pdf-et-01",
+      "titulo": "Resumo — Ética servidor",
+      "materia": "Ética",
+      "paginas": 4,
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto/d1171.htm"
+    },
+    {
+      "id": "pdf-et-02",
+      "titulo": "Resumo — Cidadania",
+      "materia": "Ética",
+      "paginas": 4,
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto/d1171.htm"
+    },
+    {
+      "id": "pdf-dc-01",
+      "titulo": "Resumo — Direitos fundamentais",
+      "materia": "Direito Constitucional",
+      "paginas": 10,
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+    },
+    {
+      "id": "pdf-dc-02",
+      "titulo": "Resumo — Organização do Estado",
+      "materia": "Direito Constitucional",
+      "paginas": 8,
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+    },
+    {
+      "id": "pdf-dc-03",
+      "titulo": "Resumo — Adm. Pública CF",
+      "materia": "Direito Constitucional",
+      "paginas": 7,
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+    },
+    {
+      "id": "pdf-dc-04",
+      "titulo": "Resumo — Poderes",
+      "materia": "Direito Constitucional",
+      "paginas": 8,
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+    },
+    {
+      "id": "pdf-da-01",
+      "titulo": "Resumo — Administração",
+      "materia": "Direito Administrativo",
+      "paginas": 8,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm"
+    },
+    {
+      "id": "pdf-da-02",
+      "titulo": "Resumo — Atos",
+      "materia": "Direito Administrativo",
+      "paginas": 9,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm"
+    },
+    {
+      "id": "pdf-da-03",
+      "titulo": "Resumo — Licitações",
+      "materia": "Direito Administrativo",
+      "paginas": 8,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm"
+    },
+    {
+      "id": "pdf-da-04",
+      "titulo": "Resumo — Poderes adm.",
+      "materia": "Direito Administrativo",
+      "paginas": 7,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm"
+    },
+    {
+      "id": "pdf-da-05",
+      "titulo": "Resumo — Agentes",
+      "materia": "Direito Administrativo",
+      "paginas": 6,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm"
+    },
+    {
+      "id": "pdf-da-06",
+      "titulo": "Resumo — Controle",
+      "materia": "Direito Administrativo",
+      "paginas": 6,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm"
+    },
+    {
+      "id": "pdf-prev-01",
+      "titulo": "Seguridade Social",
+      "materia": "Direito Previdenciário",
+      "paginas": 10,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "pdf-prev-02",
+      "titulo": "Segurados e dependentes",
+      "materia": "Direito Previdenciário",
+      "paginas": 9,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "pdf-prev-03",
+      "titulo": "Filiação e inscrição",
+      "materia": "Direito Previdenciário",
+      "paginas": 6,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "pdf-prev-04",
+      "titulo": "Carência e qualidade",
+      "materia": "Direito Previdenciário",
+      "paginas": 8,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "pdf-prev-05",
+      "titulo": "Salário de contribuição",
+      "materia": "Direito Previdenciário",
+      "paginas": 6,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "pdf-prev-06",
+      "titulo": "Aposentadorias",
+      "materia": "Direito Previdenciário",
+      "paginas": 12,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "pdf-prev-07",
+      "titulo": "Auxílios",
+      "materia": "Direito Previdenciário",
+      "paginas": 8,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "pdf-prev-08",
+      "titulo": "Pensão e BPC",
+      "materia": "Direito Previdenciário",
+      "paginas": 9,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "pdf-prev-09",
+      "titulo": "Processo INSS",
+      "materia": "Direito Previdenciário",
+      "paginas": 7,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "pdf-prev-10",
+      "titulo": "Custeio",
+      "materia": "Direito Previdenciário",
+      "paginas": 8,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "pdf-prev-11",
+      "titulo": "Tempo de contribuição",
+      "materia": "Direito Previdenciário",
+      "paginas": 7,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "pdf-prev-12",
+      "titulo": "Regras de transição",
+      "materia": "Direito Previdenciário",
+      "paginas": 9,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "pdf-prev-13",
+      "titulo": "Leis 8.212/8.213",
+      "materia": "Direito Previdenciário",
+      "paginas": 14,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "pdf-prev-14",
+      "titulo": "Questões comentadas INSS",
+      "materia": "Direito Previdenciário",
+      "paginas": 20,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "pdf-prev-15",
+      "titulo": "Mapa de benefícios",
+      "materia": "Direito Previdenciário",
+      "paginas": 6,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "pdf-prev-16",
+      "titulo": "Custeio + processo (revisão)",
+      "materia": "Direito Previdenciário",
+      "paginas": 8,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "pdf-ctb-01",
+      "titulo": "CTB — princípios",
+      "materia": "Legislação de Trânsito",
+      "paginas": 8,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+    },
+    {
+      "id": "pdf-ctb-02",
+      "titulo": "Infrações e penalidades",
+      "materia": "Legislação de Trânsito",
+      "paginas": 10,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+    },
+    {
+      "id": "pdf-ctb-03",
+      "titulo": "Sinalização",
+      "materia": "Legislação de Trânsito",
+      "paginas": 7,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+    },
+    {
+      "id": "pdf-ctb-04",
+      "titulo": "Documentos e habilitação",
+      "materia": "Legislação de Trânsito",
+      "paginas": 7,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+    },
+    {
+      "id": "pdf-ctb-05",
+      "titulo": "CTB consolidado",
+      "materia": "Legislação de Trânsito",
+      "paginas": 15,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+    },
+    {
+      "id": "pdf-pen-01",
+      "titulo": "Crimes de trânsito",
+      "materia": "Direito Penal",
+      "paginas": 6,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+    },
+    {
+      "id": "pdf-ps-01",
+      "titulo": "Primeiros socorros",
+      "materia": "Primeiros Socorros",
+      "paginas": 5,
+      "url": "biblioteca.html"
+    },
+    {
+      "id": "pdf-fis-01",
+      "titulo": "Física no trânsito",
+      "materia": "Física/Mecânica",
+      "paginas": 5,
+      "url": "biblioteca.html"
+    },
+    {
+      "id": "pdf-geo-01",
+      "titulo": "Geografia rodoviária",
+      "materia": "Geografia",
+      "paginas": 4,
+      "url": "biblioteca.html"
+    },
+    {
+      "id": "prova-inss-2016",
+      "titulo": "Prova INSS (trecho estudo)",
+      "materia": "Prova",
+      "paginas": 12,
+      "url": "https://cdn.cebraspe.org.br/concursos/INSS_2015/arquivos/234INSS_002_01_Caderno_ALGA.PDF"
+    },
+    {
+      "id": "prova-prf-2019",
+      "titulo": "Prova PRF Adm (trecho estudo)",
+      "materia": "Prova",
+      "paginas": 12,
+      "url": "https://www.solucaopreparatorio.com.br/img/provas/caderno_prova_P_Agente_Administrativo_PRF_2014.pdf"
+    }
+  ]
+}

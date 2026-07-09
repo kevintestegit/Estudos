@@ -1,0 +1,165 @@
+{
+  "itens": [
+    {
+      "id": "manual-redacao-planalto",
+      "concurso": "Comum",
+      "materia": "Português / Redação Oficial",
+      "titulo": "Manual de Redação da Presidência da República",
+      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf"
+    },
+    {
+      "id": "decreto-1171-etica",
+      "concurso": "Comum",
+      "materia": "Ética no Serviço Público",
+      "titulo": "Decreto nº 1.171/1994 - Código de Ética do Servidor Público",
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto/d1171.htm"
+    },
+    {
+      "id": "decreto-6029-etica",
+      "concurso": "Comum",
+      "materia": "Ética no Serviço Público",
+      "titulo": "Decreto nº 6.029/2007 - Sistema de Gestão da Ética",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/D6029.htm"
+    },
+    {
+      "id": "lei-9784-processo-administrativo",
+      "concurso": "Comum",
+      "materia": "Direito Administrativo",
+      "titulo": "Lei nº 9.784/1999 - Processo Administrativo Federal",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9784.htm"
+    },
+    {
+      "id": "lei-14133-licitacoes",
+      "concurso": "Comum",
+      "materia": "Direito Administrativo",
+      "titulo": "Lei nº 14.133/2021 - Licitações e Contratos Administrativos",
+      "url": "https://legislacao.planalto.gov.br/legisla/legislacao.nsf/Viw_Identificacao/lei%2014.133-2021?OpenDocument="
+    },
+    {
+      "id": "lei-8212-custeio",
+      "concurso": "INSS",
+      "materia": "Direito Previdenciário",
+      "titulo": "Lei nº 8.212/1991 - Custeio da Seguridade Social",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8212cons.htm"
+    },
+    {
+      "id": "lei-8213-beneficios",
+      "concurso": "INSS",
+      "materia": "Direito Previdenciário",
+      "titulo": "Lei nº 8.213/1991 - Benefícios da Previdência Social",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm"
+    },
+    {
+      "id": "decreto-3048-rps",
+      "concurso": "INSS",
+      "materia": "Direito Previdenciário",
+      "titulo": "Decreto nº 3.048/1999 - Regulamento da Previdência Social",
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto/d3048.htm"
+    },
+    {
+      "id": "loas-lei-8742",
+      "concurso": "INSS",
+      "materia": "Assistência Social / BPC",
+      "titulo": "Lei nº 8.742/1993 - LOAS",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8742.htm"
+    },
+    {
+      "id": "ec-103-2019",
+      "concurso": "INSS",
+      "materia": "Direito Previdenciário",
+      "titulo": "Emenda Constitucional nº 103/2019 - Reforma da Previdência",
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc103.htm"
+    },
+    {
+      "id": "lc-142-2013",
+      "concurso": "INSS",
+      "materia": "Direito Previdenciário",
+      "titulo": "Lei Complementar nº 142/2013 - Aposentadoria da pessoa com deficiência",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp142.htm"
+    },
+    {
+      "id": "in-128-inss",
+      "concurso": "INSS",
+      "materia": "Direito Previdenciário",
+      "titulo": "IN PRES/INSS nº 128/2022",
+      "url": "https://www.in.gov.br/en/web/dou/-/instrucao-normativa-pres/inss-n-128-de-28-de-marco-de-2022-389275446"
+    },
+    {
+      "id": "decreto-1655-prf",
+      "concurso": "PRF Administrativo",
+      "materia": "Legislação PRF",
+      "titulo": "Decreto nº 1.655/1995 - Competências da PRF",
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto/d1655.htm"
+    },
+    {
+      "id": "lei-9654-prf",
+      "concurso": "PRF Administrativo",
+      "materia": "Legislação PRF",
+      "titulo": "Lei nº 9.654/1998 - Carreira PRF",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/L9654compilado.htm"
+    },
+    {
+      "id": "cf-planalto",
+      "concurso": "Comum",
+      "materia": "Direito Constitucional",
+      "titulo": "Constituição Federal — Planalto (texto compilado)",
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+    },
+    {
+      "id": "ctb-lei-9503",
+      "concurso": "PRF Administrativo",
+      "materia": "Legislação de Trânsito",
+      "titulo": "Lei nº 9.503/1997 — Código de Trânsito Brasileiro",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm"
+    },
+    {
+      "id": "lei-8429-improbidade",
+      "concurso": "Comum",
+      "materia": "Direito Administrativo",
+      "titulo": "Lei nº 8.429/1992 — Improbidade Administrativa",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8429.htm"
+    },
+    {
+      "id": "lei-12527-acesso-info",
+      "concurso": "Comum",
+      "materia": "Direito Administrativo",
+      "titulo": "Lei nº 12.527/2011 — Acesso à Informação",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm"
+    },
+    {
+      "id": "lei-13460-usuario",
+      "concurso": "Comum",
+      "materia": "Direito Administrativo",
+      "titulo": "Lei nº 13.460/2017 — Participação e proteção dos usuários",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2017/lei/l13460.htm"
+    },
+    {
+      "id": "lei-8742-loas-comp",
+      "concurso": "INSS",
+      "materia": "Assistência Social / BPC",
+      "titulo": "LOAS — Lei 8.742/1993 (compilado Planalto)",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8742compilado.htm"
+    },
+    {
+      "id": "decreto-6214-bpc",
+      "concurso": "INSS",
+      "materia": "Assistência Social / BPC",
+      "titulo": "Decreto nº 6.214/2007 — Regulamento do BPC",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/d6214.htm"
+    },
+    {
+      "id": "lei-10741-estatuto-idoso",
+      "concurso": "INSS",
+      "materia": "Direito Previdenciário",
+      "titulo": "Lei nº 10.741/2003 — Estatuto da Pessoa Idosa",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/2003/l10.741.htm"
+    },
+    {
+      "id": "lei-13146-pcd",
+      "concurso": "INSS",
+      "materia": "Direito Previdenciário",
+      "titulo": "Lei nº 13.146/2015 — Estatuto da Pessoa com Deficiência",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm"
+    }
+  ]
+}

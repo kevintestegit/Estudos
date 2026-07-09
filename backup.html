@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Backup — Portal de Estudos</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <p class="brand">Portal Estudos</p>
+      <p class="brand-sub">INSS · PRF Adm</p>
+      <nav class="nav">
+        <a href="index.html" data-nav="dashboard">Dashboard</a>
+        <a href="hoje.html" data-nav="hoje">Hoje</a>
+        <a href="cronograma.html" data-nav="cronograma">Cronograma</a>
+        <a href="biblioteca.html" data-nav="biblioteca">Biblioteca</a>
+        <a href="materias.html" data-nav="materias">Matérias</a>
+        <a href="questoes.html" data-nav="questoes">Questões</a>
+        <a href="simulados.html" data-nav="simulados">Simulados</a>
+        <a href="provas.html" data-nav="provas">Provas</a>
+        <a href="caderno-erros.html" data-nav="erros">Caderno de erros</a>
+        <a href="progresso.html" data-nav="progresso">Progresso</a>
+        <a href="backup.html" data-nav="backup">Backup</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <button class="menu-toggle" id="menu-toggle" type="button">Menu</button>
+          <h1>Backup</h1>
+        </div>
+        <div id="status-bar"></div>
+      </div>
+      <div id="app-root"><p class="muted">Carregando…</p></div>
+    </main>
+  </div>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/backup.js"></script>
+  <script>initBackup();</script>
+</body>
+</html>
