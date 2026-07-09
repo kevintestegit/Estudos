@@ -24,7 +24,10 @@ const DEFAULT_PROGRESS = {
   manualStudies: [],
   materiaisEstudados: [],
   materiaisRevisao: [],
-  provasFeitas: []
+  provasFeitas: [],
+  goals: { minutes: 90, questions: 20 },
+  dailyQuiz: {},
+  flashcards: {}
 };
 
 const Storage = {
@@ -103,7 +106,7 @@ const Storage = {
     });
   },
 
-  recordQuiz({ correct, wrong, subject, topic }) {
+  recordQuiz({ correct, wrong, subject, topic, date }) {
     return this.update((d) => {
       const c = Number(correct) || 0;
       const w = Number(wrong) || 0;
@@ -115,10 +118,54 @@ const Storage = {
       d.quiz.bySubject[key].answered += c + w;
       d.quiz.bySubject[key].correct += c;
       d.quiz.bySubject[key].wrong += w;
+      this._bumpDailyQuiz(d, date || todayISO(), c + w, c, w);
       d.xp += c * 2 + w;
       this._recalcLevel(d);
       this._checkAchievements(d);
     });
+  },
+
+  setGoals({ minutes, questions }) {
+    return this.update((d) => {
+      if (!d.goals) d.goals = { minutes: 90, questions: 20 };
+      if (minutes != null) d.goals.minutes = Math.max(10, Number(minutes) || 90);
+      if (questions != null) d.goals.questions = Math.max(1, Number(questions) || 20);
+    });
+  },
+
+  getFlashState(id) {
+    const d = this.get();
+    return (d.flashcards || {})[id] || null;
+  },
+
+  // result: 'know' | 'fail'
+  reviewFlashcard(id, result) {
+    return this.update((d) => {
+      if (!d.flashcards) d.flashcards = {};
+      const today = todayISO();
+      const cur = d.flashcards[id] || { box: 0, last: null, next: today, reviews: 0, fails: 0 };
+      if (result === 'know') {
+        cur.box = Math.min(3, (cur.box || 0) + 1);
+      } else {
+        cur.box = 0;
+        cur.fails = (cur.fails || 0) + 1;
+      }
+      const days = [1, 1, 7, 30][cur.box] || 30;
+      cur.last = today;
+      cur.next = addDaysISO(today, days);
+      cur.reviews = (cur.reviews || 0) + 1;
+      d.flashcards[id] = cur;
+      d.xp += result === 'know' ? 2 : 1;
+      this._recalcLevel(d);
+    });
+  },
+
+  _bumpDailyQuiz(d, date, answered, correct, wrong) {
+    if (!d.dailyQuiz) d.dailyQuiz = {};
+    if (!d.dailyQuiz[date]) d.dailyQuiz[date] = { answered: 0, correct: 0, wrong: 0 };
+    d.dailyQuiz[date].answered += answered;
+    d.dailyQuiz[date].correct += correct;
+    d.dailyQuiz[date].wrong += wrong;
   },
 
   addErro(erro) {
@@ -158,20 +205,24 @@ const Storage = {
 
   addSimulado(result) {
     return this.update((d) => {
+      const total = result.total || 0;
+      const correct = result.correct || 0;
+      const wrong = total - correct;
       d.simulados.push({
         id: uid(),
         tipo: result.tipo || 'misto',
-        total: result.total || 0,
-        correct: result.correct || 0,
+        total,
+        correct,
         minutes: result.minutes || 0,
         bySubject: result.bySubject || {},
         date: todayISO(),
         at: new Date().toISOString()
       });
-      d.quiz.answered += (result.total || 0);
-      d.quiz.correct += (result.correct || 0);
-      d.quiz.wrong += (result.total || 0) - (result.correct || 0);
-      d.xp += (result.correct || 0) * 3;
+      d.quiz.answered += total;
+      d.quiz.correct += correct;
+      d.quiz.wrong += wrong;
+      this._bumpDailyQuiz(d, todayISO(), total, correct, wrong);
+      d.xp += correct * 3;
       this._recalcLevel(d);
       this._checkAchievements(d);
     });
@@ -284,6 +335,111 @@ function daysBetween(a, b) {
   return Math.round((db - da) / 86400000);
 }
 
+function getWeakSubjects(progress, minAnswered = 3) {
+  const p = progress || Storage.get();
+  return Object.entries(p.quiz?.bySubject || {})
+    .map(([materia, v]) => {
+      const answered = v.answered || 0;
+      const correct = v.correct || 0;
+      const pct = answered ? Math.round((correct / answered) * 100) : 0;
+      return { materia, answered, correct, wrong: v.wrong || 0, pct };
+    })
+    .filter((x) => x.answered >= minAnswered)
+    .sort((a, b) => a.pct - b.pct || b.answered - a.answered);
+}
+
+function getDueErros(progress, date) {
+  const p = progress || Storage.get();
+  const day = date || todayISO();
+  return (p.erros || []).filter((e) => {
+    if (!e.reviews || !e.done) return false;
+    return (
+      (!e.done.d1 && e.reviews.d1 <= day) ||
+      (!e.done.d7 && e.reviews.d7 <= day) ||
+      (!e.done.d30 && e.reviews.d30 <= day)
+    );
+  }).map((e) => {
+    const due = [];
+    if (!e.done.d1 && e.reviews.d1 <= day) due.push('D+1');
+    if (!e.done.d7 && e.reviews.d7 <= day) due.push('D+7');
+    if (!e.done.d30 && e.reviews.d30 <= day) due.push('D+30');
+    return { ...e, dueKeys: due };
+  });
+}
+
+function getWeeklyReport(progress) {
+  const p = progress || Storage.get();
+  const today = todayISO();
+  // last 7 days including today
+  const days = [];
+  for (let i = 6; i >= 0; i--) days.push(addDaysISO(today, -i));
+  const sessions = (p.studySessions || []).filter((s) => days.includes(s.date));
+  const minutes = sessions.reduce((a, s) => a + (Number(s.minutes) || 0), 0);
+  let qAns = 0, qOk = 0, qBad = 0;
+  days.forEach((d) => {
+    const dq = (p.dailyQuiz || {})[d];
+    if (dq) {
+      qAns += dq.answered || 0;
+      qOk += dq.correct || 0;
+      qBad += dq.wrong || 0;
+    }
+  });
+  const studiedDays = new Set(sessions.map((s) => s.date));
+  days.forEach((d) => {
+    if ((p.dailyQuiz || {})[d]?.answered) studiedDays.add(d);
+  });
+  const faltas = days.filter((d) => d < today && !studiedDays.has(d) && (p.dayStatus[d] === 'faltou' || !p.dayStatus[d] || p.dayStatus[d] === 'pendente')).length;
+  const weak = getWeakSubjects(p, 2).slice(0, 3);
+  const due = getDueErros(p, today);
+  const pct = qAns ? Math.round((qOk / qAns) * 100) : 0;
+  const nextActions = [];
+  if (due.length) nextActions.push(`Revisar ${due.length} erro(s) vencido(s)`);
+  if (weak[0]) nextActions.push(`Treinar fraco: ${weak[0].materia} (${weak[0].pct}%)`);
+  if (minutes < 300) nextActions.push('Aumentar volume de horas na próxima semana');
+  if (qAns < 50) nextActions.push('Fazer mais questões (meta: 50+/semana)');
+  if (!nextActions.length) nextActions.push('Manter ritmo e 1 simulado cronometrado');
+  return {
+    from: days[0],
+    to: today,
+    minutes,
+    hours: Math.round((minutes / 60) * 10) / 10,
+    questions: qAns,
+    correct: qOk,
+    wrong: qBad,
+    pct,
+    daysStudied: studiedDays.size,
+    faltas,
+    weak,
+    dueCount: due.length,
+    nextActions,
+    sessions: sessions.length
+  };
+}
+
+function getTodayGoals(progress) {
+  const p = progress || Storage.get();
+  const today = todayISO();
+  const goals = p.goals || { minutes: 90, questions: 20 };
+  const minutesDone = (p.studySessions || [])
+    .filter((s) => s.date === today)
+    .reduce((sum, s) => sum + (Number(s.minutes) || 0), 0);
+  const dq = (p.dailyQuiz || {})[today] || { answered: 0, correct: 0, wrong: 0 };
+  const minGoal = goals.minutes || 90;
+  const qGoal = goals.questions || 20;
+  return {
+    minutesGoal: minGoal,
+    questionsGoal: qGoal,
+    minutesDone,
+    questionsDone: dq.answered || 0,
+    questionsCorrect: dq.correct || 0,
+    minutesPct: Math.min(100, Math.round((minutesDone / minGoal) * 100)),
+    questionsPct: Math.min(100, Math.round(((dq.answered || 0) / qGoal) * 100)),
+    minutesOk: minutesDone >= minGoal,
+    questionsOk: (dq.answered || 0) >= qGoal,
+    allOk: minutesDone >= minGoal && (dq.answered || 0) >= qGoal
+  };
+}
+
 function computeStats(progress) {
   const p = progress || Storage.get();
   const today = todayISO();
@@ -352,3 +508,7 @@ window.todayISO = todayISO;
 window.addDaysISO = addDaysISO;
 window.daysBetween = daysBetween;
 window.computeStats = computeStats;
+window.getWeakSubjects = getWeakSubjects;
+window.getDueErros = getDueErros;
+window.getTodayGoals = getTodayGoals;
+window.getWeeklyReport = getWeeklyReport;

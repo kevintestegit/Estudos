@@ -31,12 +31,30 @@ function renderDashboard(cronograma, dicasData) {
   const dica = dicas.length ? dicas[new Date().getDate() % dicas.length] : '';
   const matEst = (progress.materiaisEstudados || []).length;
   const provasFeitas = (progress.provasFeitas || []).length;
+  const goals = getTodayGoals(progress);
+  const weak = getWeakSubjects(progress, 3).slice(0, 5);
+  const due = getDueErros(progress);
 
   document.getElementById('app-root').innerHTML = `
     <div class="alert ${status.code === 'em_dia' ? 'alert-ok' : status.code === 'faltou_ontem' ? 'alert-danger' : 'alert-warn'}">
       ${App.esc(status.message)}${status.recoveryCount ? ` · ${status.recoveryCount} dia(s) para recuperar` : ''}
     </div>
     ${dica ? `<div class="alert alert-info">Dica do dia: ${App.esc(dica)}</div>` : ''}
+
+    <div class="card mb-1">
+      <h2>Meta de hoje ${goals.allOk ? '<span class="badge badge-ok">Batida</span>' : '<span class="badge badge-warn">Em andamento</span>'}</h2>
+      <div class="grid grid-2">
+        <div>
+          <p><strong>Minutos:</strong> ${goals.minutesDone}/${goals.minutesGoal}</p>
+          <div class="progress-bar"><span style="width:${goals.minutesPct}%"></span></div>
+        </div>
+        <div>
+          <p><strong>Questões:</strong> ${goals.questionsDone}/${goals.questionsGoal}</p>
+          <div class="progress-bar"><span style="width:${goals.questionsPct}%"></span></div>
+        </div>
+      </div>
+      <p class="muted mt-1">Ajuste a meta em Progresso.</p>
+    </div>
 
     <div class="grid grid-2 mb-1">
       <div class="card">
@@ -47,6 +65,7 @@ function renderDashboard(cronograma, dicasData) {
         <p class="muted">${App.esc(todayTasks)}</p>
         <p><strong>Próxima ação:</strong> ${App.esc(App.nextAction(progress, cronograma))}</p>
         <p><span class="badge ${badgeClass}">${App.esc(status.message)}</span></p>
+        ${due.length ? `<p class="mt-1"><span class="badge badge-warn">${due.length} erro(s) para revisar hoje</span></p>` : ''}
         <div class="actions">
           <a class="btn" href="hoje.html">Ir para Hoje</a>
           <a class="btn btn-secondary" href="questoes.html">Questões</a>
@@ -66,6 +85,23 @@ function renderDashboard(cronograma, dicasData) {
         }</p>
         <p class="muted mt-1">Biblioteca: ${matEst} materiais · ${provasFeitas} provas reais</p>
       </div>
+    </div>
+
+    <div class="card mb-1">
+      <h2>Foco no fraco</h2>
+      ${weak.length ? `
+        <table>
+          <thead><tr><th>Matéria</th><th>Resp.</th><th>%</th><th></th></tr></thead>
+          <tbody>
+            ${weak.map((w) => `
+              <tr>
+                <td>${App.esc(w.materia)}</td>
+                <td>${w.answered}</td>
+                <td><span class="badge ${w.pct < 60 ? 'badge-danger' : w.pct < 75 ? 'badge-warn' : 'badge-ok'}">${w.pct}%</span></td>
+                <td><a class="btn btn-sm btn-accent" href="questoes.html?materia=${encodeURIComponent(w.materia)}&n=10&auto=1">Estudar só isso</a></td>
+              </tr>`).join('')}
+          </tbody>
+        </table>` : '<p class="muted">Responda pelo menos 3 questões por matéria para aparecer o ranking.</p>'}
     </div>
 
     <div class="grid grid-4">
@@ -119,6 +155,65 @@ function renderHoje(data) {
       </div>`
     : '';
 
+  const goals = getTodayGoals(progress);
+  const due = getDueErros(progress, today);
+  const weak = getWeakSubjects(progress, 3).slice(0, 3);
+  const dayTasks = plan.day?.tasks || [];
+  const mainMateria = dayTasks[0]?.materia || '';
+  const mainTag = dayTasks[0]?.questoesTag || '';
+
+  const metaHtml = `
+    <div class="card mb-1">
+      <h2>Meta de hoje ${goals.allOk ? '<span class="badge badge-ok">Batida</span>' : ''}</h2>
+      <div class="grid grid-2">
+        <div>
+          <p><strong>Minutos:</strong> ${goals.minutesDone}/${goals.minutesGoal}
+            ${goals.minutesOk ? '<span class="badge badge-ok">OK</span>' : '<span class="badge badge-warn">Falta</span>'}</p>
+          <div class="progress-bar"><span style="width:${goals.minutesPct}%"></span></div>
+        </div>
+        <div>
+          <p><strong>Questões:</strong> ${goals.questionsDone}/${goals.questionsGoal}
+            ${goals.questionsOk ? '<span class="badge badge-ok">OK</span>' : '<span class="badge badge-warn">Falta</span>'}</p>
+          <div class="progress-bar"><span style="width:${goals.questionsPct}%"></span></div>
+        </div>
+      </div>
+    </div>`;
+
+  const reviewHtml = `
+    <div class="card mb-1">
+      <h2>Revisão diária automática</h2>
+      <p class="muted">Erros agendados + bloco rápido da matéria de hoje.</p>
+      ${due.length ? `
+        <p><strong>${due.length} erro(s) para revisar:</strong></p>
+        <ul class="list">
+          ${due.slice(0, 8).map((e) => `
+            <li>
+              <strong>${App.esc(e.materia)}</strong> · ${App.esc(e.assunto)}
+              <span class="badge badge-warn">${e.dueKeys.join(', ')}</span>
+              <p class="muted">${App.esc((e.questao || '').slice(0, 120))}${(e.questao || '').length > 120 ? '…' : ''}</p>
+              <div class="actions">
+                ${e.dueKeys.map((k) => {
+                  const key = k === 'D+1' ? 'd1' : k === 'D+7' ? 'd7' : 'd30';
+                  return `<button type="button" class="btn btn-sm btn-secondary" data-rev-done="${App.esc(e.id)}" data-rev-key="${key}">Feito ${k}</button>`;
+                }).join('')}
+              </div>
+            </li>`).join('')}
+        </ul>
+        ${due.length > 8 ? `<p class="muted">+${due.length - 8} no caderno de erros.</p>` : ''}
+        <a class="btn btn-secondary btn-sm" href="caderno-erros.html">Abrir caderno completo</a>
+      ` : '<p class="muted">Nenhum erro com revisão vencida hoje.</p>'}
+      <div class="actions mt-1">
+        ${mainTag
+          ? `<a class="btn btn-accent" href="questoes.html?tag=${encodeURIComponent(mainTag)}&n=10&auto=1">10 questões do dia (${App.esc(mainTag)})</a>`
+          : mainMateria
+            ? `<a class="btn btn-accent" href="questoes.html?materia=${encodeURIComponent(mainMateria)}&n=10&auto=1">10 questões: ${App.esc(mainMateria)}</a>`
+            : `<a class="btn btn-accent" href="questoes.html?n=10&auto=1">10 questões mistas</a>`}
+        ${weak[0] ? `<a class="btn btn-secondary" href="questoes.html?materia=${encodeURIComponent(weak[0].materia)}&n=10&auto=1">Fraco: ${App.esc(weak[0].materia)} (${weak[0].pct}%)</a>` : ''}
+        <a class="btn btn-secondary" href="flashcards.html">Flashcards lei seca</a>
+        <a class="btn btn-secondary" href="questoes.html?n=15&auto=1&modo=prova">Modo prova 15q</a>
+      </div>
+    </div>`;
+
   const tasks = plan.day?.tasks || [];
   const cards = tasks.map((t, i) => {
     const aula = (aulas.aulas || []).find((a) => a.id === t.aulaId);
@@ -142,12 +237,15 @@ function renderHoje(data) {
           <a class="btn btn-secondary btn-sm" ${App.linkAttrs(pdfUrl)}>Abrir PDF / lei</a>
           <a class="btn btn-secondary btn-sm" href="${bibUrl}">Biblioteca</a>
           ${t.questoesTag ? `<a class="btn btn-secondary btn-sm" href="questoes.html?tag=${encodeURIComponent(t.questoesTag)}">Questões</a>` : `<a class="btn btn-secondary btn-sm" href="questoes.html?materia=${encodeURIComponent(t.materia)}">Questões</a>`}
+          ${App.youtubeUrl(t.materia) ? `<a class="btn btn-secondary btn-sm" href="${App.esc(App.youtubeUrl(t.materia))}" target="_blank" rel="noopener">Videoaula</a>` : ""}
         </div>
       </div>`;
   }).join('') || '<div class="card"><p>Nenhuma tarefa para hoje.</p></div>';
 
   root.innerHTML = `
     ${recoveryHtml}
+    ${metaHtml}
+    ${reviewHtml}
     <div class="card mb-1">
       <h2>${App.esc(plan.day?.titulo || 'Plano do dia')}</h2>
       <p>Semana ${plan.day?.semana || '—'} · Dia ${plan.day?.dia || '—'} · Status: <strong>${App.statusLabel(dayStatus)}</strong></p>
@@ -298,18 +396,65 @@ function renderHoje(data) {
       renderHoje(data);
     };
   }
+
+  root.querySelectorAll('[data-rev-done]').forEach((btn) => {
+    btn.onclick = () => {
+      Storage.markErroReview(btn.dataset.revDone, btn.dataset.revKey);
+      renderHoje(data);
+    };
+  });
 }
 
 async function initProgresso() {
   App.initShell('progresso');
   const stats = computeStats();
   const p = Storage.get();
+  const goals = getTodayGoals(p);
+  const weak = getWeakSubjects(p, 1);
+  const g = p.goals || { minutes: 90, questions: 20 };
+
   document.getElementById('app-root').innerHTML = `
     <div class="grid grid-3 mb-1">
       ${statCard('Nv. ' + stats.nivel, 'Nível')}
       ${statCard(stats.xp, 'XP')}
       ${statCard(stats.sequenciaAtual + ' dias', 'Sequência')}
     </div>
+
+    <div class="card mb-1">
+      <h2>Meta diária</h2>
+      <p>Hoje: <strong>${goals.minutesDone}/${goals.minutesGoal} min</strong> · <strong>${goals.questionsDone}/${goals.questionsGoal} questões</strong>
+        ${goals.allOk ? '<span class="badge badge-ok">Meta batida</span>' : ''}</p>
+      <div class="grid grid-2">
+        <div class="form-row">
+          <label for="goal-min">Meta de minutos</label>
+          <input id="goal-min" type="number" min="10" value="${g.minutes}">
+        </div>
+        <div class="form-row">
+          <label for="goal-q">Meta de questões</label>
+          <input id="goal-q" type="number" min="1" value="${g.questions}">
+        </div>
+      </div>
+      <button type="button" class="btn btn-sm" id="btn-save-goals">Salvar meta</button>
+    </div>
+
+    <div class="card mb-1">
+      <h2>Foco no fraco</h2>
+      ${weak.length ? `
+        <table>
+          <thead><tr><th>Matéria</th><th>Resp.</th><th>Acertos</th><th>%</th><th></th></tr></thead>
+          <tbody>
+            ${weak.map((w) => `
+              <tr>
+                <td>${App.esc(w.materia)}</td>
+                <td>${w.answered}</td>
+                <td>${w.correct}</td>
+                <td><span class="badge ${w.pct < 60 ? 'badge-danger' : w.pct < 75 ? 'badge-warn' : 'badge-ok'}">${w.pct}%</span></td>
+                <td><a class="btn btn-sm btn-accent" href="questoes.html?materia=${encodeURIComponent(w.materia)}&n=10&auto=1">Estudar só isso</a></td>
+              </tr>`).join('')}
+          </tbody>
+        </table>` : '<p class="muted">Sem dados de questões ainda.</p>'}
+    </div>
+
     <div class="card mb-1">
       <h2>Desempenho em questões</h2>
       <p>Respondidas: <strong>${stats.questoesResolvidas}</strong> · Acertos: <strong>${stats.acertos}</strong> · Erros: <strong>${stats.erros}</strong> · Aproveitamento: <strong>${stats.percentualAcertos}%</strong></p>
@@ -341,6 +486,50 @@ async function initProgresso() {
       <p class="mt-1 muted">${App.esc(App.motivationMessage(stats))}</p>
     </div>
   `;
+
+  const week = getWeeklyReport(p);
+  const weekCard = document.createElement('div');
+  weekCard.className = 'card mb-1';
+  weekCard.innerHTML = `
+    <h2>Relatório semanal</h2>
+    <p class="muted">${App.formatDateBR(week.from)} → ${App.formatDateBR(week.to)}</p>
+    <div class="grid grid-4">
+      ${statCard(week.hours + 'h', 'Horas')}
+      ${statCard(week.questions, 'Questões')}
+      ${statCard(week.pct + '%', 'Acertos')}
+      ${statCard(week.daysStudied, 'Dias ativos')}
+      ${statCard(week.faltas, 'Faltas (7d)')}
+
+      ${statCard(week.dueCount, 'Erros a revisar')}
+      ${statCard(week.sessions, 'Sessões')}
+      ${statCard(week.wrong, 'Erros na semana')}
+    </div>
+    <h3 class="mt-2">Pontos fracos</h3>
+    <ul class="list">
+      ${week.weak.map((w) => `<li>${App.esc(w.materia)} — ${w.pct}% (${w.answered} q)
+        <a class="btn btn-sm btn-accent" href="questoes.html?materia=${encodeURIComponent(w.materia)}&n=10&auto=1">Treinar</a>
+      </li>`).join('') || '<li class="muted">Sem dados suficientes</li>'}
+    </ul>
+    <h3 class="mt-1">O que fazer na próxima semana</h3>
+    <ul class="list">
+      ${week.nextActions.map((a) => `<li>${App.esc(a)}</li>`).join('')}
+    </ul>
+    <div class="actions">
+      <a class="btn btn-secondary" href="flashcards.html">Flashcards</a>
+      <a class="btn btn-secondary" href="questoes.html?modo=prova&n=20&auto=1">Modo prova 20q</a>
+      <a class="btn btn-secondary" href="simulados.html">Simulado</a>
+    </div>`;
+  const root = document.getElementById('app-root');
+  root.insertBefore(weekCard, root.children[1] || null);
+
+  document.getElementById('btn-save-goals').onclick = () => {
+    Storage.setGoals({
+      minutes: Number(document.getElementById('goal-min').value),
+      questions: Number(document.getElementById('goal-q').value)
+    });
+    alert('Meta salva.');
+    initProgresso();
+  };
 }
 
 async function initMaterias() {

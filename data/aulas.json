@@ -6,7 +6,8 @@
       "materia": "Português",
       "duracao": 40,
       "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf",
-      "notas": "Leia o texto antes das alternativas."
+      "notas": "Leia o texto antes das alternativas.",
+      "yt": "https://www.youtube.com/playlist?list=PLg5MvFnAgD5JjDHYpGnoa7lRUiC93Qixj"
     },
     {
       "id": "aula-pt-02",
@@ -14,7 +15,8 @@
       "materia": "Português",
       "duracao": 35,
       "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf",
-      "notas": "Foque nas regras de proparoxítonas e hiatos."
+      "notas": "Foque nas regras de proparoxítonas e hiatos.",
+      "yt": "https://www.youtube.com/playlist?list=PLg5MvFnAgD5JjDHYpGnoa7lRUiC93Qixj"
     },
     {
       "id": "aula-pt-03",
@@ -22,7 +24,8 @@
       "materia": "Português",
       "duracao": 45,
       "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLg5MvFnAgD5JjDHYpGnoa7lRUiC93Qixj"
     },
     {
       "id": "aula-pt-04",
@@ -30,7 +33,8 @@
       "materia": "Português",
       "duracao": 40,
       "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLg5MvFnAgD5JjDHYpGnoa7lRUiC93Qixj"
     },
     {
       "id": "aula-pt-05",
@@ -38,7 +42,8 @@
       "materia": "Português",
       "duracao": 40,
       "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLg5MvFnAgD5JjDHYpGnoa7lRUiC93Qixj"
     },
     {
       "id": "aula-pt-06",
@@ -46,7 +51,8 @@
       "materia": "Português",
       "duracao": 30,
       "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLg5MvFnAgD5JjDHYpGnoa7lRUiC93Qixj"
     },
     {
       "id": "aula-rl-01",
@@ -54,7 +60,8 @@
       "materia": "Raciocínio Lógico",
       "duracao": 45,
       "url": "biblioteca.html",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLZ4qFlJ8_rssA3_Kq10qJYKvEw2X7n5O4"
     },
     {
       "id": "aula-rl-02",
@@ -62,7 +69,8 @@
       "materia": "Raciocínio Lógico",
       "duracao": 45,
       "url": "biblioteca.html",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLZ4qFlJ8_rssA3_Kq10qJYKvEw2X7n5O4"
     },
     {
       "id": "aula-rl-03",
@@ -70,7 +78,8 @@
       "materia": "Raciocínio Lógico",
       "duracao": 40,
       "url": "biblioteca.html",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLZ4qFlJ8_rssA3_Kq10qJYKvEw2X7n5O4"
     },
     {
       "id": "aula-rl-04",
@@ -78,7 +87,8 @@
       "materia": "Raciocínio Lógico",
       "duracao": 40,
       "url": "biblioteca.html",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLZ4qFlJ8_rssA3_Kq10qJYKvEw2X7n5O4"
     },
     {
       "id": "aula-inf-01",
@@ -86,7 +96,8 @@
       "materia": "Informática",
       "duracao": 30,
       "url": "https://www.gov.br/governodigital/pt-br",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLZ4qFlJ8_rstdPV1Ti5J_hyVGNdXxYK2B"
     },
     {
       "id": "aula-inf-02",
@@ -94,7 +105,8 @@
       "materia": "Informática",
       "duracao": 30,
       "url": "https://www.gov.br/governodigital/pt-br",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLZ4qFlJ8_rstdPV1Ti5J_hyVGNdXxYK2B"
     },
     {
       "id": "aula-inf-03",
@@ -102,7 +114,8 @@
       "materia": "Informática",
       "duracao": 30,
       "url": "https://www.gov.br/governodigital/pt-br",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLZ4qFlJ8_rstdPV1Ti5J_hyVGNdXxYK2B"
     },
     {
       "id": "aula-inf-04",
@@ -110,7 +123,8 @@
       "materia": "Informática",
       "duracao": 35,
       "url": "https://www.gov.br/governodigital/pt-br",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLZ4qFlJ8_rstdPV1Ti5J_hyVGNdXxYK2B"
     },
     {
       "id": "aula-et-01",
@@ -118,7 +132,8 @@
       "materia": "Ética",
       "duracao": 30,
       "url": "https://www.planalto.gov.br/ccivil_03/decreto/d1171.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLr3WpxIp98UyaFnHFYg3rLITKmkAQ015Q"
     },
     {
       "id": "aula-et-02",
@@ -126,7 +141,8 @@
       "materia": "Ética",
       "duracao": 30,
       "url": "https://www.planalto.gov.br/ccivil_03/decreto/d1171.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLr3WpxIp98UyaFnHFYg3rLITKmkAQ015Q"
     },
     {
       "id": "aula-dc-01",
@@ -134,7 +150,8 @@
       "materia": "Direito Constitucional",
       "duracao": 50,
       "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-WodZWTbZHFkD7gn7T5vQai-G"
     },
     {
       "id": "aula-dc-02",
@@ -142,7 +159,8 @@
       "materia": "Direito Constitucional",
       "duracao": 45,
       "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-WodZWTbZHFkD7gn7T5vQai-G"
     },
     {
       "id": "aula-dc-03",
@@ -150,7 +168,8 @@
       "materia": "Direito Constitucional",
       "duracao": 45,
       "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-WodZWTbZHFkD7gn7T5vQai-G"
     },
     {
       "id": "aula-dc-04",
@@ -158,7 +177,8 @@
       "materia": "Direito Constitucional",
       "duracao": 45,
       "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-WodZWTbZHFkD7gn7T5vQai-G"
     },
     {
       "id": "aula-da-01",
@@ -166,7 +186,8 @@
       "materia": "Direito Administrativo",
       "duracao": 45,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woen-shVZgWQxq2RrP6u6yiE"
     },
     {
       "id": "aula-da-02",
@@ -174,7 +195,8 @@
       "materia": "Direito Administrativo",
       "duracao": 50,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woen-shVZgWQxq2RrP6u6yiE"
     },
     {
       "id": "aula-da-03",
@@ -182,7 +204,8 @@
       "materia": "Direito Administrativo",
       "duracao": 45,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woen-shVZgWQxq2RrP6u6yiE"
     },
     {
       "id": "aula-da-04",
@@ -190,7 +213,8 @@
       "materia": "Direito Administrativo",
       "duracao": 45,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woen-shVZgWQxq2RrP6u6yiE"
     },
     {
       "id": "aula-da-05",
@@ -198,7 +222,8 @@
       "materia": "Direito Administrativo",
       "duracao": 40,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woen-shVZgWQxq2RrP6u6yiE"
     },
     {
       "id": "aula-da-06",
@@ -206,7 +231,8 @@
       "materia": "Direito Administrativo",
       "duracao": 40,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woen-shVZgWQxq2RrP6u6yiE"
     },
     {
       "id": "aula-prev-01",
@@ -214,7 +240,8 @@
       "materia": "Direito Previdenciário",
       "duracao": 50,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "notas": "Saúde, previdência e assistência."
+      "notas": "Saúde, previdência e assistência.",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y"
     },
     {
       "id": "aula-prev-02",
@@ -222,7 +249,8 @@
       "materia": "Direito Previdenciário",
       "duracao": 50,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y"
     },
     {
       "id": "aula-prev-03",
@@ -230,7 +258,8 @@
       "materia": "Direito Previdenciário",
       "duracao": 40,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y"
     },
     {
       "id": "aula-prev-04",
@@ -238,7 +267,8 @@
       "materia": "Direito Previdenciário",
       "duracao": 50,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y"
     },
     {
       "id": "aula-prev-05",
@@ -246,7 +276,8 @@
       "materia": "Direito Previdenciário",
       "duracao": 40,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y"
     },
     {
       "id": "aula-prev-06",
@@ -254,7 +285,8 @@
       "materia": "Direito Previdenciário",
       "duracao": 55,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y"
     },
     {
       "id": "aula-prev-07",
@@ -262,7 +294,8 @@
       "materia": "Direito Previdenciário",
       "duracao": 45,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y"
     },
     {
       "id": "aula-prev-08",
@@ -270,7 +303,8 @@
       "materia": "Direito Previdenciário",
       "duracao": 50,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y"
     },
     {
       "id": "aula-prev-09",
@@ -278,7 +312,8 @@
       "materia": "Direito Previdenciário",
       "duracao": 40,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y"
     },
     {
       "id": "aula-prev-10",
@@ -286,7 +321,8 @@
       "materia": "Direito Previdenciário",
       "duracao": 50,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y"
     },
     {
       "id": "aula-prev-11",
@@ -294,7 +330,8 @@
       "materia": "Direito Previdenciário",
       "duracao": 45,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y"
     },
     {
       "id": "aula-prev-12",
@@ -302,7 +339,8 @@
       "materia": "Direito Previdenciário",
       "duracao": 50,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y"
     },
     {
       "id": "aula-prev-13",
@@ -310,7 +348,8 @@
       "materia": "Direito Previdenciário",
       "duracao": 55,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y"
     },
     {
       "id": "aula-prev-14",
@@ -318,7 +357,8 @@
       "materia": "Direito Previdenciário",
       "duracao": 40,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y"
     },
     {
       "id": "aula-ctb-01",
@@ -326,7 +366,8 @@
       "materia": "Legislação de Trânsito",
       "duracao": 45,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLgmH1M3vNPm2UYxToMYzB3ZCOkz5rqM2_"
     },
     {
       "id": "aula-ctb-02",
@@ -334,7 +375,8 @@
       "materia": "Legislação de Trânsito",
       "duracao": 50,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLgmH1M3vNPm2UYxToMYzB3ZCOkz5rqM2_"
     },
     {
       "id": "aula-ctb-03",
@@ -342,7 +384,8 @@
       "materia": "Legislação de Trânsito",
       "duracao": 40,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLgmH1M3vNPm2UYxToMYzB3ZCOkz5rqM2_"
     },
     {
       "id": "aula-ctb-04",
@@ -350,7 +393,8 @@
       "materia": "Legislação de Trânsito",
       "duracao": 40,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PLgmH1M3vNPm2UYxToMYzB3ZCOkz5rqM2_"
     },
     {
       "id": "aula-pen-01",
@@ -358,7 +402,8 @@
       "materia": "Direito Penal",
       "duracao": 40,
       "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-WofM5jjzL_isDjhIMhqvpP8t"
     },
     {
       "id": "aula-ps-01",
@@ -366,7 +411,8 @@
       "materia": "Primeiros Socorros",
       "duracao": 35,
       "url": "biblioteca.html",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/results?search_query=primeiros+socorros+prf+concurso"
     },
     {
       "id": "aula-fis-01",
@@ -374,7 +420,8 @@
       "materia": "Física/Mecânica",
       "duracao": 35,
       "url": "biblioteca.html",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/results?search_query=fisica+basica+no+transito+concurso"
     },
     {
       "id": "aula-geo-01",
@@ -382,7 +429,134 @@
       "materia": "Geografia",
       "duracao": 30,
       "url": "biblioteca.html",
-      "notas": ""
+      "notas": "",
+      "yt": "https://www.youtube.com/results?search_query=geografia+rodovias+federais+brasil"
+    },
+    {
+      "id": "aula-pt-07",
+      "titulo": "Ortografia oficial — novo acordo",
+      "materia": "Português",
+      "duracao": 35,
+      "url": "https://www.youtube.com/playlist?list=PLg5MvFnAgD5JjDHYpGnoa7lRUiC93Qixj",
+      "notas": "Uso do hífen, acentuação gráfica, alfabeto.",
+      "yt": "https://www.youtube.com/playlist?list=PLg5MvFnAgD5JjDHYpGnoa7lRUiC93Qixj"
+    },
+    {
+      "id": "aula-pt-08",
+      "titulo": "Crase — regras práticas",
+      "materia": "Português",
+      "duracao": 30,
+      "url": "https://www.youtube.com/results?search_query=crase+portugues+concurso",
+      "notas": "Antes de palavra feminina. Casos facultativos e proibidos.",
+      "yt": "https://www.youtube.com/results?search_query=crase+portugues+concurso"
+    },
+    {
+      "id": "aula-rl-05",
+      "titulo": "Raciocínio Lógico — sequências e padrões",
+      "materia": "Raciocínio Lógico",
+      "duracao": 40,
+      "url": "https://www.youtube.com/results?search_query=sequencias+raciocinio+logico+concurso",
+      "notas": "Sequências numéricas, figuras e palavras.",
+      "yt": "https://www.youtube.com/results?search_query=sequencias+raciocinio+logico+concurso"
+    },
+    {
+      "id": "aula-rl-06",
+      "titulo": "Raciocínio Lógico — análise combinatória",
+      "materia": "Raciocínio Lógico",
+      "duracao": 45,
+      "url": "https://www.youtube.com/results?search_query=analise+combinatoria+raciocinio+logico",
+      "notas": "Permutação, arranjo, combinação.",
+      "yt": "https://www.youtube.com/results?search_query=analise+combinatoria+raciocinio+logico"
+    },
+    {
+      "id": "aula-dc-05",
+      "titulo": "Direitos fundamentais — art. 5º detalhado",
+      "materia": "Direito Constitucional",
+      "duracao": 55,
+      "url": "https://www.youtube.com/playlist?list=PL50JqL0R-WodZWTbZHFkD7gn7T5vQai-G",
+      "notas": "Cada inciso comentado.",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-WodZWTbZHFkD7gn7T5vQai-G"
+    },
+    {
+      "id": "aula-dc-06",
+      "titulo": "Controle de constitucionalidade",
+      "materia": "Direito Constitucional",
+      "duracao": 50,
+      "url": "https://www.youtube.com/results?search_query=controle+constitucionalidade+concurso",
+      "notas": "Difuso x concentrado. ADI, ADC, ADPF.",
+      "yt": "https://www.youtube.com/results?search_query=controle+constitucionalidade+concurso"
+    },
+    {
+      "id": "aula-da-07",
+      "titulo": "Licitações — Lei 14.133/2021",
+      "materia": "Direito Administrativo",
+      "duracao": 60,
+      "url": "https://www.youtube.com/results?search_query=lei+14133+licitacoes+concurso",
+      "notas": "Modalidades, fases, dispensa e inexigibilidade.",
+      "yt": "https://www.youtube.com/results?search_query=lei+14133+licitacoes+concurso"
+    },
+    {
+      "id": "aula-da-08",
+      "titulo": "Servidores públicos — Lei 8.112",
+      "materia": "Direito Administrativo",
+      "duracao": 50,
+      "url": "https://www.youtube.com/results?search_query=lei+8112+servidores+concurso",
+      "notas": "Provimento, vacância, direitos e deveres.",
+      "yt": "https://www.youtube.com/results?search_query=lei+8112+servidores+concurso"
+    },
+    {
+      "id": "aula-prev-15",
+      "titulo": "Regime Geral de Previdência — visão geral",
+      "materia": "Direito Previdenciário",
+      "duracao": 45,
+      "url": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y",
+      "notas": "RGPS, segurados, dependentes, benefícios.",
+      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y"
+    },
+    {
+      "id": "aula-prev-16",
+      "titulo": "Aposentadoria programada — EC 103",
+      "materia": "Direito Previdenciário",
+      "duracao": 40,
+      "url": "https://www.youtube.com/results?search_query=aposentadoria+programada+ec+103+concurso",
+      "notas": "Idade mínima, tempo de contribuição, cálculos.",
+      "yt": "https://www.youtube.com/results?search_query=aposentadoria+programada+ec+103+concurso"
+    },
+    {
+      "id": "aula-prev-17",
+      "titulo": "Pensão por morte e auxílio-reclusão",
+      "materia": "Direito Previdenciário",
+      "duracao": 40,
+      "url": "https://www.youtube.com/results?search_query=pensao+por+morte+auxilio+reclusao+concurso",
+      "notas": "Dependentes, cotas, duração do benefício.",
+      "yt": "https://www.youtube.com/results?search_query=pensao+por+morte+auxilio+reclusao+concurso"
+    },
+    {
+      "id": "aula-ctb-05",
+      "titulo": "Documentação de veículos e condutores",
+      "materia": "Legislação de Trânsito",
+      "duracao": 35,
+      "url": "https://www.youtube.com/results?search_query=documentacao+veiculos+condutores+ctb",
+      "notas": "CRLV, CNH, licenciamento, habilitação.",
+      "yt": "https://www.youtube.com/results?search_query=documentacao+veiculos+condutores+ctb"
+    },
+    {
+      "id": "aula-ctb-06",
+      "titulo": "Infrações e penalidades — CTB",
+      "materia": "Legislação de Trânsito",
+      "duracao": 45,
+      "url": "https://www.youtube.com/results?search_query=infracoes+penalidades+ctb+concurso",
+      "notas": "Naturezas, pontuação, multas, suspensão.",
+      "yt": "https://www.youtube.com/results?search_query=infracoes+penalidades+ctb+concurso"
+    },
+    {
+      "id": "aula-inf-05",
+      "titulo": "Excel avançado para concurso",
+      "materia": "Informática",
+      "duracao": 35,
+      "url": "https://www.youtube.com/results?search_query=excel+intermediario+concurso",
+      "notas": "Fórmulas, tabela dinâmica, procv.",
+      "yt": "https://www.youtube.com/results?search_query=excel+intermediario+concurso"
     }
   ]
 }

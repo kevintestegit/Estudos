@@ -1,0 +1,564 @@
+{
+  "flashcards": [
+    {
+      "id": "fc-1",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "O que é seguridade social (art. 194 CF)?",
+      "verso": "Conjunto integrado de ações de poderes públicos e sociedade para assegurar saúde, previdência e assistência social.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-2",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Objetivos da seguridade (art. 194, p.u.) — cite 3",
+      "verso": "Universalidade da cobertura/atendimento; uniformidade e equivalência dos benefícios; seletividade e distributividade; irredutibilidade do valor dos benefícios; equidade na forma de participação no custeio; diversidade da base de financiamento; caráter democrático e descentralizado da administração.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-3",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Previdência social: filiação e caráter",
+      "verso": "Filiação obrigatória e caráter contributivo, com equilíbrio financeiro e atuarial (art. 201 CF).",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-4",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Assistência social exige contribuição?",
+      "verso": "Não. Independe de contribuição à seguridade social (art. 203 CF).",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-5",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Lei de benefícios do RGPS",
+      "verso": "Lei nº 8.213/1991.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-6",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Lei de custeio da Seguridade",
+      "verso": "Lei nº 8.212/1991.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-7",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Regulamento da Previdência Social",
+      "verso": "Decreto nº 3.048/1999.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-8",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "O que é carência?",
+      "verso": "Número mínimo de contribuições mensais indispensáveis para que o beneficiário faça jus ao benefício, na forma da lei.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-9",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Carência típica do auxílio por incapacidade temporária",
+      "verso": "Em regra, 12 contribuições mensais (com isenções legais).",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-10",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Período de graça — ideia central",
+      "verso": "Manutenção da qualidade de segurado por certo tempo após cessar contribuições, nos prazos legais.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-11",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "BPC/LOAS — natureza",
+      "verso": "Benefício assistencial (não previdenciário contributivo), Lei 8.742/1993.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-12",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "EC 103/2019 — efeito principal no RGPS",
+      "verso": "Reforma da Previdência: novas regras de idade/tempo e regras de transição.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-13",
+      "materia": "Direito Constitucional",
+      "categoria": "comum",
+      "frente": "Art. 5º, II — legalidade",
+      "verso": "Ninguém será obrigado a fazer ou deixar de fazer alguma coisa senão em virtude de lei.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-14",
+      "materia": "Direito Constitucional",
+      "categoria": "comum",
+      "frente": "Art. 37, caput — princípios",
+      "verso": "Legalidade, impessoalidade, moralidade, publicidade e eficiência (LIMPE).",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-15",
+      "materia": "Direito Constitucional",
+      "categoria": "comum",
+      "frente": "Art. 37, II — investidura",
+      "verso": "A investidura em cargo ou emprego público depende de aprovação prévia em concurso público, ressalvadas as nomeações para cargo em comissão.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-16",
+      "materia": "Direito Administrativo",
+      "categoria": "comum",
+      "frente": "Elementos do ato administrativo",
+      "verso": "Competência, finalidade, forma, motivo e objeto.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-17",
+      "materia": "Direito Administrativo",
+      "categoria": "comum",
+      "frente": "Anulação x revogação",
+      "verso": "Anulação: ilegalidade (ex tunc). Revogação: conveniência/oportunidade (ex nunc).",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-18",
+      "materia": "Direito Administrativo",
+      "categoria": "comum",
+      "frente": "Responsabilidade civil do Estado (art. 37 §6º)",
+      "verso": "Objetiva por atos de agentes, nessa qualidade, causando danos a terceiros.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-19",
+      "materia": "Direito Administrativo",
+      "categoria": "comum",
+      "frente": "Lei de licitações atual",
+      "verso": "Lei nº 14.133/2021.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-20",
+      "materia": "Ética",
+      "categoria": "comum",
+      "frente": "Decreto do Código de Ética do Servidor Federal",
+      "verso": "Decreto nº 1.171/1994.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-21",
+      "materia": "Ética",
+      "categoria": "comum",
+      "frente": "Regra de ouro ética (Dec. 1.171)",
+      "verso": "Tratar mal uma pessoa que paga seus impostos revela igual temperamento a quem um dia tratará mal o próprio superior.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-22",
+      "materia": "Legislação de Trânsito",
+      "categoria": "prf",
+      "frente": "CTB — lei",
+      "verso": "Lei nº 9.503/1997.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-23",
+      "materia": "Legislação de Trânsito",
+      "categoria": "prf",
+      "frente": "Trânsito em condições seguras",
+      "verso": "Direito de todos e dever dos órgãos e entidades do SNT (art. 1º §2º CTB).",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-24",
+      "materia": "Legislação de Trânsito",
+      "categoria": "prf",
+      "frente": "Hierarquia: agente x sinalização",
+      "verso": "Ordem do agente de trânsito prevalece sobre as normas de circulação e a sinalização.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-25",
+      "materia": "Legislação de Trânsito",
+      "categoria": "prf",
+      "frente": "Classificação das infrações",
+      "verso": "Leve, média, grave e gravíssima.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-26",
+      "materia": "Legislação de Trânsito",
+      "categoria": "prf",
+      "frente": "CNH — o que comprova",
+      "verso": "Habilitação do condutor para dirigir veículos da categoria indicada, com validade.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-27",
+      "materia": "Legislação PRF",
+      "categoria": "prf",
+      "frente": "Função clássica da PRF",
+      "verso": "Patrulhamento ostensivo das rodovias federais.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-28",
+      "materia": "Arquivologia",
+      "categoria": "prf",
+      "frente": "Princípio da proveniência",
+      "verso": "Documentos de um fundo não se misturam com os de outro.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-29",
+      "materia": "Arquivologia",
+      "categoria": "prf",
+      "frente": "Arquivo corrente",
+      "verso": "Documentos em curso ou de uso frequente.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-30",
+      "materia": "Português",
+      "categoria": "comum",
+      "frente": "Crase — ideia básica",
+      "verso": "Fusão da preposição a + artigo/pronome a(s) — a + a = à.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-31",
+      "materia": "Raciocínio Lógico",
+      "categoria": "comum",
+      "frente": "Negação de todo A é B",
+      "verso": "Algum A não é B.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-32",
+      "materia": "Raciocínio Lógico",
+      "categoria": "comum",
+      "frente": "Negação de p → q",
+      "verso": "p ∧ ~q.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-33",
+      "materia": "Raciocínio Lógico",
+      "categoria": "comum",
+      "frente": "Contrapositiva de p → q",
+      "verso": "~q → ~p.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-34",
+      "materia": "Informática",
+      "categoria": "comum",
+      "frente": "HTTPS",
+      "verso": "HTTP + criptografia TLS/SSL — navegação segura.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-35",
+      "materia": "Informática",
+      "categoria": "comum",
+      "frente": "RAM",
+      "verso": "Memória volátil de acesso rápido; perde dados sem energia.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-36",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Segurados obrigatórios — exemplos",
+      "verso": "Empregado, empregado doméstico, contribuinte individual, trabalhador avulso, segurado especial.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-37",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Dependentes 1ª classe (ideia)",
+      "verso": "Cônjuge/companheiro e filhos (na forma da lei), com preferência sobre classes seguintes.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-38",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Salário de contribuição",
+      "verso": "Base de cálculo das contribuições, com limites mínimo e máximo legais.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-39",
+      "materia": "Direito Administrativo",
+      "categoria": "comum",
+      "frente": "Poder de polícia",
+      "verso": "Condicionar/restringir direitos em prol do interesse público, nos limites da lei.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-40",
+      "materia": "Legislação de Trânsito",
+      "categoria": "prf",
+      "frente": "Cinto de segurança",
+      "verso": "Obrigatório para condutor e passageiros.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-inss-41",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "O que é período de graça?",
+      "verso": "Período em que o segurado mantém a qualidade de segurado independentemente de contribuições, após cessar as contribuições, nos prazos do art. 15 da Lei 8.213/91.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-inss-42",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Requisitos do auxílio-doença (incapacidade temporária)",
+      "verso": "12 contribuições (carência) + incapacidade para o trabalho por mais de 15 dias consecutivos + qualidade de segurado.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-inss-43",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Salário-maternidade — carência",
+      "verso": "Empregada/doméstica/trabalhadora avulsa: 0 carência. Contribuinte individual/facultativa: 10 contribuições.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-inss-44",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Aposentadoria por idade — requisitos",
+      "verso": "65 anos (homem) / 62 anos (mulher) + 180 contribuições (carência) + qualidade de segurado.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-inss-45",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "BPC/LOAS — requisitos",
+      "verso": "65+ anos ou deficiência + renda familiar per capita < 1/4 salário mínimo + não contributivo (não exige carência).",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-inss-46",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Pensão por morte — dependentes 1ª classe",
+      "verso": "Cônjuge/companheiro(a) + filho não emancipado <21 anos ou inválido. Exclui classes seguintes.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-inss-47",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "EC 103/2019 — idade mínima para aposentadoria programada (RGPS)",
+      "verso": "65 anos (homem) / 62 anos (mulher) + 20 anos contribuição (homem) / 15 anos (mulher).",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-inss-48",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Contribuinte individual - alíquota",
+      "verso": "20% sobre o salário de contribuição (alíquota reduzida de 11% para o plano simplificado, sem direito à aposentadoria por tempo de contribuição).",
+      "prioridade": "media"
+    },
+    {
+      "id": "fc-inss-49",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Acumulação de benefícios — regra geral",
+      "verso": "É vedada a acumulação de mais de uma aposentadoria pelo RGPS. Exceções: salário-maternidade + aposentadoria; pensão + aposentadoria (com redutor na EC 103).",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-inss-50",
+      "materia": "Direito Previdenciário",
+      "categoria": "inss",
+      "frente": "Filiação ao RGPS",
+      "verso": "Decorre automaticamente do exercício de atividade remunerada para segurados obrigatórios. Para facultativos: filiação voluntária mediante inscrição e primeira contribuição.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-prf-31",
+      "materia": "Legislação de Trânsito",
+      "categoria": "prf",
+      "frente": "Hierarquia no trânsito",
+      "verso": "Ordem do agente de trânsito > sinalização > normas de circulação (artigos 39, 89 CTB).",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-prf-32",
+      "materia": "Legislação de Trânsito",
+      "categoria": "prf",
+      "frente": "Velocidade máxima pista dupla rural (sem sinalização)",
+      "verso": "Automóveis/camionetas/motos: 110 km/h. Demais veículos: 90 km/h.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-prf-33",
+      "materia": "Legislação de Trânsito",
+      "categoria": "prf",
+      "frente": "Ultrapassar pelo acostamento",
+      "verso": "Infração gravíssima (7 pontos + multa).",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-prf-34",
+      "materia": "Legislação de Trânsito",
+      "categoria": "prf",
+      "frente": "Dirigir sem CNH ou permissão",
+      "verso": "Infração gravíssima (7 pontos + multa + apreensão do veículo).",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-prf-35",
+      "materia": "Legislação de Trânsito",
+      "categoria": "prf",
+      "frente": "Recusa ao bafômetro",
+      "verso": "Infração gravíssima (7 pontos + multa 10x + suspensão do direito de dirigir por 12 meses + recolhimento da CNH).",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-prf-36",
+      "materia": "Legislação PRF",
+      "categoria": "prf",
+      "frente": "Atribuição da PRF no CTB",
+      "verso": "Patrulhamento ostensivo das rodovias federais (art. 20, II, CTB). Execução de serviços de polícia de trânsito nas rodovias federais (inciso III).",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-prf-37",
+      "materia": "Arquivologia",
+      "categoria": "prf",
+      "frente": "Classificação de arquivos quanto ao estágio",
+      "verso": "Corrente (uso frequente), Intermediário (aguarda destinação), Permanente (guarda definitiva). Ciclo vital.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-prf-38",
+      "materia": "Noções de Administração",
+      "categoria": "prf",
+      "frente": "Funções administrativas clássicas (PODC)",
+      "verso": "Planejamento, Organização, Direção, Controle.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-prf-39",
+      "materia": "Noções de Administração",
+      "categoria": "prf",
+      "frente": "Eficiência x Eficácia",
+      "verso": "Eficiência = fazer certo (meios). Eficácia = fazer o que deve ser feito para atingir objetivos (resultados).",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-prf-40",
+      "materia": "Primeiros Socorros",
+      "categoria": "prf",
+      "frente": "RCP — compressão torácica",
+      "verso": "100-120 compressões/min, profundidade 5-6 cm, permitir retorno do tórax. 30 compressões : 2 ventilações.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-com-41",
+      "materia": "Ética no Serviço Público",
+      "categoria": "comum",
+      "frente": "Regra de ouro do servidor (Dec. 1.171)",
+      "verso": "Tratar mal uma pessoa que paga seus impostos direta ou indiretamente causará dano moral e revela igual temperamento para tratar mal superiores.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-com-42",
+      "materia": "Direito Constitucional",
+      "categoria": "comum",
+      "frente": "Art. 5º, LIV — devido processo legal",
+      "verso": "Ninguém será privado da liberdade ou de seus bens sem o devido processo legal.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-com-43",
+      "materia": "Direito Constitucional",
+      "categoria": "comum",
+      "frente": "Art. 5º, LV — contraditório e ampla defesa",
+      "verso": "Aos litigantes, em processo judicial ou administrativo, e aos acusados em geral são assegurados o contraditório e a ampla defesa, com os meios e recursos a ela inerentes.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-com-44",
+      "materia": "Direito Constitucional",
+      "categoria": "comum",
+      "frente": "Art. 37, §6º — responsabilidade civil do Estado",
+      "verso": "As pessoas jurídicas de direito público e as de direito privado prestadoras de serviços públicos responderão pelos danos que seus agentes, nessa qualidade, causarem a terceiros, assegurado o direito de regresso.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-com-45",
+      "materia": "Direito Administrativo",
+      "categoria": "comum",
+      "frente": "Convalidação de ato administrativo",
+      "verso": "Supre vício sanável do ato (ex.: competência material, forma não essencial). Efeitos ex tunc. Discricionariedade da autoridade.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-com-46",
+      "materia": "Direito Administrativo",
+      "categoria": "comum",
+      "frente": "Diferença autarquia x empresa pública",
+      "verso": "Autarquia: direito público, criada por lei, atividades típicas de Estado. Empresa pública: direito privado, capital 100% público, atividade econômica/serviço público.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-com-47",
+      "materia": "Português",
+      "categoria": "comum",
+      "frente": "Concordância verbal — sujeito composto anteposto",
+      "verso": "Verbo vai para o plural: \"O professor e o aluno estudaram.\"",
+      "prioridade": "media"
+    },
+    {
+      "id": "fc-com-48",
+      "materia": "Raciocínio Lógico",
+      "categoria": "comum",
+      "frente": "Negação de proposição composta — De Morgan",
+      "verso": "~(p ∧ q) ≡ ~p ∨ ~q. ~(p ∨ q) ≡ ~p ∧ ~q.",
+      "prioridade": "alta"
+    },
+    {
+      "id": "fc-com-49",
+      "materia": "Informática",
+      "categoria": "comum",
+      "frente": "Diferença hardware x software",
+      "verso": "Hardware: parte física do computador (CPU, RAM, HD). Software: programas e dados (SO, aplicativos).",
+      "prioridade": "media"
+    },
+    {
+      "id": "fc-com-50",
+      "materia": "Ética no Serviço Público",
+      "categoria": "comum",
+      "frente": "Princípios da Administração Pública (art. 37, caput)",
+      "verso": "LIMPE: Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência.",
+      "prioridade": "alta"
+    }
+  ]
+}

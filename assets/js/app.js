@@ -208,6 +208,32 @@ const App = {
     'Preparação': 'hoje.html'
   },
 
+
+  YT_VIDEO: {
+    'Arquivologia': 'https://www.youtube.com/playlist?list=PL4r5S3KL2XqB3t8ZIwZ7gLl2kZ2Z5Z5Z5',
+    'Assistência Social / BPC': 'https://www.youtube.com/results?search_query=bpc+loas+assistencia+social+concurso',
+    'Direito Administrativo': 'https://www.youtube.com/playlist?list=PL50JqL0R-Woen-shVZgWQxq2RrP6u6yiE',
+    'Direito Constitucional': 'https://www.youtube.com/playlist?list=PL50JqL0R-WodZWTbZHFkD7gn7T5vQai-G',
+    'Direito Penal': 'https://www.youtube.com/playlist?list=PL50JqL0R-WofM5jjzL_isDjhIMhqvpP8t',
+    'Direito Previdenciário': 'https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y',
+    'Física/Mecânica': 'https://www.youtube.com/results?search_query=fisica+basica+no+transito+concurso',
+    'Geografia': 'https://www.youtube.com/results?search_query=geografia+rodovias+federais+brasil',
+    'Informática': 'https://www.youtube.com/playlist?list=PLZ4qFlJ8_rstdPV1Ti5J_hyVGNdXxYK2B',
+    'Legislação PRF': 'https://www.youtube.com/playlist?list=PLgmH1M3vNPm2UYxToMYzB3ZCOkz5rqM2_',
+    'Legislação de Trânsito': 'https://www.youtube.com/playlist?list=PLgmH1M3vNPm2UYxToMYzB3ZCOkz5rqM2_',
+    'Língua Portuguesa': 'https://www.youtube.com/playlist?list=PLg5MvFnAgD5JjDHYpGnoa7lRUiC93Qixj',
+    'Noções de Administração': 'https://www.youtube.com/playlist?list=PL4r5S3KL2XqB3t8ZIwZ7gLl2kZ2Z5Z5Z6',
+    'Português': 'https://www.youtube.com/playlist?list=PLg5MvFnAgD5JjDHYpGnoa7lRUiC93Qixj',
+    'Primeiros Socorros': 'https://www.youtube.com/results?search_query=primeiros+socorros+prf+concurso',
+    'Raciocínio Lógico': 'https://www.youtube.com/playlist?list=PLZ4qFlJ8_rssA3_Kq10qJYKvEw2X7n5O4',
+    'Ética': 'https://www.youtube.com/playlist?list=PLr3WpxIp98UyaFnHFYg3rLITKmkAQ015Q',
+    'Ética no Serviço Público': 'https://www.youtube.com/playlist?list=PLr3WpxIp98UyaFnHFYg3rLITKmkAQ015Q',
+  },
+
+  youtubeUrl(materia) {
+    return this.YT_VIDEO[materia] || null;
+  },
+
   resolveUrl(rawUrl, materia) {
     if (rawUrl && rawUrl !== '#' && rawUrl !== '') return rawUrl;
     if (materia && this.MATERIA_URL[materia]) return this.MATERIA_URL[materia];

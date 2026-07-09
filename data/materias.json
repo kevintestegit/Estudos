@@ -1,20 +1,157 @@
 {
   "comum": [
-    {"id":"portugues","nome":"Português","cor":"#1e4d7b","assuntos":["Interpretação","Ortografia","Morfossintaxe","Concordância","Regência","Pontuação"]},
-    {"id":"rl","nome":"Raciocínio Lógico","cor":"#0d7a5f","assuntos":["Proposições","Equivalências","Diagramas","Probabilidade"]},
-    {"id":"informatica","nome":"Informática","cor":"#6d28d9","assuntos":["Hardware/Software","SO","Internet","Office"]},
-    {"id":"etica","nome":"Ética","cor":"#b45309","assuntos":["Princípios","Deveres","Cidadania"]},
-    {"id":"dc","nome":"Direito Constitucional","cor":"#b91c1c","assuntos":["Direitos fundamentais","Organização do Estado","Administração Pública","Poderes"]},
-    {"id":"da","nome":"Direito Administrativo","cor":"#0369a1","assuntos":["Administração","Atos","Licitações","Poderes","Agentes","Controle"]}
+    {
+      "id": "portugues",
+      "nome": "Português",
+      "cor": "#1e4d7b",
+      "assuntos": [
+        "Interpretação",
+        "Ortografia",
+        "Morfossintaxe",
+        "Concordância",
+        "Regência",
+        "Pontuação"
+      ]
+    },
+    {
+      "id": "rl",
+      "nome": "Raciocínio Lógico",
+      "cor": "#0d7a5f",
+      "assuntos": [
+        "Proposições",
+        "Equivalências",
+        "Diagramas",
+        "Probabilidade"
+      ]
+    },
+    {
+      "id": "informatica",
+      "nome": "Informática",
+      "cor": "#6d28d9",
+      "assuntos": [
+        "Hardware/Software",
+        "SO",
+        "Internet",
+        "Office"
+      ]
+    },
+    {
+      "id": "etica",
+      "nome": "Ética",
+      "cor": "#b45309",
+      "assuntos": [
+        "Princípios",
+        "Deveres",
+        "Cidadania"
+      ]
+    },
+    {
+      "id": "dc",
+      "nome": "Direito Constitucional",
+      "cor": "#b91c1c",
+      "assuntos": [
+        "Direitos fundamentais",
+        "Organização do Estado",
+        "Administração Pública",
+        "Poderes"
+      ]
+    },
+    {
+      "id": "da",
+      "nome": "Direito Administrativo",
+      "cor": "#0369a1",
+      "assuntos": [
+        "Administração",
+        "Atos",
+        "Licitações",
+        "Poderes",
+        "Agentes",
+        "Controle"
+      ]
+    }
   ],
   "inss": [
-    {"id":"prev","nome":"Direito Previdenciário","cor":"#047857","assuntos":["Seguridade","Segurados","Carência","Benefícios","Custeio","Processo","Leis"]}
+    {
+      "id": "prev",
+      "nome": "Direito Previdenciário",
+      "cor": "#047857",
+      "assuntos": [
+        "Seguridade",
+        "Segurados",
+        "Carência",
+        "Benefícios",
+        "Custeio",
+        "Processo",
+        "Leis"
+      ]
+    }
   ],
   "prf": [
-    {"id":"ctb","nome":"Legislação de Trânsito","cor":"#9a3412","assuntos":["CTB intro","Infrações","Sinalização","Documentos","Revisão"]},
-    {"id":"penal","nome":"Direito Penal (trânsito)","cor":"#7f1d1d","assuntos":["Crimes de trânsito"]},
-    {"id":"ps","nome":"Primeiros Socorros","cor":"#be123c","assuntos":["Atendimento inicial"]},
-    {"id":"fisica","nome":"Física/Mecânica","cor":"#4338ca","assuntos":["Noções aplicadas"]},
-    {"id":"geo","nome":"Geografia","cor":"#0f766e","assuntos":["Rodovias e regiões"]}
+    {
+      "id": "ctb",
+      "nome": "Legislação de Trânsito",
+      "cor": "#9a3412",
+      "assuntos": [
+        "CTB intro",
+        "Infrações",
+        "Sinalização",
+        "Documentos",
+        "Revisão"
+      ]
+    },
+    {
+      "id": "penal",
+      "nome": "Direito Penal (trânsito)",
+      "cor": "#7f1d1d",
+      "assuntos": [
+        "Crimes de trânsito"
+      ]
+    },
+    {
+      "id": "ps",
+      "nome": "Primeiros Socorros",
+      "cor": "#be123c",
+      "assuntos": [
+        "Atendimento inicial"
+      ]
+    },
+    {
+      "id": "fisica",
+      "nome": "Física/Mecânica",
+      "cor": "#4338ca",
+      "assuntos": [
+        "Noções aplicadas"
+      ]
+    },
+    {
+      "id": "geo",
+      "nome": "Geografia",
+      "cor": "#0f766e",
+      "assuntos": [
+        "Rodovias e regiões"
+      ]
+    },
+    {
+      "id": "arquivologia",
+      "nome": "Arquivologia",
+      "cor": "#6d28d9",
+      "assuntos": [
+        "Gestão documental",
+        "Classificação",
+        "Temporalidade",
+        "Preservação"
+      ]
+    },
+    {
+      "id": "admin",
+      "nome": "Noções de Administração",
+      "cor": "#0369a1",
+      "assuntos": [
+        "PODC",
+        "Estrutura",
+        "Eficiência/Eficácia",
+        "Organizações"
+      ]
+    }
   ]
 }

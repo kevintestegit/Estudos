@@ -24,6 +24,8 @@ function renderQuestoesHome(data, params) {
   const materias = [...new Set(all.map((q) => q.materia))].sort();
   const tag = params.get('tag') || '';
   const materia = params.get('materia') || '';
+  const nParam = Number(params.get('n')) || 0;
+  const auto = params.get('auto') === '1';
   const root = document.getElementById('app-root');
 
   root.innerHTML = `
@@ -44,7 +46,7 @@ function renderQuestoesHome(data, params) {
         </div>
         <div class="form-row">
           <label for="q-n">Quantidade</label>
-          <input id="q-n" type="number" min="1" max="50" value="5">
+          <input id="q-n" type="number" min="1" max="50" value="${nParam || 5}">
         </div>
         <div class="form-row">
           <label for="q-origem">Origem</label>
@@ -52,6 +54,13 @@ function renderQuestoesHome(data, params) {
             <option value="todas">INSS + PRF</option>
             <option value="inss">INSS / comum</option>
             <option value="prf">PRF / comum</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="q-modo">Modo</label>
+          <select id="q-modo">
+            <option value="pratica">Prática (gabarito na hora)</option>
+            <option value="prova">Modo prova (gabarito só no final)</option>
           </select>
         </div>
       </div>
@@ -63,7 +72,7 @@ function renderQuestoesHome(data, params) {
     <div id="q-area"></div>
   `;
 
-  function beginQuiz() {
+  function beginQuiz(forceMode) {
     const msg = document.getElementById('q-msg');
     try {
       let pool = allQuestions(data);
@@ -90,15 +99,16 @@ function renderQuestoesHome(data, params) {
       msg.innerHTML = '';
       const setup = document.getElementById('q-setup');
       if (setup) setup.classList.add('hidden');
-      startQuiz(pool, { mode: 'pratica', tipo: origem });
+      const mode = forceMode || document.getElementById('q-modo').value || 'pratica';
+      startQuiz(pool, { mode, tipo: origem });
     } catch (err) {
       msg.innerHTML = `<div class="alert alert-danger">Erro ao iniciar: ${App.esc(err.message || err)}</div>`;
       console.error(err);
     }
   }
 
-  document.getElementById('q-start').addEventListener('click', beginQuiz);
-  if (tag || materia) beginQuiz();
+  document.getElementById('q-start').addEventListener('click', () => beginQuiz());
+  if (auto || tag || materia) beginQuiz(params.get('modo') || 'pratica');
 }
 
 function shuffle(arr) {
@@ -132,6 +142,8 @@ function startQuiz(questions, meta) {
   let timerId = null;
   let remain = (meta.tempoMinutos || 0) * 60;
   let answeredCurrent = false;
+  const provaMode = meta.mode === 'prova';
+  const selections = [];
 
   function ensureSubject(m) {
     const key = m || 'Geral';
@@ -151,12 +163,13 @@ function startQuiz(questions, meta) {
       : '';
     area.innerHTML = `
       <div class="card" id="quiz-card">
-        <p class="muted">Questão ${idx + 1} de ${questions.length} · ${App.esc(q.materia || '')} · ${App.esc(q.assunto || '')}</p>
+        <p class="muted">Questão ${idx + 1} de ${questions.length} · ${App.esc(q.materia || '')} · ${App.esc(q.assunto || '')}
+          ${provaMode ? ' · <span class="badge badge-warn">Modo prova</span>' : ''}</p>
         ${timerHtml}
         <h3>${App.esc(q.enunciado || '')}</h3>
         <div id="opts" class="mt-1"></div>
         <div class="actions">
-          <button type="button" class="btn" id="q-confirm" disabled>Confirmar</button>
+          <button type="button" class="btn" id="q-confirm" disabled>${provaMode ? (idx + 1 < questions.length ? 'Próxima' : 'Finalizar prova') : 'Confirmar'}</button>
           <button type="button" class="btn btn-secondary" id="q-cancel">Sair</button>
         </div>
         <div id="q-feedback" class="mt-1"></div>
@@ -164,17 +177,18 @@ function startQuiz(questions, meta) {
 
     area.scrollIntoView({ behavior: 'smooth', block: 'start' });
     const opts = document.getElementById('opts');
-    let selected = null;
+    let selected = selections[idx] != null ? selections[idx] : null;
     const tipo = q.tipo === 'ce' ? 'ce' : 'me';
 
     if (tipo === 'ce') {
       ['C', 'E'].forEach((v) => {
         const b = document.createElement('button');
         b.type = 'button';
-        b.className = 'quiz-option';
+        b.className = 'quiz-option' + (selected === v ? ' selected' : '');
         b.textContent = v === 'C' ? 'Certo' : 'Errado';
         b.addEventListener('click', () => {
           selected = v;
+          selections[idx] = v;
           opts.querySelectorAll('.quiz-option').forEach((x) => x.classList.remove('selected'));
           b.classList.add('selected');
           document.getElementById('q-confirm').disabled = false;
@@ -185,10 +199,11 @@ function startQuiz(questions, meta) {
       (q.alternativas || []).forEach((alt, i) => {
         const b = document.createElement('button');
         b.type = 'button';
-        b.className = 'quiz-option';
+        b.className = 'quiz-option' + (selected === i ? ' selected' : '');
         b.textContent = `${String.fromCharCode(65 + i)}) ${alt}`;
         b.addEventListener('click', () => {
           selected = i;
+          selections[idx] = i;
           opts.querySelectorAll('.quiz-option').forEach((x) => x.classList.remove('selected'));
           b.classList.add('selected');
           document.getElementById('q-confirm').disabled = false;
@@ -196,6 +211,7 @@ function startQuiz(questions, meta) {
         opts.appendChild(b);
       });
     }
+    if (selected !== null) document.getElementById('q-confirm').disabled = false;
 
     document.getElementById('q-cancel').addEventListener('click', () => {
       if (timerId) clearInterval(timerId);
@@ -203,13 +219,23 @@ function startQuiz(questions, meta) {
     });
 
     document.getElementById('q-confirm').addEventListener('click', () => {
+      if (selected === null || selected === undefined) return;
+
+      // modo prova: só avança; corrige tudo no final
+      if (provaMode) {
+        selections[idx] = selected;
+        idx++;
+        if (idx >= questions.length) finish();
+        else renderQuestion();
+        return;
+      }
+
       if (answeredCurrent) {
         idx++;
         if (idx >= questions.length) finish();
         else renderQuestion();
         return;
       }
-      if (selected === null || selected === undefined) return;
       answeredCurrent = true;
       const ok = tipo === 'ce' ? selected === q.gabarito : Number(selected) === Number(q.gabarito);
       const subj = ensureSubject(q.materia);
@@ -254,6 +280,39 @@ function startQuiz(questions, meta) {
     if (timerId) clearInterval(timerId);
     const minutes = Math.max(1, Math.round((Date.now() - started) / 60000));
 
+    // modo prova: corrige tudo agora
+    if (provaMode) {
+      correct = 0;
+      wrong = 0;
+      answers.length = 0;
+      Object.keys(bySubject).forEach((k) => delete bySubject[k]);
+      questions.forEach((q, i) => {
+        const selected = selections[i];
+        const tipo = q.tipo === 'ce' ? 'ce' : 'me';
+        const ok = selected == null ? false
+          : (tipo === 'ce' ? selected === q.gabarito : Number(selected) === Number(q.gabarito));
+        const subj = ensureSubject(q.materia);
+        bySubject[subj].total++;
+        if (ok) {
+          correct++;
+          bySubject[subj].correct++;
+        } else {
+          wrong++;
+          try {
+            Storage.addErro({
+              materia: q.materia,
+              assunto: q.assunto,
+              questao: q.enunciado,
+              motivo: 'Erro no modo prova',
+              comentario: q.comentario || '',
+              tipo: 'atencao'
+            });
+          } catch (e) { console.error(e); }
+        }
+        answers.push({ id: q.id, ok, selected, gabarito: q.gabarito, comentario: q.comentario });
+      });
+    }
+
     if (meta.mode === 'simulado') {
       Storage.addSimulado({
         tipo: meta.tipo || 'misto',
@@ -270,6 +329,7 @@ function startQuiz(questions, meta) {
         d.quiz.correct += correct;
         d.quiz.wrong += wrong;
         d.xp += correct * 2 + wrong;
+        Storage._bumpDailyQuiz(d, todayISO(), correct + wrong, correct, wrong);
       }
       Object.entries(bySubject).forEach(([mat, v]) => {
         if (!d.quiz.bySubject[mat]) d.quiz.bySubject[mat] = { answered: 0, correct: 0, wrong: 0 };
@@ -282,9 +342,23 @@ function startQuiz(questions, meta) {
     });
 
     const pct = Math.round((correct / questions.length) * 100);
+    const reviewHtml = provaMode ? `
+      <h3 class="mt-2">Gabarito comentado</h3>
+      <ul class="list">
+        ${answers.map((a, i) => {
+          const q = questions[i];
+          return `<li>
+            <strong>${i + 1}.</strong> ${a.ok ? '<span class="badge badge-ok">Certo</span>' : '<span class="badge badge-danger">Errado</span>'}
+            · sua: ${App.esc(String(a.selected ?? '—'))} · gab: ${App.esc(String(a.gabarito))}
+            <p class="muted">${App.esc((q.enunciado || '').slice(0, 140))}…</p>
+            <p class="muted">${App.esc(a.comentario || '')}</p>
+          </li>`;
+        }).join('')}
+      </ul>` : '';
+
     area.innerHTML = `
       <div class="card">
-        <h2>Resultado</h2>
+        <h2>Resultado ${provaMode ? '(modo prova)' : ''}</h2>
         <p class="stat"><span class="value">${correct}/${questions.length}</span><span class="label">${pct}% de acertos</span></p>
         <p>Tempo: ${minutes} min · Erros enviados ao caderno: ${wrong}</p>
         <h3 class="mt-1">Por matéria</h3>
@@ -293,6 +367,7 @@ function startQuiz(questions, meta) {
             `<li>${App.esc(k)}: ${v.correct}/${v.total} (${Math.round((v.correct / v.total) * 100)}%)</li>`
           ).join('')}
         </ul>
+        ${reviewHtml}
         <div class="actions">
           <a class="btn" href="caderno-erros.html">Caderno de erros</a>
           <button class="btn btn-secondary" id="q-again">Novo questionário</button>

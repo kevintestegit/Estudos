@@ -49,6 +49,46 @@
       "tipo": "orientacao",
       "url": "biblioteca.html",
       "fonte": "Portal"
+    },
+    {
+      "id": "res-ec-103",
+      "concurso": "INSS",
+      "ano": 2019,
+      "titulo": "EC 103/2019 comentada — pontos INSS",
+      "materia": "Direito Previdenciário",
+      "tipo": "orientacao",
+      "url": "biblioteca.html",
+      "fonte": "Portal"
+    },
+    {
+      "id": "res-decreto-3048",
+      "concurso": "INSS",
+      "ano": 2026,
+      "titulo": "Decreto 3.048/1999 — leitura dirigida seções 1-3",
+      "materia": "Direito Previdenciário",
+      "tipo": "orientacao",
+      "url": "biblioteca.html",
+      "fonte": "Portal"
+    },
+    {
+      "id": "res-ctb-revisao",
+      "concurso": "PRF Administrativo",
+      "ano": 2026,
+      "titulo": "CTB completo — cronograma de leitura (30 dias)",
+      "materia": "Legislação de Trânsito",
+      "tipo": "orientacao",
+      "url": "biblioteca.html",
+      "fonte": "Portal"
+    },
+    {
+      "id": "res-prf-leis",
+      "concurso": "PRF Administrativo",
+      "ano": 2026,
+      "titulo": "Leis PRF: Decreto 1.655 + Lei 9.654 + Decreto 8.884",
+      "materia": "Legislação PRF",
+      "tipo": "orientacao",
+      "url": "biblioteca.html",
+      "fonte": "Portal"
     }
   ]
 }

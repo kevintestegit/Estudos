@@ -149,6 +149,48 @@
       "categoria": "prf",
       "materia": "Gabarito",
       "prioridade": "media"
+    },
+    {
+      "id": "pci-inss-2022-index",
+      "concurso": "INSS",
+      "cargo": "Técnico do Seguro Social",
+      "ano": 2022,
+      "banca": "Cebraspe",
+      "tipo": "prova",
+      "titulo": "PCI Concursos — índice INSS 2022 (provas/gabaritos)",
+      "url": "https://www.pciconcursos.com.br/provas/download/tecnico-do-seguro-social-inss-cebraspe-2022",
+      "fonte": "PCI Concursos",
+      "categoria": "inss",
+      "materia": "Prova completa",
+      "prioridade": "alta"
+    },
+    {
+      "id": "pci-inss-2016-index",
+      "concurso": "INSS",
+      "cargo": "Técnico do Seguro Social",
+      "ano": 2016,
+      "banca": "Cespe/Cebraspe",
+      "tipo": "prova",
+      "titulo": "PCI Concursos — índice INSS 2016",
+      "url": "https://www.pciconcursos.com.br/provas/download/tecnico-do-seguro-social-inss-cespe-2016",
+      "fonte": "PCI Concursos",
+      "categoria": "inss",
+      "materia": "Prova completa",
+      "prioridade": "media"
+    },
+    {
+      "id": "cebraspe-inss-portal",
+      "concurso": "INSS",
+      "cargo": "Técnico do Seguro Social",
+      "ano": 2022,
+      "banca": "Cebraspe",
+      "tipo": "pagina",
+      "titulo": "Portal Cebraspe — concurso INSS 2022",
+      "url": "https://www.cebraspe.org.br/concursos/inss_22",
+      "fonte": "Cebraspe",
+      "categoria": "inss",
+      "materia": "Prova",
+      "prioridade": "alta"
     }
   ]
 }

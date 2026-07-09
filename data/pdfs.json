@@ -370,6 +370,41 @@
       "materia": "Prova",
       "paginas": 12,
       "url": "https://www.solucaopreparatorio.com.br/img/provas/caderno_prova_P_Agente_Administrativo_PRF_2014.pdf"
+    },
+    {
+      "id": "pdf-pt-07",
+      "titulo": "Resumo — Crase",
+      "materia": "Português",
+      "paginas": 4,
+      "url": "https://www.youtube.com/results?search_query=crase+resumo+concurso"
+    },
+    {
+      "id": "pdf-dc-05",
+      "titulo": "Resumo — Controle de constitucionalidade",
+      "materia": "Direito Constitucional",
+      "paginas": 6,
+      "url": "https://www.youtube.com/results?search_query=controle+constitucionalidade+resumo"
+    },
+    {
+      "id": "pdf-da-07",
+      "titulo": "Resumo — Licitações 14.133",
+      "materia": "Direito Administrativo",
+      "paginas": 10,
+      "url": "https://www.youtube.com/results?search_query=lei+14133+resumo+concurso"
+    },
+    {
+      "id": "pdf-prev-17",
+      "titulo": "Resumo — Pensão por morte",
+      "materia": "Direito Previdenciário",
+      "paginas": 5,
+      "url": "https://www.youtube.com/results?search_query=pensao+por+morte+resumo"
+    },
+    {
+      "id": "pdf-ctb-06",
+      "titulo": "Resumo — Infrações CTB",
+      "materia": "Legislação de Trânsito",
+      "paginas": 8,
+      "url": "https://www.youtube.com/results?search_query=infracoes+ctb+resumo"
     }
   ]
 }
