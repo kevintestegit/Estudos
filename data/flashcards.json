@@ -169,46 +169,6 @@
       "prioridade": "alta"
     },
     {
-      "id": "fc-22",
-      "materia": "Legislação de Trânsito",
-      "categoria": "prf",
-      "frente": "CTB — lei",
-      "verso": "Lei nº 9.503/1997.",
-      "prioridade": "alta"
-    },
-    {
-      "id": "fc-23",
-      "materia": "Legislação de Trânsito",
-      "categoria": "prf",
-      "frente": "Trânsito em condições seguras",
-      "verso": "Direito de todos e dever dos órgãos e entidades do SNT (art. 1º §2º CTB).",
-      "prioridade": "alta"
-    },
-    {
-      "id": "fc-24",
-      "materia": "Legislação de Trânsito",
-      "categoria": "prf",
-      "frente": "Hierarquia: agente x sinalização",
-      "verso": "Ordem do agente de trânsito prevalece sobre as normas de circulação e a sinalização.",
-      "prioridade": "alta"
-    },
-    {
-      "id": "fc-25",
-      "materia": "Legislação de Trânsito",
-      "categoria": "prf",
-      "frente": "Classificação das infrações",
-      "verso": "Leve, média, grave e gravíssima.",
-      "prioridade": "alta"
-    },
-    {
-      "id": "fc-26",
-      "materia": "Legislação de Trânsito",
-      "categoria": "prf",
-      "frente": "CNH — o que comprova",
-      "verso": "Habilitação do condutor para dirigir veículos da categoria indicada, com validade.",
-      "prioridade": "alta"
-    },
-    {
       "id": "fc-27",
       "materia": "Legislação PRF",
       "categoria": "prf",
@@ -313,14 +273,6 @@
       "prioridade": "alta"
     },
     {
-      "id": "fc-40",
-      "materia": "Legislação de Trânsito",
-      "categoria": "prf",
-      "frente": "Cinto de segurança",
-      "verso": "Obrigatório para condutor e passageiros.",
-      "prioridade": "alta"
-    },
-    {
       "id": "fc-inss-41",
       "materia": "Direito Previdenciário",
       "categoria": "inss",
@@ -401,54 +353,6 @@
       "prioridade": "alta"
     },
     {
-      "id": "fc-prf-31",
-      "materia": "Legislação de Trânsito",
-      "categoria": "prf",
-      "frente": "Hierarquia no trânsito",
-      "verso": "Ordem do agente de trânsito > sinalização > normas de circulação (artigos 39, 89 CTB).",
-      "prioridade": "alta"
-    },
-    {
-      "id": "fc-prf-32",
-      "materia": "Legislação de Trânsito",
-      "categoria": "prf",
-      "frente": "Velocidade máxima pista dupla rural (sem sinalização)",
-      "verso": "Automóveis/camionetas/motos: 110 km/h. Demais veículos: 90 km/h.",
-      "prioridade": "alta"
-    },
-    {
-      "id": "fc-prf-33",
-      "materia": "Legislação de Trânsito",
-      "categoria": "prf",
-      "frente": "Ultrapassar pelo acostamento",
-      "verso": "Infração gravíssima (7 pontos + multa).",
-      "prioridade": "alta"
-    },
-    {
-      "id": "fc-prf-34",
-      "materia": "Legislação de Trânsito",
-      "categoria": "prf",
-      "frente": "Dirigir sem CNH ou permissão",
-      "verso": "Infração gravíssima (7 pontos + multa + apreensão do veículo).",
-      "prioridade": "alta"
-    },
-    {
-      "id": "fc-prf-35",
-      "materia": "Legislação de Trânsito",
-      "categoria": "prf",
-      "frente": "Recusa ao bafômetro",
-      "verso": "Infração gravíssima (7 pontos + multa 10x + suspensão do direito de dirigir por 12 meses + recolhimento da CNH).",
-      "prioridade": "alta"
-    },
-    {
-      "id": "fc-prf-36",
-      "materia": "Legislação PRF",
-      "categoria": "prf",
-      "frente": "Atribuição da PRF no CTB",
-      "verso": "Patrulhamento ostensivo das rodovias federais (art. 20, II, CTB). Execução de serviços de polícia de trânsito nas rodovias federais (inciso III).",
-      "prioridade": "alta"
-    },
-    {
       "id": "fc-prf-37",
       "materia": "Arquivologia",
       "categoria": "prf",
@@ -470,14 +374,6 @@
       "categoria": "prf",
       "frente": "Eficiência x Eficácia",
       "verso": "Eficiência = fazer certo (meios). Eficácia = fazer o que deve ser feito para atingir objetivos (resultados).",
-      "prioridade": "alta"
-    },
-    {
-      "id": "fc-prf-40",
-      "materia": "Primeiros Socorros",
-      "categoria": "prf",
-      "frente": "RCP — compressão torácica",
-      "verso": "100-120 compressões/min, profundidade 5-6 cm, permitir retorno do tórax. 30 compressões : 2 ventilações.",
       "prioridade": "alta"
     },
     {
@@ -543,14 +439,6 @@
       "frente": "Negação de proposição composta — De Morgan",
       "verso": "~(p ∧ q) ≡ ~p ∨ ~q. ~(p ∨ q) ≡ ~p ∧ ~q.",
       "prioridade": "alta"
-    },
-    {
-      "id": "fc-com-49",
-      "materia": "Informática",
-      "categoria": "comum",
-      "frente": "Diferença hardware x software",
-      "verso": "Hardware: parte física do computador (CPU, RAM, HD). Software: programas e dados (SO, aplicativos).",
-      "prioridade": "media"
     },
     {
       "id": "fc-com-50",

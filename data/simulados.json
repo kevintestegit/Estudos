@@ -2,20 +2,11 @@
   "simulados": [
     {
       "id": "sim-inss-01",
-      "titulo": "INSS — Bloco específico + comum",
+      "titulo": "INSS — Bloco jurídico + ética",
       "tipo": "inss",
       "tempoMinutos": 50,
-      "descricao": "Previdenciário, ética, DA e constitucional com questões reais CEBRASPE.",
+      "descricao": "Questões reais CEBRASPE (DA, DC, ética e comuns).",
       "questaoIds": [
-        "inss-2022-i14",
-        "inss-2022-i22",
-        "inss-2022-i30",
-        "inss-2022-i34",
-        "inss-2022-i35",
-        "inss-2022-i42",
-        "inss-2022-i45",
-        "inss-2022-i46",
-        "inss-2022-i47",
         "inss-2022-i15",
         "inss-2022-i16",
         "inss-2022-i17",
@@ -23,18 +14,27 @@
         "inss-2022-i19",
         "inss-2022-i20",
         "inss-2022-i21",
+        "inss-2022-i22",
         "inss-2022-i23",
         "inss-2022-i24",
+        "inss-2022-i25",
         "inss-2022-i26",
-        "inss-2022-i27"
+        "inss-2022-i31",
+        "inss-2022-i32",
+        "inss-2022-i33",
+        "inss-2022-i36",
+        "inss-2022-i37",
+        "inss-2022-i39",
+        "inss-2022-i40",
+        "inss-2016-i22"
       ]
     },
     {
       "id": "sim-inss-02",
-      "titulo": "INSS — Comuns aprofundado",
+      "titulo": "INSS — Português e RL",
       "tipo": "inss",
-      "tempoMinutos": 50,
-      "descricao": "Português, ética, DA, DC e RL.",
+      "tempoMinutos": 40,
+      "descricao": "Interpretação e raciocínio com itens reais.",
       "questaoIds": [
         "inss-2022-i1",
         "inss-2022-i2",
@@ -48,18 +48,22 @@
         "inss-2022-i10",
         "inss-2022-i12",
         "inss-2022-i13",
+        "inss-2022-i48",
+        "inss-2022-i50",
         "inss-2016-r1",
         "inss-2016-r2",
         "inss-2016-r3",
-        "inss-2016-r4"
+        "inss-2016-r4",
+        "inss-2016-r5",
+        "inss-2016-r6"
       ]
     },
     {
       "id": "sim-inss-03",
-      "titulo": "INSS — Amostra prova real",
+      "titulo": "INSS — Prova real 2016 (amostra)",
       "tipo": "inss",
       "tempoMinutos": 60,
-      "descricao": "Questões retiradas da prova INSS 2016 CEBRASPE.",
+      "descricao": "Itens da prova INSS 2016 Cespe.",
       "questaoIds": [
         "inss-2016-i22",
         "inss-2016-r1",
@@ -72,19 +76,6 @@
         "inss-2016-r8",
         "inss-2016-r9",
         "inss-2016-r10",
-        "inss-2016-r11"
-      ]
-    },
-    {
-      "id": "sim-inss-final",
-      "titulo": "INSS — Intensivo real",
-      "tipo": "inss",
-      "tempoMinutos": 60,
-      "descricao": "Simulado longo com todas as questões INSS reais disponíveis.",
-      "questaoIds": [
-        "inss-2016-i22",
-        "inss-2016-r1",
-        "inss-2016-r10",
         "inss-2016-r11",
         "inss-2016-r12",
         "inss-2016-r13",
@@ -93,25 +84,54 @@
         "inss-2016-r16",
         "inss-2016-r17",
         "inss-2016-r18",
-        "inss-2016-r19",
-        "inss-2016-r2",
-        "inss-2016-r20",
-        "inss-2016-r21",
-        "inss-2016-r22",
-        "inss-2016-r23",
-        "inss-2016-r24",
-        "inss-2016-r25",
-        "inss-2016-r26",
-        "inss-2016-r27",
-        "inss-2016-r29"
+        "inss-2016-r19"
+      ]
+    },
+    {
+      "id": "sim-inss-final",
+      "titulo": "INSS — Intensivo",
+      "tipo": "inss",
+      "tempoMinutos": 60,
+      "descricao": "Simulado longo com questões reais INSS.",
+      "questaoIds": [
+        "inss-2022-i1",
+        "inss-2022-i2",
+        "inss-2022-i3",
+        "inss-2022-i4",
+        "inss-2022-i5",
+        "inss-2022-i6",
+        "inss-2022-i7",
+        "inss-2022-i8",
+        "inss-2022-i9",
+        "inss-2022-i10",
+        "inss-2022-i11",
+        "inss-2022-i12",
+        "inss-2022-i13",
+        "inss-2022-i14",
+        "inss-2022-i15",
+        "inss-2022-i16",
+        "inss-2022-i17",
+        "inss-2022-i18",
+        "inss-2022-i19",
+        "inss-2022-i20",
+        "inss-2022-i21",
+        "inss-2022-i22",
+        "inss-2022-i23",
+        "inss-2022-i24",
+        "inss-2022-i25",
+        "inss-2022-i26",
+        "inss-2022-i27",
+        "inss-2022-i28",
+        "inss-2022-i29",
+        "inss-2022-i30"
       ]
     },
     {
       "id": "sim-prf-01",
-      "titulo": "PRF Adm — Língua Portuguesa + Ética",
+      "titulo": "PRF Adm — Comuns",
       "tipo": "prf",
       "tempoMinutos": 40,
-      "descricao": "Prova real PRF 2014 — interpretação textual e ética.",
+      "descricao": "Português, ética e RL da prova administrativa.",
       "questaoIds": [
         "inss-2022-i1",
         "inss-2022-i2",
@@ -124,7 +144,10 @@
         "inss-2022-i9",
         "inss-2022-i10",
         "inss-2022-i12",
-        "inss-2022-i13"
+        "inss-2022-i13",
+        "inss-2022-i15",
+        "inss-2022-i16",
+        "inss-2022-i17"
       ]
     },
     {
@@ -132,31 +155,31 @@
       "titulo": "PRF Adm — Específicos",
       "tipo": "prf",
       "tempoMinutos": 40,
-      "descricao": "DC, DA, administração, arquivologia, informática — prova real 2014.",
+      "descricao": "DA, DC, administração e arquivologia.",
       "questaoIds": [
-        "inss-2022-i11",
-        "inss-2016-r33",
-        "inss-2016-r34",
-        "prf-2014-q25",
-        "prf-2014-q26",
-        "prf-2014-q28",
-        "prf-2014-q29",
-        "prf-2014-q30",
+        "inss-2022-i21",
+        "inss-2022-i22",
+        "inss-2022-i23",
+        "inss-2022-i24",
         "inss-2022-i25",
+        "inss-2022-i26",
         "inss-2022-i31",
         "inss-2022-i32",
         "inss-2022-i33",
         "inss-2022-i36",
         "inss-2022-i37",
-        "inss-2022-i39"
+        "inss-2022-i39",
+        "inss-2022-i40",
+        "inss-2016-r22",
+        "inss-2016-r23"
       ]
     },
     {
       "id": "sim-prf-03",
-      "titulo": "PRF Adm — Prova real 2014 completa",
+      "titulo": "PRF Adm — Prova real 2014",
       "tipo": "prf",
       "tempoMinutos": 60,
-      "descricao": "Todas as questões reais da prova PRF Administrativo 2014 FUNCAB.",
+      "descricao": "Questões da prova PRF Agente Administrativo 2014 (FUNCAB).",
       "questaoIds": [
         "prf-2014-q01",
         "prf-2014-q02",
@@ -177,7 +200,12 @@
         "prf-2014-q20",
         "prf-2014-q24",
         "prf-2014-q25",
-        "prf-2014-q26"
+        "prf-2014-q26",
+        "prf-2014-q28",
+        "prf-2014-q29",
+        "prf-2014-q30",
+        "prf-2014-q31",
+        "prf-2014-q32"
       ]
     },
     {
@@ -185,7 +213,7 @@
       "titulo": "PRF Adm — Intensivo",
       "tipo": "prf",
       "tempoMinutos": 60,
-      "descricao": "Simulado completo PRF Administrativo com questões reais.",
+      "descricao": "Simulado completo PRF Administrativo.",
       "questaoIds": [
         "prf-2014-q01",
         "prf-2014-q02",
@@ -221,12 +249,19 @@
     },
     {
       "id": "sim-misto-01",
-      "titulo": "Misto INSS + PRF",
+      "titulo": "Misto INSS + PRF Adm",
       "tipo": "misto",
       "tempoMinutos": 40,
-      "descricao": "Mistura real de ambos os concursos.",
+      "descricao": "Mistura dos dois concursos.",
       "questaoIds": [
-        "inss-2016-i22",
+        "inss-2022-i1",
+        "inss-2022-i2",
+        "inss-2022-i3",
+        "inss-2022-i4",
+        "inss-2022-i5",
+        "inss-2022-i6",
+        "inss-2022-i7",
+        "inss-2022-i8",
         "prf-2014-q01",
         "prf-2014-q02",
         "prf-2014-q03",
@@ -242,9 +277,20 @@
       "titulo": "Misto Direito + Ética",
       "tipo": "misto",
       "tempoMinutos": 40,
-      "descricao": "DA, DC e ética dos dois concursos.",
+      "descricao": "DA, DC e ética.",
       "questaoIds": [
+        "inss-2022-i15",
+        "inss-2022-i16",
+        "inss-2022-i17",
+        "inss-2022-i18",
+        "inss-2022-i19",
+        "inss-2022-i20",
+        "inss-2022-i21",
+        "inss-2022-i22",
+        "inss-2022-i23",
+        "inss-2022-i24",
         "inss-2022-i25",
+        "inss-2022-i26",
         "inss-2022-i31",
         "inss-2022-i32",
         "inss-2022-i33",
@@ -252,18 +298,7 @@
         "inss-2022-i37",
         "inss-2022-i39",
         "inss-2022-i40",
-        "inss-2022-i48",
-        "inss-2022-i50",
-        "inss-2016-r22",
-        "inss-2016-r23",
-        "inss-2016-r24",
-        "inss-2016-r25",
-        "inss-2016-r26",
-        "inss-2016-r27",
-        "inss-2016-r29",
-        "inss-2016-r30",
-        "inss-2016-r31",
-        "inss-2016-r35"
+        "inss-2016-i22"
       ]
     },
     {
@@ -271,7 +306,7 @@
       "titulo": "Núcleo comum",
       "tipo": "comum",
       "tempoMinutos": 30,
-      "descricao": "Português, RL, informática, ética — questões reais.",
+      "descricao": "Português, RL, informática, ética.",
       "questaoIds": [
         "inss-2022-i1",
         "inss-2022-i2",
@@ -284,7 +319,10 @@
         "inss-2022-i9",
         "inss-2022-i10",
         "inss-2022-i12",
-        "inss-2022-i13"
+        "inss-2022-i13",
+        "inss-2022-i15",
+        "inss-2022-i16",
+        "inss-2022-i17"
       ]
     },
     {
@@ -292,9 +330,14 @@
       "titulo": "Direito completo",
       "tipo": "comum",
       "tempoMinutos": 30,
-      "descricao": "DA e DC reais combinados.",
+      "descricao": "DA e DC.",
       "questaoIds": [
+        "inss-2022-i21",
+        "inss-2022-i22",
+        "inss-2022-i23",
+        "inss-2022-i24",
         "inss-2022-i25",
+        "inss-2022-i26",
         "inss-2022-i31",
         "inss-2022-i32",
         "inss-2022-i33",
@@ -302,13 +345,8 @@
         "inss-2022-i37",
         "inss-2022-i39",
         "inss-2022-i40",
-        "inss-2022-i48",
-        "inss-2022-i50",
         "inss-2016-r22",
-        "inss-2016-r23",
-        "inss-2016-r24",
-        "inss-2016-r25",
-        "inss-2016-r26"
+        "inss-2016-r23"
       ]
     }
   ]

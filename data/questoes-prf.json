@@ -1,5 +1,5 @@
 {
-  "origem": "PRF / comum",
+  "origem": "PRF Administrativo / comum",
   "questoes": [
     {
       "id": "prf-2014-q01",
@@ -650,82 +650,6 @@
       ],
       "gabarito": 1,
       "comentario": "Gabarito: alternativa B. Resposta correta: «produto em grande parte não mensurável / há autonomia decisória.». Matéria: Noções de Administração. Fonte: PRF 2014 FUNCAB (real). Elimine alternativas que generalizam demais, inventam requisito inexistente ou contradizem a lei/texto. A correta é a que atende integralmente ao comando da questão.",
-      "fonte": "PRF 2014 FUNCAB (real)"
-    },
-    {
-      "id": "prf-2014-q43",
-      "tipo": "me",
-      "banca": "FUNCAB",
-      "materia": "Arquivologia",
-      "assunto": "PRF 2014 Arquivologia",
-      "tag": "geografia",
-      "enunciado": "A Arquivologia como ciência possui princípios que orientam seus\ntrabalhos e estudos. O princípio da proveniência estabelece que\nos fundos:",
-      "alternativas": [
-        "conservam seu caráter único em função do contexto em que foram produzidos.",
-        "constituem uma formação progressiva e natural, decorrente das funções de um organismo.",
-        "são organizados pela origem dos arquivos e ficam custodiados em seu território de produção.",
-        "mostram a estrutura e as funções da entidade, em suas relações internas e externas.",
-        "devem ser preservados sem dispersão, alienação, destruição ou acréscimos indevidos."
-      ],
-      "gabarito": 2,
-      "comentario": "Gabarito: alternativa C. Resposta correta: «são organizados pela origem dos arquivos e ficam custodiados em seu território de produção.». Matéria: Arquivologia. Fonte: PRF 2014 FUNCAB (real). Elimine alternativas que generalizam demais, inventam requisito inexistente ou contradizem a lei/texto. A correta é a que atende integralmente ao comando da questão.",
-      "fonte": "PRF 2014 FUNCAB (real)"
-    },
-    {
-      "id": "prf-2014-q44",
-      "tipo": "me",
-      "banca": "FUNCAB",
-      "materia": "Arquivologia",
-      "assunto": "PRF 2014 Arquivologia",
-      "tag": "geografia",
-      "enunciado": "A gestão de documentos tem por objetivo garantir, de maneira\neficaz, a produção, administração, manutenção e destinação dos\ndocumentos de forma racional e econômica. A fase básica desse\nconjunto de procedimentos — a qual inclui as atividades de\nprotocolo e de elaboração de normas de acesso à documentação\n— denomina-se:",
-      "alternativas": [
-        "identificação.",
-        "avaliação.",
-        "utilização.",
-        "classificação.",
-        "descrição. NOÇÕES DE ARQUIVOLOGIA )"
-      ],
-      "gabarito": 2,
-      "comentario": "Gabarito: alternativa C. Resposta correta: «utilização.». Matéria: Arquivologia. Fonte: PRF 2014 FUNCAB (real). Elimine alternativas que generalizam demais, inventam requisito inexistente ou contradizem a lei/texto. A correta é a que atende integralmente ao comando da questão.",
-      "fonte": "PRF 2014 FUNCAB (real)"
-    },
-    {
-      "id": "prf-2014-q45",
-      "tipo": "me",
-      "banca": "FUNCAB",
-      "materia": "Arquivologia",
-      "assunto": "PRF 2014 Arquivologia",
-      "tag": "geografia",
-      "enunciado": "No protocolo — numa empresa, serviço responsável pelas\natividades de controle da documentação -, a rotina de\nencaminhar os documentos aos respectivos destinos, de acordo\ncom despacho de autoridade competente, está relacionada ao\nsetor de:",
-      "alternativas": [
-        "autuação e custódia.",
-        "recebimento e classificação.",
-        "análise e distribuição.",
-        "circulação e arquivamento.",
-        "registro e movimentação."
-      ],
-      "gabarito": 4,
-      "comentario": "Gabarito: alternativa E. Resposta correta: «registro e movimentação.». Matéria: Arquivologia. Fonte: PRF 2014 FUNCAB (real). Elimine alternativas que generalizam demais, inventam requisito inexistente ou contradizem a lei/texto. A correta é a que atende integralmente ao comando da questão.",
-      "fonte": "PRF 2014 FUNCAB (real)"
-    },
-    {
-      "id": "prf-2014-q46",
-      "tipo": "me",
-      "banca": "FUNCAB",
-      "materia": "Arquivologia",
-      "assunto": "PRF 2014 Arquivologia",
-      "tag": "geografia",
-      "enunciado": "No âmbito da preservação e conservação, os documentos devem\nser armazenados em local apropriado e acondicionados de\nmaneira adequada. Nesse contexto, analise os itens abaixo. Il O método de combate aos insetos mais eficiente é a\nencapsulação. Nesse processo, a substância química a ser\nempregada passa por testes de garantia da integridade do\npapel. Il. A umidade é um fator que propicia o desenvolvimento de\nmofo. O índice de umidade ideal nas áreas de\narmazenamento dos documentos deve permanecer entre\n21% e 26%. Il. O alisamento consiste em colocar os documentos em\nbandejas de aço inoxidável, ex",
-      "alternativas": [
-        "IL Ile IV",
-        "|",
-        "Lllelv",
-        "Il",
-        "II === PAGE 13 === === PAGE 14 === === PAGE 15 === === PAGE 16 ==="
-      ],
-      "gabarito": 3,
-      "comentario": "Gabarito: alternativa D. Resposta correta: «Il». Matéria: Arquivologia. Fonte: PRF 2014 FUNCAB (real). Elimine alternativas que generalizam demais, inventam requisito inexistente ou contradizem a lei/texto. A correta é a que atende integralmente ao comando da questão.",
       "fonte": "PRF 2014 FUNCAB (real)"
     }
   ]

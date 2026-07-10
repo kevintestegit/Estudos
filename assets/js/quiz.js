@@ -362,7 +362,7 @@ function startQuiz(questions, meta) {
         d.quiz.correct += correct;
         d.quiz.wrong += wrong;
         d.xp += correct * 2 + wrong;
-        Storage._bumpDailyQuiz(d, todayISO(), correct + wrong, correct, wrong);
+        Storage._daily(d, todayISO(), correct + wrong, correct, wrong);
       }
       Object.entries(bySubject).forEach(([mat, v]) => {
         if (!d.quiz.bySubject[mat]) d.quiz.bySubject[mat] = { answered: 0, correct: 0, wrong: 0 };
@@ -370,8 +370,8 @@ function startQuiz(questions, meta) {
         d.quiz.bySubject[mat].correct += v.correct;
         d.quiz.bySubject[mat].wrong += v.total - v.correct;
       });
-      Storage._recalcLevel(d);
-      Storage._checkAchievements(d);
+      Storage._level(d);
+      Storage._achievements(d);
     });
 
     const pct = Math.round((correct / questions.length) * 100);

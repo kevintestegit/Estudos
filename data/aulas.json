@@ -361,78 +361,6 @@
       "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-Woc7aDIE8A5rGFWkOG6SMn5y"
     },
     {
-      "id": "aula-ctb-01",
-      "titulo": "CTB — princípios",
-      "materia": "Legislação de Trânsito",
-      "duracao": 45,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-      "notas": "",
-      "yt": "https://www.youtube.com/playlist?list=PLgmH1M3vNPm2UYxToMYzB3ZCOkz5rqM2_"
-    },
-    {
-      "id": "aula-ctb-02",
-      "titulo": "Infrações e penalidades",
-      "materia": "Legislação de Trânsito",
-      "duracao": 50,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-      "notas": "",
-      "yt": "https://www.youtube.com/playlist?list=PLgmH1M3vNPm2UYxToMYzB3ZCOkz5rqM2_"
-    },
-    {
-      "id": "aula-ctb-03",
-      "titulo": "Sinalização e veículos",
-      "materia": "Legislação de Trânsito",
-      "duracao": 40,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-      "notas": "",
-      "yt": "https://www.youtube.com/playlist?list=PLgmH1M3vNPm2UYxToMYzB3ZCOkz5rqM2_"
-    },
-    {
-      "id": "aula-ctb-04",
-      "titulo": "Habilitação e documentos",
-      "materia": "Legislação de Trânsito",
-      "duracao": 40,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-      "notas": "",
-      "yt": "https://www.youtube.com/playlist?list=PLgmH1M3vNPm2UYxToMYzB3ZCOkz5rqM2_"
-    },
-    {
-      "id": "aula-pen-01",
-      "titulo": "Crimes de trânsito",
-      "materia": "Direito Penal",
-      "duracao": 40,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-      "notas": "",
-      "yt": "https://www.youtube.com/playlist?list=PL50JqL0R-WofM5jjzL_isDjhIMhqvpP8t"
-    },
-    {
-      "id": "aula-ps-01",
-      "titulo": "Primeiros socorros básicos",
-      "materia": "Primeiros Socorros",
-      "duracao": 35,
-      "url": "biblioteca.html",
-      "notas": "",
-      "yt": "https://www.youtube.com/results?search_query=primeiros+socorros+prf+concurso"
-    },
-    {
-      "id": "aula-fis-01",
-      "titulo": "Física aplicada ao trânsito",
-      "materia": "Física/Mecânica",
-      "duracao": 35,
-      "url": "biblioteca.html",
-      "notas": "",
-      "yt": "https://www.youtube.com/results?search_query=fisica+basica+no+transito+concurso"
-    },
-    {
-      "id": "aula-geo-01",
-      "titulo": "Geografia e malha rodoviária",
-      "materia": "Geografia",
-      "duracao": 30,
-      "url": "biblioteca.html",
-      "notas": "",
-      "yt": "https://www.youtube.com/results?search_query=geografia+rodovias+federais+brasil"
-    },
-    {
       "id": "aula-pt-07",
       "titulo": "Ortografia oficial — novo acordo",
       "materia": "Português",
@@ -532,24 +460,6 @@
       "yt": "https://www.youtube.com/results?search_query=pensao+por+morte+auxilio+reclusao+concurso"
     },
     {
-      "id": "aula-ctb-05",
-      "titulo": "Documentação de veículos e condutores",
-      "materia": "Legislação de Trânsito",
-      "duracao": 35,
-      "url": "https://www.youtube.com/results?search_query=documentacao+veiculos+condutores+ctb",
-      "notas": "CRLV, CNH, licenciamento, habilitação.",
-      "yt": "https://www.youtube.com/results?search_query=documentacao+veiculos+condutores+ctb"
-    },
-    {
-      "id": "aula-ctb-06",
-      "titulo": "Infrações e penalidades — CTB",
-      "materia": "Legislação de Trânsito",
-      "duracao": 45,
-      "url": "https://www.youtube.com/results?search_query=infracoes+penalidades+ctb+concurso",
-      "notas": "Naturezas, pontuação, multas, suspensão.",
-      "yt": "https://www.youtube.com/results?search_query=infracoes+penalidades+ctb+concurso"
-    },
-    {
       "id": "aula-inf-05",
       "titulo": "Excel avançado para concurso",
       "materia": "Informática",
@@ -557,6 +467,159 @@
       "url": "https://www.youtube.com/results?search_query=excel+intermediario+concurso",
       "notas": "Fórmulas, tabela dinâmica, procv.",
       "yt": "https://www.youtube.com/results?search_query=excel+intermediario+concurso"
+    },
+    {
+      "id": "aula-admin-01",
+      "titulo": "Eficiência, eficácia e efetividade",
+      "materia": "Noções de Administração",
+      "duracao": 40,
+      "url": "https://www.youtube.com/results?search_query=eficiencia+eficacia+administracao+concurso",
+      "notas": "Conceitos clássicos de administração.",
+      "yt": "https://www.youtube.com/results?search_query=eficiencia+eficacia+administracao+concurso"
+    },
+    {
+      "id": "aula-admin-02",
+      "titulo": "PODC — planejamento a controle",
+      "materia": "Noções de Administração",
+      "duracao": 45,
+      "url": "https://www.youtube.com/results?search_query=podc+administracao+concurso",
+      "notas": "Funções administrativas.",
+      "yt": "https://www.youtube.com/results?search_query=podc+administracao+concurso"
+    },
+    {
+      "id": "aula-admin-03",
+      "titulo": "Estruturas organizacionais",
+      "materia": "Noções de Administração",
+      "duracao": 40,
+      "url": "https://www.youtube.com/results?search_query=estrutura+organizacional+concurso",
+      "notas": "Departamentalização.",
+      "yt": "https://www.youtube.com/results?search_query=estrutura+organizacional+concurso"
+    },
+    {
+      "id": "aula-admin-04",
+      "titulo": "Gestão de pessoas e liderança",
+      "materia": "Noções de Administração",
+      "duracao": 40,
+      "url": "https://www.youtube.com/results?search_query=gestao+pessoas+lideranca+concurso",
+      "notas": "Motivação e liderança.",
+      "yt": "https://www.youtube.com/results?search_query=gestao+pessoas+lideranca+concurso"
+    },
+    {
+      "id": "aula-admin-05",
+      "titulo": "Gestão de processos e qualidade",
+      "materia": "Noções de Administração",
+      "duracao": 40,
+      "url": "https://www.youtube.com/results?search_query=gestao+processos+qualidade+concurso",
+      "notas": "Processos e qualidade.",
+      "yt": "https://www.youtube.com/results?search_query=gestao+processos+qualidade+concurso"
+    },
+    {
+      "id": "aula-admin-06",
+      "titulo": "Administração de materiais",
+      "materia": "Noções de Administração",
+      "duracao": 35,
+      "url": "https://www.youtube.com/results?search_query=administracao+materiais+concurso",
+      "notas": "Materiais e patrimônio.",
+      "yt": "https://www.youtube.com/results?search_query=administracao+materiais+concurso"
+    },
+    {
+      "id": "aula-admin-07",
+      "titulo": "Controle e avaliação",
+      "materia": "Noções de Administração",
+      "duracao": 35,
+      "url": "https://www.youtube.com/results?search_query=controle+avaliacao+administracao+concurso",
+      "notas": "Controle administrativo.",
+      "yt": "https://www.youtube.com/results?search_query=controle+avaliacao+administracao+concurso"
+    },
+    {
+      "id": "aula-admin-08",
+      "titulo": "Administração pública",
+      "materia": "Noções de Administração",
+      "duracao": 40,
+      "url": "https://www.youtube.com/results?search_query=administracao+publica+concurso",
+      "notas": "Contexto institucional.",
+      "yt": "https://www.youtube.com/results?search_query=administracao+publica+concurso"
+    },
+    {
+      "id": "aula-arq-01",
+      "titulo": "Gestão documental e protocolo",
+      "materia": "Arquivologia",
+      "duracao": 40,
+      "url": "https://www.youtube.com/results?search_query=arquivologia+gestao+documental+concurso",
+      "notas": "Ciclo vital.",
+      "yt": "https://www.youtube.com/results?search_query=arquivologia+gestao+documental+concurso"
+    },
+    {
+      "id": "aula-arq-02",
+      "titulo": "Classificação e arquivamento",
+      "materia": "Arquivologia",
+      "duracao": 40,
+      "url": "https://www.youtube.com/results?search_query=arquivologia+classificacao+concurso",
+      "notas": "Métodos de arquivamento.",
+      "yt": "https://www.youtube.com/results?search_query=arquivologia+classificacao+concurso"
+    },
+    {
+      "id": "aula-arq-03",
+      "titulo": "Temporalidade e destinação",
+      "materia": "Arquivologia",
+      "duracao": 40,
+      "url": "https://www.youtube.com/results?search_query=tabela+temporalidade+arquivologia",
+      "notas": "Avaliação e destinação.",
+      "yt": "https://www.youtube.com/results?search_query=tabela+temporalidade+arquivologia"
+    },
+    {
+      "id": "aula-arq-04",
+      "titulo": "Preservação e documentos digitais",
+      "materia": "Arquivologia",
+      "duracao": 35,
+      "url": "https://www.youtube.com/results?search_query=preservacao+documentos+digitais+concurso",
+      "notas": "Conservação e digital.",
+      "yt": "https://www.youtube.com/results?search_query=preservacao+documentos+digitais+concurso"
+    },
+    {
+      "id": "aula-arq-05",
+      "titulo": "Protocolo e tramitação",
+      "materia": "Arquivologia",
+      "duracao": 35,
+      "url": "https://www.youtube.com/results?search_query=protocolo+tramitacao+documentos+concurso",
+      "notas": "Protocolo.",
+      "yt": "https://www.youtube.com/results?search_query=protocolo+tramitacao+documentos+concurso"
+    },
+    {
+      "id": "aula-arq-06",
+      "titulo": "CONARQ e política de arquivos",
+      "materia": "Arquivologia",
+      "duracao": 35,
+      "url": "https://www.youtube.com/results?search_query=conarq+arquivologia+concurso",
+      "notas": "Política nacional.",
+      "yt": "https://www.youtube.com/results?search_query=conarq+arquivologia+concurso"
+    },
+    {
+      "id": "aula-leg-prf-01",
+      "titulo": "Competências institucionais da PRF",
+      "materia": "Legislação institucional da PRF",
+      "duracao": 40,
+      "url": "https://www.youtube.com/results?search_query=competencias+prf+decreto+1655+concurso",
+      "notas": "Organização e competências.",
+      "yt": "https://www.youtube.com/results?search_query=competencias+prf+decreto+1655+concurso"
+    },
+    {
+      "id": "aula-leg-prf-02",
+      "titulo": "Decreto 1.655/1995",
+      "materia": "Legislação institucional da PRF",
+      "duracao": 40,
+      "url": "https://www.planalto.gov.br/ccivil_03/decreto/d1655.htm",
+      "notas": "Leitura da lei seca.",
+      "yt": "https://www.youtube.com/results?search_query=decreto+1655+prf"
+    },
+    {
+      "id": "aula-leg-prf-03",
+      "titulo": "Lei 9.654/1998 — carreira PRF",
+      "materia": "Legislação institucional da PRF",
+      "duracao": 40,
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/L9654compilado.htm",
+      "notas": "Aspectos institucionais da carreira.",
+      "yt": "https://www.youtube.com/results?search_query=lei+9654+prf+concurso"
     }
   ]
 }

@@ -1,19 +1,81 @@
-# Portal de Estudos — INSS e PRF Administrativo
+# Portal de Estudos — INSS + PRF Administrativo
 
-Portal estático e instalável para acompanhar cronograma, horas, questões,
-sequência de estudos, atrasos, simulados, provas, materiais e progresso diário.
+Portal estático para preparação dos concursos **INSS Técnico do Seguro Social** e **PRF Agente Administrativo**.
 
-## Abrir no computador
+Publicação: https://kevintestegit.github.io/Estudos/
 
-Execute `./iniciar.sh` e acesse `http://localhost:3050`.
+## Como executar localmente
 
-## Dados e backup
+```bash
+cd Estudos
+python3 -m http.server 3050 --directory .
+# ou: ./iniciar.sh
+```
 
-O progresso fica salvo somente no navegador. A tela **Backup** permite exportar
-e restaurar um arquivo JSON. Faça um backup periódico e guarde-o em local seguro.
+Abra: http://localhost:3050
 
-## Publicação
+> JSON e módulos precisam de servidor HTTP (não use `file://`).
 
-O fluxo `.github/workflows/pages.yml` publica automaticamente o conteúdo da
-branch `main` no GitHub Pages. No repositório, selecione **Settings → Pages →
-Source: GitHub Actions** uma única vez.
+## Stack
+
+- HTML, CSS e JavaScript puro
+- Progresso em `localStorage` (`portal-estudos-v1`)
+- Offline parcial via Service Worker
+- Sem backend, login ou banco remoto
+
+## Páginas principais
+
+| Página | Função |
+|--------|--------|
+| Dashboard | Visão geral, meta, fracos |
+| Hoje | O que estudar hoje, cronômetro, recuperação |
+| Cronograma | Plano 16 semanas |
+| Edital | Edital verticalizado + cobertura |
+| Questões / Simulados | Prática e modo prova |
+| Biblioteca | Leis e materiais oficiais |
+| Progresso | Stats, sessões editáveis, relatório 7d |
+| Backup | Exportar / importar JSON |
+
+## Dados
+
+Ficam em `data/`:
+
+- `cronograma.json` — plano real (sem conversão em runtime)
+- `edital-inss.json` / `edital-prf-administrativo.json`
+- `questoes-inss.json` / `questoes-prf.json`
+- `materiais.json`, `aulas.json`, `pdfs.json`, `textos.json`, etc.
+
+## Backup
+
+1. Abra **Backup**
+2. **Baixar backup.json**
+3. Para restaurar: escolher arquivo → Importar
+
+A migração de schema é automática e **não zera** o progresso.
+
+## Validação
+
+```bash
+node scripts/validate.mjs
+node scripts/test-calendar.mjs
+```
+
+## GitHub Pages
+
+Push na `main` publica o site. Após deploy:
+
+1. Abra o site
+2. **Ctrl+Shift+R** (limpa cache do SW)
+3. Se necessário: DevTools → Application → Service Workers → Unregister + Clear storage
+
+## Adicionar conteúdo
+
+- **Questão:** inclua em `data/questoes-*.json` com id único, gabarito e fonte.
+- **Material:** `data/materiais.json` com URL oficial verificável.
+- **Tópico de edital:** `data/edital-*.json`.
+
+Não invente links, gabaritos ou resoluções. Não inclua material pago/pirateado.
+
+## Licença de uso
+
+Material de estudo pessoal. Provas e leis pertencem às fontes oficiais (Cebraspe, Planalto, etc.).

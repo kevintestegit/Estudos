@@ -4,37 +4,75 @@
       "id": "portugues",
       "nome": "Português",
       "cor": "#1e4d7b",
-      "assuntos": ["Interpretação", "Ortografia", "Morfossintaxe", "Concordância", "Regência", "Pontuação", "Redação Oficial"]
+      "assuntos": [
+        "Interpretação",
+        "Ortografia",
+        "Morfossintaxe",
+        "Concordância",
+        "Regência",
+        "Pontuação",
+        "Redação Oficial"
+      ]
     },
     {
       "id": "rl",
       "nome": "Raciocínio Lógico",
       "cor": "#0d7a5f",
-      "assuntos": ["Proposições", "Equivalências", "Diagramas", "Contagem", "Probabilidade"]
+      "assuntos": [
+        "Proposições",
+        "Equivalências",
+        "Diagramas",
+        "Probabilidade",
+        "Sequências"
+      ]
     },
     {
       "id": "informatica",
       "nome": "Informática",
       "cor": "#6d28d9",
-      "assuntos": ["Hardware e software", "Sistemas operacionais", "Internet e segurança", "Office e LibreOffice"]
+      "assuntos": [
+        "Hardware/Software",
+        "SO",
+        "Internet",
+        "Office",
+        "Segurança"
+      ]
     },
     {
       "id": "etica",
-      "nome": "Ética",
+      "nome": "Ética no Serviço Público",
       "cor": "#b45309",
-      "assuntos": ["Decreto 1.171/1994", "Decreto 6.029/2007", "Deveres e vedações"]
+      "assuntos": [
+        "Dec. 1.171",
+        "Dec. 6.029",
+        "Princípios",
+        "Deveres"
+      ]
     },
     {
       "id": "dc",
       "nome": "Direito Constitucional",
       "cor": "#b91c1c",
-      "assuntos": ["Direitos fundamentais", "Organização do Estado", "Administração Pública", "Poderes"]
+      "assuntos": [
+        "Direitos fundamentais",
+        "Organização do Estado",
+        "Administração Pública",
+        "Poderes"
+      ]
     },
     {
       "id": "da",
       "nome": "Direito Administrativo",
       "cor": "#0369a1",
-      "assuntos": ["Princípios", "Atos", "Poderes", "Agentes", "Lei 8.112", "Processo administrativo", "Licitações"]
+      "assuntos": [
+        "Administração",
+        "Atos",
+        "Licitações",
+        "Poderes",
+        "Agentes",
+        "Controle",
+        "Lei 8.112"
+      ]
     }
   ],
   "inss": [
@@ -42,13 +80,17 @@
       "id": "prev",
       "nome": "Direito Previdenciário",
       "cor": "#047857",
-      "assuntos": ["Seguridade Social", "RGPS", "Segurados e dependentes", "Carência", "Custeio", "Benefícios", "Leis 8.212 e 8.213", "Decreto 3.048", "EC 103", "IN 128"]
-    },
-    {
-      "id": "bpc",
-      "nome": "Assistência Social / BPC",
-      "cor": "#0f766e",
-      "assuntos": ["LOAS", "Benefício de Prestação Continuada"]
+      "assuntos": [
+        "Seguridade",
+        "Segurados",
+        "Carência",
+        "Benefícios",
+        "Custeio",
+        "Processo",
+        "Leis",
+        "EC 103",
+        "BPC/LOAS"
+      ]
     }
   ],
   "prf": [
@@ -56,19 +98,37 @@
       "id": "admin",
       "nome": "Noções de Administração",
       "cor": "#0369a1",
-      "assuntos": ["PODC", "Planejamento", "Estruturas", "Gestão de pessoas", "Gestão de processos", "Qualidade"]
+      "assuntos": [
+        "PODC",
+        "Estruturas",
+        "Pessoas",
+        "Processos",
+        "Materiais",
+        "Qualidade"
+      ]
     },
     {
       "id": "arquivologia",
       "nome": "Arquivologia",
       "cor": "#6d28d9",
-      "assuntos": ["Gestão documental", "Protocolo", "Classificação", "Temporalidade", "Destinação", "Preservação"]
+      "assuntos": [
+        "Gestão documental",
+        "Classificação",
+        "Temporalidade",
+        "Preservação",
+        "CONARQ"
+      ]
     },
     {
-      "id": "leg-prf",
-      "nome": "Legislação PRF",
+      "id": "legprf",
+      "nome": "Legislação institucional da PRF",
       "cor": "#9a3412",
-      "assuntos": ["Competências", "Organização institucional", "Decreto 1.655/1995"]
+      "assuntos": [
+        "Decreto 1.655/1995",
+        "Lei 9.654/1998",
+        "Competências",
+        "Organização"
+      ]
     }
   ]
 }

@@ -261,19 +261,6 @@
       "fonte": "Planalto"
     },
     {
-      "id": "ctb-lei-9503",
-      "categoria": "prf",
-      "concurso": "PRF Administrativo",
-      "materia": "Legislação de Trânsito",
-      "titulo": "Lei nº 9.503/1997 — Código de Trânsito Brasileiro",
-      "tipo": "legislacao",
-      "prioridade": "alta",
-      "ano": 1997,
-      "banca": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-      "fonte": "Planalto"
-    },
-    {
       "id": "lei-8429-improbidade",
       "categoria": "comum",
       "concurso": "Comum",
@@ -430,19 +417,6 @@
       "fonte": "Planalto"
     },
     {
-      "id": "resolucao-contran-ref",
-      "categoria": "prf",
-      "concurso": "PRF Administrativo",
-      "materia": "Legislação de Trânsito",
-      "titulo": "CONTRAN — Resoluções (portal Senatran)",
-      "tipo": "pagina",
-      "prioridade": "alta",
-      "ano": null,
-      "banca": null,
-      "url": "https://www.gov.br/transportes/pt-br/assuntos/transito",
-      "fonte": "Senatran/Gov.br"
-    },
-    {
       "id": "enap-etica",
       "categoria": "comum",
       "concurso": "Comum",
@@ -586,19 +560,6 @@
       "fonte": "Cebraspe"
     },
     {
-      "id": "prf-legislacao-CTB",
-      "categoria": "prf",
-      "concurso": "PRF Administrativo",
-      "materia": "Legislação de Trânsito",
-      "titulo": "CTB — Lei 9.503/1997 compilada",
-      "tipo": "legislacao",
-      "prioridade": "alta",
-      "ano": 1997,
-      "banca": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-      "fonte": "Planalto"
-    },
-    {
       "id": "prf-decreto-1655",
       "categoria": "prf",
       "concurso": "PRF Administrativo",
@@ -610,32 +571,6 @@
       "banca": null,
       "url": "https://www.planalto.gov.br/ccivil_03/decreto/d1655.htm",
       "fonte": "Planalto"
-    },
-    {
-      "id": "ctb-sinalizacao",
-      "categoria": "prf",
-      "concurso": "PRF Administrativo",
-      "materia": "Legislação de Trânsito",
-      "titulo": "Manual de sinalização de trânsito — CONTRAN",
-      "tipo": "pagina",
-      "prioridade": "alta",
-      "ano": null,
-      "banca": null,
-      "url": "https://www.gov.br/transportes/pt-br/assuntos/transito",
-      "fonte": "Senatran"
-    },
-    {
-      "id": "contran-resolucoes",
-      "categoria": "prf",
-      "concurso": "PRF Administrativo",
-      "materia": "Legislação de Trânsito",
-      "titulo": "CONTRAN — Resoluções publicadas",
-      "tipo": "pagina",
-      "prioridade": "alta",
-      "ano": null,
-      "banca": null,
-      "url": "https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo/resolucoes",
-      "fonte": "Senatran"
     },
     {
       "id": "lei-8112-compilada",
