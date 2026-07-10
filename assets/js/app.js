@@ -27,3 +27,4 @@ window.alert=(...a)=>window.Modal.alert(...a);
 window.Modal.waitConfirm=msg=>window.Modal.confirm(msg);
 window.App=App;
 if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(console.warn));
+window.App=App;
