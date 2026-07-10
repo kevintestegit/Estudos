@@ -45,8 +45,8 @@ function initBackup() {
     }
   };
 
-  document.getElementById('btn-reset').onclick = () => {
-    if (!confirm('Apagar todo o progresso local?')) return;
+document.getElementById('btn-reset').onclick = async () => {
+if (!await Modal.waitConfirm('Apagar todo o progresso local?')) return;
     Storage.reset();
     Storage.ensureStartDate();
     App.renderStatusBar();

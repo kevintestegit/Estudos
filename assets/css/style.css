@@ -417,3 +417,21 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .topbar h1 { font-size: 1.25rem; }
 }
+
+/* Modal custom */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.4);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+}
+.modal-box {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  max-width: 480px; width: 100%;
+  padding: 1.25rem 1.5rem;
+}
+.modal-box h3 { margin: 0 0 0.5rem; }
+.modal-box p { margin: 0.5rem 0; color: var(--muted); }
+.modal-actions { display: flex; gap: 0.6rem; margin-top: 1rem; justify-content: flex-end; }
