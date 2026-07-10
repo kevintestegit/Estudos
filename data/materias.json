@@ -4,70 +4,37 @@
       "id": "portugues",
       "nome": "Português",
       "cor": "#1e4d7b",
-      "assuntos": [
-        "Interpretação",
-        "Ortografia",
-        "Morfossintaxe",
-        "Concordância",
-        "Regência",
-        "Pontuação"
-      ]
+      "assuntos": ["Interpretação", "Ortografia", "Morfossintaxe", "Concordância", "Regência", "Pontuação", "Redação Oficial"]
     },
     {
       "id": "rl",
       "nome": "Raciocínio Lógico",
       "cor": "#0d7a5f",
-      "assuntos": [
-        "Proposições",
-        "Equivalências",
-        "Diagramas",
-        "Probabilidade"
-      ]
+      "assuntos": ["Proposições", "Equivalências", "Diagramas", "Contagem", "Probabilidade"]
     },
     {
       "id": "informatica",
       "nome": "Informática",
       "cor": "#6d28d9",
-      "assuntos": [
-        "Hardware/Software",
-        "SO",
-        "Internet",
-        "Office"
-      ]
+      "assuntos": ["Hardware e software", "Sistemas operacionais", "Internet e segurança", "Office e LibreOffice"]
     },
     {
       "id": "etica",
       "nome": "Ética",
       "cor": "#b45309",
-      "assuntos": [
-        "Princípios",
-        "Deveres",
-        "Cidadania"
-      ]
+      "assuntos": ["Decreto 1.171/1994", "Decreto 6.029/2007", "Deveres e vedações"]
     },
     {
       "id": "dc",
       "nome": "Direito Constitucional",
       "cor": "#b91c1c",
-      "assuntos": [
-        "Direitos fundamentais",
-        "Organização do Estado",
-        "Administração Pública",
-        "Poderes"
-      ]
+      "assuntos": ["Direitos fundamentais", "Organização do Estado", "Administração Pública", "Poderes"]
     },
     {
       "id": "da",
       "nome": "Direito Administrativo",
       "cor": "#0369a1",
-      "assuntos": [
-        "Administração",
-        "Atos",
-        "Licitações",
-        "Poderes",
-        "Agentes",
-        "Controle"
-      ]
+      "assuntos": ["Princípios", "Atos", "Poderes", "Agentes", "Lei 8.112", "Processo administrativo", "Licitações"]
     }
   ],
   "inss": [
@@ -75,83 +42,33 @@
       "id": "prev",
       "nome": "Direito Previdenciário",
       "cor": "#047857",
-      "assuntos": [
-        "Seguridade",
-        "Segurados",
-        "Carência",
-        "Benefícios",
-        "Custeio",
-        "Processo",
-        "Leis"
-      ]
+      "assuntos": ["Seguridade Social", "RGPS", "Segurados e dependentes", "Carência", "Custeio", "Benefícios", "Leis 8.212 e 8.213", "Decreto 3.048", "EC 103", "IN 128"]
+    },
+    {
+      "id": "bpc",
+      "nome": "Assistência Social / BPC",
+      "cor": "#0f766e",
+      "assuntos": ["LOAS", "Benefício de Prestação Continuada"]
     }
   ],
   "prf": [
     {
-      "id": "ctb",
-      "nome": "Legislação de Trânsito",
-      "cor": "#9a3412",
-      "assuntos": [
-        "CTB intro",
-        "Infrações",
-        "Sinalização",
-        "Documentos",
-        "Revisão"
-      ]
-    },
-    {
-      "id": "penal",
-      "nome": "Direito Penal (trânsito)",
-      "cor": "#7f1d1d",
-      "assuntos": [
-        "Crimes de trânsito"
-      ]
-    },
-    {
-      "id": "ps",
-      "nome": "Primeiros Socorros",
-      "cor": "#be123c",
-      "assuntos": [
-        "Atendimento inicial"
-      ]
-    },
-    {
-      "id": "fisica",
-      "nome": "Física/Mecânica",
-      "cor": "#4338ca",
-      "assuntos": [
-        "Noções aplicadas"
-      ]
-    },
-    {
-      "id": "geo",
-      "nome": "Geografia",
-      "cor": "#0f766e",
-      "assuntos": [
-        "Rodovias e regiões"
-      ]
+      "id": "admin",
+      "nome": "Noções de Administração",
+      "cor": "#0369a1",
+      "assuntos": ["PODC", "Planejamento", "Estruturas", "Gestão de pessoas", "Gestão de processos", "Qualidade"]
     },
     {
       "id": "arquivologia",
       "nome": "Arquivologia",
       "cor": "#6d28d9",
-      "assuntos": [
-        "Gestão documental",
-        "Classificação",
-        "Temporalidade",
-        "Preservação"
-      ]
+      "assuntos": ["Gestão documental", "Protocolo", "Classificação", "Temporalidade", "Destinação", "Preservação"]
     },
     {
-      "id": "admin",
-      "nome": "Noções de Administração",
-      "cor": "#0369a1",
-      "assuntos": [
-        "PODC",
-        "Estrutura",
-        "Eficiência/Eficácia",
-        "Organizações"
-      ]
+      "id": "leg-prf",
+      "nome": "Legislação PRF",
+      "cor": "#9a3412",
+      "assuntos": ["Competências", "Organização institucional", "Decreto 1.655/1995"]
     }
   ]
 }
