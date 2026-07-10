@@ -61,7 +61,7 @@ function renderQuestoesHome(data, params) {
           <label for="q-modo">Modo</label>
           <select id="q-modo">
             <option value="pratica">Prática (gabarito na hora)</option>
-            <option value="prova">Modo prova (gabarito só no final)</option>
+            <option value="prova">Modo prova (gabarito só no final)</option></select></div><div class="form-row"><label for="q-flag">Filtro</label><select id="q-flag"><option value="">Todas</option><option value="favorite">Favoritas</option><option value="doubt">Dúvidas</option><option value="review">Pendentes revisão</option>
           </select>
         </div>
       </div>
@@ -91,7 +91,8 @@ function renderQuestoesHome(data, params) {
           (q.materia || '').toLowerCase().includes(tgl)
         );
       }
-      const n = Math.max(1, Number(document.getElementById('q-n').value) || 5);
+      const flagFilt = document.getElementById('q-flag')?.value;if(flagFilt==='favorite')pool=pool.filter(q=>Storage.getQuestionFlag(q.id).favorite);if(flagFilt==='doubt')pool=pool.filter(q=>Storage.getQuestionFlag(q.id).doubt);if(flagFilt!=='review')pool=pool.filter(q=>!q.reviewStatus||q.reviewStatus!=='pendente_de_revisao');
+const n = Math.max(1, Number(document.getElementById('q-n').value) || 5);
       pool = shuffle(pool).slice(0, Math.min(n, pool.length));
       if (!pool.length) {
         msg.innerHTML = '<div class="alert alert-warn">Nenhuma questão com esse filtro. Limpe a matéria/tag e tente de novo.</div>';
@@ -374,7 +375,7 @@ function startQuiz(questions, meta) {
       Storage._achievements(d);
     });
 
-    const pct = Math.round((correct / questions.length) * 100);
+    const blank = questions.length - correct - wrong;const isCE = questions.every(q=>q.tipo==='ce');const cebrasp = isCE ? Storage.getCebraspeScore(correct,wrong,blank) : null;const pct = Math.round((correct / questions.length) * 100);
     const reviewHtml = provaMode ? `
       <h3 class="mt-2">Gabarito comentado</h3>
       <ul class="list">
@@ -391,7 +392,7 @@ function startQuiz(questions, meta) {
 
     area.innerHTML = `
       <div class="card">
-        <h2>Resultado ${provaMode ? '(modo prova)' : ''}</h2>
+        <h2>Resultado ${provaMode ? '(modo prova)' : ''}</h2>${cebrasp ? `<p><strong>Cebraspe:</strong> ${cebrasp.acertos}A / ${cebrasp.erros}E / ${cebrasp.brancos}X · Bruta: ${cebrasp.bruta} · Líquida: ${cebrasp.liquida}</p>` : ''}
         <p class="stat"><span class="value">${correct}/${questions.length}</span><span class="label">${pct}% de acertos</span></p>
         <p>Tempo: ${minutes} min · Erros enviados ao caderno: ${wrong}</p>
         <h3 class="mt-1">Por matéria</h3>

@@ -1,0 +1,11 @@
+{
+  "name": "portal-estudos",
+  "private": true,
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "test:calendar": "node scripts/test-calendar.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "check:links:internal": "node scripts/check-links.mjs --internal-only",
+    "test": "npm run validate && npm run test:calendar && npm run check:links:internal"
+  }
+}
