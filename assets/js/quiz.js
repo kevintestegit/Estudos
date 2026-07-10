@@ -157,11 +157,16 @@ function startQuiz(questions, meta) {
     const t = q.textoId ? textos[q.textoId] : null;
     if (!t) return '';
     const body = App.esc(t.conteudo || '').replace(/\n/g, '<br>');
+    const image = t.imagem
+      ? `<img class="context-image" src="${App.esc(t.imagem)}" alt="${App.esc(t.imagemAlt || t.titulo || 'Imagem de apoio da questão')}">`
+      : '';
     return `
-      <div class="card mb-1" id="texto-base" style="background:#f8fafc;max-height:280px;overflow:auto">
-        <h3 style="margin:0 0 0.35rem;font-size:1rem">${App.esc(t.titulo || 'Texto de apoio')}</h3>
-        <p class="muted" style="margin:0 0 0.6rem;font-size:0.85rem">${App.esc(t.fonte || '')}</p>
-        <div style="font-size:0.95rem;line-height:1.55;color:var(--text)">${body}</div>
+      <div class="card mb-1 context-card" id="texto-base">
+        <p class="context-label">Contexto da questão</p>
+        <h3>${App.esc(t.titulo || 'Texto de apoio')}</h3>
+        <p class="muted context-source">${App.esc(t.fonte || '')}</p>
+        ${image}
+        ${body ? `<div class="context-body">${body}</div>` : ''}
       </div>`;
   }
 
@@ -177,6 +182,10 @@ function startQuiz(questions, meta) {
       : '';
     area.innerHTML = `
       ${renderTextoBase(q)}
+      ${q.trechoContexto ? `
+        <div class="alert alert-info context-excerpt">
+          <strong>Trecho relevante:</strong> “${App.esc(q.trechoContexto)}”
+        </div>` : ''}
       <div class="card" id="quiz-card">
         <p class="muted">Questão ${idx + 1} de ${questions.length} · ${App.esc(q.materia || '')} · ${App.esc(q.assunto || '')}
           ${provaMode ? ' · <span class="badge badge-warn">Modo prova</span>' : ''}</p>

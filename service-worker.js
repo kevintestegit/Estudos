@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'portal-estudos-v1';
+const CACHE_VERSION = 'portal-estudos-v2';
 
 const CORE_FILES = [
   './',
@@ -28,6 +28,8 @@ const CORE_FILES = [
   './assets/icons/icon.svg',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
+  './assets/context/inss-2022-itens-41-42.png',
+  './assets/context/inss-2022-item-43.png',
   './data/cronograma.json',
   './data/materias.json',
   './data/aulas.json',
@@ -67,6 +69,23 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
+
+  const preferNetwork = event.request.mode === 'navigate' || url.pathname.includes('/data/');
+
+  if (preferNetwork) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_VERSION).then((cache) => cache.put(event.request, copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request).then((cached) => cached || caches.match('./offline.html')))
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(event.request).then((cached) => {

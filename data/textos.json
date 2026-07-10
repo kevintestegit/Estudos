@@ -18,6 +18,34 @@
       "fonte": "INSS 2022 Cebraspe — Caderno 760 (Conhecimentos Básicos)",
       "conteudo": "Cresce, no mundo todo, o número de pessoas que demandam serviços de cuidado. De acordo com o último relatório da Organização Internacional do Trabalho (OIT), esse universo deverá ser de 2,3 bilhões de pessoas em 2030 — há cinco anos, eram 2,1 bilhões. O envelhecimento da população e as novas configurações familiares, com mulheres mais presentes no mercado de trabalho e menos disponíveis para assumir encargos com parentes sem autonomia, têm levado os países a repensar seus sistemas de atenção a populações vulneráveis. Partindo desse panorama, as sociólogas Nadya Guimarães, da Universidade de São Paulo (USP), e Helena Hirata, do Centro de Pesquisas Sociológicas e Políticas de Paris, na França, identificaram, em estudo, o surgimento, nos últimos vinte anos, de arranjos que visam amparar indivíduos com distintos níveis de dependência, como crianças, idosos e pessoas com deficiência. Enquanto, em algumas nações, o papel do Estado é preponderante, em outras, a atuação de instituições privadas se sobressai. Na América Latina, o protagonismo das famílias representa o aspecto mais marcante.\n\nConforme definição da OIT, o trabalho de cuidado, que pode ou não ser remunerado, envolve dois tipos de atividades: as diretas, como alimentar um bebê ou cuidar de um doente, e as indiretas, como cozinhar ou limpar. “É um trabalho que tem uma forte dimensão emocional, se desenvolve na intimidade e, com frequência, envolve a manipulação do corpo do outro”, diz Guimarães. Ela relata que o conceito de cuidado surgiu como categoria relevante para as ciências sociais há cerca de trinta anos e, desde então, tem sido crescente a sua presença em linhas de investigação em áreas como economia, antropologia, psicologia e filosofia política. “Com isso, a discussão sobre essa concepção ganhou corpo. Os estudos iniciais do cuidado limitavam-se à ideia de que ele era uma necessidade nas situações de dependência, mas tal entendimento se ampliou. Hoje, ele é visto como um trabalho fundamental para assegurar o bem-estar de todos, na medida em que qualquer pessoa pode se fragilizar e se tornar dependente em algum momento da vida”, explica a socióloga. Os avanços da pesquisa levaram à constatação de que a oferta de cuidados é distribuída de forma desigual na sociedade, recaindo, de forma mais intensa, sobre as mulheres.\n\nAo refletir sobre esse desequilíbrio, a socióloga Heidi Gottfried, da Universidade Estadual Wayne, nos Estados Unidos da América, explica que persiste, nas sociedades, a noção arraigada de que o trabalho de cuidado seria uma manifestação de amor e, por essa razão, deveria ser prestado gratuitamente. Conforme Gottfried, a ideia decorre, entre outros aspectos, de construção cultural a respeito da maternidade e de que cuidar seria um talento feminino.\n\nPor outro lado, Guimarães lembra que, a partir de 1970, as mulheres aumentaram sua participação no mercado de trabalho brasileiro. Em cinco décadas, a presença feminina saltou de 18% para 50%, segundo dados do Instituto Brasileiro de Geografia e Estatística. “Consideradas provedoras naturais dos serviços de cuidado, as mulheres passaram a trabalhar mais intensamente fora de casa. Esse fato, aliado ao envelhecimento da população, gerou o que tem sido analisado como uma crise no provimento de cuidados que, em países do hemisfério norte, tem se resolvido com uma mercantilização desses serviços, além de uma maior atuação do Estado, por meio da criação de instituições públicas de acolhimento, expansão de políticas de financiamento, formação e regulação do trabalho de cuidadores”, conta a socióloga.\n\nNa América Latina, entretanto, o fornecimento de cuidados é tradicionalmente feito pelas famílias, nas quais mulheres desempenham gratuitamente papel central como cuidadoras de crianças, idosos e pessoas com deficiência. Para a minoria que pode pagar, o mercado oferece serviços de cuidado que compensam a escassa presença do Estado.\n\n(Christina Queiroz. Revista Pesquisa FAPESP. Ed. 299, jan./2021. Internet: <https://revistapesquisa.fapesp.br/economia-do-cuidado>, com adaptações.)"
     },
+    "inss-2022-figura-cookies": {
+      "id": "inss-2022-figura-cookies",
+      "titulo": "Figura — página do INSS e aviso de cookies",
+      "fonte": "INSS 2022 Cebraspe — Caderno 760, item 41 e item 42",
+      "conteudo": "A figura mostra uma página pública do INSS no domínio gov.br, acessada por HTTPS, com um aviso explicando o uso de cookies e as opções Aceitar, Rejeitar Cookies e Gerenciar cookies.",
+      "imagem": "assets/context/inss-2022-itens-41-42.png",
+      "imagemAlt": "Recorte da prova com a página pública do INSS, endereço HTTPS e aviso sobre cookies"
+    },
+    "inss-2022-planilha-excel": {
+      "id": "inss-2022-planilha-excel",
+      "titulo": "Figura — planilha do MS Excel 365",
+      "fonte": "INSS 2022 Cebraspe — Caderno 760, item 43",
+      "conteudo": "Todas as células mostradas foram selecionadas. Em seguida, foi escolhida a opção Remover Duplicadas, todas as colunas foram marcadas na caixa de diálogo e o botão OK foi acionado.",
+      "imagem": "assets/context/inss-2022-item-43.png",
+      "imagemAlt": "Planilha com as linhas Lápis 2,50; Caneta 5,50; Caneta 5,00; Lápis 3,00; Estojo 6,00"
+    },
+    "inss-2022-atendimento": {
+      "id": "inss-2022-atendimento",
+      "titulo": "Situação hipotética — modalidades de atendimento",
+      "fonte": "INSS 2022 Cebraspe — Caderno 760, itens 46 e 47",
+      "conteudo": "Ao realizar um levantamento de informações solicitado por seu chefe, um técnico do seguro social verificou que, entre os segurados que apresentaram suas demandas ao longo da semana anterior, 75% receberam algum atendimento remoto (por telefone, aplicativo ou Internet) e 35% receberam atendimento presencial. Houve casos em que os atendimentos foram iniciados no modo remoto, mas, devido às suas complexidades, precisaram ser concluídos presencialmente."
+    },
+    "inss-2022-proposicao-p": {
+      "id": "inss-2022-proposicao-p",
+      "titulo": "Proposição P",
+      "fonte": "INSS 2022 Cebraspe — Caderno 760, itens 48 a 50",
+      "conteudo": "P: Nos processos de justificações administrativas, quando o segurado apresentar testemunhas com valor de prova, a agência fornecerá um servidor exclusivo para o atendimento."
+    },
     "prf-2014-texto-1": {
       "id": "prf-2014-texto-1",
       "titulo": "Texto 1 — A era do automóvel (João do Rio)",

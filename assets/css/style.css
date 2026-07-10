@@ -360,6 +360,41 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   font-size: 0.8rem;
 }
 
+.context-card { background: #f8fafc; }
+.context-card h3 { margin: 0 0 0.35rem; font-size: 1rem; }
+.context-label {
+  margin: 0 0 0.25rem !important;
+  color: var(--primary) !important;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.context-source { margin: 0 0 0.6rem !important; font-size: 0.85rem; }
+.context-body {
+  max-height: 300px;
+  overflow: auto;
+  padding-right: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text);
+  white-space: normal;
+}
+.context-image {
+  display: block;
+  max-width: 100%;
+  max-height: 330px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin: 0.75rem 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+}
+.context-excerpt { font-weight: 400; }
+.context-excerpt strong { color: var(--primary); }
+
 @media (max-width: 960px) {
   .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
