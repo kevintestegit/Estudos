@@ -1,0 +1,74 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - paragraph [ref=e4]: Portal Estudos
+    - paragraph [ref=e5]: INSS · PRF Adm
+    - navigation [ref=e6]:
+      - link "Dashboard" [ref=e7] [cursor=pointer]:
+        - /url: index.html
+      - link "Hoje" [ref=e8] [cursor=pointer]:
+        - /url: hoje.html
+      - link "Cronograma" [ref=e9] [cursor=pointer]:
+        - /url: cronograma.html
+      - link "Biblioteca" [ref=e10] [cursor=pointer]:
+        - /url: biblioteca.html
+      - link "Matérias" [ref=e11] [cursor=pointer]:
+        - /url: materias.html
+      - link "Questões" [ref=e12] [cursor=pointer]:
+        - /url: questoes.html
+      - link "Flashcards" [ref=e13] [cursor=pointer]:
+        - /url: flashcards.html
+      - link "Simulados" [ref=e14] [cursor=pointer]:
+        - /url: simulados.html
+      - link "Provas" [ref=e15] [cursor=pointer]:
+        - /url: provas.html
+      - link "Caderno de erros" [ref=e16] [cursor=pointer]:
+        - /url: caderno-erros.html
+      - link "Progresso" [ref=e17] [cursor=pointer]:
+        - /url: progresso.html
+      - link "Backup" [ref=e18] [cursor=pointer]:
+        - /url: backup.html
+  - main [ref=e19]:
+    - generic [ref=e20]:
+      - heading "Questões" [level=1] [ref=e22]
+      - generic [ref=e23]:
+        - generic [ref=e24]: Nv. 1
+        - generic [ref=e25]: 0d seq.
+        - generic [ref=e26]: 0% acertos
+    - generic [ref=e28]:
+      - heading "Questionários" [level=2] [ref=e29]
+      - paragraph [ref=e30]: 141 questões disponíveis · Certo/errado e múltipla escolha.
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - generic [ref=e33]: Matéria
+          - combobox "Matéria" [ref=e34]:
+            - option "Todas" [selected]
+            - option "Arquivologia"
+            - option "Direito Administrativo"
+            - option "Direito Constitucional"
+            - option "Direito Previdenciário"
+            - option "Informática"
+            - option "Língua Portuguesa"
+            - option "Noções de Administração"
+            - option "Português"
+            - option "Raciocínio Lógico"
+            - option "Ética"
+            - option "Ética no Serviço Público"
+        - generic [ref=e35]:
+          - generic [ref=e36]: Tag / assunto
+          - textbox "Tag / assunto" [ref=e37]:
+            - /placeholder: "ex.: prev-carencia"
+        - generic [ref=e38]:
+          - generic [ref=e39]: Quantidade
+          - spinbutton "Quantidade" [ref=e40]: "5"
+        - generic [ref=e41]:
+          - generic [ref=e42]: Origem
+          - combobox "Origem" [ref=e43]:
+            - option "INSS + PRF" [selected]
+            - option "INSS / comum"
+            - option "PRF / comum"
+        - generic [ref=e44]:
+          - generic [ref=e45]: Modo
+          - combobox "Modo" [ref=e46]:
+            - option "Prática (gabarito na hora)" [selected]
+            - option "Modo prova (gabarito só no final)"
+      - button "Iniciar questionário" [ref=e48] [cursor=pointer]

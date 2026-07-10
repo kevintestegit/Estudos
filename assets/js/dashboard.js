@@ -39,7 +39,7 @@ function renderDashboard(cronograma, dicasData) {
     <div class="alert ${status.code === 'em_dia' ? 'alert-ok' : status.code === 'faltou_ontem' ? 'alert-danger' : 'alert-warn'}">
       ${App.esc(status.message)}${status.recoveryCount ? ` · ${status.recoveryCount} dia(s) para recuperar` : ''}
     </div>
-    ${dica ? `<div class="alert alert-info">Dica do dia: ${App.esc(dica)}</div>` : ''}
+    
 
     <div class="card mb-1">
       <h2>Meta de hoje ${goals.allOk ? '<span class="badge badge-ok">Batida</span>' : '<span class="badge badge-warn">Em andamento</span>'}</h2>

@@ -2,11 +2,12 @@
 async function initQuestoes() {
   App.initShell('questoes');
   try {
-    const [qInss, qPrf] = await Promise.all([
+    const [qInss, qPrf, textos] = await Promise.all([
       App.loadJSON('data/questoes-inss.json'),
-      App.loadJSON('data/questoes-prf.json')
+      App.loadJSON('data/questoes-prf.json'),
+      App.loadJSON('data/textos.json').catch(() => ({ textos: {} }))
     ]);
-    const data = { qInss, qPrf };
+    const data = { qInss, qPrf, textos: textos.textos || {} };
     const params = new URLSearchParams(location.search);
     renderQuestoesHome(data, params);
   } catch (e) {
@@ -100,7 +101,7 @@ function renderQuestoesHome(data, params) {
       const setup = document.getElementById('q-setup');
       if (setup) setup.classList.add('hidden');
       const mode = forceMode || document.getElementById('q-modo').value || 'pratica';
-      startQuiz(pool, { mode, tipo: origem });
+      startQuiz(pool, { mode, tipo: origem, textos: data.textos || {} });
     } catch (err) {
       msg.innerHTML = `<div class="alert alert-danger">Erro ao iniciar: ${App.esc(err.message || err)}</div>`;
       console.error(err);
@@ -144,11 +145,24 @@ function startQuiz(questions, meta) {
   let answeredCurrent = false;
   const provaMode = meta.mode === 'prova';
   const selections = [];
+  const textos = meta.textos || {};
 
   function ensureSubject(m) {
     const key = m || 'Geral';
     if (!bySubject[key]) bySubject[key] = { total: 0, correct: 0 };
     return key;
+  }
+
+  function renderTextoBase(q) {
+    const t = q.textoId ? textos[q.textoId] : null;
+    if (!t) return '';
+    const body = App.esc(t.conteudo || '').replace(/\n/g, '<br>');
+    return `
+      <div class="card mb-1" id="texto-base" style="background:#f8fafc;max-height:280px;overflow:auto">
+        <h3 style="margin:0 0 0.35rem;font-size:1rem">${App.esc(t.titulo || 'Texto de apoio')}</h3>
+        <p class="muted" style="margin:0 0 0.6rem;font-size:0.85rem">${App.esc(t.fonte || '')}</p>
+        <div style="font-size:0.95rem;line-height:1.55;color:var(--text)">${body}</div>
+      </div>`;
   }
 
   function renderQuestion() {
@@ -162,6 +176,7 @@ function startQuiz(questions, meta) {
       ? `<p><strong>Tempo:</strong> <span id="sim-timer">${fmtTime(remain)}</span></p>`
       : '';
     area.innerHTML = `
+      ${renderTextoBase(q)}
       <div class="card" id="quiz-card">
         <p class="muted">Questão ${idx + 1} de ${questions.length} · ${App.esc(q.materia || '')} · ${App.esc(q.assunto || '')}
           ${provaMode ? ' · <span class="badge badge-warn">Modo prova</span>' : ''}</p>
@@ -258,7 +273,16 @@ function startQuiz(questions, meta) {
       }
       answers.push({ id: q.id, ok, selected });
       const fb = document.getElementById('q-feedback');
-      fb.innerHTML = `<div class="alert ${ok ? 'alert-ok' : 'alert-danger'}">${ok ? 'Correto' : 'Incorreto'}. ${App.esc(q.comentario || '')}</div>`;
+      const gabLabel = q.tipo === 'ce' ? (q.gabarito === 'C' ? 'Certo' : 'Errado')
+        : (typeof q.gabarito === 'number' ? String.fromCharCode(65 + q.gabarito) : q.gabarito);
+      fb.innerHTML = `
+        <div class="alert ${ok ? 'alert-ok' : 'alert-danger'}">
+          <strong>${ok ? 'Correto' : 'Incorreto'}</strong> · Gabarito: <strong>${App.esc(String(gabLabel))}</strong>
+        </div>
+        <div class="card mt-1" style="border-left:4px solid ${ok ? 'var(--ok)' : 'var(--danger)'}">
+          <h3 style="margin:0 0 0.5rem;font-size:1rem">Resolução</h3>
+          <p style="margin:0;color:var(--text)">${App.esc(q.comentario || 'Sem resolução cadastrada.')}</p>
+        </div>`;
       opts.querySelectorAll('.quiz-option').forEach((btn, i) => {
         btn.disabled = true;
         if (tipo === 'ce') {
@@ -351,7 +375,7 @@ function startQuiz(questions, meta) {
             <strong>${i + 1}.</strong> ${a.ok ? '<span class="badge badge-ok">Certo</span>' : '<span class="badge badge-danger">Errado</span>'}
             · sua: ${App.esc(String(a.selected ?? '—'))} · gab: ${App.esc(String(a.gabarito))}
             <p class="muted">${App.esc((q.enunciado || '').slice(0, 140))}…</p>
-            <p class="muted">${App.esc(a.comentario || '')}</p>
+            <p><strong>Resolução:</strong> ${App.esc(a.comentario || q.comentario || '')}</p>
           </li>`;
         }).join('')}
       </ul>` : '';
@@ -401,14 +425,20 @@ function startQuiz(questions, meta) {
 async function initSimulados() {
   App.initShell('simulados');
   try {
-    const data = await App.loadAll();
-    const bank = allQuestions(data);
+    const [qInss, qPrf, simulados, textos] = await Promise.all([
+      App.loadJSON('data/questoes-inss.json'),
+      App.loadJSON('data/questoes-prf.json'),
+      App.loadJSON('data/simulados.json'),
+      App.loadJSON('data/textos.json').catch(() => ({ textos: {} }))
+    ]);
+    const bank = allQuestions({ qInss, qPrf });
     const byId = Object.fromEntries(bank.map((q) => [q.id, q]));
+    const textosMap = textos.textos || {};
     const p = Storage.get();
 
     document.getElementById('app-root').innerHTML = `
       <div class="grid grid-2 mb-1">
-        ${(data.simulados.simulados || []).map((s) => `
+        ${(simulados.simulados || []).map((s) => `
           <div class="card">
             <h3>${App.esc(s.titulo)}</h3>
             <p class="muted">${App.esc(s.descricao)}</p>
@@ -440,10 +470,10 @@ async function initSimulados() {
 
     document.querySelectorAll('[data-sim]').forEach((btn) => {
       btn.onclick = () => {
-        const sim = data.simulados.simulados.find((x) => x.id === btn.dataset.sim);
+        const sim = simulados.simulados.find((x) => x.id === btn.dataset.sim);
         const qs = sim.questaoIds.map((id) => byId[id]).filter(Boolean);
         if (!qs.length) return alert('Questões não encontradas.');
-        startQuiz(qs, { mode: 'simulado', tipo: sim.tipo, tempoMinutos: sim.tempoMinutos });
+        startQuiz(qs, { mode: 'simulado', tipo: sim.tipo, tempoMinutos: sim.tempoMinutos, textos: textosMap });
         document.getElementById('q-area').scrollIntoView({ behavior: 'smooth' });
       };
     });

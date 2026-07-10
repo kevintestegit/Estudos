@@ -21,10 +21,7 @@ function initBackup() {
       <p class="muted">Apaga progresso local deste navegador.</p>
       <button class="btn btn-danger" id="btn-reset">Apagar progresso</button>
     </div>
-    <pre id="preview" class="card mt-2 muted" style="overflow:auto;max-height:240px;font-size:0.8rem"></pre>
   `;
-
-  document.getElementById('preview').textContent = Storage.exportJSON();
 
   document.getElementById('btn-export').onclick = () => {
     const blob = new Blob([Storage.exportJSON()], { type: 'application/json' });
@@ -41,7 +38,6 @@ function initBackup() {
     try {
       const text = await file.text();
       Storage.importJSON(text);
-      document.getElementById('preview').textContent = Storage.exportJSON();
       alert('Backup importado.');
       App.renderStatusBar();
     } catch (e) {
@@ -53,7 +49,6 @@ function initBackup() {
     if (!confirm('Apagar todo o progresso local?')) return;
     Storage.reset();
     Storage.ensureStartDate();
-    document.getElementById('preview').textContent = Storage.exportJSON();
     App.renderStatusBar();
     alert('Progresso apagado.');
   };

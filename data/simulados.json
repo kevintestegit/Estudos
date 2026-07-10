@@ -48,10 +48,6 @@
         "inss-2022-i10",
         "inss-2022-i12",
         "inss-2022-i13",
-        "inss-2016-i1",
-        "inss-2016-i4",
-        "inss-2016-i7",
-        "inss-2016-i13",
         "inss-2016-r1",
         "inss-2016-r2",
         "inss-2016-r3",
@@ -65,15 +61,7 @@
       "tempoMinutos": 60,
       "descricao": "Questões retiradas da prova INSS 2016 CEBRASPE.",
       "questaoIds": [
-        "inss-2016-i1",
-        "inss-2016-i4",
-        "inss-2016-i7",
-        "inss-2016-i10",
-        "inss-2016-i13",
-        "inss-2016-i16",
-        "inss-2016-i19",
         "inss-2016-i22",
-        "inss-2016-i25",
         "inss-2016-r1",
         "inss-2016-r2",
         "inss-2016-r3",
@@ -94,15 +82,7 @@
       "tempoMinutos": 60,
       "descricao": "Simulado longo com todas as questões INSS reais disponíveis.",
       "questaoIds": [
-        "inss-2016-i1",
-        "inss-2016-i10",
-        "inss-2016-i13",
-        "inss-2016-i16",
-        "inss-2016-i19",
         "inss-2016-i22",
-        "inss-2016-i25",
-        "inss-2016-i4",
-        "inss-2016-i7",
         "inss-2016-r1",
         "inss-2016-r10",
         "inss-2016-r11",
@@ -144,10 +124,7 @@
         "inss-2022-i9",
         "inss-2022-i10",
         "inss-2022-i12",
-        "inss-2022-i13",
-        "inss-2016-i1",
-        "inss-2016-i4",
-        "inss-2016-i7"
+        "inss-2022-i13"
       ]
     },
     {
@@ -249,14 +226,7 @@
       "tempoMinutos": 40,
       "descricao": "Mistura real de ambos os concursos.",
       "questaoIds": [
-        "inss-2016-i1",
-        "inss-2016-i10",
-        "inss-2016-i13",
-        "inss-2016-i16",
-        "inss-2016-i19",
         "inss-2016-i22",
-        "inss-2016-i25",
-        "inss-2016-i4",
         "prf-2014-q01",
         "prf-2014-q02",
         "prf-2014-q03",
@@ -314,10 +284,7 @@
         "inss-2022-i9",
         "inss-2022-i10",
         "inss-2022-i12",
-        "inss-2022-i13",
-        "inss-2016-i1",
-        "inss-2016-i4",
-        "inss-2016-i7"
+        "inss-2022-i13"
       ]
     },
     {
