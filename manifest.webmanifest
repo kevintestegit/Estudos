@@ -1,0 +1,25 @@
+{
+  "name": "Portal de Estudos — INSS e PRF Administrativo",
+  "short_name": "Estudos",
+  "description": "Cronograma, materiais, questões e progresso diário em um portal leve.",
+  "lang": "pt-BR",
+  "start_url": "./hoje.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f6f8",
+  "theme_color": "#12263a",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

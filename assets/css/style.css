@@ -344,6 +344,22 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 .mt-2 { margin-top: 1.25rem; }
 .mb-1 { margin-bottom: 0.75rem; }
 
+.offline-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+.offline-card { max-width: 520px; }
+.offline-card h1 { margin: 0.25rem 0 0.75rem; }
+.eyebrow {
+  color: var(--primary) !important;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+}
+
 @media (max-width: 960px) {
   .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }

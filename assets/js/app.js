@@ -253,3 +253,12 @@ const App = {
 };
 
 window.App = App;
+
+// Mantém o portal disponível como aplicativo e permite uso offline após a primeira visita.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').catch((error) => {
+      console.warn('Não foi possível ativar o modo offline.', error);
+    });
+  });
+}
