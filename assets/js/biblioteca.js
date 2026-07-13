@@ -17,7 +17,7 @@ async function initBiblioteca() {
       _origem: 'prova'
     }));
     const all = [...materiais, ...provas];
-    renderBiblioteca(all);
+    renderBiblioteca(all, params);
   } catch (e) {
     document.getElementById('app-root').innerHTML =
       `<div class="alert alert-danger">Erro ao carregar biblioteca. Use servidor local. ${App.esc(e.message)}</div>`;
@@ -31,7 +31,7 @@ function catFromConcurso(c) {
   return 'comum';
 }
 
-function renderBiblioteca(all) {
+function renderBiblioteca(all, params) {
   const root = document.getElementById('app-root');
   const p = Storage.get();
   const estudados = p.materiaisEstudados || [];
