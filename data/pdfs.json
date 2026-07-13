@@ -1,45 +1,10 @@
 {
   "pdfs": [
     {
-      "id": "pdf-pt-01",
-      "titulo": "Resumo — Interpretação",
-      "materia": "Português",
-      "paginas": 8,
-      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf"
-    },
-    {
-      "id": "pdf-pt-02",
-      "titulo": "Resumo — Ortografia",
-      "materia": "Português",
-      "paginas": 6,
-      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf"
-    },
-    {
-      "id": "pdf-pt-03",
-      "titulo": "Resumo — Morfossintaxe",
-      "materia": "Português",
-      "paginas": 10,
-      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf"
-    },
-    {
-      "id": "pdf-pt-04",
-      "titulo": "Resumo — Concordância",
-      "materia": "Português",
-      "paginas": 7,
-      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf"
-    },
-    {
       "id": "pdf-pt-05",
       "titulo": "Resumo — Regência e crase",
       "materia": "Português",
       "paginas": 6,
-      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf"
-    },
-    {
-      "id": "pdf-pt-06",
-      "titulo": "Resumo — Pontuação",
-      "materia": "Português",
-      "paginas": 5,
       "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf"
     },
     {
@@ -344,66 +309,10 @@
       "url": "https://repositorio.enap.gov.br/bitstream/1/2260/1/1.%20Apostila%20-%20M%C3%B3dulo%201%20-%20Administra%C3%A7%C3%A3o%20P%C3%BAblica.pdf"
     },
     {
-      "id": "pdf-admin-02",
-      "titulo": "Resumo — PODC",
-      "materia": "Noções de Administração",
-      "paginas": 4,
-      "url": "https://repositorio.enap.gov.br/bitstream/1/2260/1/1.%20Apostila%20-%20M%C3%B3dulo%201%20-%20Administra%C3%A7%C3%A3o%20P%C3%BAblica.pdf"
-    },
-    {
-      "id": "pdf-admin-03",
-      "titulo": "Resumo — estruturas",
-      "materia": "Noções de Administração",
-      "paginas": 4,
-      "url": "https://repositorio.enap.gov.br/bitstream/1/2260/1/1.%20Apostila%20-%20M%C3%B3dulo%201%20-%20Administra%C3%A7%C3%A3o%20P%C3%BAblica.pdf"
-    },
-    {
-      "id": "pdf-admin-04",
-      "titulo": "Resumo — gestão de pessoas",
-      "materia": "Noções de Administração",
-      "paginas": 4,
-      "url": "https://repositorio.enap.gov.br/bitstream/1/2260/1/1.%20Apostila%20-%20M%C3%B3dulo%201%20-%20Administra%C3%A7%C3%A3o%20P%C3%BAblica.pdf"
-    },
-    {
-      "id": "pdf-admin-05",
-      "titulo": "Resumo — processos e qualidade",
-      "materia": "Noções de Administração",
-      "paginas": 4,
-      "url": "https://repositorio.enap.gov.br/bitstream/1/2260/1/1.%20Apostila%20-%20M%C3%B3dulo%201%20-%20Administra%C3%A7%C3%A3o%20P%C3%BAblica.pdf"
-    },
-    {
-      "id": "pdf-admin-06",
-      "titulo": "Resumo — materiais",
-      "materia": "Noções de Administração",
-      "paginas": 4,
-      "url": "https://repositorio.enap.gov.br/bitstream/1/2260/1/1.%20Apostila%20-%20M%C3%B3dulo%201%20-%20Administra%C3%A7%C3%A3o%20P%C3%BAblica.pdf"
-    },
-    {
-      "id": "pdf-admin-07",
-      "titulo": "Resumo — controle",
-      "materia": "Noções de Administração",
-      "paginas": 4,
-      "url": "https://repositorio.enap.gov.br/bitstream/1/2260/1/1.%20Apostila%20-%20M%C3%B3dulo%201%20-%20Administra%C3%A7%C3%A3o%20P%C3%BAblica.pdf"
-    },
-    {
-      "id": "pdf-admin-08",
-      "titulo": "Resumo — administração pública",
-      "materia": "Noções de Administração",
-      "paginas": 6,
-      "url": "https://repositorio.enap.gov.br/bitstream/1/2260/1/1.%20Apostila%20-%20M%C3%B3dulo%201%20-%20Administra%C3%A7%C3%A3o%20P%C3%BAblica.pdf"
-    },
-    {
       "id": "pdf-arq-01",
       "titulo": "Guia de gestão de documentos",
       "materia": "Arquivologia",
       "paginas": 20,
-      "url": "https://www.gov.br/arquivonacional/pt-br/servicos/publicacoes/Guiadegestaodedocumentos.pdf"
-    },
-    {
-      "id": "pdf-arq-02",
-      "titulo": "Classificação e arquivamento",
-      "materia": "Arquivologia",
-      "paginas": 10,
       "url": "https://www.gov.br/arquivonacional/pt-br/servicos/publicacoes/Guiadegestaodedocumentos.pdf"
     },
     {
@@ -419,13 +328,6 @@
       "materia": "Arquivologia",
       "paginas": 8,
       "url": "https://www.gov.br/conarq/pt-br/centrais-de-conteudo/publicacoes/publicacoes-conarq"
-    },
-    {
-      "id": "pdf-arq-05",
-      "titulo": "Protocolo",
-      "materia": "Arquivologia",
-      "paginas": 6,
-      "url": "https://www.gov.br/arquivonacional/pt-br/servicos/publicacoes/Guiadegestaodedocumentos.pdf"
     },
     {
       "id": "pdf-arq-06",
