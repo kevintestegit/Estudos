@@ -71,10 +71,13 @@ function renderBiblioteca(all) {
     </div>
   `;
 
-  let filter = (()=>{const m=params.get('materia');if(m==='comum')return'comum';if(m==='prf')return'prf';if(m==='inss')return'inss';if(m)return'nome';return'todos'})();
+  let filter = (()=>{const t=params.get('tipo'),m=params.get('materia');if(t==='aulas'||t==='pdfs'||t==='questoes'||t==='acertos')return t;if(m==='comum')return'comum';if(m==='prf')return'prf';if(m==='inss')return'inss';if(m)return'nome';return'todos'})();
   let q = '';
 
   function match(item) {
+    if(filter === 'aulas' && item._origem !== 'material') return false;
+    if(filter === 'pdfs' && item._origem !== 'material' && item.tipo !== 'pdf' && item.tipo !== 'legislacao') return false;
+    if(filter === 'questoes' || filter === 'acertos') return false;
     if(filter === 'nome'){
         const m = (params.get('materia')||'').toLowerCase();
         return (item.materia||'').toLowerCase() === m || (item.concurso||'').toLowerCase().includes(m);
