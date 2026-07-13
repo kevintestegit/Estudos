@@ -71,32 +71,28 @@ function renderBiblioteca(all) {
     </div>
   `;
 
-  let filter = 'todos';
+  let filter = (()=>{const m=params.get('materia');if(m==='comum')return'comum';if(m==='prf')return'prf';if(m==='inss')return'inss';if(m)return'nome';return'todos'})();
   let q = '';
 
   function match(item) {
-    if (filter === 'inss' && item.categoria !== 'inss') return false;
-    if (filter === 'prf' && item.categoria !== 'prf') return false;
-    if (filter === 'comum' && item.categoria !== 'comum') return false;
-    if (filter === 'prova' && item.tipo !== 'prova') return false;
-    if (filter === 'gabarito' && item.tipo !== 'gabarito') return false;
-    if (filter === 'legislacao' && item.tipo !== 'legislacao') return false;
-    if (filter === 'pdf' && item.tipo !== 'pdf' && !(item.url || '').toLowerCase().includes('.pdf')) return false;
-    if (q) {
-      const hay = [item.titulo, item.materia, item.concurso, item.banca, item.fonte, item.cargo]
-        .join(' ').toLowerCase();
-      if (!hay.includes(q)) return false;
+    if(filter === 'nome'){
+        const m = (params.get('materia')||'').toLowerCase();
+        return (item.materia||'').toLowerCase() === m || (item.concurso||'').toLowerCase().includes(m);
+    }
+    if(filter === 'inss' && item.categoria !== 'inss') return false;
+    if(filter === 'prf' && item.categoria !== 'prf') return false;
+    if(filter === 'comum' && item.categoria !== 'comum') return false;
+    if(filter === 'prova' && item.tipo !== 'prova') return false;
+    if(filter === 'gabarito' && item.tipo !== 'gabarito') return false;
+    if(filter === 'legislacao' && item.tipo !== 'legislacao') return false;
+    if(filter === 'pdf' && item.tipo !== 'pdf' && !(item.url||'').toLowerCase().includes('.pdf')) return false;
+    if(q){
+        const hay = [item.titulo,item.materia,item.concurso,item.banca,item.fonte,item.cargo].join(' ').toLowerCase();
+        if(!hay.includes(q)) return false;
     }
     return true;
-  }
-
-  function prioBadge(p) {
-    if (p === 'alta') return 'badge-danger';
-    if (p === 'media') return 'badge-warn';
-    return 'badge-muted';
-  }
-
-  function paintList() {
+}
+function paintList() {
     const list = document.getElementById('bib-list');
     const items = all.filter(match);
     if (!items.length) {
