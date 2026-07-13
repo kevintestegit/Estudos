@@ -38,7 +38,7 @@ function renderBiblioteca(all) {
   const provasFeitas = p.provasFeitas || [];
   const revisao = p.materiaisRevisao || [];
 
-  root.innerHTML = `${params.get("materia")?`<div class="alert alert-info">Filtrado por: ${App.esc(params.get("materia"))}</div>`:""}
+  root.innerHTML = `${(new URLSearchParams(location.search)).get("materia")?`<div class="alert alert-info">Filtrado por: ${App.esc((new URLSearchParams(location.search)).get("materia"))}</div>`:""}
     <div class="grid grid-3 mb-1">
       <div class="card stat"><span class="value">${estudados.length}</span><span class="label">Materiais estudados</span></div>
       <div class="card stat"><span class="value">${provasFeitas.length}</span><span class="label">Provas reais feitas</span></div>
