@@ -38,6 +38,7 @@ O relatório anterior registrava bloqueio FortiGate. Esse é apenas o histórico
 - Os 69 candidatos antigos foram consultados novamente: 65 retornaram HTTP 404 no oEmbed, duas ocorrências de `dQw4w9WgXcQ` foram incompatíveis e duas páginas do Planalto eram URLs inválidas como videoaula.
 - Foram executadas 69 pesquisas específicas no YouTube e avaliados 550 resultados com título, canal, descrição visível, duração e data exibida.
 - Os 45 selecionados foram consultados novamente no oEmbed e na página pública. Título e canal coincidiram em 45/45; duração e data foram obtidas em 45/45.
+- `aula-pt-01` foi substituída por `B1lk04l-dRU` após relato de falha de acesso ao vídeo anterior. O substituto respondeu HTTP 200, `playabilityStatus: OK` e oEmbed com título e canal em 2026-07-14.
 - A consulta às legendas públicas retornou corpo vazio e não foi usada como evidência de aprovação.
 - Os 24 casos ambíguos permaneceram com `tipo: indisponivel` e `url: null`.
 
@@ -52,7 +53,7 @@ Foram usados 28 canais identificados, incluindo Estratégia Concursos, Gran Curs
 - `url` continua sendo a única fonte da interface.
 - Vídeos usam `Assistir videoaula`, URL exata, nova aba e `rel="noopener noreferrer"`.
 - Indisponíveis continuam sem `<a>` e sem conclusão por clique.
-- O Service Worker usa `portal-estudos-v13`; durante `activate`, caches anteriores, inclusive v12, são removidos.
+- O Service Worker usa `portal-estudos-v14`; durante `activate`, caches anteriores, inclusive v13, são removidos.
 - Navegação e `/data/` continuam em network-first.
 
 ## Comandos finais
@@ -62,7 +63,7 @@ Foram usados 28 canais identificados, incluindo Estratégia Concursos, Gran Curs
 | `node scripts/validate.mjs` | 0 | Estrutura e cache aprovados |
 | `node scripts/test-calendar.mjs` | 0 | 27 casos aprovados |
 | `node scripts/check-links.mjs` | 0 | 45 `ok`, 24 `indisponivel` |
-| `node --test tests/check-links.test.mjs` | 0 | 8 aprovados, 0 falhos, 0 ignorados |
+| `node --test tests/check-links.test.mjs` | 0 | 9 aprovados, 0 falhos, 0 ignorados |
 | `node --check assets/js/app.js` | 0 | Sintaxe aprovada |
 | `node --check assets/js/dashboard.js` | 0 | Sintaxe aprovada |
 | `node --check assets/js/biblioteca.js` | 0 | Sintaxe aprovada |

@@ -1,5 +1,5 @@
 {
-  "geradoEm": "2026-07-14T22:29:02.403Z",
+  "geradoEm": "2026-07-14T19:44:27-03:00",
   "registros": [
     {
       "id": "aula-pt-01",
@@ -7,8 +7,8 @@
       "assunto": "Interpretação de textos — base",
       "pesquisaRealizada": "Português Interpretação de textos — base aula concurso",
       "httpStatusPesquisa": 200,
-      "urlAprovada": "https://www.youtube.com/watch?v=22iA3PPjr7c",
-      "motivoFinal": "Selecionado por aderência direta ao assunto, com oEmbed e página pública confirmados.",
+      "urlAprovada": "https://www.youtube.com/watch?v=B1lk04l-dRU",
+      "motivoFinal": "Substituto selecionado após relato de falha de acesso ao candidato anterior; aula para concursos com oEmbed e página pública confirmados.",
       "candidatosTestados": [
         {
           "videoId": "22iA3PPjr7c",
@@ -18,8 +18,8 @@
           "duracao": "45:34",
           "publicado": "há 2 anos",
           "descricao": "Neste vídeo o Prof. Álvaro Ferreira irá explicar 2 técnicas para você acertar as questões de interpretação de textos em concurso ...",
-          "status": "aprovado",
-          "motivo": "Selecionado por aderência direta ao assunto, com oEmbed e página pública confirmados."
+          "status": "rejeitado",
+          "motivo": "Rejeitado após relato de falha de acesso pelo usuário, embora oEmbed e página pública ainda respondessem no ambiente de validação."
         },
         {
           "videoId": "OxTNN-IKcEQ",
@@ -40,8 +40,8 @@
           "duracao": "32:40",
           "publicado": "há 1 ano",
           "descricao": "Curso Completo para Guarda Municipal https://fzconcursos.com.br/curso-completo-nova/ ℹ️ Instagram Professora Luana: ...",
-          "status": "rejeitado",
-          "motivo": "Candidato alternativo não escolhido; a opção aprovada apresentou melhor aderência."
+          "status": "aprovado",
+          "motivo": "Substituto diretamente dedicado a interpretação de texto para concursos; oEmbed e página pública confirmados."
         },
         {
           "videoId": "XsN0e_xPyNI",
@@ -102,11 +102,11 @@
       "evidenciasAprovacao": {
         "oembed": true,
         "httpStatus": 200,
-        "tituloYoutube": "INTERPRETAÇÃO de TEXTOS para CONCURSO - Nunca mais erre!",
-        "canal": "Prof. Álvaro Ferreira",
-        "duracaoSegundos": 2733,
-        "publicadoEm": "2023-07-19T15:00:00-07:00",
-        "descricaoVisivel": "Neste vídeo o Prof. Álvaro Ferreira irá explicar 2 técnicas para você acertar as questões de interpretação de textos em concurso ...",
+        "tituloYoutube": "PORTUGUÊS PARA CONCURSOS: INTERPRETAÇÃO DE TEXTO",
+        "canal": "FZ Concursos",
+        "duracaoSegundos": 1959,
+        "publicadoEm": "2024-10-08T15:30:01-07:00",
+        "descricaoVisivel": "Curso Completo para Guarda Municipal https://fzconcursos.com.br/curso-completo-nova/ ℹ️ Instagram Professora Luana: ...",
         "transcricaoConfirmada": false
       }
     },

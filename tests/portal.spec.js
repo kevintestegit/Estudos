@@ -461,7 +461,7 @@ test("Service Worker remove o cache da versão anterior", async ({ page }) => {
     }
     return caches.keys();
   });
-  expect(cacheNames).toContain("portal-estudos-v13");
+  expect(cacheNames).toContain("portal-estudos-v14");
   expect(cacheNames).not.toContain("portal-estudos-v12");
 });
 

@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import { validateLesson, validateAll, linkScope } from "../scripts/check-links.mjs";
 
 const base = {
@@ -8,6 +9,11 @@ const base = {
   materia: "Direito Administrativo",
   verificadoEm: "2026-07-14",
 };
+
+test("vídeo relatado como inacessível não volta à biblioteca", () => {
+  const aulas = JSON.parse(fs.readFileSync(new URL("../data/aulas.json", import.meta.url))).aulas;
+  assert.ok(!aulas.some((aula) => aula.videoId === "22iA3PPjr7c"));
+});
 
 test("indisponível não faz requisição externa", async () => {
   let called = false;

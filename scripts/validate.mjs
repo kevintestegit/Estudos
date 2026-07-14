@@ -224,7 +224,7 @@ for (const file of sourceFiles) {
 }
 
 const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-log(serviceWorker.includes("portal-estudos-v13"), "Service Worker usa cache v13");
+log(serviceWorker.includes("portal-estudos-v14"), "Service Worker usa cache v14");
 log(serviceWorker.includes("./assets/js/calendar.js"), "Service Worker inclui calendar.js");
 log(serviceWorker.includes("e.request.mode==='navigate'||u.pathname.includes('/data/')"), "Service Worker mantém network-first para navegação e dados");
 
