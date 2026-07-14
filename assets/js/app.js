@@ -349,12 +349,18 @@ const App = {
     "Caderno de erros": "caderno-erros.html",
     Preparação: "hoje.html",
   },
-  YT_PLAYLISTS: {},
-  youtubeUrl(m, a) {
-    return (
-      this.YT_PLAYLISTS?.[m] ||
-      `https://www.youtube.com/results?search_query=${encodeURIComponent(`${m || ""} ${a || ""} concurso aula`.trim())}`
-    );
+  lessonAction(lesson) {
+    if (lesson?.tipo === "video" && lesson.url)
+      return { available: true, label: "Assistir videoaula", url: lesson.url };
+    if (lesson?.tipo === "playlist" && lesson.url)
+      return { available: true, label: "Abrir playlist", url: lesson.url };
+    return { available: false, label: "Videoaula ainda não disponível", url: null };
+  },
+  lessonActionHtml(lesson, attributes = "") {
+    const action = this.lessonAction(lesson);
+    return action.available
+      ? `<a class="btn btn-sm" ${this.linkAttrs(action.url)} ${attributes}>${action.label}</a>`
+      : `<span class="alert alert-info" data-lesson-unavailable>${action.label}</span>`;
   },
   resolveUrl(u, m) {
     return u && u !== "#" ? u : this.MATERIA_URL[m] || "biblioteca.html";
@@ -364,7 +370,7 @@ const App = {
   },
   linkAttrs(u) {
     return this.isExternal(u)
-      ? `href="${this.esc(u)}" target="_blank" rel="noopener"`
+      ? `href="${this.esc(u)}" target="_blank" rel="noopener noreferrer"`
       : `href="${this.esc(u)}"`;
   },
   materialActionLabel(item) {

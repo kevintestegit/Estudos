@@ -21,10 +21,8 @@ async function initBiblioteca() {
     }));
     const aulas = (aulasData.aulas || []).map((item) => ({
       ...item,
-      titulo: item.titulo,
-      tipo: "aula",
       categoria: "comum",
-      fonte: "YouTube ou fonte indicada",
+      fonte: item.canal || "Videoaula",
       _origem: "aula",
     }));
     const pdfs = (pdfsData.pdfs || []).map((item) => ({
@@ -187,6 +185,9 @@ function renderBiblioteca(all, params) {
         const studied = Storage.isMaterialStudied(item.id);
         const reviewing = Storage.isInRevisao(item.id);
         const url = App.resolveUrl(item.url, item.materia);
+        const action = item._origem === "aula"
+          ? App.lessonActionHtml(item)
+          : `<a class="btn btn-sm" ${App.linkAttrs(url)}>${App.materialActionLabel(item)}</a>`;
         return `<article class="card task-card">
         <h3>${App.esc(item.titulo)}</h3>
         <div class="task-meta">
@@ -196,7 +197,7 @@ function renderBiblioteca(all, params) {
         </div>
         <p class="muted">Fonte: ${App.esc(item.fonte || "Fonte indicada no endereço")}</p>
         <div class="actions">
-          <a class="btn btn-sm" ${App.linkAttrs(url)}>${App.materialActionLabel(item)}</a>
+          ${action}
           <button class="btn btn-sm btn-accent" type="button" data-study="${App.esc(item.id)}">${studied ? "Já estudado" : "Marcar como estudado"}</button>
           <button class="btn btn-sm btn-secondary" type="button" data-review="${App.esc(item.id)}">${reviewing ? "Remover da revisão" : "Revisar depois"}</button>
         </div>

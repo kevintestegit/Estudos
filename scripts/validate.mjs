@@ -59,6 +59,23 @@ for (const [group, items] of Object.entries(contentGroups)) {
   }
 }
 
+log(aulas.length === 69, `aulas: total 69 (${aulas.length})`);
+for (const aula of aulas) {
+  log(["video", "playlist", "indisponivel"].includes(aula.tipo), `aula com tipo válido: ${aula.id}`);
+  log(!("yt" in aula), `aula sem campo yt: ${aula.id}`);
+  log(!/youtube\.com\/results|[?&]search_query=/i.test(aula.url || ""), `aula sem pesquisa: ${aula.id}`);
+  log(aula.verificadoEm === "2026-07-14", `aula com data real: ${aula.id}`);
+  if (aula.tipo === "indisponivel") {
+    log(aula.url === null, `aula indisponível sem link: ${aula.id}`);
+    continue;
+  }
+  const parsed = new URL(aula.url);
+  const id = aula.tipo === "video" ? parsed.searchParams.get("v") : parsed.searchParams.get("list");
+  const stored = aula.tipo === "video" ? aula.videoId : aula.playlistId;
+  log(id === stored, `aula com ID correspondente: ${aula.id}`);
+  log(Boolean(aula.canal && aula.tituloYoutube && aula.verificadoEm), `aula com metadados obrigatórios: ${aula.id}`);
+}
+
 const badVideo = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
 log(
   !aulas.some((a) => a.url === badVideo || a.yt === badVideo),
@@ -207,7 +224,7 @@ for (const file of sourceFiles) {
 }
 
 const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-log(serviceWorker.includes("portal-estudos-v11"), "Service Worker usa cache v11");
+log(serviceWorker.includes("portal-estudos-v12"), "Service Worker usa cache v12");
 log(serviceWorker.includes("./assets/js/calendar.js"), "Service Worker inclui calendar.js");
 log(serviceWorker.includes("e.request.mode==='navigate'||u.pathname.includes('/data/')"), "Service Worker mantém network-first para navegação e dados");
 

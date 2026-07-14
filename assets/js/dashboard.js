@@ -190,30 +190,32 @@ function renderStudyTask(entry, data, firstPending) {
   const material = (data.pdfs.pdfs || []).find(
     (item) => item.id === task.pdfId,
   );
-  const videoUrl = lesson?.url || App.youtubeUrl(task.materia, task.assunto);
+  const lessonAction = App.lessonAction(lesson);
   const materialUrl = App.resolveUrl(material?.url, task.materia);
   const questionUrl = `questoes.html?${task.questoesTag ? `tag=${encodeURIComponent(task.questoesTag)}` : `materia=${encodeURIComponent(task.materia)}`}&n=10`;
   const base = taskBaseKey(entry);
   const steps = [
-    ["learn", "1", "Aprender o conteúdo", "Assistir aula", videoUrl],
+    ["learn", "1", "Aprender o conteúdo", lessonAction],
     [
       "read",
       "2",
       "Ler ou revisar",
-      App.materialActionLabel(material || { tipo: "fonte" }),
-      materialUrl,
+      { available: true, label: App.materialActionLabel(material || { tipo: "fonte" }), url: materialUrl },
     ],
-    ["practice", "3", "Praticar", "Responder 10 questões", questionUrl],
+    ["practice", "3", "Praticar", { available: true, label: "Responder 10 questões", url: questionUrl }],
   ];
   return `<article class="card study-task">
     <div class="task-title"><div><p class="eyebrow">${entry.origin === "recovery" ? `Recuperação de ${App.formatDateBR(entry.scheduleDate)}` : "Estudo de hoje"}</p><h3>${App.esc(task.materia)} — ${App.esc(task.assunto)}</h3></div><span>${App.formatMinutes(task.tempo)}</span></div>
     ${steps
-      .map(([name, number, title, label, url]) => {
+      .map(([name, number, title, action]) => {
         const key = `${base}_${name}`;
         const done = stepDone(key);
+        const control = action.available
+          ? `<a class="btn ${done ? "btn-secondary" : ""}" ${App.linkAttrs(action.url)} data-step-key="${key}">${done ? "Concluído" : action.label}</a>`
+          : `<span class="alert alert-info" data-lesson-unavailable>${action.label}</span>`;
         return `<div class="roadmap-step ${done ? "is-done" : ""} ${firstPending === key ? "is-next" : ""}" data-step="${key}">
         <span class="step-number">${done ? "✓" : number}</span>
-        <div><h4>${title}</h4><a class="btn ${done ? "btn-secondary" : ""}" ${App.linkAttrs(url)} data-step-key="${key}">${done ? "Concluído" : label}</a></div>
+        <div><h4>${title}</h4>${control}</div>
       </div>`;
       })
       .join("")}
@@ -537,7 +539,8 @@ function renderSubjectCard(subject, group, lessons, materials, progress) {
     .sort((a, b) => b.date.localeCompare(a.date))[0];
   const materialUrl = `biblioteca.html?materia=${encodeURIComponent(subject.nome)}`;
   const questionUrl = `questoes.html?materia=${encodeURIComponent(subject.nome)}`;
-  return `<article class="subject-card" style="--subject-color: ${App.esc(subject.cor || "#1e4d7b")}"><p class="subject-group-label">${App.esc(group)}</p><h3>${App.esc(subject.nome)}</h3><div class="topic-list">${(subject.assuntos || []).map((topic) => `<span class="badge badge-muted">${App.esc(topic)}</span>`).join("")}</div><div class="subject-stats">${statCardMini(subjectLessons.length, "aulas", `biblioteca.html?tipo=aulas&materia=${encodeURIComponent(subject.nome)}`)}${statCardMini(subjectMaterials.length, `fontes (${realPdfs} PDF)`, materialUrl)}${statCardMini(quiz.answered || 0, "questões", questionUrl)}${statCardMini(`${accuracy}%`, "acertos", questionUrl)}</div><p class="muted">Último estudo: <strong>${lastSession ? App.formatDateBR(lastSession.date) : "ainda não estudada"}</strong></p><div class="actions"><a class="btn btn-sm" href="${materialUrl}">Ver materiais</a><a class="btn btn-sm btn-accent" href="${questionUrl}">Fazer questões</a></div></article>`;
+  const availableLessons = subjectLessons.filter((lesson) => App.lessonAction(lesson).available).length;
+  return `<article class="subject-card" style="--subject-color: ${App.esc(subject.cor || "#1e4d7b")}"><p class="subject-group-label">${App.esc(group)}</p><h3>${App.esc(subject.nome)}</h3><div class="topic-list">${(subject.assuntos || []).map((topic) => `<span class="badge badge-muted">${App.esc(topic)}</span>`).join("")}</div><div class="subject-stats">${statCardMini(availableLessons, "videoaulas", `biblioteca.html?tipo=aulas&materia=${encodeURIComponent(subject.nome)}`)}${statCardMini(subjectMaterials.length, `fontes (${realPdfs} PDF)`, materialUrl)}${statCardMini(quiz.answered || 0, "questões", questionUrl)}${statCardMini(`${accuracy}%`, "acertos", questionUrl)}</div>${availableLessons ? "" : '<p class="alert alert-info" data-lesson-unavailable>Videoaula ainda não disponível</p>'}<p class="muted">Último estudo: <strong>${lastSession ? App.formatDateBR(lastSession.date) : "ainda não estudada"}</strong></p><div class="actions"><a class="btn btn-sm" href="${materialUrl}">Ver materiais</a><a class="btn btn-sm btn-accent" href="${questionUrl}">Fazer questões</a></div></article>`;
 }
 
 function statCardMini(value, label, href) {

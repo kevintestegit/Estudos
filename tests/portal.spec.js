@@ -160,9 +160,7 @@ test("sessão antiga sem conclusão aparece como dia parcial", async ({
     ),
   );
   await openClean(page, "/hoje.html");
-  await expect(page.locator("#app-root")).toContainText(
-    "Você estudou 35 minutos",
-  );
+  await expect(page.locator("#app-root")).toContainText("35 minutos já estudados");
   const status = await page.evaluate(
     () =>
       JSON.parse(localStorage.getItem("portal-estudos-v1")).dayStatus[
@@ -196,7 +194,7 @@ test("recuperação registra data real e data do cronograma separadamente", asyn
   const session = await page.evaluate(() =>
     JSON.parse(localStorage.getItem("portal-estudos-v1")).studySessions.at(-1),
   );
-  expect(session.date).toBe("2026-07-13");
+  expect(session.date).toBe("2026-07-14");
   expect(session.dayKey).toBe("2026-07-06");
   expect(session.origin).toBe("recovery");
 });
@@ -242,7 +240,7 @@ test("exportação de backup registra a última cópia", async ({ page }) => {
   const lastBackupAt = await page.evaluate(
     () => JSON.parse(localStorage.getItem("portal-estudos-v1")).lastBackupAt,
   );
-  expect(lastBackupAt).toMatch(/^2026-07-13/);
+  expect(lastBackupAt).toMatch(/^2026-07-14/);
 });
 
 test("migração preserva progresso da versão anterior", async ({ page }) => {
@@ -300,7 +298,7 @@ test("concluir recuperação não conclui o dia atual", async ({ page }) => {
         studySessions: [
           {
             id: "recovery-session",
-            date: "2026-07-13",
+            date: "2026-07-14",
             dayKey: "2026-07-06",
             minutes: 20,
             origin: "recovery",
@@ -317,7 +315,7 @@ test("concluir recuperação não conclui o dia atual", async ({ page }) => {
     () => JSON.parse(localStorage.getItem("portal-estudos-v1")).dayStatus,
   );
   expect(status["2026-07-06"]).toBe("recuperado");
-  expect(status["2026-07-13"]).not.toBe("concluido");
+  expect(status["2026-07-14"]).not.toBe("concluido");
 });
 
 test("mesclar preserva tarefas atuais e recuperadas", async ({ page }) => {
@@ -347,14 +345,14 @@ test("concluir estudo normal marca somente o dia atual", async ({ page }) => {
       "portal-estudos-v1",
       JSON.stringify({
         schemaVersion: 4,
-        startDate: "2026-07-13",
+        startDate: "2026-07-14",
         studyDays: [1, 2, 3, 4, 5, 6],
         dayStatus: {},
         studySessions: [
           {
             id: "today-session",
-            date: "2026-07-13",
-            dayKey: "2026-07-13",
+            date: "2026-07-14",
+            dayKey: "2026-07-14",
             minutes: 30,
           },
         ],
@@ -367,7 +365,7 @@ test("concluir estudo normal marca somente o dia atual", async ({ page }) => {
   const status = await page.evaluate(
     () =>
       JSON.parse(localStorage.getItem("portal-estudos-v1")).dayStatus[
-        "2026-07-13"
+        "2026-07-14"
       ],
   );
   expect(status).toBe("concluido");
@@ -448,7 +446,7 @@ test("Service Worker remove o cache da versão anterior", async ({ page }) => {
   await openClean(page, "/hoje.html");
   const cacheNames = await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
-    await caches.open("portal-estudos-v10");
+    await caches.open("portal-estudos-v11");
     const script = new URL("service-worker.js?upgrade-test=1", location.href);
     const registration = await navigator.serviceWorker.register(script, {
       scope: "./",
@@ -463,6 +461,46 @@ test("Service Worker remove o cache da versão anterior", async ({ page }) => {
     }
     return caches.keys();
   });
-  expect(cacheNames).toContain("portal-estudos-v11");
-  expect(cacheNames).not.toContain("portal-estudos-v10");
+  expect(cacheNames).toContain("portal-estudos-v12");
+  expect(cacheNames).not.toContain("portal-estudos-v11");
+});
+
+for (const viewport of [{ width: 1280, height: 800 }, { width: 390, height: 844 }]) {
+  for (const path of ["hoje.html", "biblioteca.html", "materias.html"]) {
+    test(`${path} não oferece pesquisa ou link para aula indisponível em ${viewport.width}px`, async ({ page }) => {
+      await page.setViewportSize(viewport);
+      if (path === "hoje.html") await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: {} })));
+      await openClean(page, `/${path}`);
+      await expect(page.locator('a[href*="youtube.com/results"]')).toHaveCount(0);
+      await expect(page.locator('[data-lesson-unavailable]').first()).toBeVisible();
+      await expect(page.locator('[data-lesson-unavailable] a')).toHaveCount(0);
+    });
+  }
+}
+
+test("Biblioteca usa exatamente a URL cadastrada para vídeo e playlist", async ({ page }) => {
+  const lessons = [
+    { id: "video", titulo: "Organização da Administração", materia: "Direito Administrativo", tipo: "video", url: "https://www.youtube.com/watch?v=abcdefghijk", videoId: "abcdefghijk", canal: "Escola", tituloYoutube: "Organização da Administração", verificadoEm: "2026-07-14" },
+    { id: "playlist", titulo: "Atos administrativos", materia: "Direito Administrativo", tipo: "playlist", url: "https://www.youtube.com/playlist?list=PLabcdefghijk", playlistId: "PLabcdefghijk", canal: "Escola", tituloYoutube: "Atos administrativos", notas: "A playlist cobre atos administrativos.", verificadoEm: "2026-07-14" },
+  ];
+  await page.route("**/data/aulas.json", (route) => route.fulfill({ json: { aulas: lessons } }));
+  await openClean(page, "/biblioteca.html?tipo=aulas");
+  const video = page.getByRole("link", { name: "Assistir videoaula" });
+  const playlist = page.getByRole("link", { name: "Abrir playlist" });
+  await expect(video).toHaveAttribute("href", lessons[0].url);
+  await expect(playlist).toHaveAttribute("href", lessons[1].url);
+  for (const link of [video, playlist]) {
+    await expect(link).toHaveAttribute("target", "_blank");
+    await expect(link).toHaveAttribute("rel", "noopener noreferrer");
+  }
+});
+
+test("aula indisponível não conclui a etapa de aprendizado", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: {} })));
+  await openClean(page, "/hoje.html");
+  const warning = page.locator('[data-lesson-unavailable]').first();
+  await expect(warning).toHaveText("Videoaula ainda não disponível");
+  await warning.click();
+  const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("portal-estudos-v1")));
+  expect(Object.keys(progress.taskStatus || {})).toHaveLength(0);
 });

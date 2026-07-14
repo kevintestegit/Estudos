@@ -1,104 +1,178 @@
 #!/usr/bin/env node
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const dataDir = path.join(root, 'data');
-const jsDir = path.join(root, 'assets/js');
-const htmlDir = root;
-const internalOnly = process.argv.includes('--internal-only');
-const INDIR = path.join(root, 'reports');
-const OUTPUT = path.join(INDIR, 'link-report.json');
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const TODAY = new Date().toISOString().slice(0, 10);
+const SEARCH = /youtube\.com\/results|[?&]search_query=/i;
+const ID = /^[\w-]{11}$/;
+const PLAYLIST_ID = /^[\w-]{10,}$/;
+const normalize = (value) => String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+const words = (value) => normalize(value).split(" ").filter((word) => word.length > 3 && !["aula", "curso", "concurso", "direito", "nocoes"].includes(word));
 
-let ok = 0, warn = 0, fail = 0;
-const log = (s, msg) => { console.log(`${s} ${msg}`); if (s === 'FAIL') fail++; else if (s === 'WARN') warn++; else ok++; };
-const results = [];
-
-function load(name) {
-  try { return JSON.parse(fs.readFileSync(path.join(dataDir, name), 'utf8')); }
-  catch { return null; }
-}
-
-// 1. check HTML pages exist
-const pages = ['index.html','hoje.html','cronograma.html','edital.html','biblioteca.html','materias.html',
-  'questoes.html','flashcards.html','simulados.html','provas.html','caderno-erros.html','progresso.html','backup.html','offline.html'];
-pages.forEach(p => {
-  const exists = fs.existsSync(path.join(htmlDir, p));
-  log(exists ? 'OK' : 'FAIL', `HTML ${p}`);
-  results.push({ type: 'html', file: p, status: exists ? 'ok' : 'missing' });
-});
-
-// 2. check JS files
-['calendar.js','storage.js','app.js','dashboard.js','cronograma.js','quiz.js','backup.js','biblioteca.js','flashcards.js','edital.js'].forEach(f => {
-  const exists = fs.existsSync(path.join(jsDir, f));
-  log(exists ? 'OK' : 'FAIL', `JS ${f}`);
-  results.push({ type: 'js', file: f, status: exists ? 'ok' : 'missing' });
-});
-
-// 3. JSON validity
-fs.readdirSync(dataDir).filter(f => f.endsWith('.json')).forEach(f => {
+export function extractIds(url) {
   try {
-    const d = JSON.parse(fs.readFileSync(path.join(dataDir, f), 'utf8'));
-    log('OK', `JSON ${f}`);
-    results.push({ type: 'json', file: f, status: 'ok' });
-  } catch (e) {
-    log('FAIL', `JSON ${f}: ${e.message}`);
-    results.push({ type: 'json', file: f, status: 'invalid', error: e.message });
+    const parsed = new URL(url);
+    return { videoId: parsed.searchParams.get("v"), playlistId: parsed.searchParams.get("list") };
+  } catch {
+    return { videoId: null, playlistId: null };
   }
-});
-
-// 4. cross-references
-const aulas = load('aulas.json')?.aulas || [];
-const pdfs = load('pdfs.json')?.pdfs || [];
-const crono = load('cronograma.json')?.days || [];
-const inss = load('questoes-inss.json')?.questoes || [];
-const prf = load('questoes-prf.json')?.questoes || [];
-const provas = load('provas.json')?.provas || [];
-const sims = load('simulados.json')?.simulados || [];
-const materiais = load('materiais.json')?.materiais || [];
-const textos = load('textos.json')?.textos || {};
-
-const aulaIds = new Set(aulas.map(a => a.id));
-const pdfIds = new Set(pdfs.map(p => p.id));
-const qIds = new Set([...inss, ...prf].map(q => q.id));
-const textoIds = new Set(Object.keys(textos));
-
-crono.forEach((day, di) => (day.tasks || []).forEach(t => {
-  if (t.aulaId && !aulaIds.has(t.aulaId)) { log('FAIL', `Dia ${di}: aulaId ${t.aulaId} inexistente`); results.push({ type: 'ref', detail: `crono day ${di}: aula ${t.aulaId}`, status: 'missing' }); }
-  if (t.pdfId && !pdfIds.has(t.pdfId)) { log('FAIL', `Dia ${di}: pdfId ${t.pdfId} inexistente`); results.push({ type: 'ref', detail: `crono day ${di}: pdf ${t.pdfId}`, status: 'missing' }); }
-}));
-
-[inss, prf].forEach((arr, i) => {
-  const src = i === 0 ? 'INSS' : 'PRF';
-  arr.forEach(q => {
-    if (q.textoId && !textoIds.has(q.textoId)) { log('FAIL', `${src} ${q.id}: textoId ${q.textoId} inexistente`); results.push({ type: 'ref', detail: `${q.id}: texto ${q.textoId}`, status: 'missing' }); }
-    if (!q.gabarito && q.gabarito !== 0) { log('FAIL', `${src} ${q.id}: sem gabarito`); results.push({ type: 'question', detail: `${q.id}`, issue: 'no-gabarito' }); }
-  });
-});
-
-sims.forEach(s => {
-  (s.questaoIds || []).forEach(qid => {
-    if (!qIds.has(qid)) { log('FAIL', `Sim ${s.id}: q ${qid} inexistente`); results.push({ type: 'ref', detail: `sim ${s.id}: ${qid}`, status: 'missing' }); }
-  });
-});
-
-materiais.forEach(m => {
-  if (!m.fonte) { log('WARN', `Material ${m.id}: sem fonte`); results.push({ type: 'material', detail: m.id, issue: 'no-fonte' }); }
-  if (!m.titulo) { log('WARN', `Material ${m.id}: sem título`); results.push({ type: 'material', detail: m.id, issue: 'no-titulo' }); }
-});
-
-// 5. external URLs (HEAD only if not internal-only)
-if (!internalOnly) {
-  const urls = [...new Set([...materiais, ...aulas, ...pdfs].map(x => x.url).filter(x => x && x.startsWith('http')))];
-  console.log(`\nURLs externas: ${urls.length} (HEAD check, timeout 5s)`);
-  urls.forEach(u => {
-    results.push({ type: 'url', url: u, status: 'not_verified' });
-  });
 }
 
-fs.mkdirSync(INDIR, { recursive: true });
-fs.writeFileSync(OUTPUT, JSON.stringify(results, null, 2));
-console.log(`\nLink check: ${ok} OK, ${warn} WARN, ${fail} FAIL`);
-console.log(`Relatório: ${OUTPUT}`);
-process.exit(fail ? 1 : 0);
+export const linkScope = (url) => /^https?:\/\//i.test(url || "") ? "externo" : url ? "interno" : "ausente";
+
+function topicCompatible(lesson, externalTitle) {
+  const actual = new Set(words(externalTitle));
+  return words(lesson.titulo).some((word) => actual.has(word));
+}
+
+async function requestMetadata(url, fetchImpl, timeoutMs) {
+  const started = Date.now();
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetchImpl(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`, { method: "GET", redirect: "follow", signal: controller.signal });
+    const text = await response.text();
+    const blocked = /FortiGate|Application Blocked|captcha|consent/i.test(text);
+    let body = {};
+    try { body = JSON.parse(text); } catch {}
+    return { response, body, blocked, durationMs: Date.now() - started };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+export async function validateLesson(lesson, options = {}) {
+  const fetchImpl = options.fetch || globalThis.fetch;
+  const started = Date.now();
+  const base = {
+    id: lesson.id,
+    materia: lesson.materia,
+    assunto: lesson.titulo,
+    url: lesson.url,
+    tipo: lesson.tipo,
+    escopo: linkScope(lesson.url),
+    verificadoEm: TODAY,
+  };
+  if (lesson.yt && lesson.yt !== lesson.url) return { ...base, status: "url_invalida", motivo: "Divergência entre url e yt." };
+  if (lesson.tipo === "indisponivel") return lesson.url === null
+    ? { ...base, status: "indisponivel", motivo: lesson.notas || "Videoaula confiável ainda não selecionada." }
+    : { ...base, status: "url_invalida", motivo: "Registro indisponível deve usar url null." };
+  if (SEARCH.test(lesson.url || "")) return { ...base, status: "pesquisa_generica", motivo: "Página de pesquisa não é videoaula." };
+  if (!['video', 'playlist'].includes(lesson.tipo) || !lesson.url) return { ...base, status: "url_invalida", motivo: "Tipo ou URL ausente." };
+
+  const extracted = extractIds(lesson.url);
+  const expected = lesson.tipo === "video" ? lesson.videoId : lesson.playlistId;
+  const actual = lesson.tipo === "video" ? extracted.videoId : extracted.playlistId;
+  const validId = lesson.tipo === "video" ? ID.test(actual || "") : PLAYLIST_ID.test(actual || "");
+  if (!validId || actual !== expected) return { ...base, status: lesson.tipo === "playlist" ? "playlist_invalida" : "url_invalida", idExtraido: actual, motivo: "ID ausente, inválido ou divergente da URL." };
+  if (actual === "dQw4w9WgXcQ") return { ...base, status: "titulo_incompativel", idExtraido: actual, motivo: "Vídeo conhecido incompatível e expressamente proibido." };
+
+  try {
+    const { response, body, blocked, durationMs } = await requestMetadata(lesson.url, fetchImpl, options.timeoutMs || 10000);
+    const evidence = { httpStatus: response.status, urlFinal: response.url || lesson.url, durationMs, idExtraido: actual };
+    if (blocked) return { ...base, ...evidence, status: "erro_de_rede", motivo: "Bloqueio de rede impediu a consulta ao YouTube.", evidencias: ["Resposta de bloqueio institucional"] };
+    if (!response.ok) {
+      const status = response.status === 401 || response.status === 403 ? "privado" : response.status === 404 ? "removido" : "nao_verificado";
+      return { ...base, ...evidence, status, motivo: `oEmbed respondeu HTTP ${response.status}.` };
+    }
+    if (!body.title || !body.author_name) return { ...base, ...evidence, status: "nao_verificado", motivo: "Resposta externa sem título ou canal." };
+    const metadata = { tituloYoutube: body.title, canal: body.author_name, evidencias: ["YouTube oEmbed retornou title e author_name"] };
+    if (normalize(body.title) !== normalize(lesson.tituloYoutube) || !topicCompatible(lesson, body.title)) return { ...base, ...evidence, ...metadata, status: "titulo_incompativel", motivo: "Título externo diverge do cadastro ou não comprova o assunto." };
+    if (normalize(body.author_name) !== normalize(lesson.canal)) return { ...base, ...evidence, ...metadata, status: "canal_incompativel", motivo: "Canal externo diverge do cadastro." };
+    return { ...base, ...evidence, ...metadata, status: "ok", motivo: lesson.tipo === "video" ? "Vídeo disponível e metadados compatíveis." : "Playlist disponível, compatível e documentada." };
+  } catch (error) {
+    return { ...base, durationMs: Date.now() - started, status: error.name === "AbortError" ? "timeout" : "erro_de_rede", erroTecnico: error.message, motivo: error.name === "AbortError" ? "Tempo limite excedido." : "Falha técnica na requisição externa." };
+  }
+}
+
+export async function validateAll(lessons, options = {}) {
+  const resultados = [];
+  for (const lesson of lessons) resultados.push(await validateLesson(lesson, options));
+  const groups = new Map();
+  for (const lesson of lessons.filter((item) => item.tipo === "video" || item.tipo === "playlist")) {
+    const key = lesson.videoId || lesson.playlistId;
+    if (!key) continue;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(lesson);
+  }
+  const duplicacoes = [];
+  for (const [contentId, uses] of groups) {
+    if (uses.length < 2) continue;
+    const justified = new Set(uses.map((item) => item.materia)).size === 1 && uses.every((item) => /abrange|cobre|reutiliza/i.test(item.notas || ""));
+    duplicacoes.push({ id: contentId, tipo: uses[0].tipo, quantidade: uses.length, aulas: uses.map(({ id, titulo, materia }) => ({ id, titulo, materia })), justificativa: justified ? uses.map((item) => item.notas).join(" | ") : null, classificacao: justified ? "legitima" : "suspeita" });
+    if (!justified) for (const use of uses) {
+      const index = resultados.findIndex((item) => item.id === use.id);
+      resultados[index] = { ...resultados[index], status: "duplicacao_suspeita", motivo: `Conteúdo ${contentId} reutilizado sem justificativa pedagógica.` };
+    }
+  }
+  return { geradoEm: new Date().toISOString(), resultados, duplicacoes };
+}
+
+async function main() {
+  const lessons = JSON.parse(fs.readFileSync(path.join(root, "data/aulas.json"), "utf8")).aulas;
+  const report = await validateAll(lessons);
+  const candidatesPath = path.join(root, "reports/aulas-candidates.json");
+  const candidateRecords = fs.existsSync(candidatesPath)
+    ? JSON.parse(fs.readFileSync(candidatesPath, "utf8")).candidatos
+    : [];
+  const candidates = new Map(candidateRecords.map((item) => [item.id, item.candidatoAntigo]));
+  for (let offset = 0; offset < report.resultados.length; offset += 6) {
+    await Promise.all(report.resultados.slice(offset, offset + 6).map(async (result) => {
+      const candidate = candidates.get(result.id);
+      result.candidatoAntigo = candidate || null;
+      result.urlAvaliada = candidate || result.url;
+      result.urlSubstituta = result.url && result.url !== candidate ? result.url : null;
+      result.tituloReal = result.tituloYoutube || null;
+      result.canalReal = result.canal || null;
+      if (!candidate) return;
+      const ids = extractIds(candidate);
+      const type = ids.videoId ? "video" : ids.playlistId ? "playlist" : "video";
+      result.auditoriaCandidato = await validateLesson({
+        id: result.id,
+        titulo: result.assunto,
+        materia: result.materia,
+        tipo: type,
+        url: candidate,
+        videoId: ids.videoId,
+        playlistId: ids.playlistId,
+        canal: "Candidato antigo não confiável",
+        tituloYoutube: result.assunto,
+      });
+    }));
+  }
+  const lessonsById = new Map(lessons.map((lesson) => [lesson.id, lesson]));
+  const candidateGroups = new Map();
+  for (const candidate of candidateRecords) {
+    const ids = extractIds(candidate.candidatoAntigo);
+    const contentId = ids.videoId || ids.playlistId;
+    if (!contentId) continue;
+    if (!candidateGroups.has(contentId)) candidateGroups.set(contentId, []);
+    candidateGroups.get(contentId).push(candidate.id);
+  }
+  report.duplicacoesCandidatos = [...candidateGroups]
+    .filter(([, ids]) => ids.length > 1)
+    .map(([contentId, ids]) => ({
+      id: contentId,
+      tipo: contentId.length === 11 ? "video" : "playlist",
+      quantidade: ids.length,
+      aulas: ids.map((id) => {
+        const lesson = lessonsById.get(id);
+        return { id, titulo: lesson?.titulo || null, materia: lesson?.materia || null };
+      }),
+      justificativa: null,
+      classificacao: "suspeita",
+      resolucao: "Candidato antigo removido; nenhum uso permanece publicado.",
+    }));
+  const output = path.join(root, "reports/aulas-link-report.json");
+  fs.mkdirSync(path.dirname(output), { recursive: true });
+  fs.writeFileSync(output, JSON.stringify(report, null, 2) + "\n");
+  const counts = report.resultados.reduce((all, item) => ({ ...all, [item.status]: (all[item.status] || 0) + 1 }), {});
+  console.log(JSON.stringify(counts));
+  console.log(`Relatório: ${output}`);
+  const failure = report.resultados.some((item) => !["ok", "indisponivel"].includes(item.status) || ["timeout", "erro_de_rede", "nao_verificado"].includes(item.auditoriaCandidato?.status)) || report.duplicacoes.some((item) => item.classificacao === "suspeita");
+  process.exitCode = failure ? 1 : 0;
+}
+
+if (import.meta.url === pathToFileURL(process.argv[1] || "").href) await main();

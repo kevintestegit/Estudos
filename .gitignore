@@ -2,5 +2,7 @@
 node_modules/
 test-results/
 playwright-report/
-reports/
+reports/*
+!reports/aulas-candidates.json
+!reports/aulas-link-report.json
 *.log

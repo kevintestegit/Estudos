@@ -1,54 +1,68 @@
-# QA_REPORT — 2026-07-13
+# QA_REPORT — 2026-07-14
 
 ## Resultado
 
-O portal permanece estático, sem backend ou banco remoto. A persistência usa somente `localStorage` na chave `portal-estudos-v1`, com migração automática para o schema 4.
+A biblioteca contém 69 registros normalizados. Nenhum endereço antigo pôde ser autenticado porque o acesso ao YouTube foi bloqueado pela rede institucional; portanto, nenhum vídeo ou playlist foi publicado como disponível.
 
-## Páginas verificadas no navegador (13/13)
+| Métrica | Quantidade |
+|---|---:|
+| Total de aulas | 69 |
+| Vídeos diretos aprovados | 0 |
+| Playlists aprovadas | 0 |
+| Indisponíveis | 69 |
+| Links efetivamente verificados e aprovados | 0 |
+| Candidatos antigos recusados para publicação | 69 |
+| Rejeitados conclusivamente | 4 |
+| Não verificados por erro de rede | 65 |
+| Substituições realizadas | 0 |
+| Timeouts | 0 |
+| Duplicações legítimas | 0 |
+| Grupos de duplicação suspeita antigos corrigidos | 14 (46 usos) |
+| Duplicações suspeitas restantes | 0 |
 
-`index.html`, `hoje.html`, `cronograma.html`, `edital.html`, `biblioteca.html`, `materias.html`, `questoes.html`, `flashcards.html`, `simulados.html`, `provas.html`, `caderno-erros.html`, `progresso.html` e `backup.html` abriram sem exceção de página, erro de console ou mensagem de falha de carregamento.
+Os quatro candidatos conclusivamente rejeitados são duas ocorrências de `dQw4w9WgXcQ` (`titulo_incompativel`) e duas páginas do Planalto cadastradas como videoaula (`url_invalida`). Os demais 65 candidatos retornaram `erro_de_rede` e não foram aprovados.
 
-## Cobertura implementada
+## Auditoria por aula
 
-- Primeiro acesso e normalização da data inicial.
-- Calendário útil, descanso, datas futuras, viradas de mês/ano e ano bissexto.
-- Cronômetro, registro manual, conclusão normal, recuperação e mesclagem sem misturar datas.
-- Dias parciais quando há atividade real sem conclusão.
-- Questões corretas, incorretas e em branco no modo prova.
-- Configuração de pontuação Cebraspe.
-- Biblioteca sem filtro, por matéria, por tipo, busca, limpeza e filtros legados úteis.
-- Dashboard, Matérias e roteiro sequencial da tela Hoje.
-- Exportação, importação validada e migração de backup.
-- Menu móvel, ausência de rolagem horizontal e foco de modal.
-- Atualização do Service Worker do cache v10 para v11.
+O arquivo `reports/aulas-link-report.json` registra, para cada uma das 69 aulas: ID interno, matéria, assunto, URL avaliada, status final, título e canal reais quando disponíveis, tipo, data, motivo, candidato antigo, URL substituta, escopo e auditoria técnica do candidato. Ele também relaciona os 14 grupos de duplicação suspeita do cadastro anterior, abrangendo 46 usos que foram removidos. `reports/aulas-candidates.json` preserva somente os candidatos anteriores e não é consumido pela aplicação.
 
-## Testes executados
+Todos os registros finais usam `tipo: indisponivel`, `url: null`, data `2026-07-14` e a nota `Videoaula confiável ainda não selecionada.`
 
-```text
-node scripts/validate.mjs                         — OK
-node scripts/test-calendar.mjs                    — 27 casos OK
-node scripts/check-links.mjs --internal-only      — 40 OK, 0 WARN, 0 FAIL
-node --check assets/js/*.js                       — OK em todos os arquivos
-npm run test:e2e                                  — 35 testes de navegador OK
-```
+## Validação externa
 
-Smoke em Chromium móvel com `python3 -m http.server 3050 --directory .`:
+Foram feitas requisições reais ao endpoint oEmbed do YouTube. O Node retornou `fetch failed` por falha na cadeia TLS. O diagnóstico com `curl` confirmou certificado local não confiável (`curl: (60)`) e, com a desativação de TLS usada somente para diagnóstico, o FortiGate respondeu HTTP 403 com `Application Blocked` para a categoria YouTube. A resposta bloqueada não foi usada como comprovação de nenhum conteúdo.
 
-```text
-hoje.html        — HTTP 200, 0 erros, sem overflow
-biblioteca.html  — HTTP 200, 0 erros, sem overflow
-materias.html    — HTTP 200, 0 erros, sem overflow
-questoes.html    — HTTP 200, 0 erros, sem overflow
-cronograma.html  — HTTP 200, 0 erros, sem overflow
-progresso.html   — HTTP 200, 0 erros, sem overflow
-```
+Nenhum canal, professor ou título foi registrado porque nenhum metadado pôde ser autenticado. Não houve pesquisa nem seleção de substitutos confiáveis sob esse bloqueio.
 
-## Pendências editoriais reais
+## Interface e cache
 
-- Resumos e PDFs que não existem não foram inventados; permanecem identificados como indisponíveis e apontam para a Biblioteca ou para fonte oficial. Produzir esses arquivos exige trabalho editorial.
-- Videoaulas diretas sem metadados confirmáveis foram substituídas por busca contextual de matéria e assunto. Escolher e validar vídeos específicos exige revisão humana de conteúdo externo.
-- Gabaritos e resoluções existentes passaram nas validações estruturais, mas a correção pedagógica integral do banco de questões ainda depende de especialista nas disciplinas.
+- `url` é a única fonte da interface; `yt` foi removido.
+- Vídeos e playlists, quando futuramente aprovados, usam a URL exata, nova aba e `rel="noopener noreferrer"`.
+- Indisponíveis exibem `Videoaula ainda não disponível`, sem `<a>` e sem conclusão por clique.
+- Hoje, Biblioteca e Matérias foram testados em 1280×800 e 390×844.
+- O Service Worker usa `portal-estudos-v12`, remove caches anteriores e mantém navegação e `/data/` em network-first.
+
+## Comandos executados
+
+| Comando | Código | Resultado | Observações |
+|---|---:|---|---|
+| `node scripts/validate.mjs` | 0 | aprovado | Estrutura, 69 aulas, referências, ausência de pesquisas/`yt`, IDs e cache v12 |
+| `node scripts/test-calendar.mjs` | 0 | aprovado | 27 casos aprovados |
+| `node scripts/check-links.mjs` | 1 | limitado pela rede | 69 indisponíveis; candidatos: 65 `erro_de_rede`, 2 `titulo_incompativel`, 2 `url_invalida` |
+| `node --test tests/check-links.test.mjs` | 0 | aprovado | 7 aprovados, 0 falhos, 0 ignorados; usa `fetch` mockado e não comprova links reais |
+| `node --check assets/js/app.js` | 0 | aprovado | Sem erro de sintaxe |
+| `node --check assets/js/dashboard.js` | 0 | aprovado | Sem erro de sintaxe |
+| `node --check assets/js/biblioteca.js` | 0 | aprovado | Sem erro de sintaxe |
+| `node --check assets/js/quiz.js` | 0 | aprovado | Sem erro de sintaxe |
+| `npx playwright test` | 0 | aprovado | 43 aprovados, 0 falhos, 0 ignorados; monitora console, respostas e `pageerror` |
+
+## Testes não concluídos
+
+| Teste | Registros afetados | Motivo | Estado atribuído | Impacto |
+|---|---:|---|---|---|
+| Confirmação externa de disponibilidade, título, canal e compatibilidade | 65 | YouTube bloqueado pelo FortiGate e cadeia TLS local inválida | `indisponivel`; auditoria do candidato em `erro_de_rede` | Nenhum desses links pôde ser publicado |
+| Pesquisa de substitutos no YouTube | 69 | Mesmo bloqueio institucional | `indisponivel` | 0 substituições; exige nova execução em rede que permita YouTube |
 
 ## Conclusão
 
-As validações automatizadas e o smoke local não encontraram erro de execução conhecido. O relatório registra apenas funcionalidades cobertas por teste ou validação.
+As correções estruturais, de interface, testes e cache estão validadas. A missão não é declarada integralmente concluída porque 65 candidatos e a pesquisa de substitutos não puderam ser confirmados externamente. A biblioteca final permanece segura: não contém pesquisas, links inventados nem conteúdo não verificado publicado como disponível.

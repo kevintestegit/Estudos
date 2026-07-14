@@ -45,6 +45,12 @@ Ficam em `data/`:
 - `questoes-inss.json` / `questoes-prf.json`
 - `materiais.json`, `aulas.json`, `pdfs.json`, `textos.json`, etc.
 
+### Videoaulas
+
+`data/aulas.json` usa `url` como única fonte da interface. Cada registro é `video`, `playlist` ou `indisponivel`; pesquisas do YouTube e fallbacks automáticos são proibidos. Conteúdo sem disponibilidade, título, canal e compatibilidade temática comprovados permanece com `url: null`.
+
+O relatório individual fica em `reports/aulas-link-report.json`. `reports/aulas-candidates.json` preserva os endereços antigos somente para auditoria: eles não são fontes confiáveis e nunca são carregados pela aplicação.
+
 ## Backup
 
 1. Abra **Backup**
@@ -58,10 +64,13 @@ A migração de schema é automática e **não zera** o progresso.
 ```bash
 node scripts/validate.mjs
 node scripts/test-calendar.mjs
-node scripts/check-links.mjs --internal-only
+node scripts/check-links.mjs
+node --test tests/check-links.test.mjs
 for file in assets/js/*.js; do node --check "$file" || exit 1; done
 npm run test:e2e
 ```
+
+`check-links.mjs` faz requisições GET externas reais. Testes com `fetch` mockado verificam somente a lógica do validador e não comprovam links. Bloqueios, timeout ou falhas de rede mantêm o conteúdo sem aprovação e produzem código de saída diferente de zero.
 
 ## GitHub Pages
 
