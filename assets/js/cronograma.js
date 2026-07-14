@@ -1,6 +1,103 @@
-async function initCronograma(){App.initShell('cronograma');try{const{cronograma}=await App.loadAll();renderCronograma(cronograma)}catch(e){document.getElementById('app-root').innerHTML=`<div class="alert alert-danger">Erro ao carregar cronograma. ${App.esc(e.message||e)}</div>`}}
-function studyDateAt(start,index,p){let d=start,n=0;while(n<index){d=addDaysISO(d,1);if(isStudyDate(d,p))n++}return d}
-function renderCronograma(c){const p=Storage.get(),root=document.getElementById('app-root');if(!p.startDate){root.innerHTML=App.planSetupHtml('Configurar início do cronograma');App.bindPlanSetup(()=>renderCronograma(c));return}const plan=App.getTodayPlan(c,p),byWeek={};(c.days||[]).forEach((d,i)=>{(byWeek[d.semana]??=[]).push({...d,index:i})});root.innerHTML=`<div class="card mb-1"><h2>${App.esc(c.titulo)}</h2><p class="muted">${App.esc(c.descricao)}</p><p>Início: <strong>${App.formatDateBR(p.startDate)}</strong> · Dias de estudo: <strong>${(p.studyDays||[]).map(x=>['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'][x]).join(', ')}</strong></p><div class="grid grid-2"><div class="form-row"><label>Redefinir data de início</label><input id="start-date" type="date" value="${p.startDate}"></div><div class="form-row"><label>Dias de estudo</label><div class="actions">${[0,1,2,3,4,5,6].map(x=>`<label><input type="checkbox" data-day value="${x}" ${(p.studyDays||[]).includes(x)?'checked':''}> ${['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'][x]}</label>`).join('')}</div></div></div><button class="btn btn-secondary" id="save-plan">Salvar configuração</button></div><div id="weeks"></div>`;
-document.getElementById('save-plan').onclick=async()=>{const startDate=document.getElementById('start-date').value,studyDays=[...document.querySelectorAll('[data-day]:checked')].map(e=>Number(e.value));if(!startDate||!studyDays.length)return alert('Informe data e ao menos um dia.');if(await Modal.waitConfirm('Alterar o início pode mudar as datas do cronograma. Continuar?')){Storage.update(d=>{d.startDate=startDate;d.studyDays=studyDays});renderCronograma(c)}};
-const weeks=document.getElementById('weeks');weeks.innerHTML=Object.keys(byWeek).map(Number).sort((a,b)=>a-b).map(w=>`<div class="week-block card"><h3 class="week-title">Semana ${w}</h3>${byWeek[w].map(d=>{const date=studyDateAt(p.startDate,d.index,p),st=p.dayStatus[date]||(date<todayISO()?'faltou':'pendente'),badge=['concluido','recuperado'].includes(st)?'badge-ok':['faltou','atrasada'].includes(st)?'badge-danger':st==='em_andamento'?'badge-warn':'badge-muted';return`<div class="day-row"><div class="day-date">${App.formatDateBR(date)}<br><span class="muted">D${d.dia}</span></div><div><strong>${App.esc(d.titulo)}</strong><div class="task-meta mt-1"><span class="badge ${d.foco==='inss'?'badge-info':d.foco==='prf'?'badge-warn':'badge-muted'}">${App.esc(d.foco)}</span>${(d.tasks||[]).map(t=>`<span>${App.esc(t.materia)} (${t.tempo}min)</span>`).join('')}</div></div><div><span class="badge ${badge}">${App.statusLabel(st)}</span><div class="actions"><button class="btn btn-sm btn-secondary" data-date="${date}" data-st="em_andamento">Andamento</button><button class="btn btn-sm btn-danger" data-date="${date}" data-st="faltou">Faltou</button></div></div></div>`}).join('')}</div>`).join('');weeks.querySelectorAll('[data-date]').forEach(b=>b.onclick=()=>{Storage.setDayStatus(b.dataset.date,b.dataset.st);renderCronograma(c)})}
-window.initCronograma=initCronograma;
+async function initCronograma() {
+  App.initShell("cronograma");
+  try {
+    const { cronograma } = await App.loadAll();
+    renderCronograma(cronograma);
+  } catch (error) {
+    document.getElementById("app-root").innerHTML =
+      `<div class="alert alert-danger">Erro ao carregar cronograma. ${App.esc(error.message || error)}</div>`;
+  }
+}
+
+function renderCronograma(cronograma) {
+  const progress = Storage.get();
+  const root = document.getElementById("app-root");
+  if (!progress.startDate) {
+    root.innerHTML = App.planSetupHtml("Configurar início do cronograma");
+    App.bindPlanSetup(() => renderCronograma(cronograma));
+    return;
+  }
+
+  const byWeek = {};
+  (cronograma.days || []).forEach((day, index) =>
+    (byWeek[day.semana] ||= []).push({ ...day, index }),
+  );
+  root.innerHTML = `
+    <section class="card mb-1">
+      <h2>${App.esc(cronograma.titulo)}</h2>
+      <p class="muted">${App.esc(cronograma.descricao)}</p>
+      <p>Início: <strong>${App.formatDateBR(progress.startDate)}</strong></p>
+      <div class="grid grid-2">
+        <div class="form-row"><label for="start-date">Redefinir data de início</label><input id="start-date" type="date" value="${progress.startDate}"><p class="alert alert-info hidden" id="start-date-adjustment"></p></div>
+        <fieldset class="card"><legend><strong>Dias de estudo</strong></legend><div class="actions">${[0, 1, 2, 3, 4, 5, 6].map((day) => `<label class="check-label"><input type="checkbox" data-day value="${day}" ${progress.studyDays.includes(day) ? "checked" : ""}> ${["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"][day]}</label>`).join("")}</div></fieldset>
+      </div>
+      <button class="btn btn-secondary" type="button" id="save-plan">Salvar configuração</button>
+    </section>
+    <div id="weeks"></div>`;
+
+  const startInput = document.getElementById("start-date");
+  const dayInputs = [...document.querySelectorAll("[data-day]")];
+  const notice = document.getElementById("start-date-adjustment");
+  const selectedDays = () =>
+    dayInputs
+      .filter((input) => input.checked)
+      .map((input) => Number(input.value));
+  const paintNotice = () => {
+    const normalized = normalizeStartDate(startInput.value, selectedDays());
+    notice.classList.toggle(
+      "hidden",
+      !startInput.value || normalized === startInput.value,
+    );
+    notice.textContent =
+      normalized !== startInput.value
+        ? `A data escolhida não é um dia de estudo. O plano começará em ${App.formatDateBR(normalized)}.`
+        : "";
+  };
+  startInput.onchange = paintNotice;
+  dayInputs.forEach((input) => {
+    input.onchange = paintNotice;
+  });
+  paintNotice();
+
+  document.getElementById("save-plan").onclick = async () => {
+    if (!startInput.value || !selectedDays().length)
+      return alert("Informe data e ao menos um dia.");
+    if (
+      !(await Modal.waitConfirm(
+        "Alterar o início pode mudar as datas do cronograma. Continuar?",
+      ))
+    )
+      return;
+    Storage.startPlan({
+      startDate: startInput.value,
+      studyDays: selectedDays(),
+    });
+    renderCronograma(cronograma);
+  };
+
+  document.getElementById("weeks").innerHTML = Object.keys(byWeek)
+    .map(Number)
+    .sort((a, b) => a - b)
+    .map(
+      (week) => `
+    <section class="week-block card"><h3 class="week-title">Semana ${week}</h3>${byWeek[
+      week
+    ]
+      .map((day) => {
+        const date = studyDateAt(progress.startDate, day.index, progress);
+        const status = getDayStatus(date, progress);
+        const badge = ["concluido", "recuperado"].includes(status)
+          ? "badge-ok"
+          : status === "faltou"
+            ? "badge-danger"
+            : ["parcial", "em_andamento"].includes(status)
+              ? "badge-warn"
+              : "badge-muted";
+        return `<div class="day-row"><div class="day-date">${App.formatDateBR(date)}<br><span class="muted">Dia ${day.dia}</span></div><div><strong>${App.esc(day.titulo)}</strong><div class="task-meta mt-1">${(day.tasks || []).map((task) => `<span>${App.esc(task.materia)} (${task.tempo} min)</span>`).join("")}</div></div><div><span class="badge ${badge}">${App.statusLabel(status)}</span>${["faltou", "parcial"].includes(status) ? `<a class="btn btn-sm btn-secondary mt-1" href="hoje.html?recuperar=${date}">Retomar</a>` : ""}</div></div>`;
+      })
+      .join("")}</section>`,
+    )
+    .join("");
+}
+
+window.initCronograma = initCronograma;

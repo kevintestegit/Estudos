@@ -101,8 +101,7 @@
           "tipo": "comum",
           "tempo": 100,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "revisao-s1"
+          "pdfId": null
         }
       ]
     },
@@ -135,8 +134,7 @@
           "tipo": "comum",
           "tempo": 90,
           "aulaId": "aula-rl-02",
-          "pdfId": "pdf-rl-02",
-          "questoesTag": "rl-equivalencias"
+          "pdfId": "pdf-rl-02"
         }
       ]
     },
@@ -186,8 +184,7 @@
           "tipo": "comum",
           "tempo": 70,
           "aulaId": "aula-inf-02",
-          "pdfId": "pdf-inf-02",
-          "questoesTag": "inf-so"
+          "pdfId": "pdf-inf-02"
         }
       ]
     },
@@ -203,8 +200,7 @@
           "tipo": "comum",
           "tempo": 100,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "revisao-s2"
+          "pdfId": null
         }
       ]
     },
@@ -220,8 +216,7 @@
           "tipo": "comum",
           "tempo": 90,
           "aulaId": "aula-pt-04",
-          "pdfId": "pdf-pt-04",
-          "questoesTag": "portugues-concordancia"
+          "pdfId": "pdf-pt-04"
         }
       ]
     },
@@ -254,8 +249,7 @@
           "tipo": "comum",
           "tempo": 90,
           "aulaId": "aula-dc-02",
-          "pdfId": "pdf-dc-02",
-          "questoesTag": "dc-estado"
+          "pdfId": "pdf-dc-02"
         }
       ]
     },
@@ -288,8 +282,7 @@
           "tipo": "inss",
           "tempo": 100,
           "aulaId": "aula-prev-01",
-          "pdfId": "pdf-prev-01",
-          "questoesTag": "prev-seguridade"
+          "pdfId": "pdf-prev-01"
         }
       ]
     },
@@ -305,8 +298,7 @@
           "tipo": "comum",
           "tempo": 100,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "revisao-s3"
+          "pdfId": null
         }
       ]
     },
@@ -322,8 +314,7 @@
           "tipo": "inss",
           "tempo": 100,
           "aulaId": "aula-prev-02",
-          "pdfId": "pdf-prev-02",
-          "questoesTag": "prev-segurados"
+          "pdfId": "pdf-prev-02"
         }
       ]
     },
@@ -339,8 +330,7 @@
           "tipo": "inss",
           "tempo": 90,
           "aulaId": "aula-prev-03",
-          "pdfId": "pdf-prev-03",
-          "questoesTag": "prev-filiacao"
+          "pdfId": "pdf-prev-03"
         }
       ]
     },
@@ -356,8 +346,7 @@
           "tipo": "comum",
           "tempo": 90,
           "aulaId": "aula-da-03",
-          "pdfId": "pdf-da-03",
-          "questoesTag": "da-licitacoes"
+          "pdfId": "pdf-da-03"
         }
       ]
     },
@@ -390,8 +379,7 @@
           "tipo": "prf",
           "tempo": 100,
           "aulaId": "aula-admin-01",
-          "pdfId": "pdf-admin-01",
-          "questoesTag": "admin-conceitos"
+          "pdfId": "pdf-admin-01"
         }
       ]
     },
@@ -407,8 +395,7 @@
           "tipo": "misto",
           "tempo": 100,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "revisao-s4"
+          "pdfId": null
         }
       ]
     },
@@ -424,8 +411,7 @@
           "tipo": "inss",
           "tempo": 100,
           "aulaId": "aula-prev-04",
-          "pdfId": "pdf-prev-04",
-          "questoesTag": "prev-carencia"
+          "pdfId": "pdf-prev-04"
         }
       ]
     },
@@ -441,8 +427,7 @@
           "tipo": "inss",
           "tempo": 90,
           "aulaId": "aula-prev-05",
-          "pdfId": "pdf-prev-05",
-          "questoesTag": "prev-salario"
+          "pdfId": "pdf-prev-05"
         }
       ]
     },
@@ -458,8 +443,7 @@
           "tipo": "prf",
           "tempo": 100,
           "aulaId": "aula-arq-01",
-          "pdfId": "pdf-arq-01",
-          "questoesTag": "arquivologia"
+          "pdfId": "pdf-arq-01"
         }
       ]
     },
@@ -475,8 +459,7 @@
           "tipo": "comum",
           "tempo": 90,
           "aulaId": "aula-da-04",
-          "pdfId": "pdf-da-04",
-          "questoesTag": "da-poderes"
+          "pdfId": "pdf-da-04"
         }
       ]
     },
@@ -509,8 +492,7 @@
           "tipo": "misto",
           "tempo": 100,
           "aulaId": "aula-admin-02",
-          "pdfId": "pdf-admin-02",
-          "questoesTag": "admin-podc"
+          "pdfId": "pdf-admin-02"
         }
       ]
     },
@@ -526,8 +508,7 @@
           "tipo": "inss",
           "tempo": 110,
           "aulaId": "aula-prev-06",
-          "pdfId": "pdf-prev-06",
-          "questoesTag": "prev-aposentadoria"
+          "pdfId": "pdf-prev-06"
         }
       ]
     },
@@ -543,8 +524,7 @@
           "tipo": "inss",
           "tempo": 100,
           "aulaId": "aula-prev-07",
-          "pdfId": "pdf-prev-07",
-          "questoesTag": "prev-auxilios"
+          "pdfId": "pdf-prev-07"
         }
       ]
     },
@@ -560,8 +540,7 @@
           "tipo": "prf",
           "tempo": 90,
           "aulaId": "aula-arq-02",
-          "pdfId": "pdf-arq-02",
-          "questoesTag": "arquivologia"
+          "pdfId": "pdf-arq-02"
         }
       ]
     },
@@ -577,8 +556,7 @@
           "tipo": "comum",
           "tempo": 90,
           "aulaId": "aula-dc-03",
-          "pdfId": "pdf-dc-03",
-          "questoesTag": "dc-admin"
+          "pdfId": "pdf-dc-03"
         }
       ]
     },
@@ -611,8 +589,7 @@
           "tipo": "misto",
           "tempo": 100,
           "aulaId": "aula-admin-03",
-          "pdfId": "pdf-admin-03",
-          "questoesTag": "admin-estrutura"
+          "pdfId": "pdf-admin-03"
         }
       ]
     },
@@ -628,8 +605,7 @@
           "tipo": "inss",
           "tempo": 100,
           "aulaId": "aula-prev-08",
-          "pdfId": "pdf-prev-08",
-          "questoesTag": "prev-pensao"
+          "pdfId": "pdf-prev-08"
         }
       ]
     },
@@ -645,8 +621,7 @@
           "tipo": "inss",
           "tempo": 90,
           "aulaId": "aula-prev-09",
-          "pdfId": "pdf-prev-09",
-          "questoesTag": "prev-processo"
+          "pdfId": "pdf-prev-09"
         }
       ]
     },
@@ -662,8 +637,7 @@
           "tipo": "prf",
           "tempo": 90,
           "aulaId": "aula-da-05",
-          "pdfId": "pdf-da-05",
-          "questoesTag": "da-agentes"
+          "pdfId": "pdf-da-05"
         }
       ]
     },
@@ -679,8 +653,7 @@
           "tipo": "prf",
           "tempo": 90,
           "aulaId": "aula-arq-03",
-          "pdfId": "pdf-arq-03",
-          "questoesTag": "arquivologia"
+          "pdfId": "pdf-arq-03"
         }
       ]
     },
@@ -713,8 +686,7 @@
           "tipo": "misto",
           "tempo": 100,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "revisao-s7"
+          "pdfId": null
         }
       ]
     },
@@ -730,8 +702,7 @@
           "tipo": "comum",
           "tempo": 120,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "sim-parcial-comum"
+          "pdfId": null
         }
       ]
     },
@@ -764,8 +735,7 @@
           "tipo": "inss",
           "tempo": 100,
           "aulaId": "aula-prev-10",
-          "pdfId": "pdf-prev-10",
-          "questoesTag": "prev-custeio"
+          "pdfId": "pdf-prev-10"
         }
       ]
     },
@@ -781,8 +751,7 @@
           "tipo": "prf",
           "tempo": 90,
           "aulaId": "aula-admin-04",
-          "pdfId": "pdf-admin-04",
-          "questoesTag": "admin-pessoas"
+          "pdfId": "pdf-admin-04"
         }
       ]
     },
@@ -798,8 +767,7 @@
           "tipo": "comum",
           "tempo": 90,
           "aulaId": "aula-da-06",
-          "pdfId": "pdf-da-06",
-          "questoesTag": "da-controle"
+          "pdfId": "pdf-da-06"
         }
       ]
     },
@@ -815,8 +783,7 @@
           "tipo": "misto",
           "tempo": 100,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "revisao-s8"
+          "pdfId": null
         }
       ]
     },
@@ -832,8 +799,7 @@
           "tipo": "inss",
           "tempo": 100,
           "aulaId": "aula-prev-11",
-          "pdfId": "pdf-prev-11",
-          "questoesTag": "prev-tempo"
+          "pdfId": "pdf-prev-11"
         }
       ]
     },
@@ -849,8 +815,7 @@
           "tipo": "inss",
           "tempo": 100,
           "aulaId": "aula-prev-12",
-          "pdfId": "pdf-prev-12",
-          "questoesTag": "prev-transicao"
+          "pdfId": "pdf-prev-12"
         }
       ]
     },
@@ -866,8 +831,7 @@
           "tipo": "prf",
           "tempo": 80,
           "aulaId": "aula-leg-prf-01",
-          "pdfId": "pdf-leg-prf-01",
-          "questoesTag": "leg-prf"
+          "pdfId": "pdf-leg-prf-01"
         }
       ]
     },
@@ -883,8 +847,7 @@
           "tipo": "comum",
           "tempo": 90,
           "aulaId": "aula-rl-04",
-          "pdfId": "pdf-rl-04",
-          "questoesTag": "rl-prob"
+          "pdfId": "pdf-rl-04"
         }
       ]
     },
@@ -900,8 +863,7 @@
           "tipo": "comum",
           "tempo": 80,
           "aulaId": "aula-inf-04",
-          "pdfId": "pdf-inf-04",
-          "questoesTag": "inf-office"
+          "pdfId": "pdf-inf-04"
         }
       ]
     },
@@ -917,8 +879,7 @@
           "tipo": "misto",
           "tempo": 100,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "revisao-s9"
+          "pdfId": null
         }
       ]
     },
@@ -934,8 +895,7 @@
           "tipo": "inss",
           "tempo": 110,
           "aulaId": "aula-prev-13",
-          "pdfId": "pdf-prev-13",
-          "questoesTag": "prev-leis"
+          "pdfId": "pdf-prev-13"
         }
       ]
     },
@@ -951,8 +911,7 @@
           "tipo": "inss",
           "tempo": 100,
           "aulaId": null,
-          "pdfId": "pdf-prev-14",
-          "questoesTag": "prev-cebraspe"
+          "pdfId": "pdf-prev-14"
         }
       ]
     },
@@ -968,8 +927,7 @@
           "tipo": "prf",
           "tempo": 80,
           "aulaId": "aula-admin-05",
-          "pdfId": "pdf-admin-05",
-          "questoesTag": "admin-processos"
+          "pdfId": "pdf-admin-05"
         }
       ]
     },
@@ -985,8 +943,7 @@
           "tipo": "prf",
           "tempo": 70,
           "aulaId": "aula-arq-04",
-          "pdfId": "pdf-arq-04",
-          "questoesTag": "arquivologia"
+          "pdfId": "pdf-arq-04"
         }
       ]
     },
@@ -1002,8 +959,7 @@
           "tipo": "comum",
           "tempo": 90,
           "aulaId": "aula-dc-04",
-          "pdfId": "pdf-dc-04",
-          "questoesTag": "dc-poderes"
+          "pdfId": "pdf-dc-04"
         }
       ]
     },
@@ -1019,8 +975,7 @@
           "tipo": "misto",
           "tempo": 100,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "revisao-s10"
+          "pdfId": null
         }
       ]
     },
@@ -1036,8 +991,7 @@
           "tipo": "inss",
           "tempo": 150,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "sim-inss"
+          "pdfId": null
         }
       ]
     },
@@ -1070,8 +1024,7 @@
           "tipo": "prf",
           "tempo": 150,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "sim-prf"
+          "pdfId": null
         }
       ]
     },
@@ -1121,8 +1074,7 @@
           "tipo": "misto",
           "tempo": 100,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "misto-40"
+          "pdfId": null
         }
       ]
     },
@@ -1138,8 +1090,7 @@
           "tipo": "inss",
           "tempo": 100,
           "aulaId": "aula-prev-14",
-          "pdfId": "pdf-prev-15",
-          "questoesTag": "prev-beneficios"
+          "pdfId": "pdf-prev-15"
         }
       ]
     },
@@ -1155,8 +1106,7 @@
           "tipo": "inss",
           "tempo": 90,
           "aulaId": null,
-          "pdfId": "pdf-prev-16",
-          "questoesTag": "prev-custeio"
+          "pdfId": "pdf-prev-16"
         }
       ]
     },
@@ -1172,8 +1122,7 @@
           "tipo": "prf",
           "tempo": 100,
           "aulaId": "aula-admin-06",
-          "pdfId": "pdf-admin-06",
-          "questoesTag": "admin-materiais"
+          "pdfId": "pdf-admin-06"
         }
       ]
     },
@@ -1189,8 +1138,7 @@
           "tipo": "comum",
           "tempo": 100,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "pt-rl-revisao"
+          "pdfId": null
         }
       ]
     },
@@ -1206,8 +1154,7 @@
           "tipo": "comum",
           "tempo": 100,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "da-dc-revisao"
+          "pdfId": null
         }
       ]
     },
@@ -1223,8 +1170,7 @@
           "tipo": "misto",
           "tempo": 100,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "revisao-s12"
+          "pdfId": null
         }
       ]
     },
@@ -1240,8 +1186,7 @@
           "tipo": "misto",
           "tempo": 150,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "sim-misto"
+          "pdfId": null
         }
       ]
     },
@@ -1291,8 +1236,7 @@
           "tipo": "inss",
           "tempo": 90,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "prev-cebraspe"
+          "pdfId": null
         }
       ]
     },
@@ -1308,8 +1252,7 @@
           "tipo": "prf",
           "tempo": 90,
           "aulaId": "aula-leg-prf-02",
-          "pdfId": "pdf-leg-prf-02",
-          "questoesTag": "leg-prf"
+          "pdfId": "pdf-leg-prf-02"
         }
       ]
     },
@@ -1325,8 +1268,7 @@
           "tipo": "misto",
           "tempo": 100,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "revisao-s13"
+          "pdfId": null
         }
       ]
     },
@@ -1427,8 +1369,7 @@
           "tipo": "misto",
           "tempo": 100,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "revisao-s14"
+          "pdfId": null
         }
       ]
     },
@@ -1444,8 +1385,7 @@
           "tipo": "inss",
           "tempo": 180,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "sim-inss"
+          "pdfId": null
         }
       ]
     },
@@ -1478,8 +1418,7 @@
           "tipo": "prf",
           "tempo": 180,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "sim-prf"
+          "pdfId": null
         }
       ]
     },
@@ -1512,8 +1451,7 @@
           "tipo": "comum",
           "tempo": 120,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "revisao-comum"
+          "pdfId": null
         }
       ]
     },
@@ -1563,8 +1501,7 @@
           "tipo": "misto",
           "tempo": 45,
           "aulaId": null,
-          "pdfId": null,
-          "questoesTag": "aquecimento"
+          "pdfId": null
         }
       ]
     },

@@ -1,35 +1,608 @@
-// Dashboard, Hoje, Progresso, Matérias e Caderno de erros
-function showLoadError(e){const r=document.getElementById('app-root');if(r)r.innerHTML=`<div class="alert alert-danger">Não foi possível carregar os dados. ${App.esc(e.message||e)}</div>`}
-function statCard(v,l){return`<div class="card stat"><span class="value">${App.esc(v)}</span><span class="label">${App.esc(l)}</span></div>`}
-async function initDashboard(){App.initShell('dashboard');try{const[c,d]=await Promise.all([App.loadJSON('data/cronograma.json'),App.loadJSON('data/dicas.json').catch(()=>({dicas:[]}))]);renderDashboard(c,d)}catch(e){showLoadError(e)}}
-function renderDashboard(c,d){const p=Storage.get(),root=document.getElementById('app-root');if(!p.startDate){root.innerHTML=App.planSetupHtml('Começar preparação INSS + PRF Administrativo');App.bindPlanSetup(()=>renderDashboard(c,d));return}const s=computeStats(p),plan=App.getTodayPlan(c,p),st=App.studyStatus(p,c),goals=getTodayGoals(p),weak=getWeakSubjects(p,3).slice(0,5),due=getDueErros(p),day=plan.day||plan.nextDay,tasks=(day?.tasks||[]).map(t=>`${t.materia}: ${t.assunto}`).join(' · ')||'Sem tarefas',badge=st.code==='em_dia'?'badge-ok':st.code==='descanso'?'badge-info':st.code==='faltou_ontem'?'badge-danger':'badge-warn';root.innerHTML=`
-<div class="alert ${st.code==='em_dia'?'alert-ok':st.code==='descanso'?'alert-info':st.code==='faltou_ontem'?'alert-danger':'alert-warn'}">${App.esc(st.message)}${st.recoveryCount?` · ${st.recoveryCount} dia(s) para recuperar`:''}</div>
-<div class="card mb-1"><h2>Meta de hoje ${goals.allOk?'<span class="badge badge-ok">Batida</span>':'<span class="badge badge-warn">Em andamento</span>'}</h2><div class="grid grid-2"><div><p><strong>Minutos:</strong> ${goals.minutesDone}/${goals.minutesGoal}</p><div class="progress-bar"><span style="width:${goals.minutesPct}%"></span></div></div><div><p><strong>Questões:</strong> ${goals.questionsDone}/${goals.questionsGoal}</p><div class="progress-bar"><span style="width:${goals.questionsPct}%"></span></div></div></div></div>
-<div class="grid grid-2 mb-1"><div class="card"><h2>${plan.isRestDay?'Próximo estudo':'Hoje'}</h2><p><strong>Data:</strong> ${App.formatDateBR(todayISO())}</p><p><strong>Cronograma:</strong> Semana ${day?.semana||'—'}, dia ${day?.dia||'—'}</p><p><strong>O que estudar:</strong> ${App.esc(day?.titulo||'—')}</p><p class="muted">${App.esc(tasks)}</p><p><strong>Próxima ação:</strong> ${App.esc(App.nextAction(p,c))}</p><p><span class="badge ${badge}">${App.esc(st.message)}</span></p>${due.length?`<p><span class="badge badge-warn">${due.length} erro(s) para revisar</span></p>`:''}<div class="actions"><a class="btn" href="hoje.html">Ir para Hoje</a><a class="btn btn-secondary" href="questoes.html">Questões</a><a class="btn btn-secondary" href="biblioteca.html">Biblioteca</a></div></div><div class="card"><h2>Motivação</h2><p><strong>Nível ${s.nivel}</strong> · ${s.xp} XP</p><div class="progress-bar"><span style="width:${Math.min(100,s.xp%50*2)}%"></span></div><p>${App.esc(App.motivationMessage(s))}</p><p><strong>Conquistas:</strong> ${s.achievements.length?s.achievements.map(x=>App.ACHIEVEMENTS[x]||x).join(', '):'Nenhuma ainda'}</p><p class="muted">Biblioteca: ${(p.materiaisEstudados||[]).length} materiais · ${(p.provasFeitas||[]).length} provas</p></div></div>
-<div class="card mb-1"><h2>Foco no fraco</h2>${weak.length?`<table><thead><tr><th>Matéria</th><th>Questões</th><th>%</th><th></th></tr></thead><tbody>${weak.map(w=>`<tr><td>${App.esc(w.materia)}</td><td>${w.answered}</td><td>${w.pct}%</td><td><a class="btn btn-sm btn-accent" href="questoes.html?materia=${encodeURIComponent(w.materia)}&n=10&auto=1">Treinar</a></td></tr>`).join('')}</tbody></table>`:'<p class="muted">Responda pelo menos 3 questões por matéria.</p>'}</div>
-<div class="grid grid-4">${statCard(s.diasEstudados,'Dias estudados')}${statCard(s.sequenciaAtual,'Sequência atual')}${statCard(s.maiorSequencia,'Maior sequência')}${statCard(s.horasEstudadas+'h','Horas estudadas')}${statCard(s.questoesResolvidas,'Questões resolvidas')}${statCard(s.percentualAcertos+'%','Acertos')}${statCard(s.diasFaltados,'Dias faltados')}${statCard(s.diasAtraso,'Dias de atraso')}${statCard(s.simuladosRealizados,'Simulados')}${statCard((p.erros||[]).length,'Erros no caderno')}${statCard(plan.recovery.length,'Pendências')}${statCard((day?.semana||1)+'/16','Semana do plano')}</div>`}
-async function initHoje(){App.initShell('hoje');try{const data=await App.loadAll();renderHoje(data)}catch(e){showLoadError(e)}}
-function renderHoje(data){const{cronograma:c,aulas,pdfs}=data,p=Storage.get(),root=document.getElementById('app-root');if(!p.startDate){root.innerHTML=App.planSetupHtml();App.bindPlanSetup(()=>renderHoje(data));return}const plan=App.getTodayPlan(c,p),st=App.studyStatus(p,c),today=todayISO(),day=plan.day,goals=getTodayGoals(p),due=getDueErros(p,today);if(plan.beforeStart){root.innerHTML=`<div class="alert alert-info">O plano começa em <strong>${App.formatDateBR(p.startDate)}</strong>.</div><a class="btn btn-secondary" href="cronograma.html">Ver cronograma</a>`;return}if(plan.isRestDay&&!plan.recovery.length){root.innerHTML=`<div class="alert alert-info">Hoje é dia de descanso. O próximo conteúdo é <strong>${App.esc(plan.nextDay?.titulo||'—')}</strong>.</div><div class="actions"><a class="btn" href="caderno-erros.html">Revisão opcional</a><a class="btn btn-secondary" href="cronograma.html">Ver cronograma</a></div>`;return}const recovery=plan.recovery[0],active=recovery&&p.recoveryTarget?.date===recovery.date?recovery.day:day,activeDate=recovery&&p.recoveryTarget?.date===recovery.date?recovery.date:today,tasks=active?.tasks||[],main=tasks[0]||{},timer=p.timer||null;root.innerHTML=`
-${plan.recovery.length?`<div class="alert alert-warn">${App.esc(st.message)}. Há <strong>${plan.recovery.length}</strong> pendência(s).<div class="actions"><button class="btn btn-secondary" id="btn-recover">Abrir dia mais antigo</button><button class="btn btn-accent" id="btn-merge">Mesclar tarefas com hoje</button></div></div>`:''}
-<div class="card mb-1"><h2>Meta de hoje ${goals.allOk?'<span class="badge badge-ok">Batida</span>':''}</h2><div class="grid grid-2"><p><strong>Minutos:</strong> ${goals.minutesDone}/${goals.minutesGoal}</p><p><strong>Questões:</strong> ${goals.questionsDone}/${goals.questionsGoal}</p></div></div>
-${due.length?`<div class="card mb-1"><h2>Revisões vencidas</h2><p>${due.length} erro(s) aguardando revisão.</p><a class="btn btn-secondary" href="caderno-erros.html">Abrir caderno</a></div>`:''}
-<div class="card mb-1"><h2>${p.recoveryTarget?`Recuperação: ${App.esc(active?.titulo||'')}`:App.esc(active?.titulo||'Plano do dia')}</h2><p>Semana ${active?.semana||'—'} · Dia ${active?.dia||'—'} · Status: <strong>${App.statusLabel(p.dayStatus[activeDate]||'pendente')}</strong></p><p class="muted">O dia só será concluído após registrar tempo real de estudo.</p><div class="actions"><button class="btn" id="btn-start">Começar estudo</button><button class="btn btn-secondary" id="btn-pause">Pausar</button><button class="btn btn-secondary" id="btn-save">Salvar sessão</button><button class="btn btn-accent" id="btn-done">Concluir dia</button><button class="btn btn-secondary" id="btn-manual">Registrar estudo manual</button></div></div>
-<div class="card mb-1" id="timer-box"><h3>Cronômetro</h3><div class="timer" id="timer-display">00:00:00</div></div>
-<div class="grid grid-2">${tasks.map((t,i)=>{const a=(aulas.aulas||[]).find(x=>x.id===t.aulaId),pdf=(pdfs.pdfs||[]).find(x=>x.id===t.pdfId),au=App.resolveUrl(a?.url,t.materia),pu=App.resolveUrl(pdf?.url,t.materia),tk=today+'_'+i,ts=Storage.getTaskStatus(tk);return`<div class="card task-card"><h3>${App.esc(t.materia)}</h3><p><strong>${App.esc(t.assunto)}</strong></p><div class="task-meta"><span class="badge badge-info">${App.esc(t.tipo)}</span><span>${App.formatMinutes(t.tempo)}</span><span class="badge badge-muted">${ts}</span></div><div class="actions"><a class="btn btn-secondary btn-sm" ${App.linkAttrs(au)}>Material</a><a class="btn btn-secondary btn-sm" ${App.linkAttrs(pu)}>PDF / lei</a><a class="btn btn-secondary btn-sm" href="questoes.html?${t.questoesTag?'tag='+encodeURIComponent(t.questoesTag):'materia='+encodeURIComponent(t.materia)}">Questões</a><a class="btn btn-secondary btn-sm" href="${App.esc(App.youtubeUrl(t.materia,t.assunto))}" target="_blank" rel="noopener">Videoaula</a></div><div class="actions mt-1"><button type="button" class="btn btn-sm ${ts==='concluida'?'btn-accent':'btn-secondary'}" data-ts="${tk}" data-ts-action="concluida">${ts==='concluida'?'Feita':'Fazer'}</button><button type="button" class="btn btn-sm btn-secondary" data-ts="${tk}" data-ts-action="dispensada">Dispensar</button></div></div>`}).join('')||'<div class="card">Nenhuma tarefa.</div>'}</div>
-<div class="card mt-2 hidden" id="manual-box"><h3>Estudo manual</h3><div class="grid grid-2"><div class="form-row"><label>Matéria</label><input id="manual-subject" value="${App.esc(main.materia||'')}"></div><div class="form-row"><label>Assunto</label><input id="manual-topic" value="${App.esc(main.assunto||'')}"></div><div class="form-row"><label>Minutos</label><input id="manual-min" type="number" min="1" value="30"></div><div class="form-row"><label>Questões feitas</label><input id="manual-q" type="number" min="0" value="0"></div><div class="form-row"><label>Acertos</label><input id="manual-ok" type="number" min="0" value="0"></div><div class="form-row"><label>Observação</label><input id="manual-note"></div></div><button class="btn" id="btn-save-manual">Salvar estudo</button></div>`;
-let tickId=null;const elapsed=()=>{const t=Storage.get().timer;if(!t)return 0;return(t.elapsed||0)+(t.running?Math.floor((Date.now()-t.startedAt)/1000):0)},paint=()=>{const s=elapsed(),e=document.getElementById('timer-display');if(e)e.textContent=[Math.floor(s/3600),Math.floor(s%3600/60),s%60].map(x=>String(x).padStart(2,'0')).join(':')};paint();if(timer?.running)tickId=setInterval(paint,1000);
-document.getElementById('btn-start').onclick=()=>{const t=Storage.get().timer;if(!t||t.contextDate!==activeDate)Storage.saveTimer({contextDate:activeDate,startedAt:Date.now(),elapsed:0,running:true,savedSeconds:0});else if(!t.running)Storage.saveTimer({...t,startedAt:Date.now(),running:true});Storage.setDayStatus(activeDate,'em_andamento');clearInterval(tickId);tickId=setInterval(paint,1000);paint()};
-document.getElementById('btn-pause').onclick=()=>{const t=Storage.get().timer;if(!t)return;Storage.saveTimer({...t,elapsed:elapsed(),running:false});clearInterval(tickId);paint()};
-const saveTimer=()=>{const t=Storage.get().timer;if(!t)return 0;const total=elapsed(),unsaved=Math.max(0,total-(t.savedSeconds||0)),minutes=Math.floor(unsaved/60);if(minutes<1)return 0;Storage.addStudySession({date:today,minutes,dayKey:activeDate,subject:main.materia||'Estudo',topic:active?.titulo||''});Storage.saveTimer({...t,elapsed:total,running:false,savedSeconds:(t.savedSeconds||0)+minutes*60});clearInterval(tickId);return minutes};
-document.getElementById('btn-save').onclick=()=>{const m=saveTimer();alert(m?`Sessão salva: ${m} min`:'Estude pelo menos 1 minuto antes de salvar.')};
-document.getElementById('btn-done').onclick=async()=>{saveTimer();const now=Storage.get(),todaySessions=(now.studySessions||[]).filter(s=>s.date===today),real=todaySessions.some(s=>s.minutes>0);if(!real&&!(now.dailyQuiz||{})[today]?.answered)return alert('Registre ao menos uma sessão real ou responda questões antes de concluir.');Storage.closeDay(today);const sum=Storage.getDailySummary(today)||{};const pend=(sum.pendingTasks||[]).length;if(pend>0&&!await Modal.waitConfirm(`Existem ${pend} tarefa(s) pendente(s). Deseja concluir o dia mesmo assim?`))return;Storage.setDayStatus(activeDate,p.recoveryTarget?'recuperado':'concluido');Storage.clearTimer();Storage.setRecoveryTarget(null);clearInterval(tickId);const msg=[`Hoje: ${sum.minutes}min`,sum.questions?`${sum.questions} questões (${sum.correct} acertos)`:'',sum.reviews?`${sum.reviews} revisões`:'',sum.subjects?.length?sum.subjects.join(', '):''].filter(Boolean).join(' · ');alert(msg);renderHoje(data)};
-document.getElementById('btn-manual').onclick=()=>document.getElementById('manual-box').classList.toggle('hidden');document.getElementById('btn-save-manual').onclick=()=>{const minutes=Number(document.getElementById('manual-min').value)||0,questions=Number(document.getElementById('manual-q').value)||0,correct=Number(document.getElementById('manual-ok').value)||0;if(minutes<1)return alert('Informe os minutos reais.');Storage.addManualStudy({date:today,minutes,questions,correct,subject:document.getElementById('manual-subject').value.trim(),topic:document.getElementById('manual-topic').value.trim(),note:document.getElementById('manual-note').value.trim()});alert('Estudo registrado.');renderHoje(data)};
-document.querySelectorAll('[data-ts]').forEach(b=>{b.onclick=()=>{Storage.setTaskStatus(b.dataset.ts,b.dataset.tsAction);renderHoje(data)}});
-const rb=document.getElementById('btn-recover');if(rb)rb.onclick=()=>{Storage.setRecoveryTarget({date:recovery.date});renderHoje(data)};const mb=document.getElementById('btn-merge');if(mb)mb.onclick=()=>{const merged={...day,titulo:`${day?.titulo||'Hoje'} + recuperação`,tasks:[...(day?.tasks||[]),...(recovery.day?.tasks||[])]};data.cronograma={...c,days:(c.days||[]).map((x,i)=>i===plan.index?merged:x)};Storage.setRecoveryTarget({date:recovery.date,merge:true});renderHoje(data)};}
-async function initProgresso(){App.initShell('progresso');const p=Storage.get(),s=computeStats(p),g=p.goals||{minutes:90,questions:20},week=getWeeklyReport(p),sessions=(p.studySessions||[]).slice().reverse(),root=document.getElementById('app-root'),prog_root=root;root.innerHTML=`<div class="grid grid-3 mb-1">${statCard('Nv. '+s.nivel,'Nível')}${statCard(s.xp,'XP')}${statCard(s.sequenciaAtual+' dias','Sequência')}</div><div class="card mb-1"><h2>Meta diária</h2><div class="grid grid-2"><div class="form-row"><label>Minutos</label><input id="goal-min" type="number" value="${g.minutes}"></div><div class="form-row"><label>Questões</label><input id="goal-q" type="number" value="${g.questions}"></div></div><button class="btn" id="btn-save-goals">Salvar meta</button></div><div class="card mb-1"><h2>Desempenho</h2><p>Respondidas: <strong>${s.questoesResolvidas}</strong> · Acertos: <strong>${s.acertos}</strong> · Erros: <strong>${s.erros}</strong> · Aproveitamento: <strong>${s.percentualAcertos}%</strong></p></div><div class="card mb-1"><h2>Histórico de sessões</h2>${sessions.length?`<table><thead><tr><th>Data</th><th>Min</th><th>Matéria</th><th>Assunto</th><th>Tipo</th><th></th></tr></thead><tbody>${sessions.map(s=>`<tr data-sid="${s.id}"><td>${App.formatDateBR(s.date)}</td><td><input class="sess-min" type="number" min="0" value="${s.minutes}" style="width:70px"></td><td><input class="sess-sub" value="${App.esc(s.subject||'')}" style="width:120px"></td><td><input class="sess-top" value="${App.esc(s.topic||'')}" style="width:140px"></td><td><input class="sess-type" value="${App.esc(s.type||'estudo')}" style="width:90px"></td><td><button class="btn btn-sm btn-secondary sess-save">Salvar</button> <button class="btn btn-sm btn-danger sess-del">Excluir</button></td></tr>`).join('')}</tbody></table>`:'<p class="muted">Nenhuma sessão registrada. Use o cronômetro ou o registro manual.</p>'}</div><div class="card"><h2>Relatório dos últimos 7 dias</h2><div class="grid grid-4">${statCard(week.hours+'h','Horas')}${statCard(week.questions,'Questões')}${statCard(week.pct+'%','Acertos')}${statCard(week.daysStudied,'Dias ativos')}${statCard(week.faltas,'Faltas')}${statCard(week.dueCount,'Revisões')}${statCard(week.sessions,'Sessões')}${statCard(week.wrong,'Erros')}</div><h3>Próximas ações</h3><ul class="list">${week.nextActions.map(a=>`<li>${App.esc(a)}</li>`).join('')}</ul><div class="actions mt-1"><a class="btn btn-secondary" href="edital.html">Cobertura do edital</a></div></div>`;document.getElementById('btn-save-goals').onclick=()=>{Storage.setGoals({minutes:document.getElementById('goal-min').value,questions:document.getElementById('goal-q').value});alert('Meta salva.');initProgresso()};root.querySelectorAll('.sess-save').forEach(btn=>{btn.onclick=()=>{const tr=btn.closest('tr');Storage.updateSession(tr.dataset.sid,{minutes:tr.querySelector('.sess-min').value,subject:tr.querySelector('.sess-sub').value,topic:tr.querySelector('.sess-top').value,type:tr.querySelector('.sess-type').value});alert('Sessão atualizada.');initProgresso()}});root.querySelectorAll('.sess-del').forEach(btn=>{btn.onclick=async()=>{if(!await Modal.waitConfirm('Excluir esta sessão? Os minutos deixarão de contar.'))return;Storage.removeSession(btn.closest('tr').dataset.sid);initProgresso()}})}
-async function initMaterias(){App.initShell('materias');try{const{materias,aulas,pdfs}=await App.loadAll();renderPainelMaterias({materias,aulas,pdfs});}catch(e){showLoadError(e)}}
+function showLoadError(error) {
+  const root = document.getElementById("app-root");
+  if (root)
+    root.innerHTML = `<div class="alert alert-danger">Não foi possível carregar os dados. ${App.esc(error.message || error)}</div>`;
+}
 
-function renderPainelMaterias(data){const M=data.materias,AU=data.aulas.aulas,PD=data.pdfs.pdfs,p=Storage.get(),root=document.getElementById("app-root"),quiz=p.quiz||{},by=quiz.bySubject||{},sess=p.studySessions||[];const cnt=(list,name)=>list.filter(x=>x.materia===name).length;const realPDFs=(name)=>(PD||[]).filter(x=>x.materia===name&&(x.url||'').toLowerCase().endsWith('.pdf')).length;const qs=(name)=>{const b=by[name]||{answered:0,correct:0};return{answered:b.answered,correct:b.correct,pct:b.answered?Math.round(b.correct/b.answered*100):0}};const last=(name)=>{const ss=sess.filter(s=>s.subject===name&&s.minutes>0);const getEdCover=(name)=>{const ep=Storage.get().editalProgress||{};const all=Object.entries(ep);if(!all.length)return 0;const match=all.filter(([k,v])=>k.startsWith(name.slice(0,6))||(v.materia||'').includes(name.slice(0,6)));const done=match.filter(([k,v])=>v.status==='consolidado'||v.status==='teoria_concluida'||v.status==='em_revisao').length;return match.length?Math.round(done/match.length*100):0};;return ss.length?ss.sort((a,b)=>b.date.localeCompare(a.date))[0].date:null};const blocks=[["Comum (INSS + PRF)",M.comum],["Especifico INSS",M.inss],["Especifico PRF Administrativo",M.prf]];root.innerHTML="<h2 style=margin-bottom:1rem>Painel de materias</h2>"+blocks.map(([t,list])=>"<div class=card><h2>"+App.esc(t)+"</h2><div class=grid style=grid-template-columns:repeat(auto-fill,minmax(300px,1fr))>"+list.map(m=>{const q=qs(m.nome),ld=last(m.nome),ass=m.assuntos||[],ac=cnt(AU,m.nome),pc=cnt(PD,m.nome),bad=ac?"✔":"-";return"<div class=card style=border-left:4px+solid+"+m.cor+"><h3>"+App.esc(m.nome)+"</h3><div class=task-meta>"+ass.map(a=>"<a class=badge style=cursor:pointer href=questoes.html?materia="+encodeURIComponent(m.nome)+">"+App.esc(a)+"</a>").join(" ")+"</div><div class=grid style=grid-template-columns:1fr+1fr>"+statCardMini(ac,"aulas "+m.nome,m.nome)+statCardMini(realPDFs(m.nome),"PDFs reais "+m.nome,m.nome)+statCardMini(q.answered,"questoes "+m.nome,m.nome)+statCardMini(q.pct+"%","acertos "+m.nome,m.nome)+"</div>"+(ld?"<p style=font-size:.78rem;color:var(--muted)>Estudou em "+App.formatDateBR(ld)+"</p>":"")+"<div class=actions><a class=btn+btn-sm href=biblioteca.html?materia="+encodeURIComponent(m.nome)+">Materiais</a><a class=btn+btn-sm+btn-accent href=questoes.html?materia="+encodeURIComponent(m.nome)+">Questoes</a></div></div>";}).join("")+"</div></div>").join("");}
+function statCard(value, label) {
+  return `<div class="card stat"><span class="value">${App.esc(value)}</span><span class="label">${App.esc(label)}</span></div>`;
+}
 
-function statCardMini(v,l,mat){return"<a href=biblioteca.html?tipo="+l.split(" ")[0]+"&materia="+encodeURIComponent(mat)+" class=badge style=text-decoration:none;background:var(--surface);border:1px+solid+var(--border);border-radius:8px;padding:.3rem+.5rem;font-weight:700;display:inline-block>"+App.esc(String(v))+" <span style=color:var(--muted);font-weight:400;font-size:.78rem>"+App.esc(l)+"</span></a>"}
+async function initDashboard() {
+  App.initShell("dashboard");
+  try {
+    renderDashboard(await App.loadJSON("data/cronograma.json"));
+  } catch (error) {
+    showLoadError(error);
+  }
+}
 
+function renderDashboard(cronograma) {
+  const progress = Storage.get();
+  const root = document.getElementById("app-root");
+  if (!progress.startDate) {
+    root.innerHTML = App.planSetupHtml(
+      "Começar preparação INSS + PRF Administrativo",
+    );
+    App.bindPlanSetup(() => renderDashboard(cronograma));
+    return;
+  }
+
+  const stats = computeStats(progress);
+  const week = getWeeklyReport(progress);
+  const plan = App.getTodayPlan(cronograma, progress);
+  const weak = getWeakSubjects(progress, 3)[0];
+  const due = getDueErros(progress);
+  root.innerHTML = `
+    <section class="hero-card card mb-1">
+      <p class="eyebrow">Próximo passo</p>
+      <h2>${App.esc(App.nextAction(progress, cronograma))}</h2>
+      <a class="btn" href="hoje.html">Abrir meu estudo de hoje</a>
+    </section>
+    <section class="grid grid-4 mb-1" aria-label="Resumo principal">
+      ${statCard(stats.diasEstudados, "Dias estudados")}
+      ${statCard(`${week.hours}h`, "Horas nesta semana")}
+      ${statCard(stats.questoesResolvidas, "Questões respondidas")}
+      ${statCard(`${stats.percentualAcertos}%`, "Percentual de acertos")}
+    </section>
+    <section class="grid grid-3 mb-1">
+      <div class="card"><h2>Próxima ação</h2><p>${App.esc(App.nextAction(progress, cronograma))}</p></div>
+      <div class="card"><h2>Maior dificuldade</h2><p>${weak ? `${App.esc(weak.materia)} — ${weak.pct}% de acertos` : "Responda questões para identificar."}</p></div>
+      <div class="card"><h2>Pendências reais</h2><p>${plan.recovery.length} dia(s) para retomar · ${due.length} revisão(ões)</p></div>
+    </section>
+    <details class="card">
+      <summary>Ver detalhes do progresso</summary>
+      <div class="grid grid-4 mt-1">
+        ${statCard(`Nível ${stats.nivel}`, "Nível")}
+        ${statCard(stats.xp, "XP")}
+        ${statCard(`${stats.sequenciaAtual} dias seguidos`, "Sequência atual")}
+        ${statCard(`${stats.maiorSequencia} dias`, "Maior sequência")}
+        ${statCard((progress.materiaisEstudados || []).length, "Materiais")}
+        ${statCard((progress.provasFeitas || []).length, "Provas")}
+        ${statCard(stats.erros, "Total de erros")}
+        ${statCard(`${plan.day?.semana || plan.nextDay?.semana || 1}/16`, "Semana do plano")}
+      </div>
+    </details>`;
+}
+
+async function initHoje() {
+  App.initShell("hoje");
+  try {
+    const recoveryDate = new URLSearchParams(location.search).get("recuperar");
+    if (recoveryDate) Storage.setRecoveryTarget({ date: recoveryDate });
+    renderHoje(await App.loadAll());
+  } catch (error) {
+    showLoadError(error);
+  }
+}
+
+function renderHoje(data) {
+  const progress = Storage.get();
+  const root = document.getElementById("app-root");
+  if (!progress.startDate) {
+    root.innerHTML = App.planSetupHtml();
+    App.bindPlanSetup(() => renderHoje(data));
+    return;
+  }
+
+  const studyDate = todayISO();
+  const plan = App.getTodayPlan(data.cronograma, progress);
+  if (plan.beforeStart) {
+    root.innerHTML = `<div class="alert alert-info">O plano começa em <strong>${App.formatDateBR(progress.startDate)}</strong>.</div><a class="btn btn-secondary" href="cronograma.html">Ver cronograma</a>`;
+    return;
+  }
+  if (plan.isRestDay && !plan.recovery.length) {
+    root.innerHTML = `<div class="alert alert-info">Hoje é dia de descanso. O próximo conteúdo é <strong>${App.esc(plan.nextDay?.titulo || "—")}</strong>.</div><a class="btn btn-secondary" href="cronograma.html">Ver meu plano</a>`;
+    return;
+  }
+
+  const target = progress.recoveryTarget;
+  const recovery = target
+    ? plan.recovery.find((item) => item.date === target.date)
+    : null;
+  const todayTasks = taskEntries(plan.day, studyDate, "today");
+  const recoveryTasks = recovery
+    ? taskEntries(recovery.day, recovery.date, "recovery")
+    : [];
+  const tasks = recovery
+    ? target.merge
+      ? [...todayTasks, ...recoveryTasks]
+      : recoveryTasks
+    : todayTasks;
+  const primaryDate = recovery && !target.merge ? recovery.date : studyDate;
+  const primaryDay = recovery && !target.merge ? recovery.day : plan.day;
+  const goals = getTodayGoals(progress);
+  const status = App.studyStatus(progress, data.cronograma);
+  const firstPending = findFirstPendingStep(tasks);
+
+  root.innerHTML = `
+    <header class="today-header mb-1">
+      <p class="eyebrow">Bom dia</p>
+      <h2>Seu estudo de hoje</h2>
+      <p><strong>${App.esc(primaryDay?.titulo || "Plano do dia")}</strong></p>
+      <p class="muted">Meta: ${App.formatMinutes(goals.minutesGoal)} · ${goals.questionsGoal} questões</p>
+    </header>
+    <div class="alert ${status.code === "parcial" ? "alert-warn" : "alert-info"}">${App.esc(status.message)}</div>
+    ${renderRecoveryChoices(plan.recovery, recovery)}
+    <section class="study-roadmap" aria-label="Roteiro de estudo">
+      ${tasks.length ? tasks.map((entry) => renderStudyTask(entry, data, firstPending)).join("") : '<div class="card"><p>Nenhuma tarefa programada.</p></div>'}
+      ${renderFinishCards(tasks, studyDate, primaryDate, firstPending)}
+    </section>
+    <details class="card mt-1" id="timer-panel">
+      <summary>Cronômetro e registro</summary>
+      <div class="timer" id="timer-display">00:00:00</div>
+      <div class="actions">
+        <button class="btn" type="button" id="btn-start">Começar</button>
+        <button class="btn btn-secondary" type="button" id="btn-pause">Pausar</button>
+        <button class="btn btn-secondary" type="button" id="btn-save">Salvar sessão</button>
+      </div>
+    </details>
+    <details class="card mt-1" id="more-options">
+      <summary>Mais opções</summary>
+      <button class="btn btn-secondary mt-1" type="button" id="btn-manual">Registrar estudo manual</button>
+      <div class="hidden mt-1" id="manual-box">
+        ${manualStudyForm(tasks[0]?.task)}
+      </div>
+    </details>
+    ${getDueErros(progress, studyDate).length ? '<div class="card mt-1"><p><strong>Recomendação:</strong> há revisões vencidas.</p><a class="btn btn-secondary" href="caderno-erros.html">Ver revisões</a></div>' : ""}`;
+
+  bindTodayActions({ data, tasks, studyDate, primaryDate });
+}
+
+function taskEntries(day, scheduleDate, origin) {
+  return (day?.tasks || []).map((task, index) => ({
+    task,
+    index,
+    scheduleDate,
+    origin,
+    day,
+  }));
+}
+
+function taskBaseKey(entry) {
+  return `${entry.scheduleDate}_${entry.index}`;
+}
+
+function stepDone(key) {
+  const progress = Storage.get();
+  const base = key.replace(/_(learn|read|practice)$/, "");
+  return (
+    ["concluida", "dispensada"].includes(progress.taskStatus?.[key]) ||
+    ["concluida", "dispensada"].includes(progress.taskStatus?.[base])
+  );
+}
+
+function findFirstPendingStep(tasks) {
+  for (const entry of tasks) {
+    for (const step of ["learn", "read", "practice"]) {
+      const key = `${taskBaseKey(entry)}_${step}`;
+      if (!stepDone(key)) return key;
+    }
+  }
+  return "finish";
+}
+
+function renderStudyTask(entry, data, firstPending) {
+  const task = entry.task;
+  const lesson = (data.aulas.aulas || []).find(
+    (item) => item.id === task.aulaId,
+  );
+  const material = (data.pdfs.pdfs || []).find(
+    (item) => item.id === task.pdfId,
+  );
+  const videoUrl = lesson?.url || App.youtubeUrl(task.materia, task.assunto);
+  const materialUrl = App.resolveUrl(material?.url, task.materia);
+  const questionUrl = `questoes.html?${task.questoesTag ? `tag=${encodeURIComponent(task.questoesTag)}` : `materia=${encodeURIComponent(task.materia)}`}&n=10`;
+  const base = taskBaseKey(entry);
+  const steps = [
+    ["learn", "1", "Aprender o conteúdo", "Assistir aula", videoUrl],
+    [
+      "read",
+      "2",
+      "Ler ou revisar",
+      App.materialActionLabel(material || { tipo: "fonte" }),
+      materialUrl,
+    ],
+    ["practice", "3", "Praticar", "Responder 10 questões", questionUrl],
+  ];
+  return `<article class="card study-task">
+    <div class="task-title"><div><p class="eyebrow">${entry.origin === "recovery" ? `Recuperação de ${App.formatDateBR(entry.scheduleDate)}` : "Estudo de hoje"}</p><h3>${App.esc(task.materia)} — ${App.esc(task.assunto)}</h3></div><span>${App.formatMinutes(task.tempo)}</span></div>
+    ${steps
+      .map(([name, number, title, label, url]) => {
+        const key = `${base}_${name}`;
+        const done = stepDone(key);
+        return `<div class="roadmap-step ${done ? "is-done" : ""} ${firstPending === key ? "is-next" : ""}" data-step="${key}">
+        <span class="step-number">${done ? "✓" : number}</span>
+        <div><h4>${title}</h4><a class="btn ${done ? "btn-secondary" : ""}" ${App.linkAttrs(url)} data-step-key="${key}">${done ? "Concluído" : label}</a></div>
+      </div>`;
+      })
+      .join("")}
+    <button class="link-button" type="button" data-dismiss="${base}">Dispensar esta tarefa</button>
+  </article>`;
+}
+
+function renderFinishCards(tasks, studyDate, primaryDate, firstPending) {
+  const dates = [...new Set(tasks.map((entry) => entry.scheduleDate))];
+  if (!dates.length) dates.push(primaryDate);
+  return dates
+    .map((scheduleDate) => {
+      const recovery = scheduleDate !== studyDate;
+      const label = recovery
+        ? `Concluir recuperação de ${App.formatDateBR(scheduleDate)}`
+        : "Concluir estudo de hoje";
+      return `<section class="card roadmap-step finish-step ${firstPending === "finish" ? "is-next" : ""}"><span class="step-number">4</span><div><h3>Finalizar</h3><button class="btn btn-accent" type="button" data-finish-date="${scheduleDate}" ${scheduleDate === primaryDate ? 'id="btn-done"' : ""}>${label}</button></div></section>`;
+    })
+    .join("");
+}
+
+function renderRecoveryChoices(queue, active) {
+  if (!queue.length) return "";
+  return `<section class="card recovery-box mb-1"><h3>Dias para retomar</h3><p class="muted">Faça um por vez. Seu estudo de hoje não será apagado.</p><div class="actions">${queue
+    .map((item) => {
+      const activity = getDayActivity(item.date, Storage.get());
+      const detail =
+        item.status === "parcial"
+          ? ` — ${activity.minutes} minutos já estudados`
+          : "";
+      return `<button class="btn btn-secondary" type="button" data-recover="${item.date}">Recuperar ${App.formatDateBR(item.date)}${detail}</button>${!active ? `<button class="link-button" type="button" data-merge="${item.date}">Mesclar com hoje</button>` : ""}`;
+    })
+    .join("")}</div></section>`;
+}
+
+function manualStudyForm(task = {}) {
+  return `<div class="grid grid-2">
+    <div class="form-row"><label for="manual-subject">Matéria</label><input id="manual-subject" value="${App.esc(task.materia || "")}"></div>
+    <div class="form-row"><label for="manual-topic">Assunto</label><input id="manual-topic" value="${App.esc(task.assunto || "")}"></div>
+    <div class="form-row"><label for="manual-min">Minutos</label><input id="manual-min" type="number" min="1" value="30"></div>
+    <div class="form-row"><label for="manual-q">Questões feitas</label><input id="manual-q" type="number" min="0" value="0"></div>
+    <div class="form-row"><label for="manual-ok">Acertos</label><input id="manual-ok" type="number" min="0" value="0"></div>
+    <div class="form-row"><label for="manual-note">Observação</label><input id="manual-note"></div>
+  </div><button class="btn" type="button" id="btn-save-manual">Salvar estudo</button>`;
+}
+
+function bindTodayActions(context) {
+  const { data, tasks, studyDate, primaryDate } = context;
+  let tickId;
+  const elapsed = () => {
+    const timer = Storage.get().timer;
+    return timer
+      ? (timer.elapsed || 0) +
+          (timer.running
+            ? Math.floor((Date.now() - timer.startedAt) / 1000)
+            : 0)
+      : 0;
+  };
+  const paintTimer = () => {
+    const seconds = elapsed();
+    const display = document.getElementById("timer-display");
+    if (display)
+      display.textContent = [
+        Math.floor(seconds / 3600),
+        Math.floor((seconds % 3600) / 60),
+        seconds % 60,
+      ]
+        .map((value) => String(value).padStart(2, "0"))
+        .join(":");
+  };
+  const saveTimer = () => {
+    const timer = Storage.get().timer;
+    if (!timer) return 0;
+    const total = elapsed();
+    const minutes = Math.floor(
+      Math.max(0, total - (timer.savedSeconds || 0)) / 60,
+    );
+    if (minutes < 1) return 0;
+    const first =
+      tasks.find((entry) => entry.scheduleDate === timer.contextDate) ||
+      tasks[0];
+    Storage.addStudySession({
+      date: studyDate,
+      dayKey: timer.contextDate,
+      minutes,
+      subject: first?.task.materia || "Estudo",
+      topic: first?.task.assunto || "",
+      origin: timer.contextDate === studyDate ? "timer" : "recovery",
+    });
+    Storage.saveTimer({
+      ...timer,
+      elapsed: total,
+      running: false,
+      savedSeconds: (timer.savedSeconds || 0) + minutes * 60,
+    });
+    clearInterval(tickId);
+    return minutes;
+  };
+
+  paintTimer();
+  if (Storage.get().timer?.running) tickId = setInterval(paintTimer, 1000);
+  document.getElementById("btn-start").onclick = () => {
+    const timer = Storage.get().timer;
+    if (!timer || timer.contextDate !== primaryDate)
+      Storage.saveTimer({
+        contextDate: primaryDate,
+        startedAt: Date.now(),
+        elapsed: 0,
+        running: true,
+        savedSeconds: 0,
+      });
+    else if (!timer.running)
+      Storage.saveTimer({ ...timer, startedAt: Date.now(), running: true });
+    Storage.setDayStatus(primaryDate, "em_andamento");
+    clearInterval(tickId);
+    tickId = setInterval(paintTimer, 1000);
+    paintTimer();
+  };
+  document.getElementById("btn-pause").onclick = () => {
+    const timer = Storage.get().timer;
+    if (!timer) return;
+    Storage.saveTimer({ ...timer, elapsed: elapsed(), running: false });
+    clearInterval(tickId);
+    paintTimer();
+  };
+  document.getElementById("btn-save").onclick = () => {
+    const minutes = saveTimer();
+    alert(
+      minutes
+        ? `Sessão salva: ${minutes} min`
+        : "Estude pelo menos 1 minuto antes de salvar.",
+    );
+  };
+
+  document.querySelectorAll("[data-step-key]").forEach((link) => {
+    link.onclick = () =>
+      Storage.setTaskStatus(link.dataset.stepKey, "concluida");
+  });
+  document.querySelectorAll("[data-dismiss]").forEach((button) => {
+    button.onclick = () => {
+      Storage.setTaskStatus(button.dataset.dismiss, "dispensada");
+      renderHoje(data);
+    };
+  });
+  document.querySelectorAll("[data-recover]").forEach((button) => {
+    button.onclick = () => {
+      Storage.setRecoveryTarget({ date: button.dataset.recover });
+      renderHoje(data);
+    };
+  });
+  document.querySelectorAll("[data-merge]").forEach((button) => {
+    button.onclick = () => {
+      Storage.setRecoveryTarget({ date: button.dataset.merge, merge: true });
+      renderHoje(data);
+    };
+  });
+
+  document.getElementById("btn-manual").onclick = () =>
+    document.getElementById("manual-box").classList.toggle("hidden");
+  document.getElementById("btn-save-manual").onclick = () => {
+    const minutes = Number(document.getElementById("manual-min").value) || 0;
+    if (minutes < 1) return alert("Informe os minutos reais.");
+    Storage.addManualStudy({
+      date: studyDate,
+      dayKey: primaryDate,
+      minutes,
+      questions: document.getElementById("manual-q").value,
+      correct: document.getElementById("manual-ok").value,
+      subject: document.getElementById("manual-subject").value.trim(),
+      topic: document.getElementById("manual-topic").value.trim(),
+      note: document.getElementById("manual-note").value.trim(),
+      origin: primaryDate === studyDate ? "manual" : "recovery",
+    });
+    alert(
+      primaryDate === studyDate
+        ? "Estudo registrado."
+        : `Recuperação registrada para ${App.formatDateBR(primaryDate)}.`,
+    );
+    renderHoje(data);
+  };
+
+  document.querySelectorAll("[data-finish-date]").forEach((button) => {
+    button.onclick = async () => {
+      const scheduleDate = button.dataset.finishDate;
+      if (Storage.get().timer?.contextDate === scheduleDate) saveTimer();
+      const progress = Storage.get();
+      const realSession = (progress.studySessions || []).some(
+        (session) =>
+          session.date === studyDate &&
+          (session.dayKey || session.date) === scheduleDate &&
+          session.minutes > 0,
+      );
+      const questions = progress.dailyQuiz?.[studyDate]?.answered > 0;
+      if (!realSession && !questions)
+        return alert(
+          "Registre ao menos uma sessão real ou responda questões antes de concluir.",
+        );
+      const pending = tasks
+        .filter((entry) => entry.scheduleDate === scheduleDate)
+        .flatMap((entry) =>
+          ["learn", "read", "practice"].map(
+            (step) => `${taskBaseKey(entry)}_${step}`,
+          ),
+        )
+        .filter((key) => !stepDone(key));
+      if (
+        pending.length &&
+        !(await Modal.waitConfirm(
+          `Existem ${pending.length} etapa(s) pendente(s). Deseja concluir mesmo assim?`,
+        ))
+      )
+        return;
+      Storage.closeDay(scheduleDate, studyDate);
+      Storage.setDayStatus(
+        scheduleDate,
+        scheduleDate === studyDate ? "concluido" : "recuperado",
+      );
+      if (scheduleDate !== studyDate) Storage.setRecoveryTarget(null);
+      Storage.clearTimer();
+      clearInterval(tickId);
+      alert(
+        scheduleDate === studyDate
+          ? "Estudo de hoje concluído."
+          : `Dia ${App.formatDateBR(scheduleDate)} recuperado.`,
+      );
+      renderHoje(data);
+    };
+  });
+}
+
+async function initProgresso() {
+  App.initShell("progresso");
+  const progress = Storage.get();
+  const stats = computeStats(progress);
+  const goals = progress.goals || { minutes: 90, questions: 20 };
+  const week = getWeeklyReport(progress);
+  const sessions = (progress.studySessions || []).slice().reverse();
+  const root = document.getElementById("app-root");
+  root.innerHTML = `
+    <div class="grid grid-4 mb-1">${statCard(stats.diasEstudados, "Dias estudados")}${statCard(`${week.hours}h`, "Horas nesta semana")}${statCard(stats.questoesResolvidas, "Questões")}${statCard(`${stats.percentualAcertos}%`, "Acertos")}</div>
+    <div class="card mb-1"><h2>Segurança do progresso</h2><p>Último backup: <strong>${progress.lastBackupAt ? App.formatDateBR(progress.lastBackupAt.slice(0, 10)) : "nunca"}</strong></p><a class="btn" href="backup.html">Baixar cópia do meu progresso</a></div>
+    <div class="card mb-1"><h2>Meta diária</h2><div class="grid grid-2"><div class="form-row"><label for="goal-min">Minutos</label><input id="goal-min" type="number" value="${goals.minutes}"></div><div class="form-row"><label for="goal-q">Questões</label><input id="goal-q" type="number" value="${goals.questions}"></div></div><button class="btn" id="btn-save-goals">Salvar meta</button></div>
+    <div class="card mb-1"><h2>Histórico de sessões</h2>${sessions.length ? `<div class="table-scroll" role="region" aria-label="Histórico de sessões" tabindex="0"><table><thead><tr><th>Data</th><th>Min</th><th>Matéria</th><th>Assunto</th><th>Origem</th><th>Ações</th></tr></thead><tbody>${sessions.map((session) => `<tr data-sid="${session.id}"><td>${App.formatDateBR(session.date)}</td><td><input aria-label="Minutos" class="sess-min" type="number" min="0" value="${session.minutes}"></td><td><input aria-label="Matéria" class="sess-sub" value="${App.esc(session.subject || "")}"></td><td><input aria-label="Assunto" class="sess-top" value="${App.esc(session.topic || "")}"></td><td>${session.dayKey && session.dayKey !== session.date ? `Recuperação de ${App.formatDateBR(session.dayKey)}` : App.esc(session.origin || "estudo")}</td><td><button class="btn btn-sm btn-secondary sess-save">Salvar</button> <button class="btn btn-sm btn-danger sess-del">Excluir</button></td></tr>`).join("")}</tbody></table></div>` : '<p class="muted">Nenhuma sessão registrada.</p>'}</div>
+    <div class="card"><h2>Últimos 7 dias</h2><p>${week.questions} questões · ${week.pct}% de acertos · ${week.daysStudied} dias ativos</p><ul class="list">${week.nextActions.map((action) => `<li>${App.esc(action)}</li>`).join("")}</ul></div>`;
+
+  document.getElementById("btn-save-goals").onclick = () => {
+    Storage.setGoals({
+      minutes: document.getElementById("goal-min").value,
+      questions: document.getElementById("goal-q").value,
+    });
+    alert("Meta salva.");
+    initProgresso();
+  };
+  root.querySelectorAll(".sess-save").forEach((button) => {
+    button.onclick = () => {
+      const row = button.closest("tr");
+      Storage.updateSession(row.dataset.sid, {
+        minutes: row.querySelector(".sess-min").value,
+        subject: row.querySelector(".sess-sub").value,
+        topic: row.querySelector(".sess-top").value,
+      });
+      alert("Sessão atualizada.");
+    };
+  });
+  root.querySelectorAll(".sess-del").forEach((button) => {
+    button.onclick = async () => {
+      if (
+        !(await Modal.waitConfirm(
+          "Excluir esta sessão? Os minutos deixarão de contar.",
+        ))
+      )
+        return;
+      Storage.removeSession(button.closest("tr").dataset.sid);
+      initProgresso();
+    };
+  });
+}
+
+async function initMaterias() {
+  App.initShell("materias");
+  try {
+    const { materias, aulas, pdfs } = await App.loadAll();
+    renderPainelMaterias({ materias, aulas, pdfs });
+  } catch (error) {
+    showLoadError(error);
+  }
+}
+
+function renderPainelMaterias(data) {
+  const groups = [
+    ["Conteúdo comum", data.materias.comum || []],
+    ["INSS", data.materias.inss || []],
+    ["PRF Administrativo", data.materias.prf || []],
+  ];
+  const progress = Storage.get();
+  const root = document.getElementById("app-root");
+  root.innerHTML = `<header class="section-heading"><div><p class="eyebrow">Meu plano</p><h2>Painel de matérias</h2></div><p class="muted">Veja o conteúdo disponível e continue pela matéria que precisa de atenção.</p></header>${groups.map(([groupName, subjects]) => `<section class="subject-group card"><h2>${App.esc(groupName)}</h2><div class="subject-grid">${subjects.map((subject) => renderSubjectCard(subject, groupName, data.aulas.aulas || [], data.pdfs.pdfs || [], progress)).join("")}</div></section>`).join("")}`;
+}
+
+function renderSubjectCard(subject, group, lessons, materials, progress) {
+  const subjectLessons = lessons.filter(
+    (item) => item.materia === subject.nome,
+  );
+  const subjectMaterials = materials.filter(
+    (item) => item.materia === subject.nome,
+  );
+  const realPdfs = subjectMaterials.filter(
+    (item) => item.tipo === "pdf",
+  ).length;
+  const quiz = progress.quiz?.bySubject?.[subject.nome] || {
+    answered: 0,
+    correct: 0,
+  };
+  const accuracy = quiz.answered
+    ? Math.round(((quiz.correct || 0) / quiz.answered) * 100)
+    : 0;
+  const lastSession = (progress.studySessions || [])
+    .filter(
+      (session) => session.subject === subject.nome && session.minutes > 0,
+    )
+    .sort((a, b) => b.date.localeCompare(a.date))[0];
+  const materialUrl = `biblioteca.html?materia=${encodeURIComponent(subject.nome)}`;
+  const questionUrl = `questoes.html?materia=${encodeURIComponent(subject.nome)}`;
+  return `<article class="subject-card" style="--subject-color: ${App.esc(subject.cor || "#1e4d7b")}"><p class="subject-group-label">${App.esc(group)}</p><h3>${App.esc(subject.nome)}</h3><div class="topic-list">${(subject.assuntos || []).map((topic) => `<span class="badge badge-muted">${App.esc(topic)}</span>`).join("")}</div><div class="subject-stats">${statCardMini(subjectLessons.length, "aulas", `biblioteca.html?tipo=aulas&materia=${encodeURIComponent(subject.nome)}`)}${statCardMini(subjectMaterials.length, `fontes (${realPdfs} PDF)`, materialUrl)}${statCardMini(quiz.answered || 0, "questões", questionUrl)}${statCardMini(`${accuracy}%`, "acertos", questionUrl)}</div><p class="muted">Último estudo: <strong>${lastSession ? App.formatDateBR(lastSession.date) : "ainda não estudada"}</strong></p><div class="actions"><a class="btn btn-sm" href="${materialUrl}">Ver materiais</a><a class="btn btn-sm btn-accent" href="${questionUrl}">Fazer questões</a></div></article>`;
+}
+
+function statCardMini(value, label, href) {
+  return `<a class="subject-stat" href="${href}"><strong>${App.esc(value)}</strong><span>${App.esc(label)}</span></a>`;
+}
+
+async function initCadernoErros() {
+  App.initShell("erros");
+  const root = document.getElementById("app-root");
+  root.innerHTML = `
+    <section class="card mb-1">
+      <h2>Registrar um erro</h2>
+      <div class="grid grid-2">
+        <div class="form-row"><label for="er-mat">Matéria</label><input id="er-mat"></div>
+        <div class="form-row"><label for="er-ass">Assunto</label><input id="er-ass"></div>
+      </div>
+      <div class="form-row"><label for="er-q">Questão</label><textarea id="er-q"></textarea></div>
+      <div class="form-row"><label for="er-com">Comentário</label><textarea id="er-com"></textarea></div>
+      <div class="form-row"><label for="er-tipo">Classificação</label><select id="er-tipo"><option value="teoria">Falta de teoria</option><option value="interpretacao">Interpretação</option><option value="atencao">Atenção</option><option value="memorizacao">Memorização</option><option value="pegadinha">Pegadinha de banca</option></select></div>
+      <button class="btn" type="button" id="er-save">Salvar erro</button>
+    </section>
+    <section class="card"><h2>Erros registrados</h2><div id="er-list"></div></section>`;
+
+  const paint = () => {
+    const progress = Storage.get();
+    const today = todayISO();
+    const list = document.getElementById("er-list");
+    list.innerHTML = (progress.erros || []).length
+      ? progress.erros
+          .slice()
+          .reverse()
+          .map((error) => renderErrorCard(error, today))
+          .join("")
+      : '<p class="muted">Nenhum erro registrado.</p>';
+    list.querySelectorAll("[data-review]").forEach((button) => {
+      button.onclick = () => {
+        Storage.markErroReview(button.dataset.id, button.dataset.review);
+        paint();
+      };
+    });
+    list.querySelectorAll("[data-delete-error]").forEach((button) => {
+      button.onclick = async () => {
+        if (!await Modal.waitConfirm("Excluir este erro?")) return;
+        Storage.removeErro(button.dataset.deleteError);
+        paint();
+      };
+    });
+  };
+
+  document.getElementById("er-save").onclick = () => {
+    Storage.addErro({
+      materia: document.getElementById("er-mat").value.trim(),
+      assunto: document.getElementById("er-ass").value.trim(),
+      questao: document.getElementById("er-q").value.trim(),
+      comentario: document.getElementById("er-com").value.trim(),
+      tipo: document.getElementById("er-tipo").value,
+    });
+    paint();
+  };
+  paint();
+}
+
+function renderErrorCard(error, today) {
+  const reviews = error.reviews || {};
+  const done = error.done || {};
+  const due = ["d1", "d7", "d30"].filter((key) => !done[key] && reviews[key] && reviews[key] <= today);
+  return `<article class="card mb-1"><p><strong>${App.esc(error.materia || "Sem matéria")}</strong> · ${App.esc(error.assunto || "")}${due.length ? ` <span class="badge badge-warn">Revisar ${due.map((key) => key.toUpperCase()).join(", ")}</span>` : ""}</p><p>${App.esc(error.questao || "")}</p><p class="muted">${App.esc(error.comentario || error.motivo || "Sem comentário")}</p><div class="actions">${["d1", "d7", "d30"].map((key) => `<button class="btn btn-sm btn-secondary" type="button" data-review="${key}" data-id="${App.esc(error.id)}" ${done[key] ? "disabled" : ""}>${done[key] ? `${key.toUpperCase()} concluído` : `Concluir ${key.toUpperCase()}`}</button>`).join("")}<button class="btn btn-sm btn-danger" type="button" data-delete-error="${App.esc(error.id)}">Excluir</button></div></article>`;
+}

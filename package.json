@@ -6,6 +6,10 @@
     "test:calendar": "node scripts/test-calendar.mjs",
     "check:links": "node scripts/check-links.mjs",
     "check:links:internal": "node scripts/check-links.mjs --internal-only",
-    "test": "npm run validate && npm run test:calendar && npm run check:links:internal"
+    "test:e2e": "playwright test",
+    "test": "npm run validate && npm run test:calendar && npm run check:links:internal && npm run test:e2e"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
   }
 }

@@ -30,7 +30,7 @@ pages.forEach(p => {
 });
 
 // 2. check JS files
-['storage.js','app.js','dashboard.js','cronograma.js','quiz.js','backup.js','biblioteca.js','flashcards.js','edital.js'].forEach(f => {
+['calendar.js','storage.js','app.js','dashboard.js','cronograma.js','quiz.js','backup.js','biblioteca.js','flashcards.js','edital.js'].forEach(f => {
   const exists = fs.existsSync(path.join(jsDir, f));
   log(exists ? 'OK' : 'FAIL', `JS ${f}`);
   results.push({ type: 'js', file: f, status: exists ? 'ok' : 'missing' });

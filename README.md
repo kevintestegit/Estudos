@@ -48,7 +48,7 @@ Ficam em `data/`:
 ## Backup
 
 1. Abra **Backup**
-2. **Baixar backup.json**
+2. **Baixar cópia do meu progresso**
 3. Para restaurar: escolher arquivo → Importar
 
 A migração de schema é automática e **não zera** o progresso.
@@ -58,6 +58,9 @@ A migração de schema é automática e **não zera** o progresso.
 ```bash
 node scripts/validate.mjs
 node scripts/test-calendar.mjs
+node scripts/check-links.mjs --internal-only
+for file in assets/js/*.js; do node --check "$file" || exit 1; done
+npm run test:e2e
 ```
 
 ## GitHub Pages

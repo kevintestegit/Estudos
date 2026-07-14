@@ -41,7 +41,7 @@ async function initEdital() {
           <div class="progress-bar mb-1"><span style="width:${cov.pct}%"></span></div>
           ${Object.entries(byMat).map(([mat, tops]) => `
             <h3 class="mt-1">${App.esc(mat)}</h3>
-            <table>
+            <div class="table-scroll" role="region" aria-label="Tópicos de ${App.esc(mat)}" tabindex="0"><table>
               <thead><tr><th>Tópico</th><th>Subtópico</th><th>Prioridade</th><th>Status</th><th></th></tr></thead>
               <tbody>
                 ${tops.map((t) => {
@@ -60,7 +60,7 @@ async function initEdital() {
                   </tr>`;
                 }).join('')}
               </tbody>
-            </table>`).join('')}
+            </table></div>`).join('')}
         </div>`;
     }
 

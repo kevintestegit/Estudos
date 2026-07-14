@@ -1,209 +1,279 @@
 async function initBiblioteca() {
-  App.initShell('biblioteca');
+  App.initShell("biblioteca");
+  const params = new URLSearchParams(location.search);
   try {
-    const [materiaisData, provasData] = await Promise.all([
-      App.loadJSON('data/materiais.json'),
-      App.loadJSON('data/provas.json')
+    const [materiaisData, provasData, aulasData, pdfsData] = await Promise.all([
+      App.loadJSON("data/materiais.json"),
+      App.loadJSON("data/provas.json"),
+      App.loadJSON("data/aulas.json"),
+      App.loadJSON("data/pdfs.json"),
     ]);
-    const materiais = (materiaisData.materiais || []).map((m) => ({
-      ...m,
-      _origem: 'material'
+    const materiais = (materiaisData.materiais || []).map((item) => ({
+      ...item,
+      _origem: "material",
     }));
-    const provas = (provasData.provas || []).map((p) => ({
-      ...p,
-      categoria: p.categoria || catFromConcurso(p.concurso),
-      materia: p.materia || (p.tipo === 'gabarito' ? 'Gabarito' : 'Prova completa'),
-      prioridade: p.prioridade || 'alta',
-      _origem: 'prova'
+    const provas = (provasData.provas || []).map((item) => ({
+      ...item,
+      categoria: item.categoria || categoryFromContest(item.concurso),
+      materia: item.materia || "Prova completa",
+      prioridade: item.prioridade || "alta",
+      _origem: "prova",
     }));
-    const all = [...materiais, ...provas];
-    renderBiblioteca(all, params);
-  } catch (e) {
-    document.getElementById('app-root').innerHTML =
-      `<div class="alert alert-danger">Erro ao carregar biblioteca. Use servidor local. ${App.esc(e.message)}</div>`;
+    const aulas = (aulasData.aulas || []).map((item) => ({
+      ...item,
+      titulo: item.titulo,
+      tipo: "aula",
+      categoria: "comum",
+      fonte: "YouTube ou fonte indicada",
+      _origem: "aula",
+    }));
+    const pdfs = (pdfsData.pdfs || []).map((item) => ({
+      ...item,
+      categoria: "comum",
+      fonte: item.fonte || "Fonte indicada",
+      _origem: "pdf",
+    }));
+    renderBiblioteca([...materiais, ...provas, ...aulas, ...pdfs], params);
+  } catch (error) {
+    document.getElementById("app-root").innerHTML =
+      `<div class="alert alert-danger">Erro ao carregar biblioteca. ${App.esc(error.message)}</div>`;
   }
 }
 
-function catFromConcurso(c) {
-  const s = String(c || '').toLowerCase();
-  if (s.includes('prf')) return 'prf';
-  if (s.includes('inss')) return 'inss';
-  return 'comum';
+function categoryFromContest(contest) {
+  const value = String(contest || "").toLowerCase();
+  if (value.includes("prf")) return "prf";
+  if (value.includes("inss")) return "inss";
+  return "comum";
+}
+
+function normalizeLibraryFilter(params) {
+  const type = params.get("tipo");
+  if (type === "pdfs") return "pdf";
+  if (type === "aulas") return "aula";
+  if (type === "questoes" || type === "acertos") return type;
+  if (
+    [
+      "pdf",
+      "aula",
+      "inss",
+      "prf",
+      "comum",
+      "prova",
+      "gabarito",
+      "legislacao",
+    ].includes(type)
+  )
+    return type;
+  return params.get("materia") ? "materia" : "todos";
 }
 
 function renderBiblioteca(all, params) {
-  const root = document.getElementById('app-root');
-  const p = Storage.get();
-  const estudados = p.materiaisEstudados || [];
-  const provasFeitas = p.provasFeitas || [];
-  const revisao = p.materiaisRevisao || [];
+  const root = document.getElementById("app-root");
+  let filter = normalizeLibraryFilter(params);
+  let subject = params.get("materia") || "";
+  let query = "";
 
-  root.innerHTML = `${(new URLSearchParams(location.search)).get("materia")?`<div class="alert alert-info">Filtrado por: ${App.esc((new URLSearchParams(location.search)).get("materia"))}</div>`:""}
-    <div class="grid grid-3 mb-1">
-      <div class="card stat"><span class="value">${estudados.length}</span><span class="label">Materiais estudados</span></div>
-      <div class="card stat"><span class="value">${provasFeitas.length}</span><span class="label">Provas reais feitas</span></div>
-      <div class="card stat"><span class="value">${revisao.length}</span><span class="label">Na fila de revisão</span></div>
-    </div>
-
-    <div class="card mb-1">
-      <h2>Filtros</h2>
+  root.innerHTML = `
+    <div id="active-filter"></div>
+    <div class="grid grid-3 mb-1" id="library-stats"></div>
+    <section class="card mb-1" aria-labelledby="filter-title">
+      <h2 id="filter-title">Encontrar material</h2>
       <div class="actions" id="filters">
-        <button class="btn btn-sm filter-btn active" data-f="todos">Todos</button>
-        <button class="btn btn-sm btn-secondary filter-btn" data-f="inss">INSS</button>
-        <button class="btn btn-sm btn-secondary filter-btn" data-f="prf">PRF Administrativo</button>
-        <button class="btn btn-sm btn-secondary filter-btn" data-f="comum">Conteúdo comum</button>
-        <button class="btn btn-sm btn-secondary filter-btn" data-f="prova">Provas</button>
-        <button class="btn btn-sm btn-secondary filter-btn" data-f="gabarito">Gabaritos</button>
-        <button class="btn btn-sm btn-secondary filter-btn" data-f="legislacao">Legislação</button>
-        <button class="btn btn-sm btn-secondary filter-btn" data-f="pdf">PDFs oficiais</button>
+        ${[
+          ["todos", "Todos"],
+          ["inss", "INSS"],
+          ["prf", "PRF Administrativo"],
+          ["comum", "Conteúdo comum"],
+          ["aula", "Aulas"],
+          ["pdf", "PDFs"],
+          ["questoes", "Questões"],
+          ["acertos", "Meu desempenho"],
+          ["legislacao", "Legislação"],
+          ["prova", "Provas"],
+          ["gabarito", "Gabaritos"],
+        ]
+          .map(
+            ([value, label]) =>
+              `<button class="btn btn-sm btn-secondary filter-btn" type="button" data-filter="${value}">${label}</button>`,
+          )
+          .join("")}
       </div>
-      <div class="form-row mt-1" style="max-width:360px">
-        <label for="bib-search">Buscar</label>
-        <input id="bib-search" type="search" placeholder="título, matéria, banca…">
+      <div class="form-row mt-1 library-search">
+        <label for="bib-search">Buscar por título, matéria ou fonte</label>
+        <input id="bib-search" type="search" placeholder="Ex.: Português ou Lei 14.133">
       </div>
-    </div>
-
+    </section>
     <div id="bib-list" class="grid grid-2"></div>
-
-    <div class="card mt-2">
+    <section class="card mt-2">
       <h2>Fila de revisão</h2>
       <div id="bib-revisao"></div>
-    </div>
-  `;
+    </section>`;
 
-  let filter = (()=>{const t=params.get('tipo'),m=params.get('materia');if(t==='aulas'||t==='pdfs'||t==='questoes'||t==='acertos')return t;if(m==='comum')return'comum';if(m==='prf')return'prf';if(m==='inss')return'inss';if(m)return'nome';return'todos'})();
-  let q = '';
+  function matches(item) {
+    if (
+      subject &&
+      String(item.materia || "").toLowerCase() !== subject.toLowerCase()
+    )
+      return false;
+    if (["inss", "prf", "comum"].includes(filter) && item.categoria !== filter)
+      return false;
+    if (filter === "aula" && item._origem !== "aula") return false;
+    if (filter === "pdf" && item.tipo !== "pdf") return false;
+    if (
+      ["prova", "gabarito", "legislacao"].includes(filter) &&
+      item.tipo !== filter
+    )
+      return false;
+    if (!query) return true;
+    return [item.titulo, item.materia, item.concurso, item.banca, item.fonte]
+      .join(" ")
+      .toLowerCase()
+      .includes(query);
+  }
 
-  function match(item) {
-    if(filter === 'aulas' && item._origem !== 'material') return false;
-    if(filter === 'pdfs' && item._origem !== 'material' && item.tipo !== 'pdf' && item.tipo !== 'legislacao') return false;
-    if(filter === 'questoes' || filter === 'acertos') return false;
-    if(filter === 'nome'){
-        const m = (params.get('materia')||'').toLowerCase();
-        return (item.materia||'').toLowerCase() === m || (item.concurso||'').toLowerCase().includes(m);
-    }
-    if(filter === 'inss' && item.categoria !== 'inss') return false;
-    if(filter === 'prf' && item.categoria !== 'prf') return false;
-    if(filter === 'comum' && item.categoria !== 'comum') return false;
-    if(filter === 'prova' && item.tipo !== 'prova') return false;
-    if(filter === 'gabarito' && item.tipo !== 'gabarito') return false;
-    if(filter === 'legislacao' && item.tipo !== 'legislacao') return false;
-    if(filter === 'pdf' && item.tipo !== 'pdf' && !(item.url||'').toLowerCase().includes('.pdf')) return false;
-    if(q){
-        const hay = [item.titulo,item.materia,item.concurso,item.banca,item.fonte,item.cargo].join(' ').toLowerCase();
-        if(!hay.includes(q)) return false;
-    }
-    return true;
-}
-function paintList() {
-    const list = document.getElementById('bib-list');
-    const items = all.filter(match);
-    if (!items.length) {
-      list.innerHTML = '<div class="card"><p class="muted">Nenhum material com esse filtro.</p></div>';
-      return;
-    }
-    list.innerHTML = items.map((item) => {
-      const studied = Storage.isMaterialStudied(item.id);
-      const inRev = Storage.isInRevisao(item.id);
-      return `
-        <div class="card task-card">
-          <h3>${App.esc(item.titulo)}</h3>
-          <div class="task-meta">
-            <span class="badge badge-info">${App.esc(item.concurso || '—')}</span>
-            <span class="badge badge-muted">${App.esc(item.tipo || '—')}</span>
-            <span class="badge ${prioBadge(item.prioridade)}">${App.esc(item.prioridade || '—')}</span>
-            ${studied ? '<span class="badge badge-ok">Estudado</span>' : ''}
-            ${inRev ? '<span class="badge badge-warn">Revisão</span>' : ''}
-          </div>
-          <p><strong>Matéria:</strong> ${App.esc(item.materia || '—')}</p>
-          <p><strong>Ano:</strong> ${item.ano ?? '—'}
-            ${item.banca ? ` · <strong>Banca:</strong> ${App.esc(item.banca)}` : ''}
-            ${item.questoes ? ` · <strong>Questões:</strong> ${item.questoes}` : ''}
-          </p>
-          <p class="muted"><strong>Fonte:</strong> ${App.esc(item.fonte || '—')}</p>
-          <div class="actions">
-            <a class="btn btn-sm" href="${App.esc(item.url || '#')}" target="_blank" rel="noopener">Abrir material</a>
-            <button class="btn btn-sm btn-accent" data-study="${App.esc(item.id)}">${studied ? 'Já estudado' : 'Marcar como estudado'}</button>
-            <button class="btn btn-sm btn-secondary" data-rev="${App.esc(item.id)}">${inRev ? 'Na revisão' : 'Adicionar à revisão'}</button>
-          </div>
-        </div>`;
-    }).join('');
-
-    list.querySelectorAll('[data-study]').forEach((btn) => {
-      btn.onclick = () => {
-        const item = all.find((x) => x.id === btn.dataset.study);
-        if (!item) return;
-        Storage.markMaterialStudied(item);
-        paintStats();
-        paintList();
-        paintRevisao();
-        App.renderStatusBar();
-      };
-    });
-    list.querySelectorAll('[data-rev]').forEach((btn) => {
-      btn.onclick = () => {
-        const item = all.find((x) => x.id === btn.dataset.rev);
-        if (!item) return;
-        if (Storage.isInRevisao(item.id)) Storage.removeMaterialRevisao(item.id);
-        else Storage.addMaterialRevisao(item);
-        paintStats();
-        paintList();
-        paintRevisao();
-      };
+  function paintActiveFilter() {
+    const box = document.getElementById("active-filter");
+    const typeLabel = {
+      aula: "Aulas",
+      pdf: "PDFs",
+      questoes: "Questões",
+      acertos: "Meu desempenho",
+    }[filter];
+    const label = [typeLabel, subject].filter(Boolean).join(" · ");
+    box.innerHTML = label
+      ? `<div class="alert alert-info">Filtro ativo: <strong>${App.esc(label)}</strong> <button class="btn btn-sm btn-secondary" type="button" id="clear-filter">Limpar filtro</button></div>`
+      : "";
+    document.getElementById("clear-filter")?.addEventListener("click", () => {
+      filter = "todos";
+      subject = "";
+      history.replaceState(null, "", "biblioteca.html");
+      paint();
     });
   }
 
   function paintStats() {
-    const pr = Storage.get();
-    root.querySelectorAll('.stat .value')[0].textContent = (pr.materiaisEstudados || []).length;
-    root.querySelectorAll('.stat .value')[1].textContent = (pr.provasFeitas || []).length;
-    root.querySelectorAll('.stat .value')[2].textContent = (pr.materiaisRevisao || []).length;
+    const progress = Storage.get();
+    document.getElementById("library-stats").innerHTML = `
+      ${libraryStat((progress.materiaisEstudados || []).length, "Materiais estudados")}
+      ${libraryStat((progress.provasFeitas || []).length, "Provas feitas")}
+      ${libraryStat((progress.materiaisRevisao || []).length, "Na fila de revisão")}`;
   }
 
-  function paintRevisao() {
-    const box = document.getElementById('bib-revisao');
-    const items = Storage.get().materiaisRevisao || [];
-    if (!items.length) {
-      box.innerHTML = '<p class="muted">Nada na fila de revisão.</p>';
+  function paintList() {
+    const list = document.getElementById("bib-list");
+    if (filter === "questoes" || filter === "acertos") {
+      const progress = Storage.get();
+      const stats = subject
+        ? progress.quiz?.bySubject?.[subject] || {}
+        : progress.quiz || {};
+      const answered = Number(stats.answered) || 0;
+      const correct = Number(stats.correct) || 0;
+      const accuracy = answered ? Math.round((correct / answered) * 100) : 0;
+      const questionUrl = `questoes.html${subject ? `?materia=${encodeURIComponent(subject)}` : ""}`;
+      list.innerHTML = filter === "questoes"
+        ? `<article class="card task-card"><h3>Praticar${subject ? ` — ${App.esc(subject)}` : " questões"}</h3><p>Abra o questionário para responder questões e receber a resolução.</p><a class="btn btn-accent" href="${questionUrl}">Fazer questões</a></article>`
+        : `<article class="card task-card"><h3>Seu desempenho${subject ? ` — ${App.esc(subject)}` : ""}</h3><p><strong>${answered}</strong> questões respondidas · <strong>${accuracy}%</strong> de acertos.</p><div class="actions"><a class="btn btn-accent" href="${questionUrl}">Continuar praticando</a><a class="btn btn-secondary" href="progresso.html">Ver meu progresso</a></div></article>`;
       return;
     }
-    box.innerHTML = `<ul class="list">${items.map((r) => `
-      <li>
-        <strong>${App.esc(r.titulo)}</strong>
-        <span class="muted"> · ${App.esc(r.materia)} · ${App.esc(r.tipo)}</span>
-        <div class="actions">
-          ${r.url ? `<a class="btn btn-sm btn-secondary" href="${App.esc(r.url)}" target="_blank" rel="noopener">Abrir</a>` : ''}
-          <button class="btn btn-sm btn-danger" data-rm="${App.esc(r.id)}">Remover</button>
+    const items = all.filter(matches);
+    if (!items.length) {
+      list.innerHTML =
+        '<div class="card empty-state"><h3>Nenhum resultado</h3><p>Tente limpar o filtro ou buscar outro termo.</p></div>';
+      return;
+    }
+    list.innerHTML = items
+      .map((item) => {
+        const studied = Storage.isMaterialStudied(item.id);
+        const reviewing = Storage.isInRevisao(item.id);
+        const url = App.resolveUrl(item.url, item.materia);
+        return `<article class="card task-card">
+        <h3>${App.esc(item.titulo)}</h3>
+        <div class="task-meta">
+          <span class="badge badge-info">${App.esc(item.materia || item.concurso || "Geral")}</span>
+          <span class="badge badge-muted">${App.esc(item.tipo || "fonte")}</span>
+          ${studied ? '<span class="badge badge-ok">Estudado</span>' : ""}
         </div>
-      </li>`).join('')}</ul>`;
-    box.querySelectorAll('[data-rm]').forEach((btn) => {
-      btn.onclick = () => {
-        Storage.removeMaterialRevisao(btn.dataset.rm);
-        paintStats();
-        paintList();
-        paintRevisao();
+        <p class="muted">Fonte: ${App.esc(item.fonte || "Fonte indicada no endereço")}</p>
+        <div class="actions">
+          <a class="btn btn-sm" ${App.linkAttrs(url)}>${App.materialActionLabel(item)}</a>
+          <button class="btn btn-sm btn-accent" type="button" data-study="${App.esc(item.id)}">${studied ? "Já estudado" : "Marcar como estudado"}</button>
+          <button class="btn btn-sm btn-secondary" type="button" data-review="${App.esc(item.id)}">${reviewing ? "Remover da revisão" : "Revisar depois"}</button>
+        </div>
+      </article>`;
+      })
+      .join("");
+
+    list.querySelectorAll("[data-study]").forEach((button) => {
+      button.onclick = () => {
+        const item = all.find(
+          (candidate) => candidate.id === button.dataset.study,
+        );
+        if (item) Storage.markMaterialStudied(item);
+        paint();
+      };
+    });
+    list.querySelectorAll("[data-review]").forEach((button) => {
+      button.onclick = () => {
+        const item = all.find(
+          (candidate) => candidate.id === button.dataset.review,
+        );
+        if (!item) return;
+        if (Storage.isInRevisao(item.id))
+          Storage.removeMaterialRevisao(item.id);
+        else Storage.addMaterialRevisao(item);
+        paint();
       };
     });
   }
 
-  document.querySelectorAll('.filter-btn').forEach((btn) => {
-    btn.onclick = () => {
-      filter = btn.dataset.f;
-      document.querySelectorAll('.filter-btn').forEach((b) => {
-        b.classList.toggle('active', b === btn);
-        b.classList.toggle('btn-secondary', b !== btn);
-        if (b === btn) b.classList.remove('btn-secondary');
-      });
-      paintList();
+  function paintReview() {
+    const box = document.getElementById("bib-revisao");
+    const items = Storage.get().materiaisRevisao || [];
+    box.innerHTML = items.length
+      ? `<ul class="list">${items.map((item) => `<li><strong>${App.esc(item.titulo)}</strong><button class="btn btn-sm btn-danger" type="button" data-remove-review="${App.esc(item.id)}">Remover</button></li>`).join("")}</ul>`
+      : '<p class="muted">Nada na fila de revisão.</p>';
+    box.querySelectorAll("[data-remove-review]").forEach((button) => {
+      button.onclick = () => {
+        Storage.removeMaterialRevisao(button.dataset.removeReview);
+        paint();
+      };
+    });
+  }
+
+  function paintButtons() {
+    document.querySelectorAll(".filter-btn").forEach((button) => {
+      const active = button.dataset.filter === filter;
+      button.classList.toggle("btn-secondary", !active);
+      button.classList.toggle("active", active);
+    });
+  }
+
+  function paint() {
+    paintActiveFilter();
+    paintStats();
+    paintList();
+    paintReview();
+    paintButtons();
+    App.renderStatusBar();
+  }
+
+  document.querySelectorAll(".filter-btn").forEach((button) => {
+    button.onclick = () => {
+      filter = button.dataset.filter;
+      subject = "";
+      paint();
     };
   });
-  document.getElementById('bib-search').oninput = (e) => {
-    q = e.target.value.trim().toLowerCase();
+  document.getElementById("bib-search").oninput = (event) => {
+    query = event.target.value.trim().toLowerCase();
     paintList();
   };
+  paint();
+}
 
-  paintList();
-  paintRevisao();
+function libraryStat(value, label) {
+  return `<div class="card stat"><span class="value">${value}</span><span class="label">${label}</span></div>`;
 }
 
 window.initBiblioteca = initBiblioteca;
