@@ -35,6 +35,12 @@ test("vídeo só fica ok com metadados externos compatíveis", async () => {
   assert.equal(result.idExtraido, lesson.videoId);
 });
 
+test("compatibilidade temática aceita termos flexionados e equivalência documentada", async () => {
+  const lesson = { ...base, titulo: "Morfossintaxe essencial", tipo: "video", url: "https://www.youtube.com/watch?v=abcdefghijk", videoId: "abcdefghijk", canal: "Professor", tituloYoutube: "Diferença entre MORFOLOGIA e SINTAXE - Para concurso", notas: "Aula sobre morfologia e sintaxe." };
+  const result = await validateLesson(lesson, { fetch: async () => new Response(JSON.stringify({ title: lesson.tituloYoutube, author_name: lesson.canal }), { status: 200 }) });
+  assert.equal(result.status, "ok");
+});
+
 test("erro de rede não é convertido em ok", async () => {
   const result = await validateLesson(
     { ...base, tipo: "video", url: "https://www.youtube.com/watch?v=abcdefghijk", videoId: "abcdefghijk", canal: "Canal", tituloYoutube: base.titulo },

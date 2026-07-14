@@ -49,7 +49,7 @@ Ficam em `data/`:
 
 `data/aulas.json` usa `url` como única fonte da interface. Cada registro é `video`, `playlist` ou `indisponivel`; pesquisas do YouTube e fallbacks automáticos são proibidos. Conteúdo sem disponibilidade, título, canal e compatibilidade temática comprovados permanece com `url: null`.
 
-O relatório individual fica em `reports/aulas-link-report.json`. `reports/aulas-candidates.json` preserva os endereços antigos somente para auditoria: eles não são fontes confiáveis e nunca são carregados pela aplicação.
+O relatório individual fica em `reports/aulas-link-report.json`; as buscas e alternativas avaliadas ficam em `reports/aulas-research.json`. `reports/aulas-candidates.json` preserva os endereços antigos somente para auditoria: eles não são fontes confiáveis e nunca são carregados pela aplicação.
 
 ## Backup
 

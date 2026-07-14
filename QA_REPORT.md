@@ -1,68 +1,75 @@
-# QA_REPORT — 2026-07-14
+# QA_REPORT — videoaulas — 2026-07-14
 
 ## Resultado
 
-A biblioteca contém 69 registros normalizados. Nenhum endereço antigo pôde ser autenticado porque o acesso ao YouTube foi bloqueado pela rede institucional; portanto, nenhum vídeo ou playlist foi publicado como disponível.
+A execução pela rede Wi-Fi publicou 45 vídeos verificados e manteve 24 aulas indisponíveis. Não há playlists, pesquisas genéricas, campo `yt`, duplicações ou links não verificados publicados.
 
 | Métrica | Quantidade |
 |---|---:|
 | Total de aulas | 69 |
-| Vídeos diretos aprovados | 0 |
+| Vídeos aprovados | 45 |
 | Playlists aprovadas | 0 |
-| Indisponíveis | 69 |
-| Links efetivamente verificados e aprovados | 0 |
-| Candidatos antigos recusados para publicação | 69 |
-| Rejeitados conclusivamente | 4 |
-| Não verificados por erro de rede | 65 |
-| Substituições realizadas | 0 |
-| Timeouts | 0 |
-| Duplicações legítimas | 0 |
-| Grupos de duplicação suspeita antigos corrigidos | 14 (46 usos) |
-| Duplicações suspeitas restantes | 0 |
+| Indisponíveis | 24 |
+| Links publicados verificados externamente | 45 |
+| Candidatos antigos aprovados | 0 |
+| Candidatos antigos rejeitados | 69 |
+| Candidatos antigos removidos | 65 |
+| Candidatos antigos privados | 0 |
+| Candidatos antigos incompatíveis | 2 |
+| Candidatos antigos com URL inválida | 2 |
+| Substituições aprovadas | 45 |
+| Resultados de pesquisa avaliados | 550 |
+| Desatualizados comprovados | 0 |
+| Erros de rede na validação final | 0 |
+| Timeouts na validação final | 0 |
+| Duplicações finais | 0 |
+| Grupos duplicados antigos removidos | 14 (46 usos) |
 
-Os quatro candidatos conclusivamente rejeitados são duas ocorrências de `dQw4w9WgXcQ` (`titulo_incompativel`) e duas páginas do Planalto cadastradas como videoaula (`url_invalida`). Os demais 65 candidatos retornaram `erro_de_rede` e não foram aprovados.
+## Conectividade
 
-## Auditoria por aula
+`curl -I -L --max-time 15 https://www.youtube.com/` respondeu HTTP/2 200, sem erro TLS, captcha, consentimento ou bloqueio institucional. Não houve redirecionamento problemático.
 
-O arquivo `reports/aulas-link-report.json` registra, para cada uma das 69 aulas: ID interno, matéria, assunto, URL avaliada, status final, título e canal reais quando disponíveis, tipo, data, motivo, candidato antigo, URL substituta, escopo e auditoria técnica do candidato. Ele também relaciona os 14 grupos de duplicação suspeita do cadastro anterior, abrangendo 46 usos que foram removidos. `reports/aulas-candidates.json` preserva somente os candidatos anteriores e não é consumido pela aplicação.
+O teste do oEmbed respondeu HTTP 200 e JSON com `title` e `author_name` (`Rick Astley`). Esse vídeo foi usado somente para testar conectividade e permanece proibido na biblioteca.
 
-Todos os registros finais usam `tipo: indisponivel`, `url: null`, data `2026-07-14` e a nota `Videoaula confiável ainda não selecionada.`
+O relatório anterior registrava bloqueio FortiGate. Esse é apenas o histórico da primeira execução; a validação atual ocorreu com sucesso pelo Wi-Fi.
 
-## Validação externa
+## Processo e evidências
 
-Foram feitas requisições reais ao endpoint oEmbed do YouTube. O Node retornou `fetch failed` por falha na cadeia TLS. O diagnóstico com `curl` confirmou certificado local não confiável (`curl: (60)`) e, com a desativação de TLS usada somente para diagnóstico, o FortiGate respondeu HTTP 403 com `Application Blocked` para a categoria YouTube. A resposta bloqueada não foi usada como comprovação de nenhum conteúdo.
+- Os 69 candidatos antigos foram consultados novamente: 65 retornaram HTTP 404 no oEmbed, duas ocorrências de `dQw4w9WgXcQ` foram incompatíveis e duas páginas do Planalto eram URLs inválidas como videoaula.
+- Foram executadas 69 pesquisas específicas no YouTube e avaliados 550 resultados com título, canal, descrição visível, duração e data exibida.
+- Os 45 selecionados foram consultados novamente no oEmbed e na página pública. Título e canal coincidiram em 45/45; duração e data foram obtidas em 45/45.
+- A consulta às legendas públicas retornou corpo vazio e não foi usada como evidência de aprovação.
+- Os 24 casos ambíguos permaneceram com `tipo: indisponivel` e `url: null`.
 
-Nenhum canal, professor ou título foi registrado porque nenhum metadado pôde ser autenticado. Não houve pesquisa nem seleção de substitutos confiáveis sob esse bloqueio.
+Os detalhes por aula estão em `reports/aulas-link-report.json`; consultas, alternativas e motivos ficam em `reports/aulas-research.json`. Os endereços históricos permanecem em `reports/aulas-candidates.json` e não são consumidos pela aplicação.
+
+## Canais
+
+Foram usados 28 canais identificados, incluindo Estratégia Concursos, Gran Cursos Online, Nova Concursos, TecConcursos, Cursos do Portal, FZ Concursos, IMP Concursos, Carranza Cursos, professores especializados e canais educacionais consolidados. O nome exato retornado pelo oEmbed consta em cada registro.
 
 ## Interface e cache
 
-- `url` é a única fonte da interface; `yt` foi removido.
-- Vídeos e playlists, quando futuramente aprovados, usam a URL exata, nova aba e `rel="noopener noreferrer"`.
-- Indisponíveis exibem `Videoaula ainda não disponível`, sem `<a>` e sem conclusão por clique.
-- Hoje, Biblioteca e Matérias foram testados em 1280×800 e 390×844.
-- O Service Worker usa `portal-estudos-v12`, remove caches anteriores e mantém navegação e `/data/` em network-first.
+- `url` continua sendo a única fonte da interface.
+- Vídeos usam `Assistir videoaula`, URL exata, nova aba e `rel="noopener noreferrer"`.
+- Indisponíveis continuam sem `<a>` e sem conclusão por clique.
+- O Service Worker usa `portal-estudos-v13`; durante `activate`, caches anteriores, inclusive v12, são removidos.
+- Navegação e `/data/` continuam em network-first.
 
-## Comandos executados
+## Comandos finais
 
-| Comando | Código | Resultado | Observações |
-|---|---:|---|---|
-| `node scripts/validate.mjs` | 0 | aprovado | Estrutura, 69 aulas, referências, ausência de pesquisas/`yt`, IDs e cache v12 |
-| `node scripts/test-calendar.mjs` | 0 | aprovado | 27 casos aprovados |
-| `node scripts/check-links.mjs` | 1 | limitado pela rede | 69 indisponíveis; candidatos: 65 `erro_de_rede`, 2 `titulo_incompativel`, 2 `url_invalida` |
-| `node --test tests/check-links.test.mjs` | 0 | aprovado | 7 aprovados, 0 falhos, 0 ignorados; usa `fetch` mockado e não comprova links reais |
-| `node --check assets/js/app.js` | 0 | aprovado | Sem erro de sintaxe |
-| `node --check assets/js/dashboard.js` | 0 | aprovado | Sem erro de sintaxe |
-| `node --check assets/js/biblioteca.js` | 0 | aprovado | Sem erro de sintaxe |
-| `node --check assets/js/quiz.js` | 0 | aprovado | Sem erro de sintaxe |
-| `npx playwright test` | 0 | aprovado | 43 aprovados, 0 falhos, 0 ignorados; monitora console, respostas e `pageerror` |
+| Comando | Código | Resultado |
+|---|---:|---|
+| `node scripts/validate.mjs` | 0 | Estrutura e cache aprovados |
+| `node scripts/test-calendar.mjs` | 0 | 27 casos aprovados |
+| `node scripts/check-links.mjs` | 0 | 45 `ok`, 24 `indisponivel` |
+| `node --test tests/check-links.test.mjs` | 0 | 8 aprovados, 0 falhos, 0 ignorados |
+| `node --check assets/js/app.js` | 0 | Sintaxe aprovada |
+| `node --check assets/js/dashboard.js` | 0 | Sintaxe aprovada |
+| `node --check assets/js/biblioteca.js` | 0 | Sintaxe aprovada |
+| `node --check assets/js/quiz.js` | 0 | Sintaxe aprovada |
+| `npx playwright test` | 0 | 43 aprovados, 0 falhos, 0 ignorados |
+| `git diff --check` | 0 | Nenhum erro |
 
-## Testes não concluídos
+## Limitações
 
-| Teste | Registros afetados | Motivo | Estado atribuído | Impacto |
-|---|---:|---|---|---|
-| Confirmação externa de disponibilidade, título, canal e compatibilidade | 65 | YouTube bloqueado pelo FortiGate e cadeia TLS local inválida | `indisponivel`; auditoria do candidato em `erro_de_rede` | Nenhum desses links pôde ser publicado |
-| Pesquisa de substitutos no YouTube | 69 | Mesmo bloqueio institucional | `indisponivel` | 0 substituições; exige nova execução em rede que permita YouTube |
-
-## Conclusão
-
-As correções estruturais, de interface, testes e cache estão validadas. A missão não é declarada integralmente concluída porque 65 candidatos e a pesquisa de substitutos não puderam ser confirmados externamente. A biblioteca final permanece segura: não contém pesquisas, links inventados nem conteúdo não verificado publicado como disponível.
+Não foi possível confirmar conteúdo por transcrição. A aprovação usa somente as evidências efetivamente obtidas: pesquisa específica, página pública, título, canal, descrição visível, duração, data e oEmbed. Registros cuja cobertura integral ou atualidade permaneceu ambígua não foram publicados.

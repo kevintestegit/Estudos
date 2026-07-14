@@ -5,4 +5,5 @@ playwright-report/
 reports/*
 !reports/aulas-candidates.json
 !reports/aulas-link-report.json
+!reports/aulas-research.json
 *.log

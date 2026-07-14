@@ -446,7 +446,7 @@ test("Service Worker remove o cache da versão anterior", async ({ page }) => {
   await openClean(page, "/hoje.html");
   const cacheNames = await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
-    await caches.open("portal-estudos-v11");
+    await caches.open("portal-estudos-v12");
     const script = new URL("service-worker.js?upgrade-test=1", location.href);
     const registration = await navigator.serviceWorker.register(script, {
       scope: "./",
@@ -461,8 +461,8 @@ test("Service Worker remove o cache da versão anterior", async ({ page }) => {
     }
     return caches.keys();
   });
-  expect(cacheNames).toContain("portal-estudos-v12");
-  expect(cacheNames).not.toContain("portal-estudos-v11");
+  expect(cacheNames).toContain("portal-estudos-v13");
+  expect(cacheNames).not.toContain("portal-estudos-v12");
 });
 
 for (const viewport of [{ width: 1280, height: 800 }, { width: 390, height: 844 }]) {
@@ -470,6 +470,7 @@ for (const viewport of [{ width: 1280, height: 800 }, { width: 390, height: 844 
     test(`${path} não oferece pesquisa ou link para aula indisponível em ${viewport.width}px`, async ({ page }) => {
       await page.setViewportSize(viewport);
       if (path === "hoje.html") await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: {} })));
+      await page.route("**/data/aulas.json", (route) => route.fulfill({ json: { aulas: [{ id: "aula-pt-01", titulo: "Interpretação de textos — base", materia: "Português", tipo: "indisponivel", url: null, notas: "Videoaula confiável ainda não selecionada.", verificadoEm: "2026-07-14" }] } }));
       await openClean(page, `/${path}`);
       await expect(page.locator('a[href*="youtube.com/results"]')).toHaveCount(0);
       await expect(page.locator('[data-lesson-unavailable]').first()).toBeVisible();
@@ -497,6 +498,7 @@ test("Biblioteca usa exatamente a URL cadastrada para vídeo e playlist", async 
 
 test("aula indisponível não conclui a etapa de aprendizado", async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: {} })));
+  await page.route("**/data/aulas.json", (route) => route.fulfill({ json: { aulas: [{ id: "aula-pt-01", titulo: "Interpretação de textos — base", materia: "Português", tipo: "indisponivel", url: null, notas: "Videoaula confiável ainda não selecionada.", verificadoEm: "2026-07-14" }] } }));
   await openClean(page, "/hoje.html");
   const warning = page.locator('[data-lesson-unavailable]').first();
   await expect(warning).toHaveText("Videoaula ainda não disponível");

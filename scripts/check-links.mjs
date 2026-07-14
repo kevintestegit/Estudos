@@ -23,8 +23,8 @@ export function extractIds(url) {
 export const linkScope = (url) => /^https?:\/\//i.test(url || "") ? "externo" : url ? "interno" : "ausente";
 
 function topicCompatible(lesson, externalTitle) {
-  const actual = new Set(words(externalTitle));
-  return words(lesson.titulo).some((word) => actual.has(word));
+  const actual = words(externalTitle);
+  return words(lesson.titulo).some((expected) => actual.some((word) => expected.slice(0, 5) === word.slice(0, 5)));
 }
 
 async function requestMetadata(url, fetchImpl, timeoutMs) {
@@ -117,6 +117,10 @@ async function main() {
   const candidateRecords = fs.existsSync(candidatesPath)
     ? JSON.parse(fs.readFileSync(candidatesPath, "utf8")).candidatos
     : [];
+  const researchPath = path.join(root, "reports/aulas-research.json");
+  const research = fs.existsSync(researchPath)
+    ? new Map(JSON.parse(fs.readFileSync(researchPath, "utf8")).registros.map((item) => [item.id, item]))
+    : new Map();
   const candidates = new Map(candidateRecords.map((item) => [item.id, item.candidatoAntigo]));
   for (let offset = 0; offset < report.resultados.length; offset += 6) {
     await Promise.all(report.resultados.slice(offset, offset + 6).map(async (result) => {
@@ -141,6 +145,25 @@ async function main() {
         tituloYoutube: result.assunto,
       });
     }));
+  }
+  for (const result of report.resultados) {
+    const lessonResearch = research.get(result.id);
+    result.candidatoAntigoStatus = result.auditoriaCandidato?.status || null;
+    result.urlAprovada = result.status === "ok" ? result.url : null;
+    result.tipoAprovado = result.status === "ok" ? result.tipo : null;
+    result.pesquisaRealizada = lessonResearch?.pesquisaRealizada || null;
+    result.candidatosTestados = lessonResearch?.candidatosTestados || [];
+    if (lessonResearch?.motivoFinal) result.motivo = lessonResearch.motivoFinal;
+    const validationEvidence = result.evidencias;
+    result.evidencias = {
+      oembed: result.status === "ok",
+      httpStatus: result.httpStatus || null,
+      idExtraido: result.idExtraido || null,
+      urlFinal: result.urlFinal || null,
+      duracaoRequisicaoMs: result.durationMs ?? null,
+      pesquisaHttpStatus: lessonResearch?.httpStatusPesquisa || null,
+      detalhes: validationEvidence || [],
+    };
   }
   const lessonsById = new Map(lessons.map((lesson) => [lesson.id, lesson]));
   const candidateGroups = new Map();
