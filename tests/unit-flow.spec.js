@@ -166,7 +166,12 @@ test("agenda revisão somente depois da correção", async ({ page }) => {
         unitId,
         phase: "pratica",
         questionIds: ["real-1"],
-        answers: [],
+        answers: [{
+          questionId: "real-1",
+          answer: "C",
+          correct: true,
+          objetivos: ["pt-int-inferencia-valida"],
+        }],
         performanceByObjective: { "pt-int-inferencia-valida": { wrong: 1 } },
         finishedAt: new Date().toISOString(),
       });
@@ -611,4 +616,146 @@ test("migração normaliza unidade legada e mantém entradas válidas", async ({
   expect(result.transition).toEqual({ ok: false, state: "nao_iniciada" });
   expect(result.persisted.unitAttempts).toHaveLength(1);
   expect(result.persisted.unitProgress.quebrada.state).toBe("nao_iniciada");
+});
+
+test("importação rejeita respostas de tentativa inconsistentes", async ({
+  page,
+}) => {
+  const errors = await page.evaluate(() => {
+    const base = {
+      id: "attempt-importado",
+      unitId: "unidade",
+      phase: "pratica",
+      questionIds: ["real-1"],
+      answers: [{
+        questionId: "real-1",
+        answer: "E",
+        correct: false,
+        objetivos: ["pt-int-inferencia-valida"],
+      }],
+      performanceByObjective: {},
+      finishedAt: null,
+      result: null,
+    };
+    const malformed = [
+      { ...base, answers: [{ ...base.answers[0], questionId: "real-2" }] },
+      { ...base, answers: [{ ...base.answers[0], answer: undefined }] },
+      { ...base, answers: [{ ...base.answers[0], objetivos: [] }] },
+      { ...base, answers: [{ ...base.answers[0], objetivos: [7] }] },
+      { ...base, answers: [base.answers[0], { ...base.answers[0] }] },
+    ];
+    return malformed.map((attempt) => {
+      try {
+        Storage.importJSON(JSON.stringify({
+          schemaVersion: 5,
+          unitAttempts: [attempt],
+        }));
+        return null;
+      } catch (error) {
+        return error.message;
+      }
+    });
+  });
+
+  expect(errors.every(Boolean)).toBe(true);
+});
+
+test("migração recalcula resultado importado antes de concluir prática", async ({
+  page,
+}) => {
+  const result = await page.evaluate((unitId) => {
+    const attemptId = "attempt-resultado-adulterado";
+    Storage.importJSON(JSON.stringify({
+      schemaVersion: 5,
+      unitProgress: {
+        [unitId]: {
+          state: "pratica_em_andamento",
+          activeAttemptId: attemptId,
+        },
+      },
+      unitAttempts: [{
+        id: attemptId,
+        unitId,
+        phase: "pratica",
+        questionIds: ["real-1"],
+        answers: [{
+          questionId: "real-1",
+          answer: "E",
+          correct: false,
+          objetivos: ["pt-int-inferencia-valida"],
+        }],
+        performanceByObjective: {
+          "pt-int-inferencia-valida": { answered: 1, correct: 1, wrong: 0 },
+        },
+        finishedAt: new Date().toISOString(),
+        result: { answered: 1, correct: 1, wrong: 0 },
+      }],
+    }));
+    const transition = Storage.transitionUnit(unitId, "concluir_pratica");
+    const attempt = Storage.get().unitAttempts[0];
+    return { transition, attempt };
+  }, UNIT_ID);
+
+  expect(result.attempt.result).toEqual({ answered: 1, correct: 0, wrong: 1 });
+  expect(result.attempt.performanceByObjective).toEqual({
+    "pt-int-inferencia-valida": { answered: 1, correct: 0, wrong: 1 },
+  });
+  expect(result.transition).toEqual({ ok: true, state: "correcao_pendente" });
+});
+
+test("revisão importada exige contrato completo e não libera conclusão", async ({
+  page,
+}) => {
+  const result = await page.evaluate((unitId) => {
+    const review = {
+      id: "review-valida",
+      unitId,
+      objetivos: ["pt-int-inferencia-valida"],
+      scheduledDate: addDaysISO(todayISO(), 1),
+      reason: "Revisar o objetivo com erro.",
+      status: "pendente",
+      createdAt: new Date().toISOString(),
+    };
+    const malformed = [
+      { ...review, id: "" },
+      { ...review, objetivos: [] },
+      { ...review, objetivos: ["pt-int-inferencia-valida", "pt-int-inferencia-valida"] },
+      { ...review, scheduledDate: "2026-02-30" },
+      { ...review, reason: "" },
+      { ...review, status: "qualquer" },
+      { ...review, createdAt: "invalido" },
+    ];
+    const importErrors = malformed.map((item) => {
+      try {
+        Storage.importJSON(JSON.stringify({ schemaVersion: 5, unitReviews: [item] }));
+        return null;
+      } catch (error) {
+        return error.message;
+      }
+    });
+    localStorage.setItem("portal-estudos-v1", JSON.stringify({
+      schemaVersion: 5,
+      unitProgress: {
+        [unitId]: {
+          state: "revisao_agendada",
+          activeReviewId: "review-incompleta",
+        },
+      },
+      unitReviews: [{ id: "review-incompleta", unitId, status: "pendente" }],
+    }));
+    const migrated = Storage.get();
+    const before = Storage.exportJSON();
+    const transition = Storage.transitionUnit(unitId, "concluir_unidade");
+    return {
+      importErrors,
+      migratedReviews: migrated.unitReviews,
+      transition,
+      unchanged: before === Storage.exportJSON(),
+    };
+  }, UNIT_ID);
+
+  expect(result.importErrors.every(Boolean)).toBe(true);
+  expect(result.migratedReviews).toEqual([]);
+  expect(result.transition).toEqual({ ok: false, state: "revisao_agendada" });
+  expect(result.unchanged).toBe(true);
 });

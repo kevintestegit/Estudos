@@ -50,16 +50,50 @@ const UNIT_STATES = new Set([
   "revisao_agendada",
   "concluida",
 ]);
+const UNIT_REVIEW_STATUSES = new Set(["pendente", "concluida", "cancelada"]);
 const isObject = (value) =>
   value && typeof value === "object" && !Array.isArray(value);
 const isValidUnitAnswer = (answer) =>
   isObject(answer) &&
   typeof answer.questionId === "string" &&
+  Object.hasOwn(answer, "answer") &&
+  answer.answer !== undefined &&
   typeof answer.correct === "boolean" &&
   Array.isArray(answer.objetivos) &&
+  answer.objetivos.length > 0 &&
   answer.objetivos.every(
     (objective) => typeof objective === "string" && objective,
+  ) &&
+  new Set(answer.objetivos).size === answer.objetivos.length;
+const isISODate = (value) => {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  return (
+    !Number.isNaN(date.valueOf()) && date.toISOString().slice(0, 10) === value
   );
+};
+const isValidCreatedAt = (value) => {
+  if (typeof value !== "string") return false;
+  const date = new Date(value);
+  return !Number.isNaN(date.valueOf()) && date.toISOString() === value;
+};
+const isValidUnitReview = (review) =>
+  isObject(review) &&
+  typeof review.id === "string" &&
+  Boolean(review.id) &&
+  typeof review.unitId === "string" &&
+  Boolean(review.unitId) &&
+  Array.isArray(review.objetivos) &&
+  review.objetivos.length > 0 &&
+  review.objetivos.every(
+    (objective) => typeof objective === "string" && objective,
+  ) &&
+  new Set(review.objetivos).size === review.objetivos.length &&
+  isISODate(review.scheduledDate) &&
+  typeof review.reason === "string" &&
+  Boolean(review.reason.trim()) &&
+  UNIT_REVIEW_STATUSES.has(review.status) &&
+  isValidCreatedAt(review.createdAt);
 const normalizeUnitProgress = (value) => {
   const base = newUnitProgress(),
     progress = isObject(value) ? value : {};
@@ -90,26 +124,49 @@ const normalizeUnitAttempt = (attempt) => {
     !attempt.unitId ||
     !["checagem", "pratica"].includes(attempt.phase) ||
     !Array.isArray(attempt.questionIds) ||
-    attempt.questionIds.some((id) => typeof id !== "string" || !id)
+    !attempt.questionIds.length ||
+    attempt.questionIds.some((id) => typeof id !== "string" || !id) ||
+    new Set(attempt.questionIds).size !== attempt.questionIds.length
   )
     return null;
-  const answers = Array.isArray(attempt.answers)
-      ? attempt.answers.filter(isValidUnitAnswer)
-      : [],
-    correct = answers.filter((answer) => answer.correct).length,
-    result = isObject(attempt.result)
-      ? attempt.result
-      : attempt.finishedAt
-        ? { answered: answers.length, correct, wrong: answers.length - correct }
-        : null;
+  const answers = Array.isArray(attempt.answers) ? attempt.answers : [];
+  if (
+    answers.some(
+      (answer) =>
+        !isValidUnitAnswer(answer) ||
+        !attempt.questionIds.includes(answer.questionId),
+    ) ||
+    new Set(answers.map((answer) => answer.questionId)).size !== answers.length ||
+    (attempt.finishedAt &&
+      attempt.questionIds.some(
+        (questionId) =>
+          !answers.some((answer) => answer.questionId === questionId),
+      ))
+  )
+    return null;
+  const performanceByObjective = {};
+  answers.forEach((answer) =>
+    answer.objetivos.forEach((objective) => {
+      const performance = performanceByObjective[objective] || {
+        answered: 0,
+        correct: 0,
+        wrong: 0,
+      };
+      performance.answered++;
+      performance[answer.correct ? "correct" : "wrong"]++;
+      performanceByObjective[objective] = performance;
+    }),
+  );
+  const correct = answers.filter((answer) => answer.correct).length,
+    result = attempt.finishedAt
+      ? { answered: answers.length, correct, wrong: answers.length - correct }
+      : null;
   return {
     ...attempt,
-    questionIds: [...new Set(attempt.questionIds)],
+    questionIds: [...attempt.questionIds],
     answers,
     result,
-    performanceByObjective: isObject(attempt.performanceByObjective)
-      ? attempt.performanceByObjective
-      : {},
+    performanceByObjective: attempt.finishedAt ? performanceByObjective : {},
   };
 };
 const isValidImportedUnitAttempt = (attempt) => {
@@ -117,13 +174,7 @@ const isValidImportedUnitAttempt = (attempt) => {
   return (
     normalized &&
     Array.isArray(attempt.answers) &&
-    attempt.answers.every(isValidUnitAnswer) &&
-    isObject(attempt.performanceByObjective) &&
-    (!attempt.finishedAt ||
-      (isObject(attempt.result) &&
-        ["answered", "correct", "wrong"].every(
-          (key) => Number.isFinite(attempt.result[key]) && attempt.result[key] >= 0,
-        )))
+    attempt.answers.every(isValidUnitAnswer)
   );
 };
 const DEFAULT_PROGRESS = {
@@ -224,7 +275,7 @@ const Storage = {
       ? d.unitAttempts.map(normalizeUnitAttempt).filter(Boolean)
       : [];
     d.unitReviews = Array.isArray(d.unitReviews)
-      ? d.unitReviews.filter(isObject)
+      ? d.unitReviews.filter(isValidUnitReview)
       : [];
     d.studySessions = (d.studySessions || []).map((s) => ({
       id: s.id || uid(),
@@ -681,7 +732,8 @@ const Storage = {
         (review) =>
           review.id === progress.activeReviewId &&
           review.unitId === unitId &&
-          review.status === "pendente",
+          review.status === "pendente" &&
+          isValidUnitReview(review),
       )
     )
       return { ok: false, state: progress.state };
@@ -775,12 +827,8 @@ const Storage = {
     if (
       !attempt ||
       attempt.finishedAt ||
-      !answer ||
+      !isValidUnitAnswer(answer) ||
       !attempt.questionIds.includes(answer.questionId) ||
-      !Object.hasOwn(answer, "answer") ||
-      typeof answer.correct !== "boolean" ||
-      !Array.isArray(answer.objetivos) ||
-      !answer.objetivos.length ||
       attempt.answers.some((item) => item.questionId === answer.questionId)
     )
       return { ok: false, state };
@@ -877,7 +925,6 @@ const Storage = {
       ),
       objectives = review?.objetivos,
       scheduledDate = review?.scheduledDate,
-      parsedDate = new Date(`${scheduledDate}T00:00:00Z`),
       performanceObjectives = Object.keys(
         attempt?.performanceByObjective || {},
       ),
@@ -903,11 +950,10 @@ const Storage = {
           !performanceObjectives.includes(objective),
       ) ||
       new Set(objectives).size !== objectives.length ||
-      !/^\d{4}-\d{2}-\d{2}$/.test(scheduledDate || "") ||
-      Number.isNaN(parsedDate.valueOf()) ||
-      parsedDate.toISOString().slice(0, 10) !== scheduledDate ||
+      !isISODate(scheduledDate) ||
       scheduledDate <= todayISO() ||
-      !review.reason ||
+      typeof review.reason !== "string" ||
+      !review.reason.trim() ||
       duplicate
     )
       return { ok: false, state: progress.state };
@@ -959,7 +1005,7 @@ const Storage = {
       )
     )
       throw new Error("Progresso de unidade inválido.");
-    if (p.unitReviews?.some((review) => !isObject(review)))
+    if (p.unitReviews?.some((review) => !isValidUnitReview(review)))
       throw new Error("Revisão de unidade inválida.");
     const d = this.migrate({ ...clone(DEFAULT_PROGRESS), ...p });
     this.set(d);
