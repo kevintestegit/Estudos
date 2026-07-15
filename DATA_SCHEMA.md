@@ -54,6 +54,14 @@ resposta original.
 
 As transições são explícitas. Eventos fora de ordem não alteram o armazenamento;
 abrir ou iniciar um recurso não conclui a etapa correspondente.
+`scheduleUnitReview()` é a única operação que cria a revisão e move a unidade
+para `revisao_agendada`; a revisão deve usar objetivos presentes no desempenho
+da tentativa prática ativa e uma data futura válida.
+
+O armazenamento é síncrono e adota escrita única por operação. Duas abas podem
+sobrescrever alterações concorrentes entre leitura e gravação; o piloto não usa
+Web Locks nem sincronização multiaba. Se uso simultâneo se tornar comum, esse é
+o ponto de extensão.
 
 ## Migração
 

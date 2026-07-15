@@ -20,6 +20,7 @@ const newUnitProgress = () => ({
   reading: { startedAt: null, completedAt: null },
   video: { startedAt: null, completedAt: null },
   activeAttemptId: null,
+  activeReviewId: null,
 });
 const UNIT_TRANSITIONS = {
   nao_iniciada: { iniciar_leitura: "leitura_em_andamento" },
@@ -32,8 +33,98 @@ const UNIT_TRANSITIONS = {
   pratica_em_andamento: { concluir_pratica: "pratica_concluida" },
   pratica_concluida: { concluir_correcao: "correcao_concluida" },
   correcao_pendente: { concluir_correcao: "correcao_concluida" },
-  correcao_concluida: { agendar_revisao: "revisao_agendada" },
   revisao_agendada: { concluir_unidade: "concluida" },
+};
+const UNIT_STATES = new Set([
+  "nao_iniciada",
+  "leitura_em_andamento",
+  "leitura_concluida",
+  "video_em_andamento",
+  "video_concluido",
+  "checagem_em_andamento",
+  "checagem_concluida",
+  "pratica_em_andamento",
+  "pratica_concluida",
+  "correcao_pendente",
+  "correcao_concluida",
+  "revisao_agendada",
+  "concluida",
+]);
+const isObject = (value) =>
+  value && typeof value === "object" && !Array.isArray(value);
+const isValidUnitAnswer = (answer) =>
+  isObject(answer) &&
+  typeof answer.questionId === "string" &&
+  typeof answer.correct === "boolean" &&
+  Array.isArray(answer.objetivos) &&
+  answer.objetivos.every(
+    (objective) => typeof objective === "string" && objective,
+  );
+const normalizeUnitProgress = (value) => {
+  const base = newUnitProgress(),
+    progress = isObject(value) ? value : {};
+  return {
+    ...progress,
+    state: UNIT_STATES.has(progress.state) ? progress.state : base.state,
+    updatedAt: progress.updatedAt || null,
+    reading: isObject(progress.reading)
+      ? { ...base.reading, ...progress.reading }
+      : base.reading,
+    video: isObject(progress.video)
+      ? { ...base.video, ...progress.video }
+      : base.video,
+    activeAttemptId:
+      typeof progress.activeAttemptId === "string"
+        ? progress.activeAttemptId
+        : null,
+    activeReviewId:
+      typeof progress.activeReviewId === "string" ? progress.activeReviewId : null,
+  };
+};
+const normalizeUnitAttempt = (attempt) => {
+  if (
+    !isObject(attempt) ||
+    typeof attempt.id !== "string" ||
+    !attempt.id ||
+    typeof attempt.unitId !== "string" ||
+    !attempt.unitId ||
+    !["checagem", "pratica"].includes(attempt.phase) ||
+    !Array.isArray(attempt.questionIds) ||
+    attempt.questionIds.some((id) => typeof id !== "string" || !id)
+  )
+    return null;
+  const answers = Array.isArray(attempt.answers)
+      ? attempt.answers.filter(isValidUnitAnswer)
+      : [],
+    correct = answers.filter((answer) => answer.correct).length,
+    result = isObject(attempt.result)
+      ? attempt.result
+      : attempt.finishedAt
+        ? { answered: answers.length, correct, wrong: answers.length - correct }
+        : null;
+  return {
+    ...attempt,
+    questionIds: [...new Set(attempt.questionIds)],
+    answers,
+    result,
+    performanceByObjective: isObject(attempt.performanceByObjective)
+      ? attempt.performanceByObjective
+      : {},
+  };
+};
+const isValidImportedUnitAttempt = (attempt) => {
+  const normalized = normalizeUnitAttempt(attempt);
+  return (
+    normalized &&
+    Array.isArray(attempt.answers) &&
+    attempt.answers.every(isValidUnitAnswer) &&
+    isObject(attempt.performanceByObjective) &&
+    (!attempt.finishedAt ||
+      (isObject(attempt.result) &&
+        ["answered", "correct", "wrong"].every(
+          (key) => Number.isFinite(attempt.result[key]) && attempt.result[key] >= 0,
+        )))
+  );
 };
 const DEFAULT_PROGRESS = {
   schemaVersion: SCHEMA_VERSION,
@@ -78,7 +169,12 @@ const Storage = {
           : clone(DEFAULT_PROGRESS),
         before = d.schemaVersion,
         migrated = this.migrate(d);
-      if (parsed && before !== migrated.schemaVersion) this.set(migrated);
+      if (
+        parsed &&
+        (before !== migrated.schemaVersion ||
+          JSON.stringify(parsed) !== JSON.stringify(migrated))
+      )
+        this.set(migrated);
       this.lastError = null;
       this.corruptRaw = null;
       return migrated;
@@ -114,10 +210,22 @@ const Storage = {
     if (!d.questionFlags) d.questionFlags = {};
     if (!d.cebraspeConfig) d.cebraspeConfig = { acerto: 1, erro: 0, branco: 0 };
     if (!d.taskStatus) d.taskStatus = {}; // normalize sessions
-    if (!d.unitProgress || typeof d.unitProgress !== "object" || Array.isArray(d.unitProgress))
-      d.unitProgress = {};
-    if (!Array.isArray(d.unitAttempts)) d.unitAttempts = [];
-    if (!Array.isArray(d.unitReviews)) d.unitReviews = [];
+    d.unitProgress = isObject(d.unitProgress)
+      ? Object.fromEntries(
+          Object.entries(d.unitProgress)
+            .filter(([unitId]) => unitId)
+            .map(([unitId, progress]) => [
+              unitId,
+              normalizeUnitProgress(progress),
+            ]),
+        )
+      : {};
+    d.unitAttempts = Array.isArray(d.unitAttempts)
+      ? d.unitAttempts.map(normalizeUnitAttempt).filter(Boolean)
+      : [];
+    d.unitReviews = Array.isArray(d.unitReviews)
+      ? d.unitReviews.filter(isObject)
+      : [];
     d.studySessions = (d.studySessions || []).map((s) => ({
       id: s.id || uid(),
       date: s.date || todayISO(),
@@ -568,13 +676,13 @@ const Storage = {
     )
       return { ok: false, state: progress.state };
     if (
-      event === "agendar_revisao" &&
-      !data.unitReviews.some((review) => review.unitId === unitId)
-    )
-      return { ok: false, state: progress.state };
-    if (
       event === "concluir_unidade" &&
-      !data.unitReviews.some((review) => review.unitId === unitId)
+      !data.unitReviews.some(
+        (review) =>
+          review.id === progress.activeReviewId &&
+          review.unitId === unitId &&
+          review.status === "pendente",
+      )
     )
       return { ok: false, state: progress.state };
     if (
@@ -763,14 +871,44 @@ const Storage = {
   },
   scheduleUnitReview(review) {
     const data = this.get(),
-      progress = data.unitProgress[review?.unitId] || newUnitProgress();
+      progress = data.unitProgress[review?.unitId] || newUnitProgress(),
+      attempt = data.unitAttempts.find(
+        (item) => item.id === progress.activeAttemptId,
+      ),
+      objectives = review?.objetivos,
+      scheduledDate = review?.scheduledDate,
+      parsedDate = new Date(`${scheduledDate}T00:00:00Z`),
+      performanceObjectives = Object.keys(
+        attempt?.performanceByObjective || {},
+      ),
+      duplicate = data.unitReviews.some(
+        (item) =>
+          item.unitId === review?.unitId &&
+          item.status === "pendente" &&
+          item.scheduledDate === scheduledDate &&
+          item.reason === review?.reason &&
+          JSON.stringify(item.objetivos) === JSON.stringify(objectives),
+      );
     if (
       progress.state !== "correcao_concluida" ||
-      !Array.isArray(review?.objetivos) ||
-      !review.objetivos.length ||
-      !/^\d{4}-\d{2}-\d{2}$/.test(review.scheduledDate || "") ||
-      Number.isNaN(Date.parse(`${review.scheduledDate}T00:00:00Z`)) ||
-      !review.reason
+      !attempt ||
+      attempt.phase !== "pratica" ||
+      !attempt.finishedAt ||
+      !Array.isArray(objectives) ||
+      !objectives.length ||
+      objectives.some(
+        (objective) =>
+          typeof objective !== "string" ||
+          !objective.trim() ||
+          !performanceObjectives.includes(objective),
+      ) ||
+      new Set(objectives).size !== objectives.length ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(scheduledDate || "") ||
+      Number.isNaN(parsedDate.valueOf()) ||
+      parsedDate.toISOString().slice(0, 10) !== scheduledDate ||
+      scheduledDate <= todayISO() ||
+      !review.reason ||
+      duplicate
     )
       return { ok: false, state: progress.state };
     const createdAt = new Date().toISOString();
@@ -785,6 +923,7 @@ const Storage = {
     });
     progress.state = "revisao_agendada";
     progress.updatedAt = createdAt;
+    progress.activeReviewId = data.unitReviews.at(-1).id;
     data.unitProgress[review.unitId] = progress;
     try {
       this.set(data);
@@ -806,6 +945,22 @@ const Storage = {
     for (const key of ["dayStatus", "quiz", "dailyQuiz", "goals", "flashcards", "editalProgress", "dailySummaries", "questionFlags", "cebraspeConfig", "taskStatus", "unitProgress"])
       if (p[key] != null && (!p[key] || typeof p[key] !== "object" || Array.isArray(p[key])))
         throw new Error(`Objeto inválido: ${key}.`);
+    if (
+      p.unitAttempts?.some(
+        (attempt) => !isValidImportedUnitAttempt(attempt),
+      )
+    )
+      throw new Error("Tentativa de unidade inválida.");
+    if (
+      p.unitProgress &&
+      Object.values(p.unitProgress).some(
+        (progress) =>
+          !isObject(progress) || !UNIT_STATES.has(progress.state),
+      )
+    )
+      throw new Error("Progresso de unidade inválido.");
+    if (p.unitReviews?.some((review) => !isObject(review)))
+      throw new Error("Revisão de unidade inválida.");
     const d = this.migrate({ ...clone(DEFAULT_PROGRESS), ...p });
     this.set(d);
     return d;

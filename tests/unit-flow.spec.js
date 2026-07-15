@@ -157,27 +157,40 @@ test("agenda revisão somente depois da correção", async ({ page }) => {
       updatedAt: new Date().toISOString(),
       reading: { startedAt: null, completedAt: null },
       video: { startedAt: null, completedAt: null },
-      activeAttemptId: null,
+      activeAttemptId: "attempt-pratica-finalizada",
     };
     Storage.update((data) => {
       data.unitProgress[unitId] = progress;
+      data.unitAttempts.push({
+        id: "attempt-pratica-finalizada",
+        unitId,
+        phase: "pratica",
+        questionIds: ["real-1"],
+        answers: [],
+        performanceByObjective: { "pt-int-inferencia-valida": { wrong: 1 } },
+        finishedAt: new Date().toISOString(),
+      });
     });
-    return Storage.scheduleUnitReview({
-      unitId,
-      objetivos: ["pt-int-inferencia-valida"],
-      scheduledDate: "2026-07-16",
-      reason: "Erro de inferência registrado na tentativa.",
-    });
+    const scheduledDate = addDaysISO(todayISO(), 1);
+    return {
+      scheduledDate,
+      review: Storage.scheduleUnitReview({
+        unitId,
+        objetivos: ["pt-int-inferencia-valida"],
+        scheduledDate,
+        reason: "Erro de inferência registrado na tentativa.",
+      }),
+    };
   }, UNIT_ID);
 
-  expect(result.ok).toBe(true);
+  expect(result.review.ok).toBe(true);
   const data = await page.evaluate(() => Storage.get());
   expect(data.unitProgress[UNIT_ID].state).toBe("revisao_agendada");
   expect(data.unitReviews).toHaveLength(1);
   expect(data.unitReviews[0]).toMatchObject({
     unitId: UNIT_ID,
     objetivos: ["pt-int-inferencia-valida"],
-    scheduledDate: "2026-07-16",
+    scheduledDate: result.scheduledDate,
     status: "pendente",
   });
 });
@@ -419,4 +432,183 @@ test("rejeita correção de tentativa histórica inativa", async ({ page }) => {
 
   expect(result.correction.ok).toBe(false);
   expect(result.unchanged).toBe(true);
+});
+
+test("agenda revisão futura somente para objetivos do desempenho ativo", async ({
+  page,
+}) => {
+  const result = await page.evaluate((unitId) => {
+    Storage.update((data) => {
+      data.unitProgress[unitId] = {
+        state: "pratica_em_andamento",
+        updatedAt: new Date().toISOString(),
+        reading: { startedAt: null, completedAt: null },
+        video: { startedAt: null, completedAt: null },
+        activeAttemptId: null,
+      };
+    });
+    const attempt = Storage.startUnitAttempt(unitId, "pratica", ["real-1"]);
+    Storage.recordUnitAnswer(attempt.attemptId, {
+      questionId: "real-1",
+      answer: "C",
+      correct: true,
+      objetivos: ["pt-int-inferencia-valida"],
+    });
+    Storage.finishUnitAttempt(attempt.attemptId);
+    Storage.transitionUnit(unitId, "concluir_pratica");
+    Storage.transitionUnit(unitId, "concluir_correcao");
+    const future = addDaysISO(todayISO(), 1);
+    const base = {
+      unitId,
+      scheduledDate: future,
+      reason: "Desempenho registrado na prática.",
+    };
+    const invalidResults = [
+      Storage.scheduleUnitReview({ ...base, objetivos: [""] }),
+      Storage.scheduleUnitReview({
+        ...base,
+        objetivos: ["pt-int-inferencia-valida", "pt-int-inferencia-valida"],
+      }),
+      Storage.scheduleUnitReview({ ...base, objetivos: ["objetivo-inexistente"] }),
+      Storage.scheduleUnitReview({
+        ...base,
+        objetivos: ["pt-int-inferencia-valida"],
+        scheduledDate: todayISO(),
+      }),
+      Storage.scheduleUnitReview({
+        ...base,
+        objetivos: ["pt-int-inferencia-valida"],
+        scheduledDate: "2026-02-30",
+      }),
+    ];
+    const valid = Storage.scheduleUnitReview({
+      ...base,
+      objetivos: ["pt-int-inferencia-valida"],
+    });
+    Storage.update((data) => {
+      data.unitProgress[unitId].state = "correcao_concluida";
+    });
+    const beforeDuplicate = Storage.exportJSON();
+    const duplicate = Storage.scheduleUnitReview({
+      ...base,
+      objetivos: ["pt-int-inferencia-valida"],
+    });
+    return {
+      invalidResults,
+      valid,
+      duplicate,
+      duplicateUnchanged: beforeDuplicate === Storage.exportJSON(),
+    };
+  }, UNIT_ID);
+
+  expect(result.invalidResults.every((item) => item.ok === false)).toBe(true);
+  expect(result.valid).toEqual({ ok: true, state: "revisao_agendada" });
+  expect(result.duplicate.ok).toBe(false);
+  expect(result.duplicateUnchanged).toBe(true);
+});
+
+test("não permite agendar revisão por transitionUnit", async ({ page }) => {
+  const result = await page.evaluate((unitId) => {
+    Storage.update((data) => {
+      data.unitProgress[unitId] = {
+        state: "correcao_concluida",
+        updatedAt: new Date().toISOString(),
+        reading: { startedAt: null, completedAt: null },
+        video: { startedAt: null, completedAt: null },
+        activeAttemptId: null,
+      };
+      data.unitReviews.push({
+        id: "review-legado",
+        unitId,
+        objetivos: ["pt-int-inferencia-valida"],
+        scheduledDate: addDaysISO(todayISO(), 1),
+        reason: "Registro legado.",
+        status: "pendente",
+        createdAt: new Date().toISOString(),
+      });
+    });
+    const before = Storage.exportJSON();
+    const transition = Storage.transitionUnit(unitId, "agendar_revisao");
+    return { transition, unchanged: before === Storage.exportJSON() };
+  }, UNIT_ID);
+
+  expect(result.transition).toEqual({
+    ok: false,
+    state: "correcao_concluida",
+  });
+  expect(result.unchanged).toBe(true);
+});
+
+test("importação rejeita estruturas internas de unidade malformadas", async ({
+  page,
+}) => {
+  const errors = await page.evaluate(() => {
+    const malformed = [
+      { schemaVersion: 5, unitAttempts: [null] },
+      {
+        schemaVersion: 5,
+        unitAttempts: [{
+          id: "attempt-sem-resultado",
+          unitId: "unidade",
+          phase: "pratica",
+          questionIds: ["real-1"],
+          answers: [],
+          finishedAt: new Date().toISOString(),
+        }],
+      },
+      { schemaVersion: 5, unitProgress: { unidade: null } },
+    ];
+    return malformed.map((data) => {
+      try {
+        Storage.importJSON(JSON.stringify(data));
+        return null;
+      } catch (error) {
+        return error.message;
+      }
+    });
+  });
+
+  expect(errors.every(Boolean)).toBe(true);
+  expect(errors.join(" ")).toMatch(/unidade|tentativa/i);
+});
+
+test("migração normaliza unidade legada e mantém entradas válidas", async ({
+  page,
+}) => {
+  const result = await page.evaluate((unitId) => {
+    const validAttempt = {
+      id: "attempt-valid",
+      unitId,
+      phase: "pratica",
+      questionIds: ["real-1"],
+      answers: [],
+      customLegacyField: "preservado",
+    };
+    localStorage.setItem(
+      "portal-estudos-v1",
+      JSON.stringify({
+        schemaVersion: 5,
+        unitAttempts: [null, validAttempt],
+        unitProgress: {
+          quebrada: null,
+          [unitId]: {
+            state: "estado-legado-invalido",
+            customLegacyField: "preservado",
+          },
+        },
+      }),
+    );
+    const data = Storage.get();
+    const transition = Storage.transitionUnit("quebrada", "concluir_video");
+    const persisted = JSON.parse(localStorage.getItem("portal-estudos-v1"));
+    return { data, transition, persisted };
+  }, UNIT_ID);
+
+  expect(result.data.unitAttempts).toHaveLength(1);
+  expect(result.data.unitAttempts[0].customLegacyField).toBe("preservado");
+  expect(result.data.unitProgress[UNIT_ID].state).toBe("nao_iniciada");
+  expect(result.data.unitProgress[UNIT_ID].customLegacyField).toBe("preservado");
+  expect(result.transition).toEqual({ ok: false, state: "nao_iniciada" });
+  expect(result.persisted.unitAttempts).toHaveLength(1);
+  expect(result.persisted.unitProgress.quebrada.state).toBe("nao_iniciada");
 });
