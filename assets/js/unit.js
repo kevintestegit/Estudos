@@ -18,6 +18,7 @@
       (item) => item.id === video.aulaId,
     );
     const objectives = new Set(video.objetivosCobertos || []);
+    const duration = video.duracaoTotalSegundos ?? lesson?.duracaoTotalSegundos;
     let canonicalId = null;
     try {
       const url = new URL(lesson?.url || "");
@@ -35,10 +36,10 @@
       video.motivoSelecao && video.fonte && video.fonteUrl && video.verificadoEm &&
       Number.isFinite(video.inicioSegundos) &&
       Number.isFinite(video.fimSegundos) &&
-      Number.isFinite(lesson.duracaoTotalSegundos) &&
+      Number.isFinite(duration) &&
       video.inicioSegundos >= 0 &&
       video.fimSegundos > video.inicioSegundos &&
-      video.fimSegundos <= lesson.duracaoTotalSegundos &&
+      video.fimSegundos <= duration &&
       (unit.objetivos || []).every((objective) => objectives.has(objective))
       ? { ...video, videoId: lesson.videoId }
       : null;
@@ -55,9 +56,20 @@
       return (data.unidades || []).find((unit) => unit.id === unitId) || null;
     },
 
-    render({ unit, task, entry, data }) {
+    render({ unit, task, entry, data, firstPending }) {
       const progress = Storage.getUnitProgress(unit.id);
       const state = progress.state;
+      const entryKey = `${entry?.scheduleDate || "unit"}_${entry?.index ?? 0}`;
+      const active = firstPending == null || firstPending === `unit:${entryKey}` || state === "concluida";
+      const header = `<div class="task-title"><div><p class="eyebrow">Unidade piloto</p><h3>${App.esc(task.materia)} — ${App.esc(task.assunto)}</h3></div><span>${App.esc(unit.leitura?.tempoMinutos || 0)} min de leitura</span></div>`;
+      if (!active)
+        return `<article class="card study-task unit-flow" data-unit-id="${App.esc(unit.id)}" data-unit-entry="${App.esc(entryKey)}">${header}
+          ${locked("Leitura guiada", "Conclua a unidade anterior para desbloquear.")}
+          ${locked("Videoaula", "Conclua a unidade anterior para desbloquear.")}
+          ${locked("Checagem rápida", "Conclua a unidade anterior para desbloquear.")}
+          ${locked("Questões reais", "Conclua a unidade anterior para desbloquear.")}
+          ${locked("Correção e revisão", "Conclua a unidade anterior para desbloquear.")}
+        </article>`;
       const video = verifiedVideo(unit, data);
       const readingStarted = state !== "nao_iniciada";
       const readingDone = !["nao_iniciada", "leitura_em_andamento"].includes(state);
@@ -66,7 +78,7 @@
       const readingSections = readingStarted
         ? `<p class="unit-resume">${state === "leitura_em_andamento" ? "Continue a leitura de onde parou." : "Leitura concluída."}</p>
           ${progress.reading.sectionId ? `<p class="muted">Retomada: ${App.esc((unit.leitura?.secoes || []).find(({ id }) => id === progress.reading.sectionId)?.titulo || progress.reading.sectionId)}</p>` : ""}
-          ${(unit.leitura?.secoes || []).map((section) => `<section class="unit-reading-section" id="${App.esc(section.id)}" data-reading-section tabindex="-1"><h4>${App.esc(section.titulo)}</h4><p>${App.esc(section.conteudo)}</p></section>`).join("")}
+          ${(unit.leitura?.secoes || []).map((section) => `<section class="unit-reading-section" id="${App.esc(section.id)}" data-reading-section tabindex="0"><h4>${App.esc(section.titulo)}</h4><p>${App.esc(section.conteudo)}</p></section>`).join("")}
           ${this.readingSupport(unit.leitura)}`
         : `<p>${App.esc(unit.leitura?.tempoMinutos || 0)} minutos de leitura guiada dentro do portal.</p>`;
       const readingAction = state === "nao_iniciada"
@@ -90,9 +102,8 @@
         : video
           ? "Conclua a videoaula para desbloquear."
           : "Aguarde a validação da videoaula para desbloquear.";
-      const entryKey = `${entry?.scheduleDate || "unit"}_${entry?.index ?? 0}`;
       return `<article class="card study-task unit-flow" data-unit-id="${App.esc(unit.id)}" data-unit-entry="${App.esc(entryKey)}">
-        <div class="task-title"><div><p class="eyebrow">Unidade piloto</p><h3>${App.esc(task.materia)} — ${App.esc(task.assunto)}</h3></div><span>${App.esc(unit.leitura?.tempoMinutos || 0)} min de leitura</span></div>
+        ${header}
         <section class="unit-step ${readingDone ? "is-done" : ""}"><h4>Leitura guiada</h4>${readingSections}${readingAction}</section>
         ${videoHtml}
         ${locked("Checagem rápida", nextRequirement)}
@@ -115,14 +126,39 @@
       root?.querySelectorAll("[data-reading-section]").forEach((section) => {
         section.onfocus = () => Storage.setUnitReadingSection(unit.id, section.id);
       });
+      const sections = [...(root?.querySelectorAll("[data-reading-section]") || [])];
+      if (sections.length && "IntersectionObserver" in window) {
+        root._readingObserver = new IntersectionObserver((entries) => {
+          if (!entries.some(({ isIntersecting }) => isIntersecting)) return;
+          const visible = sections.filter((section) => {
+            const box = section.getBoundingClientRect();
+            return box.bottom > 0 && box.top < innerHeight;
+          }).sort((a, b) => Math.abs(a.getBoundingClientRect().top) - Math.abs(b.getBoundingClientRect().top))[0];
+          if (visible) Storage.setUnitReadingSection(unit.id, visible.id);
+        }, { threshold: [0.25, 0.6] });
+        sections.forEach((section) => root._readingObserver.observe(section));
+      } else if (sections.length) {
+        const track = () => {
+          if (!root.isConnected) return window.removeEventListener("scroll", track);
+          const visible = sections.filter((section) => {
+            const box = section.getBoundingClientRect();
+            return box.bottom > 0 && box.top < innerHeight;
+          }).sort((a, b) => Math.abs(a.getBoundingClientRect().top) - Math.abs(b.getBoundingClientRect().top))[0];
+          if (visible) Storage.setUnitReadingSection(unit.id, visible.id);
+        };
+        window.addEventListener("scroll", track, { passive: true });
+      }
       const savedSection = Storage.getUnitProgress(unit.id).reading.sectionId;
       if (savedSection)
-        requestAnimationFrame(() => root?.querySelector(`#${CSS.escape(savedSection)}`)?.focus());
+        requestAnimationFrame(() => root?.querySelector(`#${CSS.escape(savedSection)}`)?.scrollIntoView());
       const button = root?.querySelector("[data-unit-event]");
       if (!button) return;
       button.onclick = () => {
         const result = Storage.transitionUnit(unit.id, button.dataset.unitEvent);
-        if (result.ok) rerender();
+        if (result.ok) {
+          root._readingObserver?.disconnect();
+          rerender();
+        }
       };
     },
   };

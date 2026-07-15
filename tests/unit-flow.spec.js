@@ -972,13 +972,14 @@ test("video validado usa trecho incorporado e só conclui por ação explícita"
         fonte: "YouTube",
         fonteUrl: "https://www.youtube.com/watch?v=B1lk04l-dRU",
         verificadoEm: "2026-07-15",
+        duracaoTotalSegundos: 120,
       },
     };
     const context = {
       unit,
       task: { unitId },
       entry: {},
-      data: { aulas: { aulas: [{ id: "aula-teste", tipo: "video", url: "https://www.youtube.com/watch?v=B1lk04l-dRU", videoId: "B1lk04l-dRU", duracaoTotalSegundos: 120, canal: "Canal verificado", tituloYoutube: "Aula verificada", verificadoEm: "2026-07-15" }] } },
+      data: { aulas: { aulas: [{ id: "aula-teste", tipo: "video", url: "https://www.youtube.com/watch?v=B1lk04l-dRU", videoId: "B1lk04l-dRU", canal: "Canal verificado", tituloYoutube: "Aula verificada", verificadoEm: "2026-07-15" }] } },
     };
     const root = document.getElementById("app-root");
     root.innerHTML = UnitFlow.render(context);
@@ -1022,19 +1023,26 @@ test("fechamento da unidade real ignora chaves legadas", async ({ page }) => {
   await page.reload();
 
   await expect(page.locator("#btn-done")).toBeEnabled();
+  expect(await page.evaluate((date) => Storage.get().taskStatus[`${date}_0_learn`], today)).toBe("pendente");
   await page.locator("#btn-done").click();
-  expect(await page.evaluate((date) => Storage.get().dayStatus[date], today)).toBe("concluido");
+  const result = await page.evaluate((date) => ({
+    dayStatus: Storage.get().dayStatus[date],
+    summary: Storage.get().dailySummaries[date],
+  }), today);
+  expect(result.dayStatus).toBe("concluido");
+  expect(result.summary.pendingTasks).toEqual([]);
+  expect(result.summary.partial).toBe(false);
 });
 
 test("retoma a seção estável da leitura após recarregar", async ({ page }) => {
   await openPilot(page, { width: 1280, height: 800 });
   await page.getByRole("button", { name: "Começar leitura" }).click();
-  await page.locator("#coesao-referencial").focus();
-  expect(await page.evaluate((id) => Storage.getUnitProgress(id).reading.sectionId, UNIT_ID)).toBe("coesao-referencial");
+  await page.locator("#coesao-referencial").evaluate((section) => section.scrollIntoView());
+  await expect.poll(() => page.evaluate((id) => Storage.getUnitProgress(id).reading.sectionId, UNIT_ID)).toBe("coesao-referencial");
 
   await page.reload();
-  await expect(page.locator("#coesao-referencial")).toBeFocused();
   await expect(page.getByText("Retomada: Siga a cadeia de referências")).toBeVisible();
+  await expect.poll(() => page.locator("#coesao-referencial").evaluate((section) => Math.abs(section.getBoundingClientRect().top) < innerHeight)).toBe(true);
 });
 
 test("cada data mesclada considera somente suas próprias unidades", async ({ page }) => {
@@ -1133,4 +1141,37 @@ test("bind usa entry para conectar a ocorrência correta da unidade", async ({ p
     return { rerenders, state: Storage.getUnitProgress(unit.id).state };
   });
   expect(result).toEqual({ rerenders: 1, state: "leitura_em_andamento" });
+});
+
+test("somente a primeira unidade pendente oferece ação principal", async ({ page }) => {
+  const today = await page.evaluate(() => todayISO());
+  await page.route("**/data/cronograma.json", (route) => route.fulfill({ json: { days: [{ dia: 1, titulo: "Duas unidades", tasks: [
+    { materia: "Português", assunto: "Primeira", unitId: "unidade-1" },
+    { materia: "Português", assunto: "Segunda", unitId: "unidade-2" },
+  ] }] } }));
+  await page.evaluate((date) => Storage.update((data) => {
+    data.startDate = date;
+    data.studyDays = [0, 1, 2, 3, 4, 5, 6];
+  }), today);
+  await page.reload();
+  await page.evaluate(async () => {
+    App.cache["data/unidades.json"] = { unidades: [1, 2].map((number) => ({
+      id: `unidade-${number}`,
+      titulo: `Unidade ${number}`,
+      objetivos: [],
+      leitura: { tempoMinutos: 5, secoes: [] },
+      video: {},
+    })) };
+    UnitFlow.dataPromise = null;
+    await initHoje();
+  });
+
+  await expect(page.locator("[data-primary-action]")).toHaveCount(1);
+  await expect(page.locator('[data-unit-id="unidade-1"] [data-primary-action]')).toHaveText("Começar leitura");
+  await expect(page.locator('[data-unit-id="unidade-2"]')).toContainText("Conclua a unidade anterior para desbloquear");
+
+  await page.evaluate(() => Storage.update((data) => { data.unitProgress["unidade-1"] = { state: "concluida" }; }));
+  await page.evaluate(() => initHoje());
+  await expect(page.locator("[data-primary-action]")).toHaveCount(1);
+  await expect(page.locator('[data-unit-id="unidade-2"] [data-primary-action]')).toHaveText("Começar leitura");
 });

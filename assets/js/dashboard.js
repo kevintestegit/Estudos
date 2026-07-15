@@ -203,7 +203,7 @@ function renderStudyTask(entry, data, firstPending) {
   if (task.unitId) {
     const unit = data.units?.[task.unitId];
     return unit
-      ? UnitFlow.render({ unit, task, entry, data })
+      ? UnitFlow.render({ unit, task, entry, data, firstPending })
       : `<article class="card study-task"><div class="alert alert-danger">Unidade não encontrada.</div></article>`;
   }
   const lesson = (data.aulas.aulas || []).find(
@@ -393,6 +393,7 @@ function bindTodayActions(context) {
         unit,
         task,
         entry,
+        firstPending: findFirstPendingStep(tasks),
         data,
         rerender: () => renderHoje(data),
       });
@@ -467,6 +468,16 @@ function bindTodayActions(context) {
             ).filter((key) => !stepDone(key)));
       if (pending.length)
         return alert(`Conclua as etapas pendentes antes de finalizar (${pending.length}).`);
+      Storage.update((data) => {
+        tasks
+          .filter((entry) =>
+            entry.scheduleDate === scheduleDate &&
+            entry.task.unitId &&
+            data.unitProgress[entry.task.unitId]?.state === "concluida")
+          .forEach((entry) => ["learn", "read", "practice"].forEach((step) => {
+            data.taskStatus[`${taskBaseKey(entry)}_${step}`] = "concluida";
+          }));
+      });
       Storage.closeDay(scheduleDate, studyDate);
       Storage.setDayStatus(
         scheduleDate,
