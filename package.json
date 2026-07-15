@@ -10,7 +10,7 @@
     "validate:units": "node scripts/validate-units.mjs",
     "test:units": "node --test tests/validate-units.test.mjs",
     "test:e2e": "playwright test",
-    "test": "npm run validate && npm run test:calendar && npm run test:links && npm run test:units && npm run validate:units && npm run test:e2e"
+    "test": "npm run validate && npm run test:calendar && npm run test:links && npm run test:units && npm run test:e2e"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1"

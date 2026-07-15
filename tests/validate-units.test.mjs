@@ -36,6 +36,22 @@ const base = {
   questoes: [1, 2, 3, 4, 5].map((n) => ({ id: `real-${n}`, materia: "Português", assunto: "Interpretação de textos", unitIds: ["unidade-pt-interpretacao-01"], objetivos: ["pt-int-inferencia-valida"], fonte: "Cebraspe", fonteUrl: "https://cdn.cebraspe.org.br/prova.pdf", fonteVerificada: true }))
 };
 
+test("aceita unidade editorial coerente", () => {
+  const result = validateUnits(structuredClone(base));
+  assert.deepEqual(result.unidades[0].erros, []);
+  assert.deepEqual(result.unidades[0].pendenciasEditoriais, []);
+  assert.deepEqual(result.unidades[0].dadosNaoVerificados, []);
+  assert.equal(result.falhou, false);
+});
+
+for (const status of [undefined, "ativo"]) {
+  test(`rejeita statusEditorial inválido: ${status}`, () => {
+    const input = structuredClone(base);
+    input.unidades[0].statusEditorial = status;
+    assert.match(validateUnits(input).unidades[0].erros.join(" "), /statusEditorial/i);
+  });
+}
+
 test("rejeita timestamp fora da duração", () => {
   const input = structuredClone(base);
   input.unidades[0].video.fimSegundos = 2000;

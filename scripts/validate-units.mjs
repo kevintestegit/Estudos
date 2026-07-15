@@ -34,6 +34,7 @@ export function validateUnits({ unidades = [], checagens = [], aulas = [], quest
     const aula = aulasById.get(unit.video?.aulaId);
 
     if (!unit.id || duplicateUnitIds.has(unit.id)) erros.push("ID de unidade ausente ou duplicado.");
+    if (!["rascunho", "publicada"].includes(unit.statusEditorial)) erros.push("statusEditorial deve ser rascunho ou publicada.");
     if (!objectives.length || duplicates(objectives).length) erros.push("Objetivos ausentes ou duplicados.");
     if (!unit.leitura?.secoes?.length) erros.push("Leitura obrigatória sem conteúdo.");
     if (unit.leitura?.secoes?.some(({ id }) => !id)) erros.push("ID de seção de leitura ausente.");
