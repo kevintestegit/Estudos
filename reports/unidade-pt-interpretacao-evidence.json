@@ -1,0 +1,51 @@
+{
+  "aulaId": "aula-pt-01",
+  "videoId": "B1lk04l-dRU",
+  "duracaoTotalSegundos": 1959,
+  "inicio": null,
+  "fim": null,
+  "objetivosConfirmados": [],
+  "evidencias": [
+    {
+      "fonte": "youtube_oembed",
+      "url": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DB1lk04l-dRU&format=json",
+      "httpStatus": 200,
+      "titulo": "PORTUGUÊS PARA CONCURSOS: INTERPRETAÇÃO DE TEXTO",
+      "autor": "FZ Concursos"
+    },
+    {
+      "fonte": "pagina_publica_youtube",
+      "url": "https://www.youtube.com/watch?v=B1lk04l-dRU",
+      "httpStatus": 200,
+      "duracaoSegundos": 1959,
+      "publicadoEm": "2024-10-08T15:30:01-07:00",
+      "legendaAutomatica": {
+        "idioma": "pt",
+        "nome": "Português (gerada automaticamente)",
+        "disponivelNaPagina": true
+      }
+    },
+    {
+      "fonte": "youtube_timedtext",
+      "httpStatus": 200,
+      "conteudoObtido": false,
+      "respostaDiretaBytes": 0,
+      "respostaUrlAssinadaBytes": 52,
+      "tipoRespostaUrlAssinada": "image/gif"
+    }
+  ],
+  "verificadoEm": "2026-07-15",
+  "status": "pendente_revisao_manual",
+  "httpOembed": {
+    "status": 200,
+    "contentType": "application/json",
+    "titulo": "PORTUGUÊS PARA CONCURSOS: INTERPRETAÇÃO DE TEXTO",
+    "authorName": "FZ Concursos",
+    "providerName": "YouTube"
+  },
+  "limitacoes": [
+    "O título e os metadados confirmam o tema geral, mas não comprovam a cobertura dos objetivos pt-int-compreensao-explicita, pt-int-inferencia-valida e pt-int-coesao-referencial.",
+    "A página anuncia legenda automática em português, porém o endpoint direto retornou corpo vazio e a URL assinada retornou apenas um GIF de 52 bytes.",
+    "Sem transcrição ou inspeção manual reproduzível do conteúdo, não foi possível confirmar objetivos nem delimitar segundos exatos sem inventar evidência."
+  ]
+}
