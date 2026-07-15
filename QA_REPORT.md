@@ -56,6 +56,7 @@ Foram usados 28 canais identificados, incluindo Estratégia Concursos, Gran Curs
 - Vídeos usam `Assistir videoaula`, URL exata, nova aba e `rel="noopener noreferrer"`.
 - Indisponíveis continuam sem `<a>` e sem conclusão por clique.
 - O Service Worker usa `portal-estudos-v16`; durante `activate`, somente caches anteriores do portal, inclusive v15, são removidos. Caches de outras aplicações são preservados.
+- A URL exata de `unit.js?v=1` e `data/unidades.json` entram no precache para permitir a primeira abertura offline da unidade piloto após a ativação.
 - Navegação e `/data/` continuam em network-first.
 
 ## Correções de confiabilidade

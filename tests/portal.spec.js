@@ -533,6 +533,35 @@ test("Service Worker remove o cache da versão anterior", async ({ page }) => {
   expect(cacheNames).toContain("cache-de-outro-aplicativo");
 });
 
+test("primeira abertura offline de Hoje mantém a unidade disponível", async ({ page, context }) => {
+  const pageErrors = [];
+  page.on("pageerror", (error) => pageErrors.push(error.message));
+  await page.goto("/index.html");
+  await page.evaluate(async () => navigator.serviceWorker.ready);
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
+  const cached = await page.evaluate(async () => {
+    const cache = await caches.open("portal-estudos-v16");
+    const url = (path) => new URL(path, location.href).href;
+    return {
+      unitScript: Boolean(await cache.match(url("assets/js/unit.js?v=1"))),
+      unitsData: Boolean(await cache.match(url("data/unidades.json"))),
+    };
+  });
+  expect(cached).toEqual({ unitScript: true, unitsData: true });
+
+  await context.setOffline(true);
+  try {
+    await page.goto("/hoje.html");
+    await page.getByRole("button", { name: "Iniciar meu plano de estudos" }).click();
+    await expect(page.getByRole("heading", { name: "Português — Interpretação de textos" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Começar leitura" })).toBeVisible();
+    expect(pageErrors).toEqual([]);
+  } finally {
+    await context.setOffline(false);
+  }
+});
+
 for (const viewport of [{ width: 1280, height: 800 }, { width: 390, height: 844 }]) {
   for (const path of ["hoje.html", "biblioteca.html", "materias.html"]) {
     test(`${path} não oferece pesquisa ou link para aula indisponível em ${viewport.width}px`, async ({ page }) => {
