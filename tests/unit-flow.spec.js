@@ -166,6 +166,7 @@ test("agenda revisão somente depois da correção", async ({ page }) => {
         unitId,
         phase: "pratica",
         questionIds: ["real-1"],
+        startedAt: new Date(Date.now() - 1000).toISOString(),
         answers: [{
           questionId: "real-1",
           answer: "C",
@@ -586,6 +587,8 @@ test("migração normaliza unidade legada e mantém entradas válidas", async ({
       unitId,
       phase: "pratica",
       questionIds: ["real-1"],
+      startedAt: new Date().toISOString(),
+      finishedAt: null,
       answers: [],
       customLegacyField: "preservado",
     };
@@ -634,6 +637,7 @@ test("importação rejeita respostas de tentativa inconsistentes", async ({
         objetivos: ["pt-int-inferencia-valida"],
       }],
       performanceByObjective: {},
+      startedAt: new Date().toISOString(),
       finishedAt: null,
       result: null,
     };
@@ -665,6 +669,7 @@ test("migração recalcula resultado importado antes de concluir prática", asyn
 }) => {
   const result = await page.evaluate((unitId) => {
     const attemptId = "attempt-resultado-adulterado";
+    const startedAt = new Date(Date.now() - 1000).toISOString();
     Storage.importJSON(JSON.stringify({
       schemaVersion: 5,
       unitProgress: {
@@ -687,6 +692,7 @@ test("migração recalcula resultado importado antes de concluir prática", asyn
         performanceByObjective: {
           "pt-int-inferencia-valida": { answered: 1, correct: 1, wrong: 0 },
         },
+        startedAt,
         finishedAt: new Date().toISOString(),
         result: { answered: 1, correct: 1, wrong: 0 },
       }],
@@ -758,4 +764,134 @@ test("revisão importada exige contrato completo e não libera conclusão", asyn
   expect(result.migratedReviews).toEqual([]);
   expect(result.transition).toEqual({ ok: false, state: "revisao_agendada" });
   expect(result.unchanged).toBe(true);
+});
+
+test("importação rejeita correção fraudulenta e migração não a conclui", async ({
+  page,
+}) => {
+  const result = await page.evaluate((unitId) => {
+    const startedAt = new Date(Date.now() - 2000).toISOString();
+    const finishedAt = new Date(Date.now() - 1000).toISOString();
+    const base = {
+      id: "attempt-correcao-importada",
+      unitId,
+      phase: "pratica",
+      questionIds: ["real-1"],
+      startedAt,
+      finishedAt,
+      answers: [{
+        questionId: "real-1",
+        answer: "E",
+        correct: false,
+        objetivos: ["pt-int-inferencia-valida"],
+        correction: {
+          classification: "interpretacao",
+          classifiedAt: finishedAt,
+          reviewedAt: new Date().toISOString(),
+        },
+      }],
+      result: { answered: 1, correct: 0, wrong: 1 },
+      performanceByObjective: {},
+    };
+    const fraudulent = [
+      { ...base, answers: [{ ...base.answers[0], correction: {
+        ...base.answers[0].correction,
+        classification: "fraudulenta",
+      } }] },
+      { ...base, answers: [{ ...base.answers[0], correction: {
+        ...base.answers[0].correction,
+        classifiedAt: "2026-02-30T00:00:00.000Z",
+      } }] },
+      { ...base, answers: [{ ...base.answers[0], correction: {
+        ...base.answers[0].correction,
+        reviewedAt: "agora",
+      } }] },
+    ];
+    const importErrors = fraudulent.map((attempt) => {
+      try {
+        Storage.importJSON(JSON.stringify({ schemaVersion: 5, unitAttempts: [attempt] }));
+        return null;
+      } catch (error) {
+        return error.message;
+      }
+    });
+    localStorage.setItem("portal-estudos-v1", JSON.stringify({
+      schemaVersion: 5,
+      unitProgress: {
+        [unitId]: { state: "correcao_pendente", activeAttemptId: base.id },
+      },
+      unitAttempts: [fraudulent[0]],
+    }));
+    const migrated = Storage.get();
+    const before = Storage.exportJSON();
+    const transition = Storage.transitionUnit(unitId, "concluir_correcao");
+    return {
+      importErrors,
+      migratedAttempts: migrated.unitAttempts,
+      transition,
+      unchanged: before === Storage.exportJSON(),
+    };
+  }, UNIT_ID);
+
+  expect(result.importErrors.every(Boolean)).toBe(true);
+  expect(result.migratedAttempts).toEqual([]);
+  expect(result.transition).toEqual({ ok: false, state: "correcao_pendente" });
+  expect(result.unchanged).toBe(true);
+});
+
+test("tentativa importada exige IDs e timestamps semanticamente válidos", async ({
+  page,
+}) => {
+  const errors = await page.evaluate(() => {
+    const startedAt = new Date(Date.now() - 1000).toISOString();
+    const base = {
+      id: "attempt-valida",
+      unitId: "unidade-valida",
+      phase: "pratica",
+      questionIds: ["real-1"],
+      startedAt,
+      finishedAt: null,
+      answers: [],
+      result: null,
+      performanceByObjective: {},
+    }, completedAnswers = [{
+      questionId: "real-1",
+      answer: "C",
+      correct: true,
+      objetivos: ["pt-int-inferencia-valida"],
+    }];
+    const malformed = [
+      { ...base, id: "   " },
+      { ...base, unitId: "\t" },
+      { ...base, questionIds: [" "] },
+      { ...base, answers: [{
+        questionId: " ", answer: "E", correct: false,
+        objetivos: ["pt-int-inferencia-valida"],
+      }] },
+      { ...base, answers: [{
+        questionId: "real-1", answer: "E", correct: false, objetivos: ["  "],
+      }] },
+      { ...base, startedAt: "2026-02-30T00:00:00.000Z" },
+      {
+        ...base,
+        answers: completedAnswers,
+        finishedAt: "verdadeiro-mas-invalido",
+      },
+      {
+        ...base,
+        answers: completedAnswers,
+        finishedAt: new Date(Date.now() - 2000).toISOString(),
+      },
+    ];
+    return malformed.map((attempt) => {
+      try {
+        Storage.importJSON(JSON.stringify({ schemaVersion: 5, unitAttempts: [attempt] }));
+        return null;
+      } catch (error) {
+        return error.message;
+      }
+    });
+  });
+
+  expect(errors.every(Boolean)).toBe(true);
 });

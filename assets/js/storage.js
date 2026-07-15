@@ -51,20 +51,37 @@ const UNIT_STATES = new Set([
   "concluida",
 ]);
 const UNIT_REVIEW_STATUSES = new Set(["pendente", "concluida", "cancelada"]);
+const UNIT_CORRECTION_TYPES = new Set([
+  "conceitual",
+  "interpretacao",
+  "atencao",
+]);
 const isObject = (value) =>
   value && typeof value === "object" && !Array.isArray(value);
+const isValidISOTimestamp = (value) => {
+  if (typeof value !== "string") return false;
+  const date = new Date(value);
+  return !Number.isNaN(date.valueOf()) && date.toISOString() === value;
+};
+const isValidUnitCorrection = (correction) =>
+  isObject(correction) &&
+  UNIT_CORRECTION_TYPES.has(correction.classification) &&
+  isValidISOTimestamp(correction.classifiedAt) &&
+  isValidISOTimestamp(correction.reviewedAt);
 const isValidUnitAnswer = (answer) =>
   isObject(answer) &&
   typeof answer.questionId === "string" &&
+  Boolean(answer.questionId.trim()) &&
   Object.hasOwn(answer, "answer") &&
   answer.answer !== undefined &&
   typeof answer.correct === "boolean" &&
   Array.isArray(answer.objetivos) &&
   answer.objetivos.length > 0 &&
   answer.objetivos.every(
-    (objective) => typeof objective === "string" && objective,
+    (objective) => typeof objective === "string" && objective.trim(),
   ) &&
-  new Set(answer.objetivos).size === answer.objetivos.length;
+  new Set(answer.objetivos).size === answer.objetivos.length &&
+  (answer.correction == null || isValidUnitCorrection(answer.correction));
 const isISODate = (value) => {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) return false;
   const date = new Date(`${value}T00:00:00Z`);
@@ -72,21 +89,17 @@ const isISODate = (value) => {
     !Number.isNaN(date.valueOf()) && date.toISOString().slice(0, 10) === value
   );
 };
-const isValidCreatedAt = (value) => {
-  if (typeof value !== "string") return false;
-  const date = new Date(value);
-  return !Number.isNaN(date.valueOf()) && date.toISOString() === value;
-};
+const isValidCreatedAt = isValidISOTimestamp;
 const isValidUnitReview = (review) =>
   isObject(review) &&
   typeof review.id === "string" &&
-  Boolean(review.id) &&
+  Boolean(review.id.trim()) &&
   typeof review.unitId === "string" &&
-  Boolean(review.unitId) &&
+  Boolean(review.unitId.trim()) &&
   Array.isArray(review.objetivos) &&
   review.objetivos.length > 0 &&
   review.objetivos.every(
-    (objective) => typeof objective === "string" && objective,
+    (objective) => typeof objective === "string" && objective.trim(),
   ) &&
   new Set(review.objetivos).size === review.objetivos.length &&
   isISODate(review.scheduledDate) &&
@@ -119,14 +132,20 @@ const normalizeUnitAttempt = (attempt) => {
   if (
     !isObject(attempt) ||
     typeof attempt.id !== "string" ||
-    !attempt.id ||
+    !attempt.id.trim() ||
     typeof attempt.unitId !== "string" ||
-    !attempt.unitId ||
+    !attempt.unitId.trim() ||
     !["checagem", "pratica"].includes(attempt.phase) ||
     !Array.isArray(attempt.questionIds) ||
     !attempt.questionIds.length ||
-    attempt.questionIds.some((id) => typeof id !== "string" || !id) ||
-    new Set(attempt.questionIds).size !== attempt.questionIds.length
+    attempt.questionIds.some(
+      (id) => typeof id !== "string" || !id.trim(),
+    ) ||
+    new Set(attempt.questionIds).size !== attempt.questionIds.length ||
+    !isValidISOTimestamp(attempt.startedAt) ||
+    (attempt.finishedAt !== null &&
+      (!isValidISOTimestamp(attempt.finishedAt) ||
+        attempt.finishedAt < attempt.startedAt))
   )
     return null;
   const answers = Array.isArray(attempt.answers) ? attempt.answers : [];
