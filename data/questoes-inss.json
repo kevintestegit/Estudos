@@ -6,12 +6,28 @@
       "tipo": "ce",
       "banca": "CEBRASPE",
       "materia": "Português",
-      "assunto": "INSS 2022 item 1",
+      "assunto": "Interpretação de textos",
       "tag": "portugues-interpretacao",
       "enunciado": "O envelhecimento da população mundial é um dos fatores que explicam a ampliação da presença de mulheres no mercado de trabalho.",
       "gabarito": "E",
       "comentario": "ERRADO. O texto afirma que o envelhecimento da população e as novas configurações familiares (com mulheres mais presentes no mercado de trabalho) levam os países a repensar sistemas de cuidado. O envelhecimento não é apresentado como fator que explica a ampliação da presença feminina no mercado; a relação no texto é outra (mulheres no mercado + envelhecimento geram crise de cuidados). Logo, o item inverte a causalidade.",
       "fonte": "INSS 2022 Cebraspe",
+      "unitIds": [
+        "unidade-pt-interpretacao-01"
+      ],
+      "objetivos": [
+        "pt-int-inferencia-valida"
+      ],
+      "concurso": "INSS — Técnico do Seguro Social",
+      "ano": 2022,
+      "dificuldade": "media",
+      "dificuldadeOrigem": "classificacao_editorial_autoral",
+      "origemQuestao": "real",
+      "comentarioOrigem": "autoral",
+      "fonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/760_INSS_CB1_01.PDF",
+      "gabaritoFonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/GAB_DEFINITIVO_760_INSS_CB1_01.PDF",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-15",
       "textoId": "inss-2022-cb1a1"
     },
     {
@@ -19,12 +35,28 @@
       "tipo": "ce",
       "banca": "CEBRASPE",
       "materia": "Português",
-      "assunto": "INSS 2022 item 2",
+      "assunto": "Interpretação de textos",
       "tag": "portugues-interpretacao",
       "enunciado": "Os serviços de cuidados fornecidos na América Latina diferenciam-se dos providos em países do hemisfério norte.",
       "gabarito": "C",
       "comentario": "CERTO. O texto distingue: no hemisfério norte há maior mercantilização e atuação do Estado; na América Latina o protagonismo das famílias (cuidado gratuito, sobretudo de mulheres) é o aspecto mais marcante. Há, portanto, diferenciação entre os arranjos.",
       "fonte": "INSS 2022 Cebraspe",
+      "unitIds": [
+        "unidade-pt-interpretacao-01"
+      ],
+      "objetivos": [
+        "pt-int-compreensao-explicita"
+      ],
+      "concurso": "INSS — Técnico do Seguro Social",
+      "ano": 2022,
+      "dificuldade": "media",
+      "dificuldadeOrigem": "classificacao_editorial_autoral",
+      "origemQuestao": "real",
+      "comentarioOrigem": "autoral",
+      "fonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/760_INSS_CB1_01.PDF",
+      "gabaritoFonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/GAB_DEFINITIVO_760_INSS_CB1_01.PDF",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-15",
       "textoId": "inss-2022-cb1a1"
     },
     {
@@ -45,12 +77,28 @@
       "tipo": "ce",
       "banca": "CEBRASPE",
       "materia": "Português",
-      "assunto": "INSS 2022 item 4",
+      "assunto": "Interpretação de textos",
       "tag": "portugues-interpretacao",
       "enunciado": "A profissionalização do trabalho de cuidados nos últimos anos remodelou a essência do conceito de cuidado.",
       "gabarito": "E",
       "comentario": "ERRADO. O texto fala em ampliação do conceito de cuidado e em profissionalização/mercado no Norte, mas não afirma que a profissionalização 'remodelou a essência' do conceito. Não há essa conclusão no texto.",
       "fonte": "INSS 2022 Cebraspe",
+      "unitIds": [
+        "unidade-pt-interpretacao-01"
+      ],
+      "objetivos": [
+        "pt-int-inferencia-valida"
+      ],
+      "concurso": "INSS — Técnico do Seguro Social",
+      "ano": 2022,
+      "dificuldade": "media",
+      "dificuldadeOrigem": "classificacao_editorial_autoral",
+      "origemQuestao": "real",
+      "comentarioOrigem": "autoral",
+      "fonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/760_INSS_CB1_01.PDF",
+      "gabaritoFonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/GAB_DEFINITIVO_760_INSS_CB1_01.PDF",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-15",
       "textoId": "inss-2022-cb1a1"
     },
     {
@@ -58,12 +106,28 @@
       "tipo": "ce",
       "banca": "CEBRASPE",
       "materia": "Português",
-      "assunto": "INSS 2022 item 5",
+      "assunto": "Interpretação de textos",
       "tag": "portugues-interpretacao",
       "enunciado": "Ao confirmarem a forte dimensão emocional do trabalho de cuidados, os estudos relatados no texto recomendam que esse setor da economia não seja assumido pelo Estado nem seja objeto de mercantilização.",
       "gabarito": "E",
       "comentario": "ERRADO. O texto reconhece dimensão emocional do cuidado, mas não recomenda que o setor 'não seja assumido pelo Estado nem seja objeto de mercantilização'. No Norte, o texto aponta exatamente mercantilização e maior atuação estatal como resposta à crise de cuidados.",
       "fonte": "INSS 2022 Cebraspe",
+      "unitIds": [
+        "unidade-pt-interpretacao-01"
+      ],
+      "objetivos": [
+        "pt-int-inferencia-valida"
+      ],
+      "concurso": "INSS — Técnico do Seguro Social",
+      "ano": 2022,
+      "dificuldade": "media",
+      "dificuldadeOrigem": "classificacao_editorial_autoral",
+      "origemQuestao": "real",
+      "comentarioOrigem": "autoral",
+      "fonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/760_INSS_CB1_01.PDF",
+      "gabaritoFonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/GAB_DEFINITIVO_760_INSS_CB1_01.PDF",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-15",
       "textoId": "inss-2022-cb1a1"
     },
     {
@@ -84,12 +148,28 @@
       "tipo": "ce",
       "banca": "CEBRASPE",
       "materia": "Português",
-      "assunto": "INSS 2022 item 7",
+      "assunto": "Interpretação de textos",
       "tag": "portugues-interpretacao",
       "enunciado": "No terceiro parágrafo, o segmento “a ideia” (segundo período) retoma, por coesão, a “noção” descrita no primeiro período.",
       "gabarito": "C",
       "comentario": "CERTO. No terceiro parágrafo, 'a ideia' retoma, por coesão lexical, a 'noção' (arraigada) de que o cuidado seria manifestação de amor, mencionada no período anterior. É retomada anafórica típica.",
       "fonte": "INSS 2022 Cebraspe",
+      "unitIds": [
+        "unidade-pt-interpretacao-01"
+      ],
+      "objetivos": [
+        "pt-int-coesao-referencial"
+      ],
+      "concurso": "INSS — Técnico do Seguro Social",
+      "ano": 2022,
+      "dificuldade": "media",
+      "dificuldadeOrigem": "classificacao_editorial_autoral",
+      "origemQuestao": "real",
+      "comentarioOrigem": "autoral",
+      "fonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/760_INSS_CB1_01.PDF",
+      "gabaritoFonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/GAB_DEFINITIVO_760_INSS_CB1_01.PDF",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-15",
       "textoId": "inss-2022-cb1a1"
     },
     {

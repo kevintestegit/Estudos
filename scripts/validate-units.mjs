@@ -32,6 +32,7 @@ export function validateUnits({ unidades = [], checagens = [], aulas = [], quest
     const checks = (unit.checagem?.questionIds || []).map((id) => checksById.get(id));
     const questions = (unit.pratica?.questionIds || []).map((id) => questionsById.get(id));
     const aula = aulasById.get(unit.video?.aulaId);
+    const pendingDraftVideo = unit.statusEditorial === "rascunho" && unit.video?.statusVerificacao !== "aprovado";
 
     if (!unit.id || duplicateUnitIds.has(unit.id)) erros.push("ID de unidade ausente ou duplicado.");
     if (!["rascunho", "publicada"].includes(unit.statusEditorial)) erros.push("statusEditorial deve ser rascunho ou publicada.");
@@ -49,7 +50,8 @@ export function validateUnits({ unidades = [], checagens = [], aulas = [], quest
     if (aulas.some(({ id }) => !id)) erros.push("ID de aula ausente.");
     if (!aula) erros.push("Referência de videoaula quebrada.");
     if (duplicateAulaIds.has(unit.video?.aulaId)) erros.push("ID de aula duplicado.");
-    if (!includesAll(objectives, unit.video?.objetivosCobertos)) erros.push("Objetivo sem cobertura na videoaula.");
+    if (pendingDraftVideo) pendenciasEditoriais.push("Vídeo pendente de validação pedagógica.");
+    if (!includesAll(objectives, unit.video?.objetivosCobertos) && !pendingDraftVideo) erros.push("Objetivo sem cobertura na videoaula.");
     if (!unit.video?.fonte || !unit.video?.fonteUrl) erros.push("Vídeo sem fonte.");
     if (unit.video?.fonteVerificada !== true) dadosNaoVerificados.push("Fonte do vídeo não verificada.");
     const verifiedDate = isIsoDate(unit.video?.verificadoEm);
@@ -58,7 +60,7 @@ export function validateUnits({ unidades = [], checagens = [], aulas = [], quest
     const start = unit.video?.inicioSegundos;
     const end = unit.video?.fimSegundos;
     const duration = aula?.duracaoTotalSegundos ?? unit.video?.duracaoTotalSegundos;
-    if (!Number.isFinite(start) || !Number.isFinite(end) || start < 0 || end <= start || !Number.isFinite(duration) || end > duration) {
+    if ((!Number.isFinite(start) || !Number.isFinite(end) || start < 0 || end <= start || !Number.isFinite(duration) || end > duration) && !pendingDraftVideo) {
       erros.push("Timestamp do trecho de vídeo inválido.");
     }
 

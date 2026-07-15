@@ -1,0 +1,259 @@
+{
+  "unidades": [
+    {
+      "id": "unidade-pt-interpretacao-01",
+      "materia": "Português",
+      "assunto": "Interpretação de textos",
+      "titulo": "Compreensão explícita, inferência válida e coesão referencial",
+      "objetivos": [
+        "pt-int-compreensao-explicita",
+        "pt-int-inferencia-valida",
+        "pt-int-coesao-referencial"
+      ],
+      "leitura": {
+        "conteudoId": "leitura-pt-interpretacao-01",
+        "tempoMinutos": 8,
+        "objetivosCobertos": [
+          "pt-int-compreensao-explicita",
+          "pt-int-inferencia-valida",
+          "pt-int-coesao-referencial"
+        ],
+        "secoes": [
+          {
+            "id": "compreensao-explicita",
+            "titulo": "Comece pelo que o texto afirma",
+            "objetivosCobertos": [
+              "pt-int-compreensao-explicita"
+            ],
+            "conteudo": "Compreender uma informação explícita é localizar uma ideia que o texto efetivamente apresenta e reconstruí-la sem alterar relações como causa, comparação, oposição, condição ou consequência. Antes de julgar um item, volte ao trecho indicado e separe três elementos: quem ou o que está em foco, o que se declara sobre esse elemento e como as ideias se relacionam. A banca costuma conservar as palavras principais, mas trocar o vínculo entre elas. Exemplo autoral: se o texto diz que o aumento da temperatura e a falta de chuva reduziram a produção, não se pode concluir que a queda da produção causou a falta de chuva. Os mesmos termos aparecem, porém a relação causal foi invertida. Também é preciso respeitar o alcance das palavras. 'Alguns servidores participaram' não equivale a 'todos participaram'; 'pode ocorrer' não significa 'sempre ocorre'. Para conferir uma paráfrase, pergunte: a versão mantém os participantes, a direção da relação, a intensidade e as restrições do original? Se qualquer desses pontos mudar, o item não reproduz a informação explícita. Em provas do tipo certo ou errado, uma única alteração relevante basta para tornar a afirmação errada. Por isso, não avalie apenas se o tema parece familiar: compare a proposição inteira com o texto-base."
+          },
+          {
+            "id": "inferencia-valida",
+            "titulo": "Inferir sem ultrapassar o texto",
+            "objetivosCobertos": [
+              "pt-int-inferencia-valida"
+            ],
+            "conteudo": "Inferência é uma conclusão apoiada por pistas do texto, mesmo quando não aparece escrita com as mesmas palavras. Ela precisa ser necessária ou, ao menos, claramente sustentada pelo conjunto das informações; uma hipótese apenas possível não basta. Use um teste simples: liste as premissas fornecidas e pergunte se a conclusão continua verdadeira sem acrescentar conhecimento externo. Exemplo autoral: 'A biblioteca fechou às 18 horas. Lara chegou às 18h20 e encontrou a porta trancada.' É válido inferir que Lara chegou depois do fechamento. Não é válido afirmar que ela perdeu uma prova, porque o texto nada diz sobre prova. As armadilhas mais comuns são atribuir intenção ao autor, transformar descrição em recomendação e criar causa onde há apenas sequência ou coexistência. Se uma pesquisa relata que determinado serviço é prestado pelo Estado em alguns lugares, isso não autoriza dizer que os pesquisadores recomendam esse modelo para todos. Observe também verbos modalizadores: 'indica', 'sugere' e 'pode' expressam graus de certeza menores que 'comprova', 'determina' e 'sempre'. Uma inferência válida preserva esse grau. Na dúvida, formule a pergunta: qual frase ou combinação de frases obriga esta conclusão? Se não houver resposta objetiva, o item provavelmente extrapola. O conhecimento de mundo ajuda a entender palavras e situações, mas não pode preencher uma justificativa que o texto não ofereceu."
+          },
+          {
+            "id": "coesao-referencial",
+            "titulo": "Siga a cadeia de referências",
+            "objetivosCobertos": [
+              "pt-int-coesao-referencial"
+            ],
+            "conteudo": "Coesão referencial é o conjunto de recursos que liga expressões a elementos já apresentados ou que ainda serão apresentados. Pronomes, sinônimos, repetições controladas e expressões resumidoras evitam que cada frase recomece do zero. Para descobrir o referente, não escolha apenas o substantivo mais próximo. Substitua mentalmente a expressão pelo candidato e verifique concordância, sentido e continuidade temática. Exemplo autoral: 'A comissão publicou uma nova regra. A medida entra em vigor amanhã.' A expressão 'a medida' retoma 'uma nova regra'; a proximidade ajuda, mas a equivalência de sentido confirma a ligação. Em 'Paula conversou com Renata quando ela chegou', o pronome 'ela' pode ser ambíguo sem contexto adicional. A banca pode explorar justamente essa falta de referente inequívoco. Há retomada anafórica quando a expressão aponta para algo anterior e catafórica quando anuncia algo posterior. Também existe coesão lexical: 'noção', 'ideia' e 'entendimento' podem formar uma cadeia, desde que o contexto mostre que tratam do mesmo conteúdo. A troca por um termo parecido não é automaticamente válida; é preciso preservar o referente e a relação argumentativa. Ao resolver, marque a expressão, procure os candidatos no trecho próximo e faça a substituição completa. Se a frase resultar incoerente, contrariar o número ou o gênero, ou deslocar o foco temático, rejeite aquele candidato."
+          },
+          {
+            "id": "armadilhas-de-banca",
+            "titulo": "Armadilhas recorrentes",
+            "objetivosCobertos": [
+              "pt-int-compreensao-explicita",
+              "pt-int-inferencia-valida",
+              "pt-int-coesao-referencial"
+            ],
+            "conteudo": "Quatro operações aparecem com frequência em itens de interpretação. A inversão causal troca causa e consequência, embora preserve quase todas as palavras. A generalização amplia 'alguns', 'em certos casos' ou 'pode' para 'todos', 'sempre' ou 'necessariamente'. A extrapolação acrescenta recomendação, avaliação ou finalidade que o autor não declarou. A troca de referente liga pronome ou expressão resumidora a um termo próximo, mas semanticamente incompatível. Faça uma leitura desconfiada dos absolutos e dos verbos fortes, sem adotar a regra simplista de que toda palavra absoluta torna o item errado: ela pode reproduzir exatamente o texto. Outro erro frequente do candidato é responder com a própria opinião. A questão pede fidelidade ao texto, não concordância pessoal com o tema. Em itens longos, divida a afirmação em blocos e verifique cada um. Se a primeira parte estiver correta e a segunda introduzir uma conclusão indevida, o item inteiro está errado. Por fim, volte ao contexto suficiente: uma frase isolada pode esconder a oposição estabelecida no parágrafo seguinte ou o referente apresentado no período anterior."
+          },
+          {
+            "id": "resumo",
+            "titulo": "Roteiro de decisão",
+            "objetivosCobertos": [
+              "pt-int-compreensao-explicita",
+              "pt-int-inferencia-valida",
+              "pt-int-coesao-referencial"
+            ],
+            "conteudo": "Para cada item, siga cinco passos. Primeiro, identifique exatamente o que a afirmação pede. Segundo, localize no texto as passagens necessárias. Terceiro, compare sujeitos, relações, intensidade e restrições. Quarto, se houver inferência, escreva mentalmente as premissas e rejeite qualquer conclusão que dependa de informação externa. Quinto, se houver retomada, substitua a expressão pelo referente proposto e teste concordância e sentido. Ao errar, classifique a causa: erro conceitual, quando a regra não estava clara; erro de interpretação, quando a relação do texto foi lida de modo incorreto; ou erro de atenção, quando uma palavra decisiva passou despercebida. Essa classificação orientará a correção e a revisão futura."
+          }
+        ],
+        "pontosChave": [
+          "Compare relações completas, não apenas palavras repetidas.",
+          "Aceite uma inferência somente quando as premissas do texto a sustentarem.",
+          "Confirme o referente por concordância, sentido e continuidade temática.",
+          "Uma parte incorreta torna o item inteiro incorreto."
+        ],
+        "armadilhasDeBanca": [
+          "Inverter causa e consequência.",
+          "Transformar possibilidade em certeza ou parte em totalidade.",
+          "Atribuir ao autor recomendação que o texto apenas descreve.",
+          "Escolher como referente apenas o termo mais próximo."
+        ],
+        "fontes": [
+          {
+            "titulo": "Cebraspe — caderno de provas objetivas INSS 2022, cargo 760",
+            "url": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/760_INSS_CB1_01.PDF",
+            "verificada": true,
+            "verificadoEm": "2026-07-15"
+          },
+          {
+            "titulo": "Cebraspe — gabarito oficial definitivo INSS 2022, cargo 760",
+            "url": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/GAB_DEFINITIVO_760_INSS_CB1_01.PDF",
+            "verificada": true,
+            "verificadoEm": "2026-07-15"
+          }
+        ]
+      },
+      "video": {
+        "aulaId": "aula-pt-01",
+        "inicioSegundos": null,
+        "fimSegundos": null,
+        "objetivosCobertos": [],
+        "fonte": "YouTube — FZ Concursos",
+        "fonteUrl": "https://www.youtube.com/watch?v=B1lk04l-dRU",
+        "fonteVerificada": true,
+        "coberturaPedagogicaVerificada": false,
+        "verificadoEm": "2026-07-15",
+        "statusVerificacao": "pendente_revisao_manual"
+      },
+      "checagem": {
+        "questionIds": [
+          "check-pt-int-01",
+          "check-pt-int-02",
+          "check-pt-int-03",
+          "check-pt-int-04"
+        ],
+        "quantidadeMinima": 3
+      },
+      "pratica": {
+        "questionIds": [
+          "inss-2022-i1",
+          "inss-2022-i2",
+          "inss-2022-i4",
+          "inss-2022-i5",
+          "inss-2022-i7"
+        ],
+        "quantidadeMinima": 5
+      },
+      "correcao": {
+        "agruparPorObjetivo": true,
+        "permitirNovaTentativa": true,
+        "classificacoesErro": [
+          "conceitual",
+          "interpretacao",
+          "atencao"
+        ]
+      },
+      "revisao": {
+        "habilitada": true,
+        "estrategia": "baseada-em-desempenho"
+      },
+      "statusEditorial": "rascunho"
+    }
+  ],
+  "checagens": [
+    {
+      "id": "check-pt-int-01",
+      "unitId": "unidade-pt-interpretacao-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "pt-int-compreensao-explicita"
+      ],
+      "enunciado": "Um texto afirma: 'Em 2025, a biblioteca ampliou o horário e, por isso, recebeu mais visitantes.' Qual alternativa preserva a informação explícita?",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "O aumento de visitantes levou a biblioteca a ampliar o horário."
+        },
+        {
+          "id": "B",
+          "texto": "A ampliação do horário foi apresentada como causa do aumento de visitantes."
+        },
+        {
+          "id": "C",
+          "texto": "Toda biblioteca que amplia o horário recebe mais visitantes."
+        }
+      ],
+      "respostaCorreta": "B",
+      "feedback": {
+        "correta": "Correto. A alternativa mantém a direção da relação causal expressa no exemplo.",
+        "incorreta": "A relação foi invertida ou generalizada. Compare causa, consequência e alcance da afirmação.",
+        "leituraSecaoId": "compreensao-explicita"
+      }
+    },
+    {
+      "id": "check-pt-int-02",
+      "unitId": "unidade-pt-interpretacao-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "pt-int-inferencia-valida"
+      ],
+      "enunciado": "Um texto informa: 'A reunião começou às 9 horas. Caio chegou às 9h15.' Qual conclusão é sustentada apenas por essas informações?",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "Caio chegou depois do início da reunião."
+        },
+        {
+          "id": "B",
+          "texto": "Caio perdeu a apresentação principal."
+        },
+        {
+          "id": "C",
+          "texto": "Caio foi advertido pelo atraso."
+        }
+      ],
+      "respostaCorreta": "A",
+      "feedback": {
+        "correta": "Correto. A comparação entre os horários basta para sustentar essa conclusão.",
+        "incorreta": "O texto não informa o conteúdo da reunião nem qualquer advertência; essas conclusões acrescentam dados externos.",
+        "leituraSecaoId": "inferencia-valida"
+      }
+    },
+    {
+      "id": "check-pt-int-03",
+      "unitId": "unidade-pt-interpretacao-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "pt-int-inferencia-valida"
+      ],
+      "enunciado": "Se um relatório apenas descreve que alguns municípios criaram ciclovias, qual afirmação extrapola o texto?",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "O relatório menciona a criação de ciclovias em parte dos municípios."
+        },
+        {
+          "id": "B",
+          "texto": "O relatório recomenda que todos os municípios adotem ciclovias."
+        },
+        {
+          "id": "C",
+          "texto": "Nem todos os municípios precisam estar incluídos no grupo descrito."
+        }
+      ],
+      "respostaCorreta": "B",
+      "feedback": {
+        "correta": "Correto. A descrição de uma prática não equivale a uma recomendação universal.",
+        "incorreta": "Revise a diferença entre relatar um fato e atribuir uma recomendação ao autor.",
+        "leituraSecaoId": "inferencia-valida"
+      }
+    },
+    {
+      "id": "check-pt-int-04",
+      "unitId": "unidade-pt-interpretacao-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "pt-int-coesao-referencial"
+      ],
+      "enunciado": "No trecho 'O conselho aprovou uma nova regra. A medida vale a partir de junho.', a expressão 'A medida' retoma qual elemento?",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "O conselho."
+        },
+        {
+          "id": "B",
+          "texto": "Uma nova regra."
+        },
+        {
+          "id": "C",
+          "texto": "O mês de junho."
+        }
+      ],
+      "respostaCorreta": "B",
+      "feedback": {
+        "correta": "Correto. 'A medida' funciona como expressão resumidora de 'uma nova regra'.",
+        "incorreta": "Substitua a expressão pelos candidatos e verifique qual preserva o sentido da sequência.",
+        "leituraSecaoId": "coesao-referencial"
+      }
+    }
+  ]
+}

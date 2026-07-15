@@ -89,6 +89,27 @@ test("mantém rascunho com dado não verificado sem bloquear a validação", () 
   assert.equal(result.falhou, false);
 });
 
+test("mantém vídeo pendente sem timestamps ou cobertura como pendência de rascunho", () => {
+  const input = structuredClone(base);
+  input.unidades[0].statusEditorial = "rascunho";
+  input.unidades[0].video = {
+    aulaId: "aula-pt-01",
+    inicioSegundos: null,
+    fimSegundos: null,
+    objetivosCobertos: [],
+    fonte: "YouTube",
+    fonteUrl: "https://www.youtube.com/watch?v=video123456",
+    fonteVerificada: true,
+    verificadoEm: "2026-07-15",
+    statusVerificacao: "pendente_revisao_manual"
+  };
+  const result = validateUnits(input);
+  assert.deepEqual(result.unidades[0].erros, []);
+  assert.match(result.unidades[0].pendenciasEditoriais.join(" "), /vídeo/i);
+  assert.match(result.unidades[0].dadosNaoVerificados.join(" "), /vídeo/i);
+  assert.equal(result.falhou, false);
+});
+
 test("registra checagem abaixo do mínimo editorial", () => {
   const input = structuredClone(base);
   input.unidades[0].checagem.questionIds.pop();

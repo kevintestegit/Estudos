@@ -1,0 +1,17 @@
+{
+  "unidades": [
+    {
+      "unitId": "unidade-pt-interpretacao-01",
+      "status": "pendente_editorial",
+      "erros": [],
+      "avisos": [],
+      "pendenciasEditoriais": [
+        "Vídeo pendente de validação pedagógica."
+      ],
+      "dadosNaoVerificados": [
+        "Vídeo ou trecho sem evidência pedagógica verificada."
+      ]
+    }
+  ],
+  "falhou": false
+}
