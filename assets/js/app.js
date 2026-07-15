@@ -432,6 +432,8 @@ window.Modal = (() => {
           `<button type="button" class="btn btn-sm ${b.accent || "btn-secondary"}" data-mb="${i}">${App.esc(b.label)}</button>`,
       )
       .join("");
+    // reflow so enter animation restarts
+    void m.el.offsetWidth;
     m.el.classList.remove("hidden");
     m.actions.querySelector("button")?.focus();
     return new Promise((resolve) => {
@@ -464,9 +466,31 @@ window.Modal = (() => {
     m.hide();
   };
   m.hide = () => {
-    if (!m.el) return;
-    m.el.classList.add("hidden");
-    m.previousFocus?.focus?.();
+    if (!m.el || m.el.classList.contains("hidden")) return;
+    if (m.el.classList.contains("is-leaving")) return;
+    const finish = () => {
+      m.el.classList.add("hidden");
+      m.el.classList.remove("is-leaving");
+      m.previousFocus?.focus?.();
+    };
+    const reduce =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    if (reduce) {
+      finish();
+      return;
+    }
+    m.el.classList.add("is-leaving");
+    const onEnd = (e) => {
+      if (e.target !== m.el) return;
+      m.el.removeEventListener("animationend", onEnd);
+      clearTimeout(fallback);
+      finish();
+    };
+    m.el.addEventListener("animationend", onEnd);
+    const fallback = setTimeout(() => {
+      m.el.removeEventListener("animationend", onEnd);
+      finish();
+    }, 220);
   };
   return m;
 })();
