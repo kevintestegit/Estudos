@@ -1,5 +1,15 @@
 const { test, expect } = require("@playwright/test");
 
+async function useLegacySchedule(page) {
+  await page.route("**/data/cronograma.json", async (route) => {
+    const response = await route.fetch();
+    const data = await response.json();
+    for (const day of data.days || [])
+      for (const task of day.tasks || []) delete task.unitId;
+    await route.fulfill({ response, json: data });
+  });
+}
+
 const pages = [
   "index.html",
   "hoje.html",
@@ -300,6 +310,7 @@ test("simulados permite configurar a pontuação Cebraspe", async ({ page }) => 
 });
 
 test("concluir recuperação não conclui o dia atual", async ({ page }) => {
+  await useLegacySchedule(page);
   await page.addInitScript(() =>
     localStorage.setItem(
       "portal-estudos-v1",
@@ -336,6 +347,7 @@ test("concluir recuperação não conclui o dia atual", async ({ page }) => {
 });
 
 test("mesclar preserva tarefas atuais e recuperadas", async ({ page }) => {
+  await useLegacySchedule(page);
   await page.addInitScript(() =>
     localStorage.setItem(
       "portal-estudos-v1",
@@ -357,6 +369,7 @@ test("mesclar preserva tarefas atuais e recuperadas", async ({ page }) => {
 });
 
 test("concluir estudo normal marca somente o dia atual", async ({ page }) => {
+  await useLegacySchedule(page);
   await page.addInitScript(() =>
     localStorage.setItem(
       "portal-estudos-v1",
@@ -517,7 +530,10 @@ for (const viewport of [{ width: 1280, height: 800 }, { width: 390, height: 844 
   for (const path of ["hoje.html", "biblioteca.html", "materias.html"]) {
     test(`${path} não oferece pesquisa ou link para aula indisponível em ${viewport.width}px`, async ({ page }) => {
       await page.setViewportSize(viewport);
-      if (path === "hoje.html") await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: {} })));
+      if (path === "hoje.html") {
+        await useLegacySchedule(page);
+        await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: {} })));
+      }
       await page.route("**/data/aulas.json", (route) => route.fulfill({ json: { aulas: [{ id: "aula-pt-01", titulo: "Interpretação de textos — base", materia: "Português", tipo: "indisponivel", url: null, notas: "Videoaula confiável ainda não selecionada.", verificadoEm: "2026-07-14" }] } }));
       await openClean(page, `/${path}`);
       await expect(page.locator('a[href*="youtube.com/results"]')).toHaveCount(0);
@@ -545,6 +561,7 @@ test("Biblioteca usa exatamente a URL cadastrada para vídeo e playlist", async 
 });
 
 test("aula indisponível não conclui a etapa de aprendizado", async ({ page }) => {
+  await useLegacySchedule(page);
   await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: {} })));
   await page.route("**/data/aulas.json", (route) => route.fulfill({ json: { aulas: [{ id: "aula-pt-01", titulo: "Interpretação de textos — base", materia: "Português", tipo: "indisponivel", url: null, notas: "Videoaula confiável ainda não selecionada.", verificadoEm: "2026-07-14" }] } }));
   await openClean(page, "/hoje.html");
@@ -556,6 +573,7 @@ test("aula indisponível não conclui a etapa de aprendizado", async ({ page }) 
 });
 
 test("abrir videoaula não conclui a etapa", async ({ page }) => {
+  await useLegacySchedule(page);
   await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: {} })));
   await openClean(page, "/hoje.html");
   const link = page.locator('[data-step-key$="_learn"]').first();
@@ -565,6 +583,7 @@ test("abrir videoaula não conclui a etapa", async ({ page }) => {
 });
 
 test("prática leva taskKey ao quiz sem concluir antes", async ({ page }) => {
+  await useLegacySchedule(page);
   await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: {} })));
   await openClean(page, "/hoje.html");
   const link = page.locator('[data-step-key$="_practice"]').first();
@@ -582,6 +601,7 @@ test("finalizar quiz conclui somente taskKey recebido", async ({ page }) => {
 });
 
 test("dia com etapa obrigatória pendente não conclui", async ({ page }) => {
+  await useLegacySchedule(page);
   await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({
     schemaVersion: 4,
     startDate: "2026-07-14",

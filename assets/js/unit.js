@@ -1,0 +1,103 @@
+// Jornada pedagógica das unidades publicadas em Hoje.
+(function () {
+  const AFTER_VIDEO = new Set([
+    "video_concluido",
+    "checagem_em_andamento",
+    "checagem_concluida",
+    "pratica_em_andamento",
+    "pratica_concluida",
+    "correcao_pendente",
+    "correcao_concluida",
+    "revisao_agendada",
+    "concluida",
+  ]);
+
+  const verifiedVideo = (unit, data) => {
+    const video = unit.video || {};
+    const lesson = (data.aulas?.aulas || []).find(
+      (item) => item.id === video.aulaId,
+    );
+    const objectives = new Set(video.objetivosCobertos || []);
+    return lesson &&
+      /^[\w-]{11}$/.test(lesson.videoId || "") &&
+      video.fonteVerificada === true &&
+      video.coberturaPedagogicaVerificada === true &&
+      video.statusVerificacao === "aprovado" &&
+      Number.isInteger(video.inicioSegundos) &&
+      Number.isInteger(video.fimSegundos) &&
+      video.inicioSegundos >= 0 &&
+      video.fimSegundos > video.inicioSegundos &&
+      (unit.objetivos || []).every((objective) => objectives.has(objective))
+      ? { ...video, videoId: lesson.videoId }
+      : null;
+  };
+
+  const locked = (title, message) => `<section class="unit-step is-locked">
+    <h4>${App.esc(title)}</h4><p class="muted">${App.esc(message)}</p>
+  </section>`;
+
+  const UnitFlow = {
+    async load(unitId) {
+      this.dataPromise ||= App.loadJSON("data/unidades.json");
+      const data = await this.dataPromise;
+      return (data.unidades || []).find((unit) => unit.id === unitId) || null;
+    },
+
+    render({ unit, task, data }) {
+      const progress = Storage.getUnitProgress(unit.id);
+      const state = progress.state;
+      const video = verifiedVideo(unit, data);
+      const readingStarted = state !== "nao_iniciada";
+      const readingDone = !["nao_iniciada", "leitura_em_andamento"].includes(state);
+      const videoStarted = state === "video_em_andamento" || AFTER_VIDEO.has(state);
+      const videoDone = AFTER_VIDEO.has(state);
+      const readingSections = readingStarted
+        ? `<p class="unit-resume">${state === "leitura_em_andamento" ? "Continue a leitura de onde parou." : "Leitura concluída."}</p>
+          ${(unit.leitura?.secoes || []).map((section) => `<section class="unit-reading-section" id="${App.esc(section.id)}"><h4>${App.esc(section.titulo)}</h4><p>${App.esc(section.conteudo)}</p></section>`).join("")}`
+        : `<p>${App.esc(unit.leitura?.tempoMinutos || 0)} minutos de leitura guiada dentro do portal.</p>`;
+      const readingAction = state === "nao_iniciada"
+        ? '<button class="btn" type="button" data-primary-action data-unit-event="iniciar_leitura">Começar leitura</button>'
+        : state === "leitura_em_andamento"
+          ? '<button class="btn" type="button" data-primary-action data-unit-event="concluir_leitura">Concluir leitura</button>'
+          : "";
+
+      let videoHtml;
+      if (!readingDone)
+        videoHtml = locked("Videoaula", "Conclua a leitura para desbloquear a videoaula.");
+      else if (!video)
+        videoHtml = `<section class="unit-step is-pending"><h4>Videoaula</h4><p class="alert alert-info">Videoaula pendente de validação</p><p class="muted" data-lesson-unavailable>Videoaula ainda não disponível</p><p class="muted">Nenhum vídeo será aberto até a cobertura pedagógica e o trecho serem confirmados.</p></section>`;
+      else if (!videoStarted)
+        videoHtml = `<section class="unit-step"><h4>Videoaula</h4><p>Trecho verificado e alinhado aos objetivos da unidade.</p><button class="btn" type="button" data-primary-action data-unit-event="iniciar_video">Assistir videoaula</button></section>`;
+      else
+        videoHtml = `<section class="unit-step"><h4>Videoaula</h4><div class="unit-video"><iframe src="https://www.youtube.com/embed/${video.videoId}?start=${video.inicioSegundos}&end=${video.fimSegundos}&rel=0" title="Videoaula: ${App.esc(unit.titulo)}" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>${state === "video_em_andamento" ? '<button class="btn" type="button" data-primary-action data-unit-event="concluir_video">Concluir videoaula</button>' : '<p class="unit-resume">Videoaula concluída.</p>'}</section>`;
+
+      const nextRequirement = videoDone
+        ? "A integração desta etapa será apresentada na sequência."
+        : video
+          ? "Conclua a videoaula para desbloquear."
+          : "Aguarde a validação da videoaula para desbloquear.";
+      return `<article class="card study-task unit-flow" data-unit-id="${App.esc(unit.id)}">
+        <div class="task-title"><div><p class="eyebrow">Unidade piloto</p><h3>${App.esc(task.materia)} — ${App.esc(task.assunto)}</h3></div><span>${App.esc(unit.leitura?.tempoMinutos || 0)} min de leitura</span></div>
+        <section class="unit-step ${readingDone ? "is-done" : ""}"><h4>Leitura guiada</h4>${readingSections}${readingAction}</section>
+        ${videoHtml}
+        ${locked("Checagem rápida", nextRequirement)}
+        ${locked("Questões reais", nextRequirement)}
+        ${locked("Correção e revisão", "Conclua as etapas anteriores para desbloquear.")}
+      </article>`;
+    },
+
+    bind({ unit, rerender }) {
+      const root = [...document.querySelectorAll("[data-unit-id]")].find(
+        (element) => element.dataset.unitId === unit.id,
+      );
+      const button = root?.querySelector("[data-unit-event]");
+      if (!button) return;
+      button.onclick = () => {
+        const result = Storage.transitionUnit(unit.id, button.dataset.unitEvent);
+        if (result.ok) rerender();
+      };
+    },
+  };
+
+  window.UnitFlow = UnitFlow;
+})();

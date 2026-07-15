@@ -895,3 +895,108 @@ test("tentativa importada exige IDs e timestamps semanticamente válidos", async
 
   expect(errors.every(Boolean)).toBe(true);
 });
+
+async function openPilot(page, viewport) {
+  await page.setViewportSize(viewport);
+  await page.evaluate(() => {
+    const data = Storage.get();
+    data.startDate = todayISO();
+    data.studyDays = [0, 1, 2, 3, 4, 5, 6];
+    Storage.set(data);
+  });
+  await page.reload();
+}
+
+for (const [name, viewport] of [
+  ["desktop", { width: 1280, height: 800 }],
+  ["mobile", { width: 390, height: 844 }],
+]) {
+  test(`leitura bloqueada mantém uma ação principal e retoma no ${name}`, async ({
+    page,
+  }) => {
+    await openPilot(page, viewport);
+
+    const primary = page.locator("[data-primary-action]");
+    await expect(primary).toHaveCount(1);
+    await expect(primary).toHaveText("Começar leitura");
+    await expect(page.getByText("Videoaula", { exact: true })).toBeVisible();
+    await expect(page.getByText(/Conclua a leitura para desbloquear/)).toBeVisible();
+
+    await primary.focus();
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("heading", { name: "Comece pelo que o texto afirma" })).toBeVisible();
+    await expect(primary).toHaveCount(1);
+    await expect(primary).toHaveText("Concluir leitura");
+    await page.reload();
+    await expect(page.getByText("Continue a leitura de onde parou.")).toBeVisible();
+    await expect(primary).toHaveText("Concluir leitura");
+
+    await primary.click();
+    await expect(page.getByText("Videoaula pendente de validação")).toBeVisible();
+    await expect(page.locator("iframe, a[href*='youtube.com']")).toHaveCount(0);
+    await expect(primary).toHaveCount(0);
+    await expect(page.getByText(/Aguarde a validação da videoaula/)).toHaveCount(2);
+    expect(
+      await page.evaluate((unitId) => Storage.getUnitProgress(unitId).state, UNIT_ID),
+    ).toBe("leitura_concluida");
+  });
+}
+
+test("video validado usa trecho incorporado e só conclui por ação explícita", async ({
+  page,
+}) => {
+  await page.route("https://www.youtube.com/**", (route) => route.abort());
+  await page.evaluate((unitId) => {
+    Storage.update((data) => {
+      data.unitProgress[unitId] = {
+        state: "leitura_concluida",
+        reading: { startedAt: new Date().toISOString(), completedAt: new Date().toISOString() },
+        video: { startedAt: null, completedAt: null },
+      };
+    });
+    const unit = {
+      id: unitId,
+      titulo: "Unidade de teste",
+      objetivos: ["objetivo-1"],
+      leitura: { secoes: [] },
+      video: {
+        aulaId: "aula-teste",
+        inicioSegundos: 12,
+        fimSegundos: 98,
+        objetivosCobertos: ["objetivo-1"],
+        fonteVerificada: true,
+        coberturaPedagogicaVerificada: true,
+        statusVerificacao: "aprovado",
+      },
+    };
+    const context = {
+      unit,
+      task: { unitId },
+      entry: {},
+      data: { aulas: { aulas: [{ id: "aula-teste", videoId: "B1lk04l-dRU" }] } },
+    };
+    const root = document.getElementById("app-root");
+    root.innerHTML = UnitFlow.render(context);
+    UnitFlow.bind({ ...context, rerender: () => {
+      root.innerHTML = UnitFlow.render(context);
+      UnitFlow.bind({ ...context, rerender: () => {} });
+    } });
+  }, "unidade-video-teste");
+
+  await page.getByRole("button", { name: "Assistir videoaula" }).click();
+  const frame = page.locator("iframe");
+  await expect(frame).toHaveAttribute(
+    "src",
+    "https://www.youtube.com/embed/B1lk04l-dRU?start=12&end=98&rel=0",
+  );
+  await expect(frame).toHaveAttribute("title", /videoaula/i);
+  await expect(frame).toHaveAttribute("allowfullscreen", "");
+  await expect(frame).toHaveAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+  expect(
+    await page.evaluate(() => Storage.getUnitProgress("unidade-video-teste").state),
+  ).toBe("video_em_andamento");
+  await page.getByRole("button", { name: "Concluir videoaula" }).click();
+  expect(
+    await page.evaluate(() => Storage.getUnitProgress("unidade-video-teste").state),
+  ).toBe("video_concluido");
+});

@@ -75,7 +75,13 @@ async function initHoje() {
       App.loadJSON("data/aulas.json"),
       App.loadJSON("data/pdfs.json"),
     ]);
-    renderHoje({ cronograma, aulas, pdfs });
+    const unitIds = [...new Set(cronograma.days.flatMap((day) =>
+      (day.tasks || []).map((task) => task.unitId).filter(Boolean),
+    ))];
+    const units = Object.fromEntries((await Promise.all(
+      unitIds.map((id) => UnitFlow.load(id)),
+    )).filter(Boolean).map((unit) => [unit.id, unit]));
+    renderHoje({ cronograma, aulas, pdfs, units });
   } catch (error) {
     showLoadError(error);
   }
@@ -189,6 +195,12 @@ function findFirstPendingStep(tasks) {
 
 function renderStudyTask(entry, data, firstPending) {
   const task = entry.task;
+  if (task.unitId) {
+    const unit = data.units?.[task.unitId];
+    return unit
+      ? UnitFlow.render({ unit, task, entry, data })
+      : `<article class="card study-task"><div class="alert alert-danger">Unidade não encontrada.</div></article>`;
+  }
   const lesson = (data.aulas.aulas || []).find(
     (item) => item.id === task.aulaId,
   );
@@ -230,6 +242,9 @@ function renderStudyTask(entry, data, firstPending) {
 }
 
 function renderFinishCards(tasks, studyDate, primaryDate, firstPending) {
+  const unitPending = tasks.some(
+    ({ task }) => task.unitId && Storage.getUnitProgress(task.unitId).state !== "concluida",
+  );
   const dates = [...new Set(tasks.map((entry) => entry.scheduleDate))];
   if (!dates.length) dates.push(primaryDate);
   return dates
@@ -238,7 +253,7 @@ function renderFinishCards(tasks, studyDate, primaryDate, firstPending) {
       const label = recovery
         ? `Concluir recuperação de ${App.formatDateBR(scheduleDate)}`
         : "Concluir estudo de hoje";
-      return `<section class="card roadmap-step finish-step ${firstPending === "finish" ? "is-next" : ""}"><span class="step-number">4</span><div><h3>Finalizar</h3><button class="btn btn-accent" type="button" data-finish-date="${scheduleDate}" ${scheduleDate === primaryDate ? 'id="btn-done"' : ""}>${label}</button></div></section>`;
+      return `<section class="card roadmap-step finish-step ${firstPending === "finish" ? "is-next" : ""}"><span class="step-number">4</span><div><h3>Finalizar</h3><button class="btn btn-accent" type="button" data-finish-date="${scheduleDate}" ${unitPending ? "disabled" : ""} ${scheduleDate === primaryDate ? 'id="btn-done"' : ""}>${unitPending ? "Conclua a unidade primeiro" : label}</button></div></section>`;
     })
     .join("");
 }
@@ -361,6 +376,16 @@ function bindTodayActions(context) {
       Storage.setTaskStatus(button.dataset.completeStep, "concluida");
       renderHoje(data);
     };
+  });
+  tasks.filter(({ task }) => task.unitId).forEach(({ task }) => {
+    const unit = data.units?.[task.unitId];
+    if (unit)
+      UnitFlow.bind({
+        unit,
+        task,
+        data,
+        rerender: () => renderHoje(data),
+      });
   });
   document.querySelectorAll("[data-dismiss]").forEach((button) => {
     button.onclick = () => {

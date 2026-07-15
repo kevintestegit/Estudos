@@ -810,6 +810,17 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   border-radius: 999px;
   transition: width var(--dur-ui) var(--ease-out);
 }
+
+.unit-step {
+  border-top: 1px solid var(--border);
+  padding: 1rem 0;
+}
+.unit-step.is-locked { opacity: 0.72; }
+.unit-reading-section { max-width: 72ch; }
+.unit-reading-section p { line-height: 1.7; }
+.unit-resume { color: var(--primary); font-weight: 700; }
+.unit-video { aspect-ratio: 16 / 9; margin-bottom: 1rem; max-width: 800px; }
+.unit-video iframe { border: 0; height: 100%; width: 100%; }
 .fc-card {
   position: relative;
   min-height: 280px;
