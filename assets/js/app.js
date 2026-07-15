@@ -43,7 +43,11 @@ const App = {
         if (e.getAttribute("data-nav") !== active) return;
         e.classList.add("active");
         e.setAttribute("aria-current", "page");
+        // dropdown stays closed by default; mark trigger if child active
+        const group = e.closest("details.nav-group");
+        if (group) group.classList.add("has-active");
       });
+    if (nav) this.bindNavDropdowns(nav);
     const root = document.getElementById("app-root");
     if (root && !document.querySelector(".skip-link")) {
       root.tabIndex = -1;
@@ -71,8 +75,48 @@ const App = {
     }
     this.renderStatusBar();
   },
+  bindNavDropdowns(nav) {
+    const groups = [...nav.querySelectorAll("details.nav-group")];
+    const closeAll = (except) => {
+      groups.forEach((g) => {
+        if (g !== except) g.open = false;
+      });
+    };
+    groups.forEach((group) => {
+      group.addEventListener("toggle", () => {
+        if (group.open) closeAll(group);
+      });
+    });
+    // click outside closes dropdowns
+    if (!this._navDropdownOutsideBound) {
+      this._navDropdownOutsideBound = true;
+      document.addEventListener("click", (e) => {
+        const t = e.target;
+        if (t && t.closest && t.closest("details.nav-group")) return;
+        document
+          .querySelectorAll("details.nav-group[open]")
+          .forEach((g) => {
+            g.open = false;
+          });
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key !== "Escape") return;
+        document
+          .querySelectorAll("details.nav-group[open]")
+          .forEach((g) => {
+            g.open = false;
+          });
+      });
+    }
+  },
   navigationHtml() {
-    return `<a class="nav-today" href="hoje.html" data-nav="hoje">Hoje</a><details class="nav-group"><summary>Meu plano</summary><a href="cronograma.html" data-nav="cronograma">Cronograma</a><a href="materias.html" data-nav="materias">Matérias</a><a href="edital.html" data-nav="edital">Edital</a></details><details class="nav-group"><summary>Questões</summary><a href="questoes.html" data-nav="questoes">Questionários</a><a href="simulados.html" data-nav="simulados">Simulados</a><a href="provas.html" data-nav="provas">Provas</a><a href="flashcards.html" data-nav="flashcards">Flashcards</a><a href="caderno-erros.html" data-nav="erros">Caderno de erros</a></details><a href="progresso.html" data-nav="progresso">Meu progresso</a><details class="nav-group"><summary>Mais</summary><a href="index.html" data-nav="dashboard">Dashboard</a><a href="biblioteca.html" data-nav="biblioteca">Biblioteca</a><a href="backup.html" data-nav="backup">Backup</a></details>`;
+    return [
+      `<a class="nav-today" href="hoje.html" data-nav="hoje">Hoje</a>`,
+      `<details class="nav-group"><summary>Meu plano</summary><div class="nav-dropdown" role="menu"><a href="cronograma.html" data-nav="cronograma" role="menuitem">Cronograma</a><a href="materias.html" data-nav="materias" role="menuitem">Matérias</a><a href="edital.html" data-nav="edital" role="menuitem">Edital</a></div></details>`,
+      `<details class="nav-group"><summary>Questões</summary><div class="nav-dropdown" role="menu"><a href="questoes.html" data-nav="questoes" role="menuitem">Questionários</a><a href="simulados.html" data-nav="simulados" role="menuitem">Simulados</a><a href="provas.html" data-nav="provas" role="menuitem">Provas</a><a href="flashcards.html" data-nav="flashcards" role="menuitem">Flashcards</a><a href="caderno-erros.html" data-nav="erros" role="menuitem">Caderno de erros</a></div></details>`,
+      `<a href="progresso.html" data-nav="progresso">Meu progresso</a>`,
+      `<details class="nav-group"><summary>Mais</summary><div class="nav-dropdown" role="menu"><a href="index.html" data-nav="dashboard" role="menuitem">Dashboard</a><a href="biblioteca.html" data-nav="biblioteca" role="menuitem">Biblioteca</a><a href="backup.html" data-nav="backup" role="menuitem">Backup</a></div></details>`,
+    ].join("");
   },
   markMissedDays() {
     const p = Storage.get();

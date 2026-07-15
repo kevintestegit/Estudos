@@ -120,9 +120,14 @@ function renderHoje(data) {
   const status = App.studyStatus(progress, data.cronograma);
   const firstPending = findFirstPendingStep(tasks);
 
+  const hour = new Date().getHours();
+  const greet =
+    hour < 12 ? "Bom dia" : hour < 18 ? "Boa tarde" : "Boa noite";
+  const studentName = "Eliana";
+
   root.innerHTML = `
     <header class="today-header mb-1">
-      <p class="eyebrow">Bom dia</p>
+      <p class="eyebrow">${greet}, ${App.esc(studentName)}</p>
       <h2>Seu estudo de hoje</h2>
       <p><strong>${App.esc(primaryDay?.titulo || "Plano do dia")}</strong></p>
       <p class="muted">Meta: ${App.formatMinutes(goals.minutesGoal)} · ${goals.questionsGoal} questões</p>
@@ -547,7 +552,27 @@ function renderSubjectCard(subject, group, lessons, materials, progress) {
   const materialUrl = `biblioteca.html?materia=${encodeURIComponent(subject.nome)}`;
   const questionUrl = `questoes.html?materia=${encodeURIComponent(subject.nome)}`;
   const availableLessons = subjectLessons.filter((lesson) => App.lessonAction(lesson).available).length;
-  return `<article class="subject-card" style="--subject-color: ${App.esc(subject.cor || "#1e4d7b")}"><p class="subject-group-label">${App.esc(group)}</p><h3>${App.esc(subject.nome)}</h3><div class="topic-list">${(subject.assuntos || []).map((topic) => `<span class="badge badge-muted">${App.esc(topic)}</span>`).join("")}</div><div class="subject-stats">${statCardMini(availableLessons, "videoaulas", `biblioteca.html?tipo=aulas&materia=${encodeURIComponent(subject.nome)}`)}${statCardMini(subjectMaterials.length, `fontes (${realPdfs} PDF)`, materialUrl)}${statCardMini(quiz.answered || 0, "questões", questionUrl)}${statCardMini(`${accuracy}%`, "acertos", questionUrl)}</div>${availableLessons ? "" : '<p class="alert alert-info" data-lesson-unavailable>Videoaula ainda não disponível</p>'}<p class="muted">Último estudo: <strong>${lastSession ? App.formatDateBR(lastSession.date) : "ainda não estudada"}</strong></p><div class="actions"><a class="btn btn-sm" href="${materialUrl}">Ver materiais</a><a class="btn btn-sm btn-accent" href="${questionUrl}">Fazer questões</a></div></article>`;
+  const topics = subject.assuntos || [];
+  const topicLimit = 6;
+  const topicHtml =
+    topics
+      .slice(0, topicLimit)
+      .map((topic) => `<span class="badge badge-muted">${App.esc(topic)}</span>`)
+      .join("") +
+    (topics.length > topicLimit
+      ? `<span class="badge badge-muted">+${topics.length - topicLimit}</span>`
+      : "");
+  return `<article class="subject-card">
+    <p class="subject-group-label">${App.esc(group)}</p>
+    <h3 class="subject-title" title="${App.esc(subject.nome)}">${App.esc(subject.nome)}</h3>
+    <div class="topic-list">${topicHtml || '<span class="muted">Sem tópicos listados</span>'}</div>
+    <div class="subject-stats">${statCardMini(availableLessons, "videoaulas", `biblioteca.html?tipo=aulas&materia=${encodeURIComponent(subject.nome)}`)}${statCardMini(subjectMaterials.length, `fontes (${realPdfs} PDF)`, materialUrl)}${statCardMini(quiz.answered || 0, "questões", questionUrl)}${statCardMini(`${accuracy}%`, "acertos", questionUrl)}</div>
+    <div class="subject-foot">
+      <div class="subject-status">${availableLessons ? "" : '<p class="alert alert-info" data-lesson-unavailable>Videoaula ainda não disponível</p>'}</div>
+      <p class="muted subject-last">Último estudo: <strong>${lastSession ? App.formatDateBR(lastSession.date) : "ainda não estudada"}</strong></p>
+      <div class="actions"><a class="btn btn-sm" href="${materialUrl}">Ver materiais</a><a class="btn btn-sm btn-accent" href="${questionUrl}">Fazer questões</a></div>
+    </div>
+  </article>`;
 }
 
 function statCardMini(value, label, href) {

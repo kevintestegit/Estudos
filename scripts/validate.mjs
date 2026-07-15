@@ -230,9 +230,9 @@ for (const file of sourceFiles) {
 }
 
 const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-log(serviceWorker.includes("portal-estudos-v15"), "Service Worker usa cache v15");
+log(serviceWorker.includes("portal-estudos-v16"), "Service Worker usa cache v16");
 log(serviceWorker.includes("./assets/js/calendar.js"), "Service Worker inclui calendar.js");
-log(serviceWorker.includes("e.request.mode==='navigate'||u.pathname.includes('/data/')"), "Service Worker mantém network-first para navegação e dados");
+log(serviceWorker.includes("e.request.mode==='navigate'||u.pathname.includes('/data/')||u.pathname.includes('/assets/')"), "Service Worker mantém network-first para navegação, dados e assets");
 
 console.log(fails ? `\n${fails} falha(s)` : "\nValidação OK");
 process.exit(fails ? 1 : 0);

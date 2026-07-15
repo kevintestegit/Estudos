@@ -467,6 +467,30 @@ test("navegação expõe página atual e estado do menu", async ({ page }) => {
   await expect(page.locator(".skip-link")).toHaveAttribute("href", "#app-root");
 });
 
+test("sidebar dropdown abre overlay e fecha ao abrir outro", async ({
+  page,
+}) => {
+  await openClean(page, "/cronograma.html");
+  const active = page.locator('[data-nav="cronograma"]');
+  await expect(active).toHaveAttribute("aria-current", "page");
+  const plano = page.locator("details.nav-group", {
+    has: page.locator('[data-nav="cronograma"]'),
+  });
+  const questoes = page.locator("details.nav-group", {
+    has: page.locator('[data-nav="questoes"]'),
+  });
+  await expect(plano).toHaveClass(/has-active/);
+  await expect(plano).not.toHaveAttribute("open");
+  await plano.locator("summary").click();
+  await expect(plano).toHaveAttribute("open", "");
+  await expect(active).toBeVisible();
+  await questoes.locator("summary").click();
+  await expect(questoes).toHaveAttribute("open", "");
+  await expect(plano).not.toHaveAttribute("open");
+  await page.locator("h1").click();
+  await expect(questoes).not.toHaveAttribute("open");
+});
+
 test("progresso do edital expõe valor acessível", async ({ page }) => {
   await openClean(page, "/edital.html");
   const bars = page.getByRole("progressbar");
@@ -492,7 +516,7 @@ test("Service Worker remove o cache da versão anterior", async ({ page }) => {
   await openClean(page, "/hoje.html");
   const cacheNames = await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
-    await caches.open("portal-estudos-v14");
+    await caches.open("portal-estudos-v15");
     await caches.open("cache-de-outro-aplicativo");
     const script = new URL("service-worker.js?upgrade-test=1", location.href);
     const registration = await navigator.serviceWorker.register(script, {
@@ -508,8 +532,8 @@ test("Service Worker remove o cache da versão anterior", async ({ page }) => {
     }
     return caches.keys();
   });
-  expect(cacheNames).toContain("portal-estudos-v15");
-  expect(cacheNames).not.toContain("portal-estudos-v14");
+  expect(cacheNames).toContain("portal-estudos-v16");
+  expect(cacheNames).not.toContain("portal-estudos-v15");
   expect(cacheNames).toContain("cache-de-outro-aplicativo");
 });
 
