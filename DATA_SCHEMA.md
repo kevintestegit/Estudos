@@ -47,6 +47,11 @@ leitura e do vídeo e a tentativa ativa. `unitAttempts[]` preserva cada tentativ
 suas respostas, resultado, duração e desempenho por objetivo. `unitReviews[]`
 registra objetivo, data agendada, motivo e estado da revisão.
 
+Uma resposta errada de prática só é considerada corrigida após receber
+`correction.classification` (`conceitual`, `interpretacao` ou `atencao`),
+`classifiedAt` e `reviewedAt`. Esses campos são anexados sem substituir a
+resposta original.
+
 As transições são explícitas. Eventos fora de ordem não alteram o armazenamento;
 abrir ou iniciar um recurso não conclui a etapa correspondente.
 

@@ -577,6 +577,21 @@ const Storage = {
       !data.unitReviews.some((review) => review.unitId === unitId)
     )
       return { ok: false, state: progress.state };
+    if (
+      event === "concluir_correcao" &&
+      progress.state === "correcao_pendente" &&
+      (!attempt ||
+        attempt.phase !== "pratica" ||
+        !attempt.finishedAt ||
+        attempt.answers.some(
+          (answer) =>
+            !answer.correct &&
+            (!answer.correction?.classification ||
+              !answer.correction.classifiedAt ||
+              !answer.correction.reviewedAt),
+        ))
+    )
+      return { ok: false, state: progress.state };
 
     const now = new Date().toISOString();
     progress.state =
@@ -711,6 +726,35 @@ const Storage = {
     try {
       this.set(data);
       return { ok: true, state, result: clone(attempt.result) };
+    } catch {
+      return { ok: false, state };
+    }
+  },
+  recordUnitCorrection(attemptId, questionId, classification) {
+    const data = this.get(),
+      attempt = data.unitAttempts.find((item) => item.id === attemptId),
+      answer = attempt?.answers.find((item) => item.questionId === questionId),
+      state = attempt
+        ? data.unitProgress[attempt.unitId]?.state || "nao_iniciada"
+        : "nao_iniciada";
+    if (
+      !attempt ||
+      attempt.phase !== "pratica" ||
+      !attempt.finishedAt ||
+      !answer ||
+      answer.correct ||
+      !["conceitual", "interpretacao", "atencao"].includes(classification)
+    )
+      return { ok: false, state };
+    const now = new Date().toISOString();
+    answer.correction = {
+      classification,
+      classifiedAt: now,
+      reviewedAt: now,
+    };
+    try {
+      this.set(data);
+      return { ok: true, state };
     } catch {
       return { ok: false, state };
     }

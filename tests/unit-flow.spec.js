@@ -212,3 +212,114 @@ test("falha de persistência mantém o estado anterior", async ({ page }) => {
   expect(result.transition).toEqual({ ok: false, state: "nao_iniciada" });
   expect(result.unchanged).toBe(true);
 });
+
+test("exige classificação e revisão de todos os erros da prática", async ({
+  page,
+}) => {
+  const result = await page.evaluate((unitId) => {
+    const progress = {
+      state: "pratica_em_andamento",
+      updatedAt: new Date().toISOString(),
+      reading: { startedAt: null, completedAt: null },
+      video: { startedAt: null, completedAt: null },
+      activeAttemptId: null,
+    };
+    Storage.update((data) => {
+      data.unitProgress[unitId] = progress;
+    });
+    const attempt = Storage.startUnitAttempt(unitId, "pratica", [
+      "real-1",
+      "real-2",
+    ]);
+    Storage.recordUnitAnswer(attempt.attemptId, {
+      questionId: "real-1",
+      answer: "C",
+      correct: false,
+      objetivos: ["pt-int-inferencia-valida"],
+    });
+    Storage.recordUnitAnswer(attempt.attemptId, {
+      questionId: "real-2",
+      answer: "E",
+      correct: false,
+      objetivos: ["pt-int-coesao-referencial"],
+    });
+    Storage.finishUnitAttempt(attempt.attemptId);
+    Storage.transitionUnit(unitId, "concluir_pratica");
+    const beforeCorrection = Storage.transitionUnit(
+      unitId,
+      "concluir_correcao",
+    );
+    const correction = Storage.recordUnitCorrection(
+      attempt.attemptId,
+      "real-1",
+      "interpretacao",
+    );
+    const afterFirstCorrection = Storage.transitionUnit(
+      unitId,
+      "concluir_correcao",
+    );
+    Storage.recordUnitCorrection(attempt.attemptId, "real-2", "conceitual");
+    const afterAllCorrections = Storage.transitionUnit(
+      unitId,
+      "concluir_correcao",
+    );
+    return {
+      beforeCorrection,
+      correction,
+      afterFirstCorrection,
+      afterAllCorrections,
+      answer: Storage.get().unitAttempts[0].answers[0],
+    };
+  }, UNIT_ID);
+
+  expect(result.beforeCorrection).toEqual({
+    ok: false,
+    state: "correcao_pendente",
+  });
+  expect(result.correction.ok).toBe(true);
+  expect(result.afterFirstCorrection).toEqual({
+    ok: false,
+    state: "correcao_pendente",
+  });
+  expect(result.afterAllCorrections).toEqual({
+    ok: true,
+    state: "correcao_concluida",
+  });
+  expect(result.answer.answer).toBe("C");
+  expect(result.answer.correct).toBe(false);
+  expect(result.answer.correction.classification).toBe("interpretacao");
+  expect(result.answer.correction.classifiedAt).toBeTruthy();
+  expect(result.answer.correction.reviewedAt).toBeTruthy();
+});
+
+test("rejeita classificação inválida sem alterar a resposta", async ({ page }) => {
+  const result = await page.evaluate((unitId) => {
+    Storage.update((data) => {
+      data.unitProgress[unitId] = {
+        state: "pratica_em_andamento",
+        updatedAt: new Date().toISOString(),
+        reading: { startedAt: null, completedAt: null },
+        video: { startedAt: null, completedAt: null },
+        activeAttemptId: null,
+      };
+    });
+    const attempt = Storage.startUnitAttempt(unitId, "pratica", ["real-1"]);
+    Storage.recordUnitAnswer(attempt.attemptId, {
+      questionId: "real-1",
+      answer: "E",
+      correct: false,
+      objetivos: ["pt-int-inferencia-valida"],
+    });
+    Storage.finishUnitAttempt(attempt.attemptId);
+    const before = Storage.exportJSON();
+    const correction = Storage.recordUnitCorrection(
+      attempt.attemptId,
+      "real-1",
+      "chute",
+    );
+    return { correction, unchanged: before === Storage.exportJSON() };
+  }, UNIT_ID);
+
+  expect(result.correction.ok).toBe(false);
+  expect(result.unchanged).toBe(true);
+});
