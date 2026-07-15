@@ -5,6 +5,26 @@
   "inicioSegundos": null,
   "fimSegundos": null,
   "objetivosConfirmados": [],
+  "candidatosAvaliados": [
+    {
+      "videoId": "B1lk04l-dRU",
+      "url": "https://www.youtube.com/watch?v=B1lk04l-dRU",
+      "titulo": "PORTUGUÊS PARA CONCURSOS: INTERPRETAÇÃO DE TEXTO",
+      "canal": "FZ Concursos",
+      "duracaoSegundos": 1959,
+      "resultado": "mantido_pendente",
+      "motivo": "O vídeo está público e o UI oferece a ação Mostrar transcrição, mas o painel permaneceu carregando sem exibir segmentos, trechos ou timestamps; assim, os três objetivos não puderam ser comprovados."
+    }
+  ],
+  "buscaSubstitutos": {
+    "limiteOperacionalSegundos": 120,
+    "limiteSolicitadoPeloControlador": true,
+    "candidatosSubstitutosAvaliadosExternamente": 0,
+    "urlsSubstitutasTestadas": 0,
+    "urlsSubstitutasAprovadas": 0,
+    "resultado": "Nenhum candidato substituto chegou à avaliação externa dentro do limite operacional.",
+    "motivo": "O tempo disponível foi consumido na tentativa de obter a transcrição do vídeo atual pelo UI do YouTube. Isto registra ausência de candidato substituto avaliado no limite, não rejeição de vídeos específicos."
+  },
   "evidencias": [
     {
       "fonte": "youtube_oembed",
@@ -32,6 +52,15 @@
       "respostaDiretaBytes": 0,
       "respostaUrlAssinadaBytes": 52,
       "tipoRespostaUrlAssinada": "image/gif"
+    },
+    {
+      "fonte": "youtube_ui_transcricao",
+      "url": "https://www.youtube.com/watch?v=B1lk04l-dRU",
+      "navegador": "Chromium via Playwright",
+      "acaoMostrarTranscricaoDisponivel": true,
+      "painelAberto": true,
+      "segmentosObtidos": 0,
+      "resultado": "O painel Transcrição abriu, mas permaneceu no indicador de carregamento sem conteúdo reproduzível."
     }
   ],
   "verificadoEm": "2026-07-15",
@@ -39,6 +68,7 @@
   "limitacoes": [
     "O título e os metadados confirmam o tema geral, mas não comprovam a cobertura dos objetivos pt-int-compreensao-explicita, pt-int-inferencia-valida e pt-int-coesao-referencial.",
     "A página anuncia legenda automática em português, porém o endpoint direto retornou corpo vazio e a URL assinada retornou apenas um GIF de 52 bytes.",
-    "Sem transcrição ou inspeção manual reproduzível do conteúdo, não foi possível confirmar objetivos nem delimitar segundos exatos sem inventar evidência."
+    "A tentativa pelo UI real do YouTube encontrou e acionou Mostrar transcrição, mas o painel permaneceu carregando sem exibir segmentos.",
+    "Sem transcrição, capítulos ou inspeção manual reproduzível do conteúdo, não foi possível confirmar objetivos nem delimitar segundos exatos sem inventar evidência."
   ]
 }
