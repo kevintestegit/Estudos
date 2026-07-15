@@ -64,6 +64,15 @@ test("rejeita questão sem objetivo", () => {
   assert.match(validateUnits(input).unidades[0].erros.join(" "), /objetivo/i);
 });
 
+for (const gabaritoFonteUrl of ["", "arquivo.pdf"]) {
+  test(`rejeita questão real sem URL válida do gabarito: ${gabaritoFonteUrl || "vazia"}`, () => {
+    const input = structuredClone(base);
+    input.questoes[0].origemQuestao = "real";
+    input.questoes[0].gabaritoFonteUrl = gabaritoFonteUrl;
+    assert.match(validateUnits(input).unidades[0].erros.join(" "), /gabarito/i);
+  });
+}
+
 test("registra quantidade insuficiente como pendência editorial", () => {
   const input = structuredClone(base);
   input.unidades[0].pratica.questionIds.pop();
@@ -108,6 +117,14 @@ test("mantém vídeo pendente sem timestamps ou cobertura como pendência de ras
   assert.match(result.unidades[0].pendenciasEditoriais.join(" "), /vídeo/i);
   assert.match(result.unidades[0].dadosNaoVerificados.join(" "), /vídeo/i);
   assert.equal(result.falhou, false);
+});
+
+test("rejeita timestamp numérico inválido mesmo em vídeo pendente de rascunho", () => {
+  const input = structuredClone(base);
+  input.unidades[0].statusEditorial = "rascunho";
+  input.unidades[0].video.statusVerificacao = "pendente_revisao_manual";
+  input.unidades[0].video.inicioSegundos = -1;
+  assert.match(validateUnits(input).unidades[0].erros.join(" "), /timestamp/i);
 });
 
 test("registra checagem abaixo do mínimo editorial", () => {

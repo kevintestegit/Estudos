@@ -10,6 +10,13 @@ const isIsoDate = (value) => {
   const date = new Date(`${value}T00:00:00Z`);
   return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
 };
+const isHttpUrl = (value) => {
+  try {
+    return ["http:", "https:"].includes(new URL(value).protocol);
+  } catch {
+    return false;
+  }
+};
 
 export function validateUnits({ unidades = [], checagens = [], aulas = [], questoes = [] }) {
   const duplicateUnitIds = new Set(duplicates(unidades.map(({ id }) => id)));
@@ -60,7 +67,8 @@ export function validateUnits({ unidades = [], checagens = [], aulas = [], quest
     const start = unit.video?.inicioSegundos;
     const end = unit.video?.fimSegundos;
     const duration = aula?.duracaoTotalSegundos ?? unit.video?.duracaoTotalSegundos;
-    if ((!Number.isFinite(start) || !Number.isFinite(end) || start < 0 || end <= start || !Number.isFinite(duration) || end > duration) && !pendingDraftVideo) {
+    const timestampsMissing = start == null && end == null;
+    if (!(pendingDraftVideo && timestampsMissing) && (!Number.isFinite(start) || !Number.isFinite(end) || start < 0 || end <= start || !Number.isFinite(duration) || end > duration)) {
       erros.push("Timestamp do trecho de vídeo inválido.");
     }
 
@@ -91,6 +99,7 @@ export function validateUnits({ unidades = [], checagens = [], aulas = [], quest
         if (!question.unitIds?.includes(unit.id)) erros.push(`Questão ${id} não referencia a unidade.`);
         if (question.materia !== unit.materia || question.assunto !== unit.assunto) erros.push(`Questão ${id} associada a assunto diferente.`);
         if (!question.fonte || !question.fonteUrl) erros.push(`Questão ${id} sem fonte.`);
+        if (question.origemQuestao === "real" && !isHttpUrl(question.gabaritoFonteUrl)) erros.push(`Questão real ${id} sem URL válida do gabarito.`);
         if (question.fonteVerificada !== true) dadosNaoVerificados.push(`Fonte da questão ${id} não verificada.`);
       }
     }
