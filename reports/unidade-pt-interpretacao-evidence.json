@@ -2,8 +2,8 @@
   "aulaId": "aula-pt-01",
   "videoId": "B1lk04l-dRU",
   "duracaoTotalSegundos": 1959,
-  "inicio": null,
-  "fim": null,
+  "inicioSegundos": null,
+  "fimSegundos": null,
   "objetivosConfirmados": [],
   "evidencias": [
     {
@@ -36,13 +36,6 @@
   ],
   "verificadoEm": "2026-07-15",
   "status": "pendente_revisao_manual",
-  "httpOembed": {
-    "status": 200,
-    "contentType": "application/json",
-    "titulo": "PORTUGUÊS PARA CONCURSOS: INTERPRETAÇÃO DE TEXTO",
-    "authorName": "FZ Concursos",
-    "providerName": "YouTube"
-  },
   "limitacoes": [
     "O título e os metadados confirmam o tema geral, mas não comprovam a cobertura dos objetivos pt-int-compreensao-explicita, pt-int-inferencia-valida e pt-int-coesao-referencial.",
     "A página anuncia legenda automática em português, porém o endpoint direto retornou corpo vazio e a URL assinada retornou apenas um GIF de 52 bytes.",
