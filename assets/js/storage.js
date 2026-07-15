@@ -17,7 +17,7 @@ const SCHEMA_VERSION = 5;
 const newUnitProgress = () => ({
   state: "nao_iniciada",
   updatedAt: null,
-  reading: { startedAt: null, completedAt: null },
+  reading: { startedAt: null, completedAt: null, sectionId: null },
   video: { startedAt: null, completedAt: null },
   activeAttemptId: null,
   activeReviewId: null,
@@ -729,6 +729,17 @@ const Storage = {
   getUnitProgress(unitId) {
     const progress = this.get().unitProgress?.[unitId];
     return clone(progress || newUnitProgress());
+  },
+  setUnitReadingSection(unitId, sectionId) {
+    if (!unitId || !sectionId) return false;
+    const data = this.get(),
+      progress = data.unitProgress[unitId] || newUnitProgress();
+    if (progress.state !== "leitura_em_andamento") return false;
+    progress.reading.sectionId = sectionId;
+    progress.updatedAt = new Date().toISOString();
+    data.unitProgress[unitId] = progress;
+    this.set(data);
+    return true;
   },
   transitionUnit(unitId, event) {
     if (!unitId || !event) return { ok: false, state: "nao_iniciada" };

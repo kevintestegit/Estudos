@@ -185,6 +185,11 @@ function stepDone(key) {
 
 function findFirstPendingStep(tasks) {
   for (const entry of tasks) {
+    if (entry.task.unitId) {
+      if (Storage.getUnitProgress(entry.task.unitId).state !== "concluida")
+        return `unit:${taskBaseKey(entry)}`;
+      continue;
+    }
     for (const step of ["learn", "read", "practice"]) {
       const key = `${taskBaseKey(entry)}_${step}`;
       if (!stepDone(key)) return key;
@@ -242,13 +247,16 @@ function renderStudyTask(entry, data, firstPending) {
 }
 
 function renderFinishCards(tasks, studyDate, primaryDate, firstPending) {
-  const unitPending = tasks.some(
-    ({ task }) => task.unitId && Storage.getUnitProgress(task.unitId).state !== "concluida",
-  );
   const dates = [...new Set(tasks.map((entry) => entry.scheduleDate))];
   if (!dates.length) dates.push(primaryDate);
   return dates
     .map((scheduleDate) => {
+      const unitPending = tasks.some(
+        (entry) =>
+          entry.scheduleDate === scheduleDate &&
+          entry.task.unitId &&
+          Storage.getUnitProgress(entry.task.unitId).state !== "concluida",
+      );
       const recovery = scheduleDate !== studyDate;
       const label = recovery
         ? `Concluir recuperação de ${App.formatDateBR(scheduleDate)}`
@@ -377,12 +385,14 @@ function bindTodayActions(context) {
       renderHoje(data);
     };
   });
-  tasks.filter(({ task }) => task.unitId).forEach(({ task }) => {
+  tasks.filter(({ task }) => task.unitId).forEach((entry) => {
+    const { task } = entry;
     const unit = data.units?.[task.unitId];
     if (unit)
       UnitFlow.bind({
         unit,
         task,
+        entry,
         data,
         rerender: () => renderHoje(data),
       });
@@ -448,12 +458,13 @@ function bindTodayActions(context) {
         );
       const pending = tasks
         .filter((entry) => entry.scheduleDate === scheduleDate)
-        .flatMap((entry) =>
-          ["learn", "read", "practice"].map(
-            (step) => `${taskBaseKey(entry)}_${step}`,
-          ),
-        )
-        .filter((key) => !stepDone(key));
+        .flatMap((entry) => entry.task.unitId
+          ? Storage.getUnitProgress(entry.task.unitId).state === "concluida"
+            ? []
+            : [`unit:${entry.task.unitId}`]
+          : ["learn", "read", "practice"].map(
+              (step) => `${taskBaseKey(entry)}_${step}`,
+            ).filter((key) => !stepDone(key)));
       if (pending.length)
         return alert(`Conclua as etapas pendentes antes de finalizar (${pending.length}).`);
       Storage.closeDay(scheduleDate, studyDate);

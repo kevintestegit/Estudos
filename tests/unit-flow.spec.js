@@ -945,6 +945,7 @@ for (const [name, viewport] of [
 test("video validado usa trecho incorporado e só conclui por ação explícita", async ({
   page,
 }) => {
+  await expect(page.locator("#app-root")).not.toContainText("Carregando...");
   await page.route("https://www.youtube.com/**", (route) => route.abort());
   await page.evaluate((unitId) => {
     Storage.update((data) => {
@@ -967,13 +968,17 @@ test("video validado usa trecho incorporado e só conclui por ação explícita"
         fonteVerificada: true,
         coberturaPedagogicaVerificada: true,
         statusVerificacao: "aprovado",
+        motivoSelecao: "Trecho conferido.",
+        fonte: "YouTube",
+        fonteUrl: "https://www.youtube.com/watch?v=B1lk04l-dRU",
+        verificadoEm: "2026-07-15",
       },
     };
     const context = {
       unit,
       task: { unitId },
       entry: {},
-      data: { aulas: { aulas: [{ id: "aula-teste", videoId: "B1lk04l-dRU" }] } },
+      data: { aulas: { aulas: [{ id: "aula-teste", tipo: "video", url: "https://www.youtube.com/watch?v=B1lk04l-dRU", videoId: "B1lk04l-dRU", duracaoTotalSegundos: 120, canal: "Canal verificado", tituloYoutube: "Aula verificada", verificadoEm: "2026-07-15" }] } },
     };
     const root = document.getElementById("app-root");
     root.innerHTML = UnitFlow.render(context);
@@ -999,4 +1004,133 @@ test("video validado usa trecho incorporado e só conclui por ação explícita"
   expect(
     await page.evaluate(() => Storage.getUnitProgress("unidade-video-teste").state),
   ).toBe("video_concluido");
+});
+
+test("fechamento da unidade real ignora chaves legadas", async ({ page }) => {
+  const today = await page.evaluate(() => todayISO());
+  await page.evaluate(({ unitId, today }) => {
+    Storage.update((data) => {
+      data.startDate = today;
+      data.studyDays = [0, 1, 2, 3, 4, 5, 6];
+      data.unitProgress[unitId] = { state: "concluida" };
+      data.taskStatus[`${today}_0_learn`] = "pendente";
+      data.taskStatus[`${today}_0_read`] = "pendente";
+      data.taskStatus[`${today}_0_practice`] = "pendente";
+      data.studySessions = [{ id: "unit-session", date: today, dayKey: today, minutes: 10 }];
+    });
+  }, { unitId: UNIT_ID, today });
+  await page.reload();
+
+  await expect(page.locator("#btn-done")).toBeEnabled();
+  await page.locator("#btn-done").click();
+  expect(await page.evaluate((date) => Storage.get().dayStatus[date], today)).toBe("concluido");
+});
+
+test("retoma a seção estável da leitura após recarregar", async ({ page }) => {
+  await openPilot(page, { width: 1280, height: 800 });
+  await page.getByRole("button", { name: "Começar leitura" }).click();
+  await page.locator("#coesao-referencial").focus();
+  expect(await page.evaluate((id) => Storage.getUnitProgress(id).reading.sectionId, UNIT_ID)).toBe("coesao-referencial");
+
+  await page.reload();
+  await expect(page.locator("#coesao-referencial")).toBeFocused();
+  await expect(page.getByText("Retomada: Siga a cadeia de referências")).toBeVisible();
+});
+
+test("cada data mesclada considera somente suas próprias unidades", async ({ page }) => {
+  const dates = await page.evaluate(() => ({ today: todayISO(), yesterday: addDaysISO(todayISO(), -1) }));
+  await page.route("**/data/cronograma.json", (route) => route.fulfill({ json: {
+    days: [
+      { dia: 1, titulo: "Legado", tasks: [{ materia: "Português", assunto: "Legado", aulaId: "aula-pt-01", pdfId: "pdf-pt-01" }] },
+      { dia: 2, titulo: "Unidade", tasks: [{ materia: "Português", assunto: "Interpretação de textos", unitId: UNIT_ID }] },
+    ],
+  } }));
+  await page.evaluate(({ unitId, today, yesterday }) => Storage.update((data) => {
+    data.startDate = yesterday;
+    data.studyDays = [0, 1, 2, 3, 4, 5, 6];
+    data.dayStatus[yesterday] = "faltou";
+    data.recoveryTarget = { date: yesterday, merge: true };
+    for (const step of ["learn", "read", "practice"])
+      data.taskStatus[`${yesterday}_0_${step}`] = "concluida";
+    data.unitProgress[unitId] = { state: "leitura_em_andamento" };
+  }), { unitId: UNIT_ID, ...dates });
+  await page.reload();
+
+  await expect(page.locator(`[data-finish-date="${dates.yesterday}"]`)).toBeEnabled();
+  await expect(page.locator(`[data-finish-date="${dates.today}"]`)).toBeDisabled();
+});
+
+test("recuperação com unidade concluída fecha somente a data recuperada", async ({ page }) => {
+  const dates = await page.evaluate(() => ({ today: todayISO(), yesterday: addDaysISO(todayISO(), -1) }));
+  await page.route("**/data/cronograma.json", (route) => route.fulfill({ json: {
+    days: [
+      { dia: 1, titulo: "Unidade", tasks: [{ materia: "Português", assunto: "Interpretação de textos", unitId: UNIT_ID }] },
+      { dia: 2, titulo: "Legado", tasks: [{ materia: "Português", assunto: "Legado", aulaId: "aula-pt-02", pdfId: "pdf-pt-02" }] },
+    ],
+  } }));
+  await page.evaluate(({ unitId, today, yesterday }) => Storage.update((data) => {
+    data.startDate = yesterday;
+    data.studyDays = [0, 1, 2, 3, 4, 5, 6];
+    data.dayStatus[yesterday] = "faltou";
+    data.recoveryTarget = { date: yesterday };
+    data.unitProgress[unitId] = { state: "concluida" };
+    data.taskStatus[`${yesterday}_0_learn`] = "pendente";
+    data.studySessions = [{ id: "recovery-unit", date: today, dayKey: yesterday, minutes: 10 }];
+  }), { unitId: UNIT_ID, ...dates });
+  await page.reload();
+
+  await page.locator("#btn-done").click();
+  const status = await page.evaluate(() => Storage.get().dayStatus);
+  expect(status[dates.yesterday]).toBe("recuperado");
+  expect(status[dates.today]).not.toBe("concluido");
+});
+
+test("não libera vídeo sem tipo, duração e ID canônico confirmados", async ({ page }) => {
+  const result = await page.evaluate((unitId) => {
+    Storage.update((data) => { data.unitProgress[unitId] = { state: "leitura_concluida" }; });
+    const unit = {
+      id: unitId,
+      titulo: "Teste",
+      objetivos: ["obj"],
+      leitura: { secoes: [] },
+      video: { aulaId: "aula", inicioSegundos: 0, fimSegundos: 90, objetivosCobertos: ["obj"], fonteVerificada: true, coberturaPedagogicaVerificada: true, statusVerificacao: "aprovado", motivoSelecao: "ok", fonte: "YouTube", fonteUrl: "https://www.youtube.com/watch?v=B1lk04l-dRU", verificadoEm: "2026-07-15" },
+    };
+    document.getElementById("app-root").innerHTML = UnitFlow.render({ unit, task: {}, entry: {}, data: { aulas: { aulas: [{ id: "aula", tipo: "playlist", url: "https://www.youtube.com/watch?v=outro", videoId: "B1lk04l-dRU", duracaoTotalSegundos: 60, verificadoEm: "2026-07-15" }] } } });
+    return {
+      iframe: Boolean(document.querySelector("iframe")),
+      action: document.querySelector("[data-unit-event='iniciar_video']")?.textContent,
+    };
+  }, "unidade-video-invalido");
+  expect(result).toEqual({ iframe: false, action: undefined });
+  await expect(page.getByText("Videoaula pendente de validação")).toBeVisible();
+});
+
+test("leitura exibe apoios e fontes verificadas com semântica segura", async ({ page }) => {
+  await openPilot(page, { width: 1280, height: 800 });
+  await page.getByRole("button", { name: "Começar leitura" }).click();
+
+  await expect(page.getByRole("heading", { name: "Pontos-chave" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Armadilhas de banca" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Fontes" })).toBeVisible();
+  await expect(page.locator("[aria-label='Pontos-chave'] li")).toHaveCount(4);
+  const source = page.locator("[aria-label='Fontes da leitura'] a").first();
+  await expect(source).toHaveAttribute("target", "_blank");
+  await expect(source).toHaveAttribute("rel", "noopener noreferrer");
+});
+
+test("bind usa entry para conectar a ocorrência correta da unidade", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const unit = { id: "unidade-repetida", titulo: "Teste", objetivos: [], leitura: { tempoMinutos: 5, secoes: [] }, video: {} };
+    const task = { materia: "Português", assunto: "Teste" };
+    const data = { aulas: { aulas: [] } };
+    const first = { scheduleDate: "2026-07-14", index: 0 };
+    const second = { scheduleDate: "2026-07-15", index: 0 };
+    const root = document.getElementById("app-root");
+    root.innerHTML = UnitFlow.render({ unit, task, entry: first, data }) + UnitFlow.render({ unit, task, entry: second, data });
+    let rerenders = 0;
+    UnitFlow.bind({ unit, task, entry: second, data, rerender: () => rerenders++ });
+    root.querySelector(`[data-unit-entry="2026-07-15_0"] [data-unit-event]`).click();
+    return { rerenders, state: Storage.getUnitProgress(unit.id).state };
+  });
+  expect(result).toEqual({ rerenders: 1, state: "leitura_em_andamento" });
 });

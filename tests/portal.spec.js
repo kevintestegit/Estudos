@@ -5,7 +5,14 @@ async function useLegacySchedule(page) {
     const response = await route.fetch();
     const data = await response.json();
     for (const day of data.days || [])
-      for (const task of day.tasks || []) delete task.unitId;
+      day.tasks = (day.tasks || []).map((task) => task.unitId ? {
+        materia: task.materia,
+        assunto: task.assunto,
+        tempo: task.tempo,
+        aulaId: "aula-pt-01",
+        pdfId: "pdf-pt-01",
+        questoesTag: "interpretacao",
+      } : task);
     await route.fulfill({ response, json: data });
   });
 }

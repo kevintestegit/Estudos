@@ -18,15 +18,27 @@
       (item) => item.id === video.aulaId,
     );
     const objectives = new Set(video.objetivosCobertos || []);
+    let canonicalId = null;
+    try {
+      const url = new URL(lesson?.url || "");
+      if (/^(www\.)?youtube\.com$/.test(url.hostname) && url.pathname === "/watch")
+        canonicalId = url.searchParams.get("v");
+    } catch {}
     return lesson &&
+      lesson.tipo === "video" &&
       /^[\w-]{11}$/.test(lesson.videoId || "") &&
+      canonicalId === lesson.videoId &&
+      lesson.canal && lesson.tituloYoutube && lesson.verificadoEm &&
       video.fonteVerificada === true &&
       video.coberturaPedagogicaVerificada === true &&
       video.statusVerificacao === "aprovado" &&
-      Number.isInteger(video.inicioSegundos) &&
-      Number.isInteger(video.fimSegundos) &&
+      video.motivoSelecao && video.fonte && video.fonteUrl && video.verificadoEm &&
+      Number.isFinite(video.inicioSegundos) &&
+      Number.isFinite(video.fimSegundos) &&
+      Number.isFinite(lesson.duracaoTotalSegundos) &&
       video.inicioSegundos >= 0 &&
       video.fimSegundos > video.inicioSegundos &&
+      video.fimSegundos <= lesson.duracaoTotalSegundos &&
       (unit.objetivos || []).every((objective) => objectives.has(objective))
       ? { ...video, videoId: lesson.videoId }
       : null;
@@ -43,7 +55,7 @@
       return (data.unidades || []).find((unit) => unit.id === unitId) || null;
     },
 
-    render({ unit, task, data }) {
+    render({ unit, task, entry, data }) {
       const progress = Storage.getUnitProgress(unit.id);
       const state = progress.state;
       const video = verifiedVideo(unit, data);
@@ -53,7 +65,9 @@
       const videoDone = AFTER_VIDEO.has(state);
       const readingSections = readingStarted
         ? `<p class="unit-resume">${state === "leitura_em_andamento" ? "Continue a leitura de onde parou." : "Leitura concluída."}</p>
-          ${(unit.leitura?.secoes || []).map((section) => `<section class="unit-reading-section" id="${App.esc(section.id)}"><h4>${App.esc(section.titulo)}</h4><p>${App.esc(section.conteudo)}</p></section>`).join("")}`
+          ${progress.reading.sectionId ? `<p class="muted">Retomada: ${App.esc((unit.leitura?.secoes || []).find(({ id }) => id === progress.reading.sectionId)?.titulo || progress.reading.sectionId)}</p>` : ""}
+          ${(unit.leitura?.secoes || []).map((section) => `<section class="unit-reading-section" id="${App.esc(section.id)}" data-reading-section tabindex="-1"><h4>${App.esc(section.titulo)}</h4><p>${App.esc(section.conteudo)}</p></section>`).join("")}
+          ${this.readingSupport(unit.leitura)}`
         : `<p>${App.esc(unit.leitura?.tempoMinutos || 0)} minutos de leitura guiada dentro do portal.</p>`;
       const readingAction = state === "nao_iniciada"
         ? '<button class="btn" type="button" data-primary-action data-unit-event="iniciar_leitura">Começar leitura</button>'
@@ -76,7 +90,8 @@
         : video
           ? "Conclua a videoaula para desbloquear."
           : "Aguarde a validação da videoaula para desbloquear.";
-      return `<article class="card study-task unit-flow" data-unit-id="${App.esc(unit.id)}">
+      const entryKey = `${entry?.scheduleDate || "unit"}_${entry?.index ?? 0}`;
+      return `<article class="card study-task unit-flow" data-unit-id="${App.esc(unit.id)}" data-unit-entry="${App.esc(entryKey)}">
         <div class="task-title"><div><p class="eyebrow">Unidade piloto</p><h3>${App.esc(task.materia)} — ${App.esc(task.assunto)}</h3></div><span>${App.esc(unit.leitura?.tempoMinutos || 0)} min de leitura</span></div>
         <section class="unit-step ${readingDone ? "is-done" : ""}"><h4>Leitura guiada</h4>${readingSections}${readingAction}</section>
         ${videoHtml}
@@ -86,10 +101,23 @@
       </article>`;
     },
 
-    bind({ unit, rerender }) {
-      const root = [...document.querySelectorAll("[data-unit-id]")].find(
-        (element) => element.dataset.unitId === unit.id,
-      );
+    readingSupport(reading = {}) {
+      const list = (title, label, items) => items?.length
+        ? `<section><h4>${title}</h4><ul aria-label="${label}">${items.map((item) => `<li>${App.esc(item)}</li>`).join("")}</ul></section>`
+        : "";
+      const sources = (reading.fontes || []).filter(({ verificada, url }) => verificada === true && App.isExternal(url));
+      return `${list("Pontos-chave", "Pontos-chave", reading.pontosChave)}${list("Armadilhas de banca", "Armadilhas de banca", reading.armadilhasDeBanca)}${sources.length ? `<section><h4>Fontes</h4><ul aria-label="Fontes da leitura">${sources.map((source) => `<li><a ${App.linkAttrs(source.url)}>${App.esc(source.titulo)}</a></li>`).join("")}</ul></section>` : ""}`;
+    },
+
+    bind({ unit, entry, rerender }) {
+      const entryKey = `${entry?.scheduleDate || "unit"}_${entry?.index ?? 0}`;
+      const root = document.querySelector(`[data-unit-id="${CSS.escape(unit.id)}"][data-unit-entry="${CSS.escape(entryKey)}"]`);
+      root?.querySelectorAll("[data-reading-section]").forEach((section) => {
+        section.onfocus = () => Storage.setUnitReadingSection(unit.id, section.id);
+      });
+      const savedSection = Storage.getUnitProgress(unit.id).reading.sectionId;
+      if (savedSection)
+        requestAnimationFrame(() => root?.querySelector(`#${CSS.escape(savedSection)}`)?.focus());
       const button = root?.querySelector("[data-unit-event]");
       if (!button) return;
       button.onclick = () => {
