@@ -734,15 +734,17 @@ const Storage = {
     const data = this.get(),
       attempt = data.unitAttempts.find((item) => item.id === attemptId),
       answer = attempt?.answers.find((item) => item.questionId === questionId),
-      state = attempt
-        ? data.unitProgress[attempt.unitId]?.state || "nao_iniciada"
-        : "nao_iniciada";
+      progress = attempt ? data.unitProgress[attempt.unitId] : null,
+      state = progress?.state || "nao_iniciada";
     if (
       !attempt ||
+      state !== "correcao_pendente" ||
+      progress.activeAttemptId !== attemptId ||
       attempt.phase !== "pratica" ||
       !attempt.finishedAt ||
       !answer ||
       answer.correct ||
+      answer.correction ||
       !["conceitual", "interpretacao", "atencao"].includes(classification)
     )
       return { ok: false, state };

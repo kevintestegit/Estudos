@@ -323,3 +323,100 @@ test("rejeita classificação inválida sem alterar a resposta", async ({ page }
   expect(result.correction.ok).toBe(false);
   expect(result.unchanged).toBe(true);
 });
+
+test("rejeita correção fora do estado pendente e não permite sobrescrita", async ({
+  page,
+}) => {
+  const result = await page.evaluate((unitId) => {
+    Storage.update((data) => {
+      data.unitProgress[unitId] = {
+        state: "pratica_em_andamento",
+        updatedAt: new Date().toISOString(),
+        reading: { startedAt: null, completedAt: null },
+        video: { startedAt: null, completedAt: null },
+        activeAttemptId: null,
+      };
+    });
+    const attempt = Storage.startUnitAttempt(unitId, "pratica", ["real-1"]);
+    Storage.recordUnitAnswer(attempt.attemptId, {
+      questionId: "real-1",
+      answer: "C",
+      correct: false,
+      objetivos: ["pt-int-inferencia-valida"],
+    });
+    Storage.finishUnitAttempt(attempt.attemptId);
+
+    const beforeWrongState = Storage.exportJSON();
+    const wrongState = Storage.recordUnitCorrection(
+      attempt.attemptId,
+      "real-1",
+      "conceitual",
+    );
+    const wrongStateUnchanged = beforeWrongState === Storage.exportJSON();
+
+    Storage.transitionUnit(unitId, "concluir_pratica");
+    const first = Storage.recordUnitCorrection(
+      attempt.attemptId,
+      "real-1",
+      "conceitual",
+    );
+    const beforeOverwrite = Storage.exportJSON();
+    const overwrite = Storage.recordUnitCorrection(
+      attempt.attemptId,
+      "real-1",
+      "atencao",
+    );
+    return {
+      wrongState,
+      wrongStateUnchanged,
+      first,
+      overwrite,
+      overwriteUnchanged: beforeOverwrite === Storage.exportJSON(),
+    };
+  }, UNIT_ID);
+
+  expect(result.wrongState.ok).toBe(false);
+  expect(result.wrongStateUnchanged).toBe(true);
+  expect(result.first.ok).toBe(true);
+  expect(result.overwrite.ok).toBe(false);
+  expect(result.overwriteUnchanged).toBe(true);
+});
+
+test("rejeita correção de tentativa histórica inativa", async ({ page }) => {
+  const result = await page.evaluate((unitId) => {
+    Storage.update((data) => {
+      data.unitProgress[unitId] = {
+        state: "pratica_em_andamento",
+        updatedAt: new Date().toISOString(),
+        reading: { startedAt: null, completedAt: null },
+        video: { startedAt: null, completedAt: null },
+        activeAttemptId: null,
+      };
+    });
+    const answerWrong = (attemptId, questionId) => {
+      Storage.recordUnitAnswer(attemptId, {
+        questionId,
+        answer: "E",
+        correct: false,
+        objetivos: ["pt-int-inferencia-valida"],
+      });
+      Storage.finishUnitAttempt(attemptId);
+    };
+    const historical = Storage.startUnitAttempt(unitId, "pratica", ["real-1"]);
+    answerWrong(historical.attemptId, "real-1");
+    const active = Storage.startUnitAttempt(unitId, "pratica", ["real-2"]);
+    answerWrong(active.attemptId, "real-2");
+    Storage.transitionUnit(unitId, "concluir_pratica");
+
+    const before = Storage.exportJSON();
+    const correction = Storage.recordUnitCorrection(
+      historical.attemptId,
+      "real-1",
+      "interpretacao",
+    );
+    return { correction, unchanged: before === Storage.exportJSON() };
+  }, UNIT_ID);
+
+  expect(result.correction.ok).toBe(false);
+  expect(result.unchanged).toBe(true);
+});
