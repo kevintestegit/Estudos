@@ -111,3 +111,25 @@ test("rejeita IDs duplicados de aulas e seções de leitura", () => {
   assert.match(errors, /aula duplicado/i);
   assert.match(errors, /seção de leitura duplicado/i);
 });
+
+test("rejeita fonte de leitura sem título ou URL", () => {
+  const input = structuredClone(base);
+  input.unidades[0].leitura.fontes = [{ titulo: "", url: "", verificada: true }];
+  assert.match(validateUnits(input).unidades[0].erros.join(" "), /fonte da leitura sem título ou URL/i);
+});
+
+test("rejeita IDs ausentes de aula e seção de leitura", () => {
+  const input = structuredClone(base);
+  delete input.aulas[0].id;
+  delete input.unidades[0].leitura.secoes[0].id;
+  const errors = validateUnits(input).unidades[0].erros.join(" ");
+  assert.match(errors, /ID de aula ausente/i);
+  assert.match(errors, /ID de seção de leitura ausente/i);
+});
+
+test("rejeita verificadoEm com data ISO inexistente no calendário", () => {
+  const input = structuredClone(base);
+  input.unidades[0].video.verificadoEm = "2026-02-30";
+  assert.match(validateUnits(input).unidades[0].dadosNaoVerificados.join(" "), /data de verificação/i);
+  assert.equal(validateUnits(input).falhou, true);
+});

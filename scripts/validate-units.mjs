@@ -5,15 +5,20 @@ import { fileURLToPath } from "node:url";
 
 const includesAll = (expected = [], actual = []) => expected.every((id) => actual.includes(id));
 const duplicates = (items = []) => items.filter((item, index) => items.indexOf(item) !== index);
+const isIsoDate = (value) => {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
+};
 
 export function validateUnits({ unidades = [], checagens = [], aulas = [], questoes = [] }) {
   const duplicateUnitIds = new Set(duplicates(unidades.map(({ id }) => id)));
-  const duplicateCheckIds = new Set(duplicates(checagens.map(({ id }) => id)));
-  const duplicateQuestionIds = new Set(duplicates(questoes.map(({ id }) => id)));
-  const duplicateAulaIds = new Set(duplicates(aulas.map(({ id }) => id)));
-  const aulasById = new Map(aulas.map((item) => [item.id, item]));
-  const checksById = new Map(checagens.map((item) => [item.id, item]));
-  const questionsById = new Map(questoes.map((item) => [item.id, item]));
+  const duplicateCheckIds = new Set(duplicates(checagens.map(({ id }) => id).filter(Boolean)));
+  const duplicateQuestionIds = new Set(duplicates(questoes.map(({ id }) => id).filter(Boolean)));
+  const duplicateAulaIds = new Set(duplicates(aulas.map(({ id }) => id).filter(Boolean)));
+  const aulasById = new Map(aulas.filter(({ id }) => id).map((item) => [item.id, item]));
+  const checksById = new Map(checagens.filter(({ id }) => id).map((item) => [item.id, item]));
+  const questionsById = new Map(questoes.filter(({ id }) => id).map((item) => [item.id, item]));
 
   const reports = unidades.map((unit) => {
     const erros = [];
@@ -22,8 +27,8 @@ export function validateUnits({ unidades = [], checagens = [], aulas = [], quest
     const dadosNaoVerificados = [];
     const objectives = unit.objetivos || [];
     const objectiveSet = new Set(objectives);
-    const sectionIds = new Set((unit.leitura?.secoes || []).map(({ id }) => id));
-    const duplicateSectionIds = new Set(duplicates((unit.leitura?.secoes || []).map(({ id }) => id)));
+    const sectionIds = new Set((unit.leitura?.secoes || []).map(({ id }) => id).filter(Boolean));
+    const duplicateSectionIds = new Set(duplicates((unit.leitura?.secoes || []).map(({ id }) => id).filter(Boolean)));
     const checks = (unit.checagem?.questionIds || []).map((id) => checksById.get(id));
     const questions = (unit.pratica?.questionIds || []).map((id) => questionsById.get(id));
     const aula = aulasById.get(unit.video?.aulaId);
@@ -31,17 +36,24 @@ export function validateUnits({ unidades = [], checagens = [], aulas = [], quest
     if (!unit.id || duplicateUnitIds.has(unit.id)) erros.push("ID de unidade ausente ou duplicado.");
     if (!objectives.length || duplicates(objectives).length) erros.push("Objetivos ausentes ou duplicados.");
     if (!unit.leitura?.secoes?.length) erros.push("Leitura obrigatória sem conteúdo.");
+    if (unit.leitura?.secoes?.some(({ id }) => !id)) erros.push("ID de seção de leitura ausente.");
     if (duplicateSectionIds.size) erros.push("ID de seção de leitura duplicado.");
     if (!includesAll(objectives, unit.leitura?.objetivosCobertos)) erros.push("Objetivo sem cobertura na leitura.");
     if (!unit.leitura?.fontes?.length) erros.push("Leitura sem fonte.");
-    else if (unit.leitura.fontes.some(({ verificada }) => verificada !== true)) dadosNaoVerificados.push("Fonte da leitura não verificada.");
+    else {
+      if (unit.leitura.fontes.some(({ titulo, url }) => !String(titulo || "").trim() || !String(url || "").trim())) erros.push("Fonte da leitura sem título ou URL.");
+      if (unit.leitura.fontes.some(({ verificada }) => verificada !== true)) dadosNaoVerificados.push("Fonte da leitura não verificada.");
+    }
 
+    if (aulas.some(({ id }) => !id)) erros.push("ID de aula ausente.");
     if (!aula) erros.push("Referência de videoaula quebrada.");
     if (duplicateAulaIds.has(unit.video?.aulaId)) erros.push("ID de aula duplicado.");
     if (!includesAll(objectives, unit.video?.objetivosCobertos)) erros.push("Objetivo sem cobertura na videoaula.");
     if (!unit.video?.fonte || !unit.video?.fonteUrl) erros.push("Vídeo sem fonte.");
     if (unit.video?.fonteVerificada !== true) dadosNaoVerificados.push("Fonte do vídeo não verificada.");
-    if (!unit.video?.motivoSelecao || !unit.video?.fonte || !unit.video?.fonteUrl || !unit.video?.verificadoEm || unit.video?.statusVerificacao !== "aprovado") dadosNaoVerificados.push("Vídeo ou trecho sem evidência pedagógica verificada.");
+    const verifiedDate = isIsoDate(unit.video?.verificadoEm);
+    if (!verifiedDate) dadosNaoVerificados.push("Data de verificação do vídeo ausente ou inválida.");
+    if (!unit.video?.motivoSelecao || !unit.video?.fonte || !unit.video?.fonteUrl || !verifiedDate || unit.video?.statusVerificacao !== "aprovado") dadosNaoVerificados.push("Vídeo ou trecho sem evidência pedagógica verificada.");
     const start = unit.video?.inicioSegundos;
     const end = unit.video?.fimSegundos;
     const duration = aula?.duracaoTotalSegundos ?? unit.video?.duracaoTotalSegundos;
