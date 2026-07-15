@@ -1,7 +1,7 @@
 # Schema de dados (localStorage)
 
 Chave: `portal-estudos-v1`  
-`schemaVersion` atual: **4**
+`schemaVersion` atual: **5**
 
 ## Campos principais
 
@@ -22,6 +22,9 @@ Chave: `portal-estudos-v1`
 | editalProgress | object | id tópico → status |
 | flashcards | object | Estado SRS |
 | taskStatus | object | Estado das etapas, indexado pela data do cronograma |
+| unitProgress | object | Estado pedagógico de cada unidade, indexado por ID estável |
+| unitAttempts | array | Histórico append-only das tentativas de checagem e prática |
+| unitReviews | array | Revisões futuras agendadas por unidade e objetivo |
 | dailySummary | object | Resumo de conclusão por data do cronograma |
 | cebraspeConfig | object | Valores configuráveis de acerto, erro e branco |
 | lastBackupAt | string\|null | Data e hora ISO da última exportação |
@@ -37,6 +40,16 @@ concurso, origin, startedAt, endedAt, taskId, at
 
 `pendente | em_andamento | parcial | concluido | faltou | recuperado`
 
+## Jornada de unidade
+
+`unitProgress[unitId]` registra o estado atual, datas de início e conclusão da
+leitura e do vídeo e a tentativa ativa. `unitAttempts[]` preserva cada tentativa,
+suas respostas, resultado, duração e desempenho por objetivo. `unitReviews[]`
+registra objetivo, data agendada, motivo e estado da revisão.
+
+As transições são explícitas. Eventos fora de ordem não alteram o armazenamento;
+abrir ou iniciar um recurso não conclui a etapa correspondente.
+
 ## Migração
 
-`Storage.migrate()` normaliza campos ausentes e sessões antigas **sem apagar** progresso. A chave histórica `portal-estudos-v1` foi mantida. Sessões, questões, erros, simulados, estados de tarefa e demais dados conhecidos são preservados; os campos novos recebem valores padrão.
+`Storage.migrate()` normaliza campos ausentes e sessões antigas **sem apagar** progresso. A migração 4 → 5 acrescenta `unitProgress: {}`, `unitAttempts: []` e `unitReviews: []`. A chave histórica `portal-estudos-v1` foi mantida. Sessões, questões, erros, simulados, estados de tarefa e demais dados conhecidos são preservados; os campos novos recebem valores padrão.

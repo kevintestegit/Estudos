@@ -13,7 +13,28 @@ const uid = () => {
     );
   }
 };
-const SCHEMA_VERSION = 4;
+const SCHEMA_VERSION = 5;
+const newUnitProgress = () => ({
+  state: "nao_iniciada",
+  updatedAt: null,
+  reading: { startedAt: null, completedAt: null },
+  video: { startedAt: null, completedAt: null },
+  activeAttemptId: null,
+});
+const UNIT_TRANSITIONS = {
+  nao_iniciada: { iniciar_leitura: "leitura_em_andamento" },
+  leitura_em_andamento: { concluir_leitura: "leitura_concluida" },
+  leitura_concluida: { iniciar_video: "video_em_andamento" },
+  video_em_andamento: { concluir_video: "video_concluido" },
+  video_concluido: { iniciar_checagem: "checagem_em_andamento" },
+  checagem_em_andamento: { concluir_checagem: "checagem_concluida" },
+  checagem_concluida: { iniciar_pratica: "pratica_em_andamento" },
+  pratica_em_andamento: { concluir_pratica: "pratica_concluida" },
+  pratica_concluida: { concluir_correcao: "correcao_concluida" },
+  correcao_pendente: { concluir_correcao: "correcao_concluida" },
+  correcao_concluida: { agendar_revisao: "revisao_agendada" },
+  revisao_agendada: { concluir_unidade: "concluida" },
+};
 const DEFAULT_PROGRESS = {
   schemaVersion: SCHEMA_VERSION,
   startDate: null,
@@ -42,6 +63,9 @@ const DEFAULT_PROGRESS = {
   questionFlags: {},
   cebraspeConfig: { acerto: 1, erro: 0, branco: 0 },
   taskStatus: {},
+  unitProgress: {},
+  unitAttempts: [],
+  unitReviews: [],
 };
 const Storage = {
   get() {
@@ -90,6 +114,10 @@ const Storage = {
     if (!d.questionFlags) d.questionFlags = {};
     if (!d.cebraspeConfig) d.cebraspeConfig = { acerto: 1, erro: 0, branco: 0 };
     if (!d.taskStatus) d.taskStatus = {}; // normalize sessions
+    if (!d.unitProgress || typeof d.unitProgress !== "object" || Array.isArray(d.unitProgress))
+      d.unitProgress = {};
+    if (!Array.isArray(d.unitAttempts)) d.unitAttempts = [];
+    if (!Array.isArray(d.unitReviews)) d.unitReviews = [];
     d.studySessions = (d.studySessions || []).map((s) => ({
       id: s.id || uid(),
       date: s.date || todayISO(),
@@ -520,6 +548,205 @@ const Storage = {
   getTaskStatus(tk) {
     return (this.get().taskStatus || {})[tk] || "pendente";
   },
+  getUnitProgress(unitId) {
+    const progress = this.get().unitProgress?.[unitId];
+    return clone(progress || newUnitProgress());
+  },
+  transitionUnit(unitId, event) {
+    if (!unitId || !event) return { ok: false, state: "nao_iniciada" };
+    const data = this.get(),
+      progress = data.unitProgress[unitId] || newUnitProgress(),
+      attempt = data.unitAttempts.find((item) => item.id === progress.activeAttemptId),
+      next = UNIT_TRANSITIONS[progress.state]?.[event];
+    if (!next) return { ok: false, state: progress.state };
+    if (
+      (event === "concluir_checagem" || event === "concluir_pratica") &&
+      (!attempt ||
+        !attempt.finishedAt ||
+        attempt.phase !==
+          (event === "concluir_checagem" ? "checagem" : "pratica"))
+    )
+      return { ok: false, state: progress.state };
+    if (
+      event === "agendar_revisao" &&
+      !data.unitReviews.some((review) => review.unitId === unitId)
+    )
+      return { ok: false, state: progress.state };
+    if (
+      event === "concluir_unidade" &&
+      !data.unitReviews.some((review) => review.unitId === unitId)
+    )
+      return { ok: false, state: progress.state };
+
+    const now = new Date().toISOString();
+    progress.state =
+      event === "concluir_pratica"
+        ? attempt.result.wrong
+          ? "correcao_pendente"
+          : "pratica_concluida"
+        : next;
+    progress.updatedAt = now;
+    if (event === "iniciar_leitura") progress.reading.startedAt = now;
+    if (event === "concluir_leitura") progress.reading.completedAt = now;
+    if (event === "iniciar_video") progress.video.startedAt = now;
+    if (event === "concluir_video") progress.video.completedAt = now;
+    data.unitProgress[unitId] = progress;
+    try {
+      this.set(data);
+      return { ok: true, state: progress.state };
+    } catch {
+      return { ok: false, state: this.getUnitProgress(unitId).state };
+    }
+  },
+  startUnitAttempt(unitId, phase, questionIds) {
+    const data = this.get(),
+      progress = data.unitProgress[unitId] || newUnitProgress(),
+      activeAttempt = data.unitAttempts.find(
+        (item) => item.id === progress.activeAttemptId,
+      ),
+      expectedState = `${phase}_em_andamento`;
+    if (
+      !unitId ||
+      !["checagem", "pratica"].includes(phase) ||
+      !Array.isArray(questionIds) ||
+      !questionIds.length ||
+      new Set(questionIds).size !== questionIds.length ||
+      questionIds.some((id) => !id) ||
+      progress.state !== expectedState ||
+      (activeAttempt && !activeAttempt.finishedAt)
+    )
+      return { ok: false, state: progress.state };
+    const attempt = {
+      id: uid(),
+      unitId,
+      phase,
+      number:
+        data.unitAttempts.filter(
+          (item) => item.unitId === unitId && item.phase === phase,
+        ).length + 1,
+      questionIds: [...questionIds],
+      startedAt: new Date().toISOString(),
+      finishedAt: null,
+      answers: [],
+      result: null,
+      durationSeconds: null,
+      performanceByObjective: {},
+    };
+    data.unitAttempts.push(attempt);
+    progress.activeAttemptId = attempt.id;
+    progress.updatedAt = attempt.startedAt;
+    data.unitProgress[unitId] = progress;
+    try {
+      this.set(data);
+      return { ok: true, state: progress.state, attemptId: attempt.id };
+    } catch {
+      return { ok: false, state: this.getUnitProgress(unitId).state };
+    }
+  },
+  recordUnitAnswer(attemptId, answer) {
+    const data = this.get(),
+      attempt = data.unitAttempts.find((item) => item.id === attemptId),
+      state = attempt
+        ? data.unitProgress[attempt.unitId]?.state || "nao_iniciada"
+        : "nao_iniciada";
+    if (
+      !attempt ||
+      attempt.finishedAt ||
+      !answer ||
+      !attempt.questionIds.includes(answer.questionId) ||
+      !Object.hasOwn(answer, "answer") ||
+      typeof answer.correct !== "boolean" ||
+      !Array.isArray(answer.objetivos) ||
+      !answer.objetivos.length ||
+      attempt.answers.some((item) => item.questionId === answer.questionId)
+    )
+      return { ok: false, state };
+    attempt.answers.push({ ...clone(answer), answeredAt: new Date().toISOString() });
+    try {
+      this.set(data);
+      return { ok: true, state };
+    } catch {
+      return { ok: false, state };
+    }
+  },
+  finishUnitAttempt(attemptId) {
+    const data = this.get(),
+      attempt = data.unitAttempts.find((item) => item.id === attemptId),
+      state = attempt
+        ? data.unitProgress[attempt.unitId]?.state || "nao_iniciada"
+        : "nao_iniciada";
+    if (
+      !attempt ||
+      attempt.finishedAt ||
+      attempt.questionIds.some(
+        (questionId) =>
+          !attempt.answers.some((answer) => answer.questionId === questionId),
+      )
+    )
+      return { ok: false, state };
+    const finishedAt = new Date().toISOString(),
+      correct = attempt.answers.filter((answer) => answer.correct).length;
+    attempt.finishedAt = finishedAt;
+    attempt.result = {
+      answered: attempt.answers.length,
+      correct,
+      wrong: attempt.answers.length - correct,
+    };
+    attempt.durationSeconds = Math.max(
+      0,
+      Math.round((new Date(finishedAt) - new Date(attempt.startedAt)) / 1000),
+    );
+    attempt.answers.forEach((answer) =>
+      answer.objetivos.forEach((objetivo) => {
+        const performance = attempt.performanceByObjective[objetivo] || {
+          answered: 0,
+          correct: 0,
+          wrong: 0,
+        };
+        performance.answered++;
+        performance[answer.correct ? "correct" : "wrong"]++;
+        attempt.performanceByObjective[objetivo] = performance;
+      }),
+    );
+    try {
+      this.set(data);
+      return { ok: true, state, result: clone(attempt.result) };
+    } catch {
+      return { ok: false, state };
+    }
+  },
+  scheduleUnitReview(review) {
+    const data = this.get(),
+      progress = data.unitProgress[review?.unitId] || newUnitProgress();
+    if (
+      progress.state !== "correcao_concluida" ||
+      !Array.isArray(review?.objetivos) ||
+      !review.objetivos.length ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(review.scheduledDate || "") ||
+      Number.isNaN(Date.parse(`${review.scheduledDate}T00:00:00Z`)) ||
+      !review.reason
+    )
+      return { ok: false, state: progress.state };
+    const createdAt = new Date().toISOString();
+    data.unitReviews.push({
+      id: uid(),
+      unitId: review.unitId,
+      objetivos: [...review.objetivos],
+      scheduledDate: review.scheduledDate,
+      reason: review.reason,
+      status: "pendente",
+      createdAt,
+    });
+    progress.state = "revisao_agendada";
+    progress.updatedAt = createdAt;
+    data.unitProgress[review.unitId] = progress;
+    try {
+      this.set(data);
+      return { ok: true, state: progress.state };
+    } catch {
+      return { ok: false, state: this.getUnitProgress(review.unitId).state };
+    }
+  },
   exportJSON() {
     return JSON.stringify(this.get(), null, 2);
   },
@@ -527,10 +754,10 @@ const Storage = {
     const p = JSON.parse(t);
     if (!p || typeof p !== "object" || Array.isArray(p))
       throw new Error("Backup deve ser um objeto JSON.");
-    for (const key of ["studyDays", "studySessions", "erros", "simulados", "achievements", "manualStudies", "materiaisEstudados", "materiaisRevisao", "provasFeitas"])
+    for (const key of ["studyDays", "studySessions", "erros", "simulados", "achievements", "manualStudies", "materiaisEstudados", "materiaisRevisao", "provasFeitas", "unitAttempts", "unitReviews"])
       if (p[key] != null && !Array.isArray(p[key]))
         throw new Error(`Coleção inválida: ${key}.`);
-    for (const key of ["dayStatus", "quiz", "dailyQuiz", "goals", "flashcards", "editalProgress", "dailySummaries", "questionFlags", "cebraspeConfig", "taskStatus"])
+    for (const key of ["dayStatus", "quiz", "dailyQuiz", "goals", "flashcards", "editalProgress", "dailySummaries", "questionFlags", "cebraspeConfig", "taskStatus", "unitProgress"])
       if (p[key] != null && (!p[key] || typeof p[key] !== "object" || Array.isArray(p[key])))
         throw new Error(`Objeto inválido: ${key}.`);
     const d = this.migrate({ ...clone(DEFAULT_PROGRESS), ...p });

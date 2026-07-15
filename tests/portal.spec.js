@@ -277,7 +277,7 @@ test("migração preserva progresso da versão anterior", async ({ page }) => {
   const progress = await page.evaluate(() =>
     JSON.parse(localStorage.getItem("portal-estudos-v1")),
   );
-  expect(progress.schemaVersion).toBe(4);
+  expect(progress.schemaVersion).toBe(5);
   expect(progress.studySessions[0].id).toBe("keep-session");
   expect(progress.quiz.answered).toBe(2);
   expect(progress.erros[0].id).toBe("keep-error");
@@ -437,7 +437,7 @@ test("importação valida, confirma e preserva o backup", async ({ page }) => {
   const progress = await page.evaluate(() =>
     JSON.parse(localStorage.getItem("portal-estudos-v1")),
   );
-  expect(progress.schemaVersion).toBe(4);
+  expect(progress.schemaVersion).toBe(5);
   expect(progress.studySessions[0].id).toBe("imported");
 });
 
