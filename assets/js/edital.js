@@ -38,7 +38,7 @@ async function initEdital() {
         <div class="card mb-1">
           <h2>${App.esc(title)}</h2>
           <p><strong>${cov.pct}%</strong> consolidado · <strong>${cov.pctTeoria}%</strong> com teoria · ${cov.total} tópicos</p>
-          <div class="progress-bar mb-1"><span style="width:${cov.pct}%"></span></div>
+          <div class="progress-bar mb-1" role="progressbar" aria-label="Progresso consolidado de ${App.esc(title)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${cov.pct}"><span style="width:${cov.pct}%"></span></div>
           ${Object.entries(byMat).map(([mat, tops]) => `
             <h3 class="mt-1">${App.esc(mat)}</h3>
             <div class="table-scroll" role="region" aria-label="Tópicos de ${App.esc(mat)}" tabindex="0"><table>

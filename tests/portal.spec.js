@@ -66,7 +66,20 @@ async function answerOneQuestion(page, shouldBeCorrect) {
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.addInitScript(() => localStorage.clear());
+  await page.addInitScript(() => {
+    const RealDate = Date;
+    const now = new RealDate("2026-07-14T15:00:00.000Z").valueOf();
+    globalThis.Date = class extends RealDate {
+      constructor(...args) {
+        super(...(args.length ? args : [now]));
+      }
+
+      static now() {
+        return now;
+      }
+    };
+    localStorage.clear();
+  });
 });
 
 for (const path of pages) {
@@ -295,6 +308,11 @@ test("concluir recuperação não conclui o dia atual", async ({ page }) => {
         startDate: "2026-07-06",
         studyDays: [1, 2, 3, 4, 5, 6],
         dayStatus: { "2026-07-06": "faltou" },
+        taskStatus: {
+          "2026-07-06_0_learn": "concluida",
+          "2026-07-06_0_read": "concluida",
+          "2026-07-06_0_practice": "concluida",
+        },
         studySessions: [
           {
             id: "recovery-session",
@@ -310,7 +328,6 @@ test("concluir recuperação não conclui o dia atual", async ({ page }) => {
   await openClean(page, "/hoje.html");
   await page.getByRole("button", { name: /Recuperar 06\/07\/2026/i }).click();
   await page.locator("#btn-done").click();
-  await page.getByRole("button", { name: "Confirmar" }).click();
   const status = await page.evaluate(
     () => JSON.parse(localStorage.getItem("portal-estudos-v1")).dayStatus,
   );
@@ -348,6 +365,11 @@ test("concluir estudo normal marca somente o dia atual", async ({ page }) => {
         startDate: "2026-07-14",
         studyDays: [1, 2, 3, 4, 5, 6],
         dayStatus: {},
+        taskStatus: {
+          "2026-07-14_0_learn": "concluida",
+          "2026-07-14_0_read": "concluida",
+          "2026-07-14_0_practice": "concluida",
+        },
         studySessions: [
           {
             id: "today-session",
@@ -361,7 +383,6 @@ test("concluir estudo normal marca somente o dia atual", async ({ page }) => {
   );
   await openClean(page, "/hoje.html");
   await page.locator("#btn-done").click();
-  await page.getByRole("button", { name: "Confirmar" }).click();
   const status = await page.evaluate(
     () =>
       JSON.parse(localStorage.getItem("portal-estudos-v1")).dayStatus[
@@ -430,6 +451,31 @@ test("menu móvel fecha depois de selecionar um destino", async ({ page }) => {
   await expect(page.locator("#sidebar")).not.toHaveClass(/open/);
 });
 
+test("navegação expõe página atual e estado do menu", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openClean(page, "/hoje.html");
+  await expect(page.locator('[data-nav="hoje"]')).toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+  const menu = page.locator("#menu-toggle");
+  await expect(menu).toHaveAttribute("aria-controls", "sidebar");
+  await expect(menu).toHaveAttribute("aria-expanded", "false");
+  await menu.click();
+  await expect(menu).toHaveAttribute("aria-expanded", "true");
+  await expect(page.locator("#status-bar")).toHaveAttribute("role", "status");
+  await expect(page.locator(".skip-link")).toHaveAttribute("href", "#app-root");
+});
+
+test("progresso do edital expõe valor acessível", async ({ page }) => {
+  await openClean(page, "/edital.html");
+  const bars = page.getByRole("progressbar");
+  await expect(bars).toHaveCount(2);
+  await expect(bars.first()).toHaveAttribute("aria-valuemin", "0");
+  await expect(bars.first()).toHaveAttribute("aria-valuemax", "100");
+  await expect(bars.first()).toHaveAttribute("aria-valuenow", /\d+/);
+});
+
 test("modal controla foco e fecha com Escape", async ({ page }) => {
   await openClean(page, "/backup.html");
   const resetButton = page.locator("#btn-reset");
@@ -446,7 +492,8 @@ test("Service Worker remove o cache da versão anterior", async ({ page }) => {
   await openClean(page, "/hoje.html");
   const cacheNames = await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
-    await caches.open("portal-estudos-v12");
+    await caches.open("portal-estudos-v14");
+    await caches.open("cache-de-outro-aplicativo");
     const script = new URL("service-worker.js?upgrade-test=1", location.href);
     const registration = await navigator.serviceWorker.register(script, {
       scope: "./",
@@ -461,8 +508,9 @@ test("Service Worker remove o cache da versão anterior", async ({ page }) => {
     }
     return caches.keys();
   });
-  expect(cacheNames).toContain("portal-estudos-v14");
-  expect(cacheNames).not.toContain("portal-estudos-v12");
+  expect(cacheNames).toContain("portal-estudos-v15");
+  expect(cacheNames).not.toContain("portal-estudos-v14");
+  expect(cacheNames).toContain("cache-de-outro-aplicativo");
 });
 
 for (const viewport of [{ width: 1280, height: 800 }, { width: 390, height: 844 }]) {
@@ -505,4 +553,95 @@ test("aula indisponível não conclui a etapa de aprendizado", async ({ page }) 
   await warning.click();
   const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("portal-estudos-v1")));
   expect(Object.keys(progress.taskStatus || {})).toHaveLength(0);
+});
+
+test("abrir videoaula não conclui a etapa", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: {} })));
+  await openClean(page, "/hoje.html");
+  const link = page.locator('[data-step-key$="_learn"]').first();
+  await link.click();
+  const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("portal-estudos-v1")));
+  expect(progress.taskStatus || {}).toEqual({});
+});
+
+test("prática leva taskKey ao quiz sem concluir antes", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: {} })));
+  await openClean(page, "/hoje.html");
+  const link = page.locator('[data-step-key$="_practice"]').first();
+  const key = await link.getAttribute("data-step-key");
+  expect(await link.getAttribute("href")).toContain(`taskKey=${encodeURIComponent(key)}`);
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("portal-estudos-v1")).taskStatus || {})).toEqual({});
+});
+
+test("finalizar quiz conclui somente taskKey recebido", async ({ page }) => {
+  const taskKey = "2026-07-14_0_practice";
+  await openClean(page, `/questoes.html?tag=portugues-interpretacao&n=1&auto=1&taskKey=${encodeURIComponent(taskKey)}`);
+  await answerOneQuestion(page, true);
+  const status = await page.evaluate(() => JSON.parse(localStorage.getItem("portal-estudos-v1")).taskStatus || {});
+  expect(status).toEqual({ [taskKey]: "concluida" });
+});
+
+test("dia com etapa obrigatória pendente não conclui", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({
+    schemaVersion: 4,
+    startDate: "2026-07-14",
+    studyDays: [2],
+    taskStatus: {},
+    studySessions: [{ id: "today", date: "2026-07-14", dayKey: "2026-07-14", minutes: 20 }],
+  })));
+  await openClean(page, "/hoje.html");
+  await page.locator("#btn-done").click();
+  await expect(page.getByRole("dialog")).toContainText("Conclua as etapas pendentes");
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("portal-estudos-v1")).dayStatus?.["2026-07-14"])).not.toBe("concluido");
+});
+
+test("backup com coleção inválida não substitui progresso", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14" })));
+  await openClean(page, "/backup.html");
+  await page.locator("#file-import").setInputFiles({
+    name: "backup-invalido.json",
+    mimeType: "application/json",
+    buffer: Buffer.from(JSON.stringify({ schemaVersion: 4, startDate: "2020-01-01", erros: {} })),
+  });
+  await page.locator("#btn-import").click();
+  await page.getByRole("button", { name: "Confirmar" }).click();
+  await expect(page.getByRole("dialog")).toContainText("Falha ao importar");
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("portal-estudos-v1")).startDate)).toBe("2026-07-14");
+});
+
+test("localStorage corrompido permanece disponível para recuperação", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", "{progresso-quebrado"));
+  await openClean(page, "/backup.html");
+  await expect(page.locator("#storage-warning")).toContainText("progresso local está corrompido");
+  expect(await page.evaluate(() => localStorage.getItem("portal-estudos-v1"))).toBe("{progresso-quebrado");
+});
+
+test("caderno deduplica erro pelo questionId", async ({ page }) => {
+  await openClean(page, "/caderno-erros.html");
+  const errors = await page.evaluate(() => {
+    Storage.addErro({ questionId: "q-1", materia: "Português", questao: "Texto" });
+    Storage.addErro({ questionId: "q-1", materia: "Português", questao: "Texto" });
+    return Storage.get().erros;
+  });
+  expect(errors).toHaveLength(1);
+  expect(errors[0].questionId).toBe("q-1");
+  expect(errors[0].occurrences).toBe(2);
+});
+
+test("fila de revisão mantém ação e data", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({
+    schemaVersion: 4,
+    materiaisRevisao: [{ id: "material-1", titulo: "Lei", url: "https://example.com/lei", addedAt: "2026-07-14" }],
+  })));
+  await openClean(page, "/biblioteca.html");
+  const link = page.getByRole("link", { name: "Abrir para revisar" });
+  await expect(link).toHaveAttribute("href", "https://example.com/lei");
+  await expect(page.locator("#bib-revisao")).toContainText("14/07/2026");
+});
+
+test("filtro INSS inclui videoaulas previdenciárias", async ({ page }) => {
+  await openClean(page, "/biblioteca.html?tipo=inss");
+  await expect(
+    page.getByText("Seguridade Social — conceitos", { exact: true }),
+  ).toBeVisible();
 });

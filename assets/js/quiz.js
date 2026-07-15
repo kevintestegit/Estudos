@@ -27,6 +27,7 @@ function renderQuestoesHome(data, params) {
   const materia = params.get("materia") || "";
   const nParam = Number(params.get("n")) || 0;
   const auto = params.get("auto") === "1";
+  const taskKey = params.get("taskKey") || "";
   const root = document.getElementById("app-root");
 
   root.innerHTML = `
@@ -113,7 +114,7 @@ function renderQuestoesHome(data, params) {
       if (setup) setup.classList.add("hidden");
       const mode =
         forceMode || document.getElementById("q-modo").value || "pratica";
-      startQuiz(pool, { mode, tipo: origem, textos: data.textos || {} });
+      startQuiz(pool, { mode, tipo: origem, textos: data.textos || {}, taskKey });
     } catch (err) {
       msg.innerHTML = `<div class="alert alert-danger">Erro ao iniciar: ${App.esc(err.message || err)}</div>`;
       console.error(err);
@@ -317,6 +318,7 @@ function startQuiz(questions, meta) {
         wrong++;
         try {
           Storage.addErro({
+            questionId: q.id,
             materia: q.materia,
             assunto: q.assunto,
             questao: q.enunciado,
@@ -393,6 +395,7 @@ function startQuiz(questions, meta) {
           wrong++;
           try {
             Storage.addErro({
+              questionId: q.id,
               materia: q.materia,
               assunto: q.assunto,
               questao: q.enunciado,
@@ -445,6 +448,7 @@ function startQuiz(questions, meta) {
       Storage._level(d);
       Storage._achievements(d);
     });
+    if (meta.taskKey) Storage.setTaskStatus(meta.taskKey, "concluida");
 
     const blank = questions.length - correct - wrong;
     const isCE = questions.every((q) => q.tipo === "ce");

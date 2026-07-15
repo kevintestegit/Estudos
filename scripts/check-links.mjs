@@ -27,16 +27,31 @@ function topicCompatible(lesson, externalTitle) {
   return words(lesson.titulo).some((expected) => actual.some((word) => expected.slice(0, 5) === word.slice(0, 5)));
 }
 
-async function requestMetadata(url, fetchImpl, timeoutMs) {
+function playlistMetadata(text) {
+  const title = text.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i)?.[1];
+  const rawAuthor = text.match(/"ownerChannelName":"((?:\\.|[^"])*)"/)?.[1];
+  let author = rawAuthor;
+  try { author = JSON.parse(`"${rawAuthor}"`); } catch {}
+  return {
+    title: title?.replace(/&quot;/g, '"').replace(/&amp;/g, "&"),
+    author_name: author,
+  };
+}
+
+async function requestMetadata(lesson, fetchImpl, timeoutMs) {
   const started = Date.now();
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const response = await fetchImpl(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`, { method: "GET", redirect: "follow", signal: controller.signal });
+    const requestUrl = lesson.tipo === "playlist"
+      ? lesson.url
+      : `https://www.youtube.com/oembed?url=${encodeURIComponent(lesson.url)}&format=json`;
+    const response = await fetchImpl(requestUrl, { method: "GET", redirect: "follow", signal: controller.signal });
     const text = await response.text();
-    const blocked = /FortiGate|Application Blocked|captcha|consent/i.test(text);
+    const blocked = /FortiGate|Application Blocked|captcha|consent\.youtube\.com/i.test(text);
     let body = {};
-    try { body = JSON.parse(text); } catch {}
+    if (lesson.tipo === "playlist") body = playlistMetadata(text);
+    else try { body = JSON.parse(text); } catch {}
     return { response, body, blocked, durationMs: Date.now() - started };
   } finally {
     clearTimeout(timer);
@@ -70,15 +85,15 @@ export async function validateLesson(lesson, options = {}) {
   if (actual === "dQw4w9WgXcQ") return { ...base, status: "titulo_incompativel", idExtraido: actual, motivo: "Vídeo conhecido incompatível e expressamente proibido." };
 
   try {
-    const { response, body, blocked, durationMs } = await requestMetadata(lesson.url, fetchImpl, options.timeoutMs || 10000);
+    const { response, body, blocked, durationMs } = await requestMetadata(lesson, fetchImpl, options.timeoutMs || 10000);
     const evidence = { httpStatus: response.status, urlFinal: response.url || lesson.url, durationMs, idExtraido: actual };
     if (blocked) return { ...base, ...evidence, status: "erro_de_rede", motivo: "Bloqueio de rede impediu a consulta ao YouTube.", evidencias: ["Resposta de bloqueio institucional"] };
     if (!response.ok) {
-      const status = response.status === 401 || response.status === 403 ? "privado" : response.status === 404 ? "removido" : "nao_verificado";
+      const status = response.status === 401 ? "privado" : response.status === 404 ? "removido" : "nao_verificado";
       return { ...base, ...evidence, status, motivo: `oEmbed respondeu HTTP ${response.status}.` };
     }
     if (!body.title || !body.author_name) return { ...base, ...evidence, status: "nao_verificado", motivo: "Resposta externa sem título ou canal." };
-    const metadata = { tituloYoutube: body.title, canal: body.author_name, evidencias: ["YouTube oEmbed retornou title e author_name"] };
+    const metadata = { tituloYoutube: body.title, canal: body.author_name, evidencias: [lesson.tipo === "video" ? "YouTube oEmbed retornou title e author_name" : "Página pública da playlist retornou título e canal"] };
     if (normalize(body.title) !== normalize(lesson.tituloYoutube) || !topicCompatible(lesson, body.title)) return { ...base, ...evidence, ...metadata, status: "titulo_incompativel", motivo: "Título externo diverge do cadastro ou não comprova o assunto." };
     if (normalize(body.author_name) !== normalize(lesson.canal)) return { ...base, ...evidence, ...metadata, status: "canal_incompativel", motivo: "Canal externo diverge do cadastro." };
     return { ...base, ...evidence, ...metadata, status: "ok", motivo: lesson.tipo === "video" ? "Vídeo disponível e metadados compatíveis." : "Playlist disponível, compatível e documentada." };
@@ -108,6 +123,13 @@ export async function validateAll(lessons, options = {}) {
     }
   }
   return { geradoEm: new Date().toISOString(), resultados, duplicacoes };
+}
+
+export function hasPublishedFailure(report) {
+  return (
+    report.resultados.some((item) => !["ok", "indisponivel"].includes(item.status)) ||
+    report.duplicacoes.some((item) => item.classificacao === "suspeita")
+  );
 }
 
 async function main() {
@@ -156,7 +178,8 @@ async function main() {
     if (lessonResearch?.motivoFinal) result.motivo = lessonResearch.motivoFinal;
     const validationEvidence = result.evidencias;
     result.evidencias = {
-      oembed: result.status === "ok",
+      oembed: result.status === "ok" && result.tipo === "video",
+      paginaPlaylist: result.status === "ok" && result.tipo === "playlist",
       httpStatus: result.httpStatus || null,
       idExtraido: result.idExtraido || null,
       urlFinal: result.urlFinal || null,
@@ -194,8 +217,7 @@ async function main() {
   const counts = report.resultados.reduce((all, item) => ({ ...all, [item.status]: (all[item.status] || 0) + 1 }), {});
   console.log(JSON.stringify(counts));
   console.log(`Relatório: ${output}`);
-  const failure = report.resultados.some((item) => !["ok", "indisponivel"].includes(item.status) || ["timeout", "erro_de_rede", "nao_verificado"].includes(item.auditoriaCandidato?.status)) || report.duplicacoes.some((item) => item.classificacao === "suspeita");
-  process.exitCode = failure ? 1 : 0;
+  process.exitCode = hasPublishedFailure(report) ? 1 : 0;
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] || "").href) await main();

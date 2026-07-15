@@ -8,7 +8,9 @@ module.exports = defineConfig({
   use: {
     baseURL: "http://127.0.0.1:3050",
     browserName: "chromium",
-    launchOptions: { executablePath: "/snap/bin/chromium" },
+    launchOptions: process.env.CI
+      ? {}
+      : { executablePath: "/snap/bin/chromium" },
     viewport: { width: 1280, height: 800 },
   },
   webServer: {

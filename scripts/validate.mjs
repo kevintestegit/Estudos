@@ -31,6 +31,11 @@ for (const f of fs.readdirSync(dataDir).filter((x) => x.endsWith(".json"))) {
 const inss = load("questoes-inss.json").questoes || [];
 const prf = load("questoes-prf.json").questoes || [];
 const all = [...inss, ...prf];
+const canonicalSubjects = new Set(
+  Object.values(load("materias.json"))
+    .flat()
+    .map((subject) => subject.nome),
+);
 const ids = new Set();
 let dup = 0;
 for (const q of all) {
@@ -40,6 +45,7 @@ for (const q of all) {
   if (q.tipo === "me" && (!q.alternativas || q.alternativas.length < 2))
     log(false, `ME sem alternativas: ${q.id}`);
   if (!String(q.comentario || "").trim()) log(false, `sem resolução: ${q.id}`);
+  log(canonicalSubjects.has(q.materia), `matéria canônica: ${q.id}`);
 }
 log(dup === 0, `IDs únicos (${all.length} questões, dups=${dup})`);
 
@@ -224,7 +230,7 @@ for (const file of sourceFiles) {
 }
 
 const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-log(serviceWorker.includes("portal-estudos-v14"), "Service Worker usa cache v14");
+log(serviceWorker.includes("portal-estudos-v15"), "Service Worker usa cache v15");
 log(serviceWorker.includes("./assets/js/calendar.js"), "Service Worker inclui calendar.js");
 log(serviceWorker.includes("e.request.mode==='navigate'||u.pathname.includes('/data/')"), "Service Worker mantém network-first para navegação e dados");
 

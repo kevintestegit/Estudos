@@ -473,12 +473,12 @@
       "categoria": "inss",
       "concurso": "INSS",
       "materia": "Edital",
-      "titulo": "Edital INSS 2022 — Retificações",
+      "titulo": "Edital INSS 2022 — Primeira retificação",
       "tipo": "pagina",
       "prioridade": "alta",
       "ano": 2022,
       "banca": "Cebraspe",
-      "url": "https://cdn.cebraspe.org.br/concursos/inss_22/arquivos/ED_8_INSS_22_RETIFICACAO.PDF",
+      "url": "https://cdn.cebraspe.org.br/concursos/inss_22/arquivos/ED_2_INSS_22_RET.PDF",
       "fonte": "Cebraspe"
     },
     {
@@ -530,7 +530,7 @@
       "prioridade": "baixa",
       "ano": null,
       "banca": null,
-      "url": "https://www.gov.br/previdencia/pt-br/assuntos/prev/acordos-internacionais",
+      "url": "https://www.gov.br/previdencia/pt-br/assuntos/acordos-internacionais/acordos-internacionais-em-vigor",
       "fonte": "Gov.br"
     },
     {
@@ -551,13 +551,13 @@
       "categoria": "prf",
       "concurso": "PRF Administrativo",
       "materia": "Edital",
-      "titulo": "Último edital PRF (referência de estudo)",
+      "titulo": "Concurso PRF 2014 — Agente Administrativo",
       "tipo": "pagina",
       "prioridade": "alta",
       "ano": 2021,
-      "banca": "Cebraspe",
-      "url": "https://cdn.cebraspe.org.br/concursos/prf_21/arquivos/ED_1_2021_ABERTURA.PDF",
-      "fonte": "Cebraspe"
+      "banca": "FUNCAB",
+      "url": "https://www.gov.br/gestao/pt-br/acesso-a-informacao/servidores/concursos/noticias/policia-rodoviaria-federal-lanca-edital-com-216",
+      "fonte": "Ministério da Gestão"
     },
     {
       "id": "prf-decreto-1655",

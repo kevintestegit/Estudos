@@ -28,6 +28,20 @@ body {
   min-height: 100vh;
 }
 
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 10000;
+  transform: translateY(-200%);
+  background: var(--surface);
+  color: var(--primary);
+  padding: 0.65rem 1rem;
+  border: 2px solid currentColor;
+  border-radius: 8px;
+}
+.skip-link:focus { transform: none; }
+
 a { color: var(--primary); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
@@ -537,6 +551,15 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   .table-scroll::after { display: block; }
   .task-title { flex-direction: column; }
   .topbar h1 { font-size: 1.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 /* Modal custom */

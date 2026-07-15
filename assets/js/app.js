@@ -32,31 +32,6 @@ const App = {
       })),
     };
   },
-  async loadAll() {
-    const [cronograma, materias, aulas, pdfs, qInss, qPrf, simulados, provas] =
-      await Promise.all(
-        [
-          "cronograma",
-          "materias",
-          "aulas",
-          "pdfs",
-          "questoes-inss",
-          "questoes-prf",
-          "simulados",
-          "provas",
-        ].map((x) => this.loadJSON("data/" + x + ".json")),
-      );
-    return {
-      cronograma,
-      materias,
-      aulas,
-      pdfs,
-      qInss,
-      qPrf,
-      simulados,
-      provas,
-    };
-  },
   initShell(active) {
     const p = Storage.get();
     if (p.startDate) this.markMissedDays();
@@ -64,16 +39,34 @@ const App = {
     if (nav) nav.innerHTML = this.navigationHtml();
     document
       .querySelectorAll("[data-nav]")
-      .forEach(
-        (e) =>
-          e.getAttribute("data-nav") === active && e.classList.add("active"),
+      .forEach((e) => {
+        if (e.getAttribute("data-nav") !== active) return;
+        e.classList.add("active");
+        e.setAttribute("aria-current", "page");
+      });
+    const root = document.getElementById("app-root");
+    if (root && !document.querySelector(".skip-link")) {
+      root.tabIndex = -1;
+      document.body.insertAdjacentHTML(
+        "afterbegin",
+        '<a class="skip-link" href="#app-root">Ir para o conteúdo</a>',
       );
+    }
     const b = document.getElementById("menu-toggle"),
       s = document.getElementById("sidebar");
     if (b && s) {
-      b.onclick = () => s.classList.toggle("open");
+      b.setAttribute("aria-controls", "sidebar");
+      b.setAttribute("aria-expanded", "false");
+      b.onclick = () => {
+        const open = s.classList.toggle("open");
+        b.setAttribute("aria-expanded", String(open));
+      };
       s.querySelectorAll("a").forEach(
-        (link) => (link.onclick = () => s.classList.remove("open")),
+        (link) =>
+          (link.onclick = () => {
+            s.classList.remove("open");
+            b.setAttribute("aria-expanded", "false");
+          }),
       );
     }
     this.renderStatusBar();
@@ -251,6 +244,8 @@ const App = {
   renderStatusBar() {
     const e = document.getElementById("status-bar");
     if (!e) return;
+    e.setAttribute("role", "status");
+    e.setAttribute("aria-live", "polite");
     const p = Storage.get(),
       s = computeStats(p);
     e.innerHTML = p.startDate

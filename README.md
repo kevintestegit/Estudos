@@ -59,6 +59,21 @@ O relatório individual fica em `reports/aulas-link-report.json`; as buscas e al
 
 A migração de schema é automática e **não zera** o progresso.
 
+Se o JSON do `localStorage` estiver corrompido, a tela de Backup preserva o
+conteúdo bruto para download. A importação valida coleções e objetos antes de
+substituir o progresso existente.
+
+## Fluxo de estudo
+
+Na página **Hoje**, abrir teoria ou material não conclui a etapa. O usuário
+marca teoria e leitura explicitamente; a prática é concluída ao terminar o
+questionário vinculado. O dia só pode ser finalizado depois de todas as etapas
+e de uma sessão real ou questões respondidas.
+
+Erros repetidos da mesma questão são agrupados no Caderno de erros, com
+contagem e data da última ocorrência. Materiais enviados para revisão mantêm
+data, link de abertura e ação de remoção.
+
 ## Validação
 
 ```bash
@@ -71,6 +86,9 @@ npm run test:e2e
 ```
 
 `check-links.mjs` faz requisições GET externas reais. Testes com `fetch` mockado verificam somente a lógica do validador e não comprovam links. Bloqueios, timeout ou falhas de rede mantêm o conteúdo sem aprovação e produzem código de saída diferente de zero.
+
+O workflow de GitHub Pages instala as dependências e o Chromium e executa
+`npm test` antes de preparar o artefato. Uma falha impede a publicação.
 
 ## GitHub Pages
 

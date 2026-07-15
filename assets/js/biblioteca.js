@@ -21,13 +21,13 @@ async function initBiblioteca() {
     }));
     const aulas = (aulasData.aulas || []).map((item) => ({
       ...item,
-      categoria: "comum",
+      categoria: item.categoria || categoryFromSubject(item.materia),
       fonte: item.canal || "Videoaula",
       _origem: "aula",
     }));
     const pdfs = (pdfsData.pdfs || []).map((item) => ({
       ...item,
-      categoria: "comum",
+      categoria: item.categoria || categoryFromSubject(item.materia),
       fonte: item.fonte || "Fonte indicada",
       _origem: "pdf",
     }));
@@ -42,6 +42,21 @@ function categoryFromContest(contest) {
   const value = String(contest || "").toLowerCase();
   if (value.includes("prf")) return "prf";
   if (value.includes("inss")) return "inss";
+  return "comum";
+}
+
+function categoryFromSubject(subject) {
+  const value = String(subject || "");
+  if (value === "Direito Previdenciário") return "inss";
+  if (
+    [
+      "Noções de Administração",
+      "Arquivologia",
+      "Legislação institucional da PRF",
+      "Legislação PRF",
+    ].includes(value)
+  )
+    return "prf";
   return "comum";
 }
 
@@ -232,7 +247,7 @@ function renderBiblioteca(all, params) {
     const box = document.getElementById("bib-revisao");
     const items = Storage.get().materiaisRevisao || [];
     box.innerHTML = items.length
-      ? `<ul class="list">${items.map((item) => `<li><strong>${App.esc(item.titulo)}</strong><button class="btn btn-sm btn-danger" type="button" data-remove-review="${App.esc(item.id)}">Remover</button></li>`).join("")}</ul>`
+      ? `<ul class="list">${items.map((item) => `<li><strong>${App.esc(item.titulo)}</strong><p class="muted">Adicionado em ${App.formatDateBR(item.addedAt)}</p><div class="actions">${item.url ? `<a class="btn btn-sm" ${App.linkAttrs(item.url)}>Abrir para revisar</a>` : ""}<button class="btn btn-sm btn-danger" type="button" data-remove-review="${App.esc(item.id)}">Remover</button></div></li>`).join("")}</ul>`
       : '<p class="muted">Nada na fila de revisão.</p>';
     box.querySelectorAll("[data-remove-review]").forEach((button) => {
       button.onclick = () => {

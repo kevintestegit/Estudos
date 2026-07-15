@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { validateLesson, validateAll, linkScope } from "../scripts/check-links.mjs";
+import { validateLesson, validateAll, linkScope, hasPublishedFailure } from "../scripts/check-links.mjs";
 
 const base = {
   id: "aula-da-01",
@@ -79,4 +79,115 @@ test("relatório distingue links internos, externos e ausentes", () => {
   assert.equal(linkScope("biblioteca.html"), "interno");
   assert.equal(linkScope("https://www.youtube.com/watch?v=abcdefghijk"), "externo");
   assert.equal(linkScope(null), "ausente");
+});
+
+test("questões usam somente matérias canônicas", () => {
+  const materiasData = JSON.parse(
+    fs.readFileSync(new URL("../data/materias.json", import.meta.url)),
+  );
+  const nomes = new Set(
+    Object.values(materiasData)
+      .flat()
+      .map((materia) => materia.nome),
+  );
+  const questoes = ["questoes-inss.json", "questoes-prf.json"].flatMap(
+    (arquivo) =>
+      JSON.parse(
+        fs.readFileSync(new URL(`../data/${arquivo}`, import.meta.url)),
+      ).questoes,
+  );
+  const divergentes = questoes.filter((questao) => !nomes.has(questao.materia));
+  assert.deepEqual(
+    divergentes.map(({ id, materia }) => ({ id, materia })),
+    [],
+  );
+});
+
+test("materiais não mantêm URLs comprovadamente quebradas", () => {
+  const materiais = JSON.parse(
+    fs.readFileSync(new URL("../data/materiais.json", import.meta.url)),
+  ).materiais;
+  const quebradas = new Set([
+    "https://cdn.cebraspe.org.br/concursos/inss_22/arquivos/ED_8_INSS_22_RETIFICACAO.PDF",
+    "https://www.gov.br/previdencia/pt-br/assuntos/prev/acordos-internacionais",
+    "https://cdn.cebraspe.org.br/concursos/prf_21/arquivos/ED_1_2021_ABERTURA.PDF",
+  ]);
+  assert.deepEqual(
+    materiais.filter((item) => quebradas.has(item.url)).map((item) => item.id),
+    [],
+  );
+});
+
+test("HTTP 403 não é prova de vídeo privado", async () => {
+  const lesson = {
+    ...base,
+    tipo: "video",
+    url: "https://www.youtube.com/watch?v=abcdefghijk",
+    videoId: "abcdefghijk",
+    canal: "Canal",
+    tituloYoutube: base.titulo,
+  };
+  const result = await validateLesson(lesson, {
+    fetch: async () => new Response("Forbidden", { status: 403 }),
+  });
+  assert.equal(result.status, "nao_verificado");
+});
+
+test("playlist é validada pela página pública", async () => {
+  const lesson = {
+    ...base,
+    titulo: "Organização da Administração",
+    tipo: "playlist",
+    url: "https://www.youtube.com/playlist?list=PLabcdefghijk",
+    playlistId: "PLabcdefghijk",
+    canal: "Escola de Governo",
+    tituloYoutube: "Organização da Administração Pública",
+  };
+  let requestedUrl = "";
+  const result = await validateLesson(lesson, {
+    fetch: async (url) => {
+      requestedUrl = url;
+      return new Response(
+        '<meta property="og:title" content="Organização da Administração Pública"><script>{"ownerChannelName":"Escola de Governo"}</script>',
+        { status: 200 },
+      );
+    },
+  });
+  assert.equal(requestedUrl, lesson.url);
+  assert.equal(result.status, "ok");
+});
+
+test("páginas carregam somente os dados que consomem", () => {
+  for (const arquivo of ["app.js", "dashboard.js", "cronograma.js"]) {
+    const source = fs.readFileSync(
+      new URL(`../assets/js/${arquivo}`, import.meta.url),
+      "utf8",
+    );
+    assert.doesNotMatch(source, /loadAll\s*\(/, arquivo);
+  }
+});
+
+test("deploy executa a suíte antes de publicar", () => {
+  const workflow = fs.readFileSync(
+    new URL("../.github/workflows/pages.yml", import.meta.url),
+    "utf8",
+  );
+  assert.match(workflow, /actions\/setup-node@v4/);
+  assert.match(workflow, /npm ci/);
+  assert.match(workflow, /npx playwright install --with-deps chromium/);
+  assert.match(workflow, /npm test/);
+  assert.ok(workflow.indexOf("npm test") < workflow.indexOf("Preparar site"));
+});
+
+test("candidato histórico inconclusivo não reprova biblioteca válida", () => {
+  const report = {
+    resultados: [
+      { status: "ok", auditoriaCandidato: { status: "erro_de_rede" } },
+      { status: "indisponivel" },
+    ],
+    duplicacoes: [],
+  };
+  assert.equal(hasPublishedFailure(report), false);
+  report.resultados[0].status = "nao_verificado";
+  assert.equal(hasPublishedFailure(report), true);
 });

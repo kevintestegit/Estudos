@@ -23,6 +23,17 @@ jobs:
     steps:
       - name: Baixar arquivos
         uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Instalar dependências
+        run: npm ci
+      - name: Instalar Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Validar portal
+        run: npm test
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
         with:

@@ -45,17 +45,22 @@ const DEFAULT_PROGRESS = {
 };
 const Storage = {
   get() {
+    let raw = null;
     try {
-      const raw = localStorage.getItem(STORAGE_KEY),
-        parsed = raw ? JSON.parse(raw) : null,
+      raw = localStorage.getItem(STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : null,
         d = parsed
           ? { ...clone(DEFAULT_PROGRESS), ...parsed }
           : clone(DEFAULT_PROGRESS),
         before = d.schemaVersion,
         migrated = this.migrate(d);
       if (parsed && before !== migrated.schemaVersion) this.set(migrated);
+      this.lastError = null;
+      this.corruptRaw = null;
       return migrated;
-    } catch {
+    } catch (error) {
+      this.lastError = error;
+      this.corruptRaw = raw;
       return clone(DEFAULT_PROGRESS);
     }
   },
@@ -313,8 +318,19 @@ const Storage = {
   addErro(e) {
     return this.update((d) => {
       const b = todayISO();
+      const existing = e.questionId
+        ? d.erros.find((item) => item.questionId === e.questionId)
+        : null;
+      if (existing) {
+        existing.occurrences = (existing.occurrences || 1) + 1;
+        existing.lastSeen = b;
+        return;
+      }
       d.erros.push({
         id: uid(),
+        questionId: e.questionId || null,
+        occurrences: 1,
+        lastSeen: b,
         materia: e.materia || "",
         assunto: e.assunto || "",
         questao: e.questao || "",
@@ -511,10 +527,12 @@ const Storage = {
     const p = JSON.parse(t);
     if (!p || typeof p !== "object" || Array.isArray(p))
       throw new Error("Backup deve ser um objeto JSON.");
-    if (p.studySessions && !Array.isArray(p.studySessions))
-      throw new Error("Sessões inválidas.");
-    if (p.quiz && typeof p.quiz !== "object")
-      throw new Error("Questões inválidas.");
+    for (const key of ["studyDays", "studySessions", "erros", "simulados", "achievements", "manualStudies", "materiaisEstudados", "materiaisRevisao", "provasFeitas"])
+      if (p[key] != null && !Array.isArray(p[key]))
+        throw new Error(`Coleção inválida: ${key}.`);
+    for (const key of ["dayStatus", "quiz", "dailyQuiz", "goals", "flashcards", "editalProgress", "dailySummaries", "questionFlags", "cebraspeConfig", "taskStatus"])
+      if (p[key] != null && (!p[key] || typeof p[key] !== "object" || Array.isArray(p[key])))
+        throw new Error(`Objeto inválido: ${key}.`);
     const d = this.migrate({ ...clone(DEFAULT_PROGRESS), ...p });
     this.set(d);
     return d;

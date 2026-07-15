@@ -3,6 +3,7 @@ function initBackup() {
   const root = document.getElementById("app-root");
   const progress = Storage.get();
   root.innerHTML = `
+    ${Storage.corruptRaw != null ? '<div class="alert alert-danger" id="storage-warning">Seu progresso local está corrompido. Baixe o conteúdo bruto antes de restaurar um backup.<div class="actions"><button class="btn btn-secondary" type="button" id="btn-export-corrupt">Baixar dados para recuperação</button></div></div>' : ""}
     <section class="card mb-1">
       <p class="eyebrow">Proteja seu progresso</p>
       <h2>Baixar uma cópia</h2>
@@ -21,6 +22,14 @@ function initBackup() {
       <p>Esta ação apaga somente os dados deste navegador e não pode ser desfeita sem backup.</p>
       <button class="btn btn-danger" type="button" id="btn-reset">Apagar todo o progresso</button>
     </section>`;
+
+  document.getElementById("btn-export-corrupt")?.addEventListener("click", () => {
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(new Blob([Storage.corruptRaw], { type: "text/plain" }));
+    link.download = `portal-estudos-corrompido-${todayISO()}.txt`;
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(link.href), 0);
+  });
 
   document.getElementById("btn-export").onclick = () => {
     const timestamp = new Date().toISOString();

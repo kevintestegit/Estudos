@@ -70,7 +70,12 @@ async function initHoje() {
   try {
     const recoveryDate = new URLSearchParams(location.search).get("recuperar");
     if (recoveryDate) Storage.setRecoveryTarget({ date: recoveryDate });
-    renderHoje(await App.loadAll());
+    const [cronograma, aulas, pdfs] = await Promise.all([
+      App.loadJSON("data/cronograma.json"),
+      App.loadJSON("data/aulas.json"),
+      App.loadJSON("data/pdfs.json"),
+    ]);
+    renderHoje({ cronograma, aulas, pdfs });
   } catch (error) {
     showLoadError(error);
   }
@@ -192,8 +197,9 @@ function renderStudyTask(entry, data, firstPending) {
   );
   const lessonAction = App.lessonAction(lesson);
   const materialUrl = App.resolveUrl(material?.url, task.materia);
-  const questionUrl = `questoes.html?${task.questoesTag ? `tag=${encodeURIComponent(task.questoesTag)}` : `materia=${encodeURIComponent(task.materia)}`}&n=10`;
   const base = taskBaseKey(entry);
+  const practiceKey = `${base}_practice`;
+  const questionUrl = `questoes.html?${task.questoesTag ? `tag=${encodeURIComponent(task.questoesTag)}` : `materia=${encodeURIComponent(task.materia)}`}&n=10&taskKey=${encodeURIComponent(practiceKey)}`;
   const steps = [
     ["learn", "1", "Aprender o conteúdo", lessonAction],
     [
@@ -211,7 +217,7 @@ function renderStudyTask(entry, data, firstPending) {
         const key = `${base}_${name}`;
         const done = stepDone(key);
         const control = action.available
-          ? `<a class="btn ${done ? "btn-secondary" : ""}" ${App.linkAttrs(action.url)} data-step-key="${key}">${done ? "Concluído" : action.label}</a>`
+          ? `<div class="actions"><a class="btn ${done ? "btn-secondary" : ""}" ${App.linkAttrs(action.url)} data-step-key="${key}">${action.label}</a>${name !== "practice" ? `<button class="btn btn-secondary" type="button" data-complete-step="${key}" ${done ? "disabled" : ""}>${done ? "Concluído" : "Marcar etapa como concluída"}</button>` : ""}</div>`
           : `<span class="alert alert-info" data-lesson-unavailable>${action.label}</span>`;
         return `<div class="roadmap-step ${done ? "is-done" : ""} ${firstPending === key ? "is-next" : ""}" data-step="${key}">
         <span class="step-number">${done ? "✓" : number}</span>
@@ -350,9 +356,11 @@ function bindTodayActions(context) {
     );
   };
 
-  document.querySelectorAll("[data-step-key]").forEach((link) => {
-    link.onclick = () =>
-      Storage.setTaskStatus(link.dataset.stepKey, "concluida");
+  document.querySelectorAll("[data-complete-step]").forEach((button) => {
+    button.onclick = () => {
+      Storage.setTaskStatus(button.dataset.completeStep, "concluida");
+      renderHoje(data);
+    };
   });
   document.querySelectorAll("[data-dismiss]").forEach((button) => {
     button.onclick = () => {
@@ -421,13 +429,8 @@ function bindTodayActions(context) {
           ),
         )
         .filter((key) => !stepDone(key));
-      if (
-        pending.length &&
-        !(await Modal.waitConfirm(
-          `Existem ${pending.length} etapa(s) pendente(s). Deseja concluir mesmo assim?`,
-        ))
-      )
-        return;
+      if (pending.length)
+        return alert(`Conclua as etapas pendentes antes de finalizar (${pending.length}).`);
       Storage.closeDay(scheduleDate, studyDate);
       Storage.setDayStatus(
         scheduleDate,
@@ -497,7 +500,11 @@ async function initProgresso() {
 async function initMaterias() {
   App.initShell("materias");
   try {
-    const { materias, aulas, pdfs } = await App.loadAll();
+    const [materias, aulas, pdfs] = await Promise.all([
+      App.loadJSON("data/materias.json"),
+      App.loadJSON("data/aulas.json"),
+      App.loadJSON("data/pdfs.json"),
+    ]);
     renderPainelMaterias({ materias, aulas, pdfs });
   } catch (error) {
     showLoadError(error);

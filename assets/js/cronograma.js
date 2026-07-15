@@ -1,7 +1,7 @@
 async function initCronograma() {
   App.initShell("cronograma");
   try {
-    const { cronograma } = await App.loadAll();
+    const cronograma = await App.loadJSON('data/cronograma.json');
     renderCronograma(cronograma);
   } catch (error) {
     document.getElementById("app-root").innerHTML =
