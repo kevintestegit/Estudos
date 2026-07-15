@@ -10,6 +10,7 @@ export function validateUnits({ unidades = [], checagens = [], aulas = [], quest
   const duplicateUnitIds = new Set(duplicates(unidades.map(({ id }) => id)));
   const duplicateCheckIds = new Set(duplicates(checagens.map(({ id }) => id)));
   const duplicateQuestionIds = new Set(duplicates(questoes.map(({ id }) => id)));
+  const duplicateAulaIds = new Set(duplicates(aulas.map(({ id }) => id)));
   const aulasById = new Map(aulas.map((item) => [item.id, item]));
   const checksById = new Map(checagens.map((item) => [item.id, item]));
   const questionsById = new Map(questoes.map((item) => [item.id, item]));
@@ -22,6 +23,7 @@ export function validateUnits({ unidades = [], checagens = [], aulas = [], quest
     const objectives = unit.objetivos || [];
     const objectiveSet = new Set(objectives);
     const sectionIds = new Set((unit.leitura?.secoes || []).map(({ id }) => id));
+    const duplicateSectionIds = new Set(duplicates((unit.leitura?.secoes || []).map(({ id }) => id)));
     const checks = (unit.checagem?.questionIds || []).map((id) => checksById.get(id));
     const questions = (unit.pratica?.questionIds || []).map((id) => questionsById.get(id));
     const aula = aulasById.get(unit.video?.aulaId);
@@ -29,10 +31,17 @@ export function validateUnits({ unidades = [], checagens = [], aulas = [], quest
     if (!unit.id || duplicateUnitIds.has(unit.id)) erros.push("ID de unidade ausente ou duplicado.");
     if (!objectives.length || duplicates(objectives).length) erros.push("Objetivos ausentes ou duplicados.");
     if (!unit.leitura?.secoes?.length) erros.push("Leitura obrigatória sem conteúdo.");
+    if (duplicateSectionIds.size) erros.push("ID de seção de leitura duplicado.");
     if (!includesAll(objectives, unit.leitura?.objetivosCobertos)) erros.push("Objetivo sem cobertura na leitura.");
+    if (!unit.leitura?.fontes?.length) erros.push("Leitura sem fonte.");
+    else if (unit.leitura.fontes.some(({ verificada }) => verificada !== true)) dadosNaoVerificados.push("Fonte da leitura não verificada.");
 
     if (!aula) erros.push("Referência de videoaula quebrada.");
+    if (duplicateAulaIds.has(unit.video?.aulaId)) erros.push("ID de aula duplicado.");
     if (!includesAll(objectives, unit.video?.objetivosCobertos)) erros.push("Objetivo sem cobertura na videoaula.");
+    if (!unit.video?.fonte || !unit.video?.fonteUrl) erros.push("Vídeo sem fonte.");
+    if (unit.video?.fonteVerificada !== true) dadosNaoVerificados.push("Fonte do vídeo não verificada.");
+    if (!unit.video?.motivoSelecao || !unit.video?.fonte || !unit.video?.fonteUrl || !unit.video?.verificadoEm || unit.video?.statusVerificacao !== "aprovado") dadosNaoVerificados.push("Vídeo ou trecho sem evidência pedagógica verificada.");
     const start = unit.video?.inicioSegundos;
     const end = unit.video?.fimSegundos;
     const duration = aula?.duracaoTotalSegundos ?? unit.video?.duracaoTotalSegundos;
@@ -51,6 +60,10 @@ export function validateUnits({ unidades = [], checagens = [], aulas = [], quest
       }
     }
     if (!includesAll(objectives, checks.flatMap((item) => item?.objetivos || []))) erros.push("Objetivo sem checagem.");
+    const checkMinimum = unit.checagem?.quantidadeMinima;
+    const checkCount = unit.checagem?.questionIds?.length || 0;
+    if (!Number.isInteger(checkMinimum) || checkMinimum < 3 || checkMinimum > 5 || checkCount < 3 || checkCount > 5) erros.push("Checagem deve conter de 3 a 5 questões.");
+    if (Number.isInteger(checkMinimum) && checkCount < checkMinimum) pendenciasEditoriais.push(`Checagem possui ${checkCount} de ${checkMinimum} questões exigidas.`);
 
     const minimum = unit.pratica?.quantidadeMinima || 0;
     if (questions.length < minimum) pendenciasEditoriais.push(`Prática possui ${questions.length} de ${minimum} questões exigidas.`);
@@ -80,7 +93,9 @@ export function validateUnits({ unidades = [], checagens = [], aulas = [], quest
     };
   });
 
-  return { unidades: reports };
+  const unitsById = new Map(unidades.map((unit) => [unit.id, unit]));
+  const falhou = reports.some((item) => item.erros.length || (unitsById.get(item.unitId)?.statusEditorial === "publicada" && (item.pendenciasEditoriais.length || item.dadosNaoVerificados.length)));
+  return { unidades: reports, falhou };
 }
 
 function runCli() {
@@ -96,10 +111,8 @@ function runCli() {
       questoes: [...read("questoes-inss.json").questoes, ...read("questoes-prf.json").questoes]
     });
     fs.writeFileSync(reportPath, `${JSON.stringify(result, null, 2)}\n`);
-    const unitsById = new Map((unitData.unidades || []).map((unit) => [unit.id, unit]));
-    const failed = result.unidades.some((item) => item.erros.length || (unitsById.get(item.unitId)?.statusEditorial === "publicada" && (item.pendenciasEditoriais.length || item.dadosNaoVerificados.length)));
-    console.log(failed ? "Validação de unidades falhou." : "Validação de unidades OK.");
-    process.exitCode = failed ? 1 : 0;
+    console.log(result.falhou ? "Validação de unidades falhou." : "Validação de unidades OK.");
+    process.exitCode = result.falhou ? 1 : 0;
   } catch (error) {
     const result = { status: "erro", erro: error.message };
     fs.writeFileSync(reportPath, `${JSON.stringify(result, null, 2)}\n`);
