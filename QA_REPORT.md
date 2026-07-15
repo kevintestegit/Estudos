@@ -55,7 +55,7 @@ Foram usados 28 canais identificados, incluindo Estratégia Concursos, Gran Curs
 - `url` continua sendo a única fonte da interface.
 - Vídeos usam `Assistir videoaula`, URL exata, nova aba e `rel="noopener noreferrer"`.
 - Indisponíveis continuam sem `<a>` e sem conclusão por clique.
-- O Service Worker usa `portal-estudos-v15`; durante `activate`, somente caches anteriores do portal, inclusive v14, são removidos. Caches de outras aplicações são preservados.
+- O Service Worker usa `portal-estudos-v16`; durante `activate`, somente caches anteriores do portal, inclusive v15, são removidos. Caches de outras aplicações são preservados.
 - Navegação e `/data/` continuam em network-first.
 
 ## Correções de confiabilidade

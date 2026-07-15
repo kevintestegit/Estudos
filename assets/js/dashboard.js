@@ -1,7 +1,17 @@
 function showLoadError(error) {
+  window.UnitFlow?.cleanup();
+  clearTodayTimerInterval();
   const root = document.getElementById("app-root");
   if (root)
     root.innerHTML = `<div class="alert alert-danger">Não foi possível carregar os dados. ${App.esc(error.message || error)}</div>`;
+}
+
+let todayTimerInterval = null;
+
+function clearTodayTimerInterval() {
+  if (todayTimerInterval === null) return;
+  clearInterval(todayTimerInterval);
+  todayTimerInterval = null;
 }
 
 function statCard(value, label) {
@@ -78,10 +88,18 @@ async function initHoje() {
     const unitIds = [...new Set(cronograma.days.flatMap((day) =>
       (day.tasks || []).map((task) => task.unitId).filter(Boolean),
     ))];
-    const units = Object.fromEntries((await Promise.all(
-      unitIds.map((id) => UnitFlow.load(id)),
-    )).filter(Boolean).map((unit) => [unit.id, unit]));
-    renderHoje({ cronograma, aulas, pdfs, units });
+    const units = {};
+    const unitErrors = {};
+    await Promise.all(unitIds.map(async (id) => {
+      try {
+        const unit = await UnitFlow.load(id);
+        if (unit) units[unit.id] = unit;
+        else unitErrors[id] = "Unidade não encontrada.";
+      } catch {
+        unitErrors[id] = "Não foi possível carregar esta unidade.";
+      }
+    }));
+    renderHoje({ cronograma, aulas, pdfs, units, unitErrors });
   } catch (error) {
     showLoadError(error);
   }
@@ -90,6 +108,8 @@ async function initHoje() {
 function renderHoje(data) {
   const progress = Storage.get();
   const root = document.getElementById("app-root");
+  UnitFlow.cleanup();
+  clearTodayTimerInterval();
   if (!progress.startDate) {
     root.innerHTML = App.planSetupHtml();
     App.bindPlanSetup(() => renderHoje(data));
@@ -204,7 +224,7 @@ function renderStudyTask(entry, data, firstPending) {
     const unit = data.units?.[task.unitId];
     return unit
       ? UnitFlow.render({ unit, task, entry, data, firstPending })
-      : `<article class="card study-task"><div class="alert alert-danger">Unidade não encontrada.</div></article>`;
+      : `<article class="card study-task unit-flow" data-unit-id="${App.esc(task.unitId)}"><div class="alert alert-danger" role="alert">${App.esc(data.unitErrors?.[task.unitId] || "Unidade não encontrada.")}</div></article>`;
   }
   const lesson = (data.aulas.aulas || []).find(
     (item) => item.id === task.aulaId,
@@ -293,7 +313,6 @@ function manualStudyForm(task = {}) {
 
 function bindTodayActions(context) {
   const { data, tasks, studyDate, primaryDate } = context;
-  let tickId;
   const elapsed = () => {
     const timer = Storage.get().timer;
     return timer
@@ -340,12 +359,13 @@ function bindTodayActions(context) {
       running: false,
       savedSeconds: (timer.savedSeconds || 0) + minutes * 60,
     });
-    clearInterval(tickId);
+    clearTodayTimerInterval();
     return minutes;
   };
 
   paintTimer();
-  if (Storage.get().timer?.running) tickId = setInterval(paintTimer, 1000);
+  if (Storage.get().timer?.running)
+    todayTimerInterval = setInterval(paintTimer, 1000);
   document.getElementById("btn-start").onclick = () => {
     const timer = Storage.get().timer;
     if (!timer || timer.contextDate !== primaryDate)
@@ -359,15 +379,15 @@ function bindTodayActions(context) {
     else if (!timer.running)
       Storage.saveTimer({ ...timer, startedAt: Date.now(), running: true });
     Storage.setDayStatus(primaryDate, "em_andamento");
-    clearInterval(tickId);
-    tickId = setInterval(paintTimer, 1000);
+    clearTodayTimerInterval();
+    todayTimerInterval = setInterval(paintTimer, 1000);
     paintTimer();
   };
   document.getElementById("btn-pause").onclick = () => {
     const timer = Storage.get().timer;
     if (!timer) return;
     Storage.saveTimer({ ...timer, elapsed: elapsed(), running: false });
-    clearInterval(tickId);
+    clearTodayTimerInterval();
     paintTimer();
   };
   document.getElementById("btn-save").onclick = () => {
@@ -485,7 +505,7 @@ function bindTodayActions(context) {
       );
       if (scheduleDate !== studyDate) Storage.setRecoveryTarget(null);
       Storage.clearTimer();
-      clearInterval(tickId);
+      clearTodayTimerInterval();
       alert(
         scheduleDate === studyDate
           ? "Estudo de hoje concluído."

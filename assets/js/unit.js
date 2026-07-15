@@ -46,14 +46,22 @@
   };
 
   const locked = (title, message) => `<section class="unit-step is-locked">
-    <h4>${App.esc(title)}</h4><p class="muted">${App.esc(message)}</p>
+    <span class="unit-lock-icon" aria-hidden="true">🔒</span><div><h4>${App.esc(title)}</h4><p data-lock-message>${App.esc(message)}</p></div>
   </section>`;
+
+  const cleanupTasks = new Set();
+  const restoredReadings = new Set();
 
   const UnitFlow = {
     async load(unitId) {
       this.dataPromise ||= App.loadJSON("data/unidades.json");
       const data = await this.dataPromise;
       return (data.unidades || []).find((unit) => unit.id === unitId) || null;
+    },
+
+    cleanup() {
+      cleanupTasks.forEach((cleanup) => cleanup());
+      cleanupTasks.clear();
     },
 
     render({ unit, task, entry, data, firstPending }) {
@@ -124,11 +132,13 @@
       const entryKey = `${entry?.scheduleDate || "unit"}_${entry?.index ?? 0}`;
       const root = document.querySelector(`[data-unit-id="${CSS.escape(unit.id)}"][data-unit-entry="${CSS.escape(entryKey)}"]`);
       root?.querySelectorAll("[data-reading-section]").forEach((section) => {
-        section.onfocus = () => Storage.setUnitReadingSection(unit.id, section.id);
+        const saveSection = () => Storage.setUnitReadingSection(unit.id, section.id);
+        section.addEventListener("focus", saveSection);
+        cleanupTasks.add(() => section.removeEventListener("focus", saveSection));
       });
       const sections = [...(root?.querySelectorAll("[data-reading-section]") || [])];
       if (sections.length && "IntersectionObserver" in window) {
-        root._readingObserver = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver((entries) => {
           if (!entries.some(({ isIntersecting }) => isIntersecting)) return;
           const visible = sections.filter((section) => {
             const box = section.getBoundingClientRect();
@@ -136,7 +146,8 @@
           }).sort((a, b) => Math.abs(a.getBoundingClientRect().top) - Math.abs(b.getBoundingClientRect().top))[0];
           if (visible) Storage.setUnitReadingSection(unit.id, visible.id);
         }, { threshold: [0.25, 0.6] });
-        sections.forEach((section) => root._readingObserver.observe(section));
+        sections.forEach((section) => observer.observe(section));
+        cleanupTasks.add(() => observer.disconnect());
       } else if (sections.length) {
         const track = () => {
           if (!root.isConnected) return window.removeEventListener("scroll", track);
@@ -147,16 +158,21 @@
           if (visible) Storage.setUnitReadingSection(unit.id, visible.id);
         };
         window.addEventListener("scroll", track, { passive: true });
+        cleanupTasks.add(() => window.removeEventListener("scroll", track));
       }
-      const savedSection = Storage.getUnitProgress(unit.id).reading.sectionId;
-      if (savedSection)
+      const progress = Storage.getUnitProgress(unit.id);
+      const savedSection = progress.reading.sectionId;
+      const restoreKey = `${unit.id}:${entryKey}`;
+      if (progress.state === "leitura_em_andamento" && savedSection && !restoredReadings.has(restoreKey)) {
+        restoredReadings.add(restoreKey);
         requestAnimationFrame(() => root?.querySelector(`#${CSS.escape(savedSection)}`)?.scrollIntoView());
+      }
       const button = root?.querySelector("[data-unit-event]");
       if (!button) return;
       button.onclick = () => {
         const result = Storage.transitionUnit(unit.id, button.dataset.unitEvent);
         if (result.ok) {
-          root._readingObserver?.disconnect();
+          UnitFlow.cleanup();
           rerender();
         }
       };

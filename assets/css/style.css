@@ -815,7 +815,22 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   border-top: 1px solid var(--border);
   padding: 1rem 0;
 }
-.unit-step.is-locked { opacity: 0.72; }
+.unit-step.is-locked {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  color: var(--text);
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-left: 4px solid #475569;
+  border-radius: var(--radius-sm);
+  opacity: 1;
+}
+.unit-step.is-locked h4 { margin: 0 0 0.25rem; }
+.unit-step.is-locked p { margin: 0; color: #334155; }
+.unit-lock-icon { line-height: 1.5; }
 .unit-reading-section { max-width: 72ch; }
 .unit-reading-section p { line-height: 1.7; }
 .unit-resume { color: var(--primary); font-weight: 700; }

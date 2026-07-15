@@ -1175,3 +1175,140 @@ test("somente a primeira unidade pendente oferece ação principal", async ({ pa
   await expect(page.locator("[data-primary-action]")).toHaveCount(1);
   await expect(page.locator('[data-unit-id="unidade-2"] [data-primary-action]')).toHaveText("Começar leitura");
 });
+
+test("falha ao carregar unidades preserva tarefas legadas e isola o erro", async ({ page }) => {
+  const today = await page.evaluate(() => todayISO());
+  await page.route("**/data/cronograma.json", (route) => route.fulfill({ json: { days: [{
+    dia: 1,
+    titulo: "Dia misto",
+    tasks: [
+      { materia: "Português", assunto: "Ortografia", aulaId: "aula-pt-02", pdfId: "pdf-pt-02" },
+      { materia: "Português", assunto: "Interpretação de textos", unitId: UNIT_ID },
+    ],
+  }] } }));
+  await page.route("**/data/unidades.json", (route) => route.fulfill({ status: 500, body: "falha simulada" }));
+  await page.evaluate(async (date) => {
+    (await navigator.serviceWorker.getRegistrations()).forEach((registration) => registration.unregister());
+    await Promise.all((await caches.keys()).map((key) => caches.delete(key)));
+    delete App.cache["data/unidades.json"];
+    UnitFlow.dataPromise = null;
+    Storage.update((data) => {
+      data.startDate = date;
+      data.studyDays = [0, 1, 2, 3, 4, 5, 6];
+    });
+  }, today);
+  await page.reload();
+
+  await expect(page.getByRole("heading", { name: "Português — Ortografia" })).toBeVisible();
+  await expect(page.locator("[data-step]")).toHaveCount(3);
+  const unitError = page.locator(`[data-unit-id="${UNIT_ID}"] [role="alert"]`);
+  await expect(unitError).toHaveCount(1);
+  await expect(unitError).toContainText("Não foi possível carregar esta unidade");
+  await expect(page.locator("#app-root > .alert-danger")).toHaveCount(0);
+});
+
+test("restaura a seção uma vez somente durante leitura em andamento", async ({ page }) => {
+  await openPilot(page, { width: 1280, height: 800 });
+  const counts = await page.evaluate(async (unitId) => {
+    Storage.update((data) => {
+      data.unitProgress[unitId] = {
+        state: "leitura_em_andamento",
+        reading: { sectionId: "coesao-referencial" },
+      };
+    });
+    let scrolls = 0;
+    Element.prototype.scrollIntoView = () => scrolls++;
+    const settle = () => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    await initHoje();
+    await settle();
+    const initial = scrolls;
+    await initHoje();
+    await settle();
+    const repeated = scrolls;
+    Storage.update((data) => { data.unitProgress[unitId].state = "video_em_andamento"; });
+    await initHoje();
+    await settle();
+    return { initial, repeated, afterVideo: scrolls };
+  }, UNIT_ID);
+
+  expect(counts).toEqual({ initial: 1, repeated: 1, afterVideo: 1 });
+});
+
+test("limpa o observer da unidade antes de substituir o roteiro", async ({ page }) => {
+  await openPilot(page, { width: 1280, height: 800 });
+  const result = await page.evaluate(async (unitId) => {
+    Storage.update((data) => {
+      data.unitProgress[unitId] = { state: "leitura_em_andamento", reading: {} };
+    });
+    let created = 0;
+    let disconnected = 0;
+    window.IntersectionObserver = class {
+      constructor() { created++; }
+      observe() {}
+      disconnect() { disconnected++; }
+    };
+    await initHoje();
+    await initHoje();
+    return { created, disconnected };
+  }, UNIT_ID);
+
+  expect(result.created).toBeGreaterThanOrEqual(2);
+  expect(result.disconnected).toBeGreaterThanOrEqual(result.created - 1);
+});
+
+test("rerender de Hoje mantém somente um intervalo do cronômetro", async ({ page }) => {
+  await openPilot(page, { width: 1280, height: 800 });
+  const active = await page.evaluate(async () => {
+    let nextId = 0;
+    const intervals = new Set();
+    window.setInterval = () => {
+      const id = ++nextId;
+      intervals.add(id);
+      return id;
+    };
+    window.clearInterval = (id) => intervals.delete(id);
+    Storage.saveTimer({
+      contextDate: todayISO(),
+      startedAt: Date.now(),
+      elapsed: 0,
+      running: true,
+      savedSeconds: 0,
+    });
+    await initHoje();
+    await initHoje();
+    return intervals.size;
+  });
+
+  expect(active).toBe(1);
+});
+
+test("etapa bloqueada mantém contraste e indicação não visual", async ({ page }) => {
+  await openPilot(page, { width: 1280, height: 800 });
+  const locked = page.locator(".unit-step.is-locked").first();
+  await expect(locked.locator('[aria-hidden="true"]')).toHaveCount(1);
+  await expect(locked.locator("[data-lock-message]")).toContainText("Conclua a leitura");
+  const style = await locked.evaluate((element) => {
+    const parse = (color) => color.match(/[\d.]+/g).slice(0, 3).map(Number);
+    const luminance = (color) => {
+      const values = parse(color).map((value) => {
+        const channel = value / 255;
+        return channel <= 0.03928 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+      });
+      return 0.2126 * values[0] + 0.7152 * values[1] + 0.0722 * values[2];
+    };
+    const box = getComputedStyle(element);
+    const message = getComputedStyle(element.querySelector("[data-lock-message]"));
+    const lighter = Math.max(luminance(box.backgroundColor), luminance(message.color));
+    const darker = Math.min(luminance(box.backgroundColor), luminance(message.color));
+    return {
+      opacity: box.opacity,
+      background: box.backgroundColor,
+      borderLeftWidth: box.borderLeftWidth,
+      contrast: (lighter + 0.05) / (darker + 0.05),
+    };
+  });
+  expect(style.opacity).toBe("1");
+  expect(style.background).not.toBe("rgba(0, 0, 0, 0)");
+  expect(parseFloat(style.borderLeftWidth)).toBeGreaterThanOrEqual(3);
+  expect(style.contrast).toBeGreaterThanOrEqual(4.5);
+});
