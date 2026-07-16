@@ -1,34 +1,29 @@
 # Changelog
 
+## 2026-07-15 — Resoluções fundamentadas
+
+### Reescrito
+- **Todas as resoluções do banco PRF** (`questoes-prf.json`): cada item explica o porquê do gabarito e por que as outras alternativas falham, quando aplicável.
+- Itens INSS 2016 com comentário genérico ou desalinhado corrigidos via `comentarios-override.json`.
+- Resoluções previdenciárias críticas expandidas (segurados, carência, BPC, EC 103, filiação, etc.).
+
+### Infra
+- `assets/js/quiz-resolucoes.js` aplica overrides por `id` no momento do questionário.
+- Cache-bust `?v=9` em Questões e Simulados.
+
+### Ainda em evolução
+- Itens oficiais com enunciado truncado na extração original continuam limitados pelo texto disponível.
+- Revisões humanas pontuais de gabarito oficial continuam bem-vindas.
+
+---
+
 ## 2026-07-15 — Flags no card + resumos comuns
 
-### Adicionado
-- Botões **Favoritar** e **Marcar dúvida** no card da questão (Questões e Simulados)
-- Resumos objetivos:
-  - Ética (Dec. 1.171)
-  - Constitucional (art. 5º e Administração Pública)
-  - Administrativo (atos e Lei 8.112)
-- `data/resumos-extra.json` para injeção no catálogo
-
-### Observação
-Filtro Favoritas/Dúvidas na tela de Questões já existia; agora dá para marcar durante a resolução.
+- Favoritar / marcar dúvida no card da questão
+- Resumos Ética, Constitucional e Administrativo
 
 ---
 
-## 2026-07-15 — Conteúdo + fluxo (pendências)
+## 2026-07-15 — Conteúdo previdenciário
 
-### Adicionado
-- 5 resumos objetivos novos de Previdenciário (custeio, transição, salário, dependentes, filiação)
-- Questões CE de lei seca: 18 → 30 em `questoes-prev.json`
-
----
-
-## 2026-07-15 — Metodologia de Questões (Fase 1)
-
-- Pré-teste, classificação forçada de erros, erros vencidos no Hoje
-
----
-
-## 2026-07-10
-
-- Plano real, edital verticalizado, validadores
+- Resumos + 30 questões CE de lei seca
