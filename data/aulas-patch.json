@@ -1,0 +1,10 @@
+{
+  "nota": "Atualizações de videoaulas antes indisponíveis",
+  "updates": [
+    {"id": "aula-pt-05", "tipo": "video", "url": "https://www.youtube.com/watch?v=1IRO-p95oo0", "videoId": "1IRO-p95oo0", "canal": "Prof. Álvaro Ferreira", "tituloYoutube": "REGÊNCIA VERBAL E NOMINAL - Muitos exemplos e questões", "duracao": 44, "notas": "Aula pública de regência verbal e nominal.", "verificadoEm": "2026-07-15"},
+    {"id": "aula-pt-06", "tipo": "video", "url": "https://www.youtube.com/watch?v=G8Stjzy-87k", "videoId": "G8Stjzy-87k", "canal": "Prof. Álvaro Ferreira", "tituloYoutube": "PONTUAÇÃO - Aulão completo para Concurso Público", "duracao": 119, "notas": "Aulão público de pontuação.", "verificadoEm": "2026-07-15"},
+    {"id": "aula-inf-03", "tipo": "video", "url": "https://www.youtube.com/watch?v=Gfh2bxe3hGU", "videoId": "Gfh2bxe3hGU", "canal": "Learn with Teacher Nattane", "tituloYoutube": "AULA SEGURANÇA DA INFORMAÇÃO", "duracao": 41, "notas": "Aula pública de segurança da informação.", "verificadoEm": "2026-07-15"},
+    {"id": "aula-prev-08", "tipo": "video", "url": "https://www.youtube.com/watch?v=vqGzq2EZmaY", "videoId": "vqGzq2EZmaY", "canal": "INSS", "tituloYoutube": "Entendendo o Benefício de Prestação Continuada (BPC/LOAS)", "duracao": 60, "notas": "Live oficial do INSS sobre BPC/LOAS.", "verificadoEm": "2026-07-15"},
+    {"id": "aula-da-08", "tipo": "video", "url": "https://www.youtube.com/watch?v=U0YFO6l7GGM", "videoId": "U0YFO6l7GGM", "canal": "Nova Concursos", "tituloYoutube": "Direito Administrativo — referência atos (complementar 8.112 em estudo)", "duracao": 58, "notas": "Enquanto não houver aula isolada de 8.112 no acervo, mantém-se referência de DA; preferir resumo Lei 8.112.", "verificadoEm": "2026-07-15"}
+  ]
+}
