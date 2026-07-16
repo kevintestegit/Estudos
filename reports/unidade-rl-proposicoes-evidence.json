@@ -1,0 +1,42 @@
+{
+  "unitId": "unidade-rl-proposicoes-01",
+  "aulaId": "aula-rl-01",
+  "videoId": "KXm8Hi-I_G0",
+  "duracaoTotalSegundos": 852,
+  "inicioSegundos": 0,
+  "fimSegundos": 830,
+  "objetivosConfirmados": [
+    "rl-prop-proposicao",
+    "rl-prop-conectivos",
+    "rl-prop-tabela-verdade"
+  ],
+  "metodo": "yt-dlp auto-sub pt",
+  "trechosChave": [
+    {
+      "t": 9,
+      "tema": "proposicoes"
+    },
+    {
+      "t": 25,
+      "tema": "conectivos e tabela"
+    },
+    {
+      "t": 49,
+      "tema": "lista conectivos"
+    },
+    {
+      "t": 347,
+      "tema": "condicional se entao"
+    },
+    {
+      "t": 724,
+      "tema": "bicondicional"
+    }
+  ],
+  "verificadoEm": "2026-07-16",
+  "status": "aprovado",
+  "limitacoes": [
+    "Itens INSS 2022 i48/i50 recebem stem mínimo porque dependem do enunciado-base da prova.",
+    "Itens INSS 2016 de proposições não entraram: faltam URLs de prova/gabarito verificadas no banco."
+  ]
+}

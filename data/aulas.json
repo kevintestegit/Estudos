@@ -90,10 +90,11 @@
       "tipo": "video",
       "url": "https://www.youtube.com/watch?v=KXm8Hi-I_G0",
       "notas": "Aula pública diretamente dedicada a Proposições e conectivos; título, canal, duração e página foram confirmados.",
-      "verificadoEm": "2026-07-14",
+      "verificadoEm": "2026-07-16",
       "videoId": "KXm8Hi-I_G0",
       "canal": "Professora Angela Matemática",
-      "tituloYoutube": "RACIOCÍNIO LÓGICO - PROPOSIÇÕES E TABELA VERDADE - Professora Angela Matemática"
+      "tituloYoutube": "RACIOCÍNIO LÓGICO - PROPOSIÇÕES E TABELA VERDADE - Professora Angela Matemática",
+      "duracaoTotalSegundos": 852
     },
     {
       "id": "aula-rl-02",

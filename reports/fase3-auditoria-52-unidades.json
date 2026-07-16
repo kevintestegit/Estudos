@@ -4,8 +4,8 @@
   "totalAulasCronogramaUnicas": 52,
   "comVideo": 51,
   "indisponivel": 1,
-  "auditoriaAprovada": 2,
-  "auditoriaPendente": 49,
+  "auditoriaAprovada": 3,
+  "auditoriaPendente": 48,
   "auditoriaBloqueada": 1,
   "registros": [
     {
@@ -58,7 +58,7 @@
       "aulaId": "aula-rl-01",
       "materia": "Raciocínio Lógico",
       "assunto": "Proposições e conectivos",
-      "unitIdCronograma": null,
+      "unitIdCronograma": "unidade-rl-proposicoes-01",
       "videoStatus": "video",
       "videoId": "KXm8Hi-I_G0",
       "canal": "Professora Angela Matemática",
@@ -66,8 +66,16 @@
       "duracaoTotalSegundos": null,
       "verificadoEm": "2026-07-14",
       "auditoriaPedagogica": {
-        "status": "pendente",
-        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+        "status": "aprovada",
+        "unitId": "unidade-rl-proposicoes-01",
+        "inicioSegundos": 0,
+        "fimSegundos": 830,
+        "objetivosCobertos": [
+          "rl-prop-proposicao",
+          "rl-prop-conectivos",
+          "rl-prop-tabela-verdade"
+        ],
+        "evidencia": "reports/unidade-rl-proposicoes-evidence.json"
       }
     },
     {

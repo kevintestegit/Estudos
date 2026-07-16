@@ -249,6 +249,138 @@
         "estrategia": "baseada-em-desempenho"
       },
       "statusEditorial": "publicada"
+    },
+    {
+      "id": "unidade-rl-proposicoes-01",
+      "materia": "Raciocínio Lógico",
+      "assunto": "Proposições e conectivos",
+      "titulo": "Proposição, conectivos e tabela-verdade",
+      "objetivos": [
+        "rl-prop-proposicao",
+        "rl-prop-conectivos",
+        "rl-prop-tabela-verdade"
+      ],
+      "leitura": {
+        "conteudoId": "leitura-rl-proposicoes-01",
+        "tempoMinutos": 8,
+        "objetivosCobertos": [
+          "rl-prop-proposicao",
+          "rl-prop-conectivos",
+          "rl-prop-tabela-verdade"
+        ],
+        "secoes": [
+          {
+            "id": "o-que-e-proposicao",
+            "titulo": "O que conta como proposição",
+            "objetivosCobertos": [
+              "rl-prop-proposicao"
+            ],
+            "conteudo": "Proposição é uma sentença declarativa que admite valor lógico verdadeiro (V) ou falso (F), nunca ambos. “O INSS paga BPC” é proposição. Perguntas, ordens e exclamações (“Abra o processo!”, “Que horas são?”) não são proposições, porque não se classifica em V/F. Proposição simples não se decompõe em outras com conectivo. Proposição composta une simples por conectivos. Em prova, o primeiro filtro é: isto é V/F? Se não for, o item que trata a frase como p ∧ q ou p → q está errado na base."
+          },
+          {
+            "id": "conectivos",
+            "titulo": "Conectivos e quando cada um é verdadeiro",
+            "objetivosCobertos": [
+              "rl-prop-conectivos"
+            ],
+            "conteudo": "Conjunção (p ∧ q, “e”): verdadeira só se ambas forem V. Disjunção inclusiva (p ∨ q, “ou”): falsa só se ambas forem F. Condicional (p → q, “se… então…”): falsa apenas em V → F; se o antecedente é F, a condicional é V. Bicondicional (p ↔ q, “se e somente se”): verdadeira quando p e q têm o mesmo valor. Disjunção exclusiva (p ⊻ q, “ou… ou…”): verdadeira quando os valores diferem. Armadilha clássica: achar que “se p então q” exige que p seja verdadeira; o valor depende da combinação inteira."
+          },
+          {
+            "id": "tabela-verdade",
+            "titulo": "Monte a tabela sem chute",
+            "objetivosCobertos": [
+              "rl-prop-tabela-verdade"
+            ],
+            "conteudo": "Com n proposições simples distintas, a tabela tem 2^n linhas. Duas simples → 4 linhas; três → 8. Preencha colunas das simples (metade V/metade F, depois alternando), calcule conectivos internos e só no fim o conectivo principal. Para achar quando a composta é falsa, isole a linha crítica do conectivo principal (ex.: só V→F na condicional). Itens do tipo “há apenas uma combinação que torna P falsa” pedem exatamente essa leitura da tabela, não memorização solta de símbolos."
+          },
+          {
+            "id": "roteiro-rl",
+            "titulo": "Roteiro de decisão",
+            "objetivosCobertos": [
+              "rl-prop-proposicao",
+              "rl-prop-conectivos",
+              "rl-prop-tabela-verdade"
+            ],
+            "conteudo": "1) A sentença é proposição? 2) Quais são as simples e os conectivos? 3) Quantas linhas a tabela precisa? 4) Qual linha torna a fórmula falsa/verdadeira? 5) Traduza de volta ao enunciado. Ao errar, classifique: conceitual (regra do conectivo), interpretação (traduziu mal o português) ou atenção (contou linhas errado)."
+          }
+        ],
+        "pontosChave": [
+          "Proposição admite V ou F; ordem/pergunta não.",
+          "∧ verdadeira só em V∧V; → falsa só em V→F.",
+          "n simples distintas ⇒ 2^n linhas na tabela.",
+          "Resolva conectivos de dentro para fora."
+        ],
+        "armadilhasDeBanca": [
+          "Tratar imperativo como proposição composta.",
+          "Achar que condicional com antecedente falso é falsa.",
+          "Contar 8 linhas para só duas proposições simples."
+        ],
+        "fontes": [
+          {
+            "titulo": "Cebraspe — caderno INSS 2022 (itens de Raciocínio Lógico)",
+            "url": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/760_INSS_CB1_01.PDF",
+            "verificada": true,
+            "verificadoEm": "2026-07-16"
+          },
+          {
+            "titulo": "Cebraspe — gabarito definitivo INSS 2022",
+            "url": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/GAB_DEFINITIVO_760_INSS_CB1_01.PDF",
+            "verificada": true,
+            "verificadoEm": "2026-07-16"
+          }
+        ]
+      },
+      "video": {
+        "aulaId": "aula-rl-01",
+        "duracaoTotalSegundos": 852,
+        "inicioSegundos": 0,
+        "fimSegundos": 830,
+        "objetivosCobertos": [
+          "rl-prop-proposicao",
+          "rl-prop-conectivos",
+          "rl-prop-tabela-verdade"
+        ],
+        "fonte": "YouTube — Professora Angela Matemática",
+        "fonteUrl": "https://www.youtube.com/watch?v=KXm8Hi-I_G0",
+        "fonteVerificada": true,
+        "coberturaPedagogicaVerificada": true,
+        "verificadoEm": "2026-07-16",
+        "statusVerificacao": "aprovado",
+        "motivoSelecao": "ASR (yt-dlp pt) de KXm8Hi-I_G0 (~852s): intro a proposições e necessidade de dominar conectivos e tabela-verdade (~0–40s); lista conjunção, disjunção, condicional e bicondicional (~49–80s); desenvolve exemplos com tabela-verdade e casos V/F da condicional e demais conectivos até o fechamento (~830s). Trecho usa a aula quase integral por ser curta e monotemática."
+      },
+      "checagem": {
+        "questionIds": [
+          "check-rl-prop-01",
+          "check-rl-prop-02",
+          "check-rl-prop-03",
+          "check-rl-prop-04"
+        ],
+        "quantidadeMinima": 3
+      },
+      "pratica": {
+        "questionIds": [
+          "inss-2022-i48",
+          "inss-2022-i50",
+          "rl-prop-p01",
+          "rl-prop-p02",
+          "rl-prop-p03"
+        ],
+        "quantidadeMinima": 5
+      },
+      "correcao": {
+        "agruparPorObjetivo": true,
+        "permitirNovaTentativa": true,
+        "classificacoesErro": [
+          "conceitual",
+          "interpretacao",
+          "atencao"
+        ]
+      },
+      "revisao": {
+        "habilitada": true,
+        "estrategia": "baseada-em-desempenho"
+      },
+      "statusEditorial": "publicada"
     }
   ],
   "checagens": [
@@ -453,6 +585,122 @@
         "correta": "Correto. Oxítonas terminadas em a(s), e(s) ou o(s) são acentuadas.",
         "incorreta": "Classifique a tônica e só então aplique a regra da terminação.",
         "leituraSecaoId": "regras-acentuacao"
+      }
+    },
+    {
+      "id": "check-rl-prop-01",
+      "unitId": "unidade-rl-proposicoes-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "rl-prop-proposicao"
+      ],
+      "enunciado": "Qual alternativa é uma proposição lógica?",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "Verifique o número do benefício agora!"
+        },
+        {
+          "id": "B",
+          "texto": "O prazo de recurso é de 30 dias."
+        },
+        {
+          "id": "C",
+          "texto": "Que dia vence a perícia?"
+        }
+      ],
+      "respostaCorreta": "B",
+      "feedback": {
+        "correta": "Correto. É declaração passível de V/F.",
+        "incorreta": "Ordem e pergunta não são proposições.",
+        "leituraSecaoId": "o-que-e-proposicao"
+      }
+    },
+    {
+      "id": "check-rl-prop-02",
+      "unitId": "unidade-rl-proposicoes-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "rl-prop-conectivos"
+      ],
+      "enunciado": "Em que caso a condicional p → q é falsa?",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "p falsa e q verdadeira."
+        },
+        {
+          "id": "B",
+          "texto": "p verdadeira e q falsa."
+        },
+        {
+          "id": "C",
+          "texto": "p e q ambas falsas."
+        }
+      ],
+      "respostaCorreta": "B",
+      "feedback": {
+        "correta": "Correto. Só V → F torna a condicional falsa.",
+        "incorreta": "Reveja a tabela da condicional.",
+        "leituraSecaoId": "conectivos"
+      }
+    },
+    {
+      "id": "check-rl-prop-03",
+      "unitId": "unidade-rl-proposicoes-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "rl-prop-conectivos"
+      ],
+      "enunciado": "A conjunção “Ana é servidora e Bruno é aposentado” é verdadeira somente se:",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "Pelo menos uma das partes for verdadeira."
+        },
+        {
+          "id": "B",
+          "texto": "As duas partes forem verdadeiras."
+        },
+        {
+          "id": "C",
+          "texto": "As duas partes forem falsas."
+        }
+      ],
+      "respostaCorreta": "B",
+      "feedback": {
+        "correta": "Correto. ∧ exige V em ambos os lados.",
+        "incorreta": "Não confunda conjunção com disjunção.",
+        "leituraSecaoId": "conectivos"
+      }
+    },
+    {
+      "id": "check-rl-prop-04",
+      "unitId": "unidade-rl-proposicoes-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "rl-prop-tabela-verdade"
+      ],
+      "enunciado": "Uma proposição composta com três proposições simples distintas tem quantas linhas na tabela-verdade?",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "3"
+        },
+        {
+          "id": "B",
+          "texto": "6"
+        },
+        {
+          "id": "C",
+          "texto": "8"
+        }
+      ],
+      "respostaCorreta": "C",
+      "feedback": {
+        "correta": "Correto. 2³ = 8 linhas.",
+        "incorreta": "Use 2^n, com n = número de simples distintas.",
+        "leituraSecaoId": "tabela-verdade"
       }
     }
   ]

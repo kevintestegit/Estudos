@@ -674,26 +674,53 @@
       "tipo": "ce",
       "banca": "CEBRASPE",
       "materia": "Raciocínio Lógico",
-      "assunto": "INSS 2022 item 48",
+      "assunto": "Proposições e conectivos",
       "tag": "rl-proposicoes",
-      "enunciado": "A tabela-verdade associada à proposição P possui oito linhas.",
+      "enunciado": "Considere a proposição P formada por uma condicional entre duas proposições simples. A tabela-verdade associada à proposição P possui oito linhas.",
       "gabarito": "E",
       "comentario": "ERRADO. A proposição P pode ser representada como uma condicional entre duas proposições simples. Assim, sua tabela-verdade possui 2² = 4 linhas, e não oito.",
       "fonte": "INSS 2022 Cebraspe",
-      "textoId": "inss-2022-proposicao-p"
+      "textoId": "inss-2022-proposicao-p",
+      "origemQuestao": "real",
+      "fonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/760_INSS_CB1_01.PDF",
+      "gabaritoFonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/GAB_DEFINITIVO_760_INSS_CB1_01.PDF",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "concurso": "INSS — Técnico do Seguro Social",
+      "ano": 2022,
+      "unitIds": [
+        "unidade-rl-proposicoes-01"
+      ],
+      "objetivos": [
+        "rl-prop-tabela-verdade"
+      ]
     },
     {
       "id": "inss-2022-i50",
       "tipo": "ce",
       "banca": "CEBRASPE",
       "materia": "Raciocínio Lógico",
-      "assunto": "INSS 2022 item 50",
+      "assunto": "Proposições e conectivos",
       "tag": "rl-proposicoes",
-      "enunciado": "Há apenas uma possibilidade de combinação de valores lógicos para as proposições simples que compõem P que a tornam falsa.",
+      "enunciado": "Considere a proposição P formada por uma condicional entre duas proposições simples. Há apenas uma possibilidade de combinação de valores lógicos para as proposições simples que compõem P que a tornam falsa.",
       "gabarito": "C",
       "comentario": "CERTO. Uma condicional é falsa somente quando o antecedente é verdadeiro e o consequente é falso; existe apenas uma combinação com esse resultado.",
       "fonte": "INSS 2022 Cebraspe",
-      "textoId": "inss-2022-proposicao-p"
+      "textoId": "inss-2022-proposicao-p",
+      "origemQuestao": "real",
+      "fonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/760_INSS_CB1_01.PDF",
+      "gabaritoFonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/GAB_DEFINITIVO_760_INSS_CB1_01.PDF",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "concurso": "INSS — Técnico do Seguro Social",
+      "ano": 2022,
+      "unitIds": [
+        "unidade-rl-proposicoes-01"
+      ],
+      "objetivos": [
+        "rl-prop-tabela-verdade",
+        "rl-prop-conectivos"
+      ]
     },
     {
       "id": "inss-2016-i22",
@@ -1363,6 +1390,113 @@
       "objetivos": [
         "pt-ort-regras-acentuacao",
         "pt-ort-classificacao-tonica"
+      ],
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "facil"
+    },
+    {
+      "id": "rl-prop-p01",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Raciocínio Lógico",
+      "assunto": "Proposições e conectivos",
+      "tag": "rl-proposicoes",
+      "enunciado": "A sentença imperativa “João, abra o sistema e confira o benefício!” é uma proposição lógica composta do tipo p ∧ q.",
+      "gabarito": "E",
+      "comentario": "ERRADO. Ordem/imperativo não é proposição (não admite V/F). Sem proposições simples, não há conjunção lógica p ∧ q.",
+      "fonte": "Elaboração própria (conceitos de proposição e conectivos)",
+      "fonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/760_INSS_CB1_01.PDF",
+      "gabaritoFonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/GAB_DEFINITIVO_760_INSS_CB1_01.PDF",
+      "origemQuestao": "autoral",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "unitIds": [
+        "unidade-rl-proposicoes-01"
+      ],
+      "objetivos": [
+        "rl-prop-proposicao",
+        "rl-prop-conectivos"
+      ],
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "facil"
+    },
+    {
+      "id": "rl-prop-p02",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Raciocínio Lógico",
+      "assunto": "Proposições e conectivos",
+      "tag": "rl-proposicoes",
+      "enunciado": "A conjunção p ∧ q é verdadeira somente quando p e q são ambas verdadeiras.",
+      "gabarito": "C",
+      "comentario": "CERTO. Na tabela-verdade da conjunção, a única linha verdadeira é V ∧ V.",
+      "fonte": "Elaboração própria (tabela-verdade dos conectivos)",
+      "fonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/760_INSS_CB1_01.PDF",
+      "gabaritoFonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/GAB_DEFINITIVO_760_INSS_CB1_01.PDF",
+      "origemQuestao": "autoral",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "unitIds": [
+        "unidade-rl-proposicoes-01"
+      ],
+      "objetivos": [
+        "rl-prop-conectivos",
+        "rl-prop-tabela-verdade"
+      ],
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "facil"
+    },
+    {
+      "id": "rl-prop-p03",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Raciocínio Lógico",
+      "assunto": "Proposições e conectivos",
+      "tag": "rl-proposicoes",
+      "enunciado": "A condicional p → q é falsa apenas na combinação em que p é verdadeira e q é falsa.",
+      "gabarito": "C",
+      "comentario": "CERTO. A condicional só é falsa no caso V → F; nas demais linhas é verdadeira.",
+      "fonte": "Elaboração própria (tabela-verdade da condicional)",
+      "fonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/760_INSS_CB1_01.PDF",
+      "gabaritoFonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/GAB_DEFINITIVO_760_INSS_CB1_01.PDF",
+      "origemQuestao": "autoral",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "unitIds": [
+        "unidade-rl-proposicoes-01"
+      ],
+      "objetivos": [
+        "rl-prop-conectivos",
+        "rl-prop-tabela-verdade"
+      ],
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "facil"
+    },
+    {
+      "id": "rl-prop-p04",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Raciocínio Lógico",
+      "assunto": "Proposições e conectivos",
+      "tag": "rl-proposicoes",
+      "enunciado": "Se uma proposição composta usa duas proposições simples distintas, sua tabela-verdade tem exatamente quatro linhas.",
+      "gabarito": "C",
+      "comentario": "CERTO. Com n proposições simples distintas, a tabela tem 2^n linhas; para n = 2, há 4 linhas.",
+      "fonte": "Elaboração própria (construção de tabela-verdade)",
+      "fonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/760_INSS_CB1_01.PDF",
+      "gabaritoFonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/GAB_DEFINITIVO_760_INSS_CB1_01.PDF",
+      "origemQuestao": "autoral",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "unitIds": [
+        "unidade-rl-proposicoes-01"
+      ],
+      "objetivos": [
+        "rl-prop-tabela-verdade"
       ],
       "concurso": "Material didático do portal",
       "ano": 2026,

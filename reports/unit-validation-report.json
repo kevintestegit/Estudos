@@ -15,6 +15,14 @@
       "avisos": [],
       "pendenciasEditoriais": [],
       "dadosNaoVerificados": []
+    },
+    {
+      "unitId": "unidade-rl-proposicoes-01",
+      "status": "valida",
+      "erros": [],
+      "avisos": [],
+      "pendenciasEditoriais": [],
+      "dadosNaoVerificados": []
     }
   ],
   "falhou": false
