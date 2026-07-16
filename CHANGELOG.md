@@ -1,25 +1,35 @@
 # Changelog
 
+## 2026-07-15 — Metodologia de Questões (Fase 1) ✅
+
+### Adicionado
+- **Classificação forçada de erros**: ao errar no modo prática, é obrigatório selecionar o tipo (teoria, interpretação, atenção, memorização) e escrever por que errou.
+- **Erros vencidos em destaque no “Hoje”**: bloco de prioridade máxima no topo com lista e link para o Caderno de erros.
+- **Pré-teste obrigatório**: 3 questões antes de liberar a etapa de teoria de cada tarefa.
+- **Confirmação ao concluir o dia** se ainda houver revisões vencidas pendentes.
+- Ordem recomendada do dia (erros → pré-teste/plano → matéria fraca).
+- `nextAction` do dashboard prioriza revisões vencidas.
+
+### Melhorado
+- Fluxo de estudo orientado a active recall.
+- Caderno de erros com classificações e motivos úteis.
+- Hierarquia visual de prioridades no fluxo diário.
+
+### Próximos (Fase 2+)
+- Melhorar algoritmo de flashcards (SM-2)
+- Conteúdo teórico mínimo de qualidade por tópico
+- Interleaving nas semanas finais
+
+---
+
 ## 2026-07-10
 
 ### Corrigido
-- Remoção definitiva de conteúdo de PRF Policial (CTB, trânsito, primeiros socorros, física, geografia rodoviária)
+- Remoção definitiva de conteúdo de PRF Policial
 - `cronograma.json` real sem conversão em runtime
-- Removido `schedule-fix.js`
-- Botão "Ver resultado" (aliases `_daily` / `_level` / `_achievements`)
-- Horas só por cronômetro/manual/simulado (não por marcar concluído)
-- Domingo/descanso não conta como falta
+- Horas só por atividade real
 - Plano exige clique em "Iniciar plano"
 
 ### Adicionado
-- Edital verticalizado INSS e PRF Administrativo
-- Página `edital.html` com cobertura e status por tópico
-- Histórico de sessões com editar/excluir
-- Migração de schema do localStorage
-- Scripts `validate.mjs` e `test-calendar.mjs`
-- Workflow GitHub Actions de validação
-- Textos de apoio em questões de interpretação
-- Resoluções detalhadas em questões oficiais
-
-### Cache
-- Service Worker `portal-estudos-v6`
+- Edital verticalizado, validadores, testes e GitHub Actions
+- Textos de apoio e resoluções em questões oficiais

@@ -119,6 +119,8 @@ function renderHoje(data) {
   const goals = getTodayGoals(progress);
   const status = App.studyStatus(progress, data.cronograma);
   const firstPending = findFirstPendingStep(tasks);
+  const due = getDueErros(progress, studyDate);
+  const weak = getWeakSubjects(progress, 3)[0];
 
   const hour = new Date().getHours();
   const greet =
@@ -132,12 +134,20 @@ function renderHoje(data) {
       <p><strong>${App.esc(primaryDay?.titulo || "Plano do dia")}</strong></p>
       <p class="muted">Meta: ${App.formatMinutes(goals.minutesGoal)} · ${goals.questionsGoal} questões</p>
     </header>
+
     <div class="alert ${status.code === "parcial" ? "alert-warn" : "alert-info"}">${App.esc(status.message)}</div>
+
+    ${renderDueErrorsBlock(due)}
+
+    ${renderPriorityHint(due, weak)}
+
     ${renderRecoveryChoices(plan.recovery, recovery)}
+
     <section class="study-roadmap" aria-label="Roteiro de estudo">
       ${tasks.length ? tasks.map((entry) => renderStudyTask(entry, data, firstPending)).join("") : '<div class="card"><p>Nenhuma tarefa programada.</p></div>'}
       ${renderFinishCards(tasks, studyDate, primaryDate, firstPending)}
     </section>
+
     <details class="card mt-1" id="timer-panel">
       <summary>Cronômetro e registro</summary>
       <div class="timer" id="timer-display">00:00:00</div>
@@ -147,16 +157,55 @@ function renderHoje(data) {
         <button class="btn btn-secondary" type="button" id="btn-save">Salvar sessão</button>
       </div>
     </details>
+
     <details class="card mt-1" id="more-options">
       <summary>Mais opções</summary>
       <button class="btn btn-secondary mt-1" type="button" id="btn-manual">Registrar estudo manual</button>
       <div class="hidden mt-1" id="manual-box">
         ${manualStudyForm(tasks[0]?.task)}
       </div>
-    </details>
-    ${getDueErros(progress, studyDate).length ? '<div class="card mt-1"><p><strong>Recomendação:</strong> há revisões vencidas.</p><a class="btn btn-secondary" href="caderno-erros.html">Ver revisões</a></div>' : ""}`;
+    </details>`;
 
   bindTodayActions({ data, tasks, studyDate, primaryDate });
+}
+
+function renderDueErrorsBlock(due) {
+  if (!due.length) return "";
+
+  const items = due
+    .slice(0, 5)
+    .map((e) => {
+      const keys = (e.dueKeys || []).join(", ");
+      const tipo = e.tipo
+        ? `<span class="badge badge-muted">${App.esc(e.tipo)}</span>`
+        : "";
+      return `<li>
+        <strong>${App.esc(e.materia || "Sem matéria")}</strong>
+        ${tipo}
+        <span class="badge badge-warn">${App.esc(keys)}</span>
+        <br><span class="muted">${App.esc((e.motivo || e.questao || "").slice(0, 90))}${(e.motivo || e.questao || "").length > 90 ? "…" : ""}</span>
+      </li>`;
+    })
+    .join("");
+
+  return `
+    <section class="card mb-1" style="border-left: 4px solid var(--warn, #d97706)">
+      <p class="eyebrow">Prioridade máxima</p>
+      <h3 style="margin:0 0 0.35rem">Revisões vencidas (${due.length})</h3>
+      <p class="muted" style="margin:0 0 0.75rem">Faça essas revisões antes do conteúdo novo. É o que mais aumenta retenção.</p>
+      <ul class="list" style="margin:0 0 1rem">${items}</ul>
+      <a class="btn btn-accent" href="caderno-erros.html">Abrir Caderno de erros e revisar</a>
+    </section>`;
+}
+
+function renderPriorityHint(due, weak) {
+  if (due.length) {
+    return `<div class="alert alert-warn mb-1"><strong>Ordem recomendada hoje:</strong> 1) Revisar erros vencidos → 2) Pré-teste + plano do dia → 3) Treinar matéria fraca se sobrar tempo.</div>`;
+  }
+  if (weak) {
+    return `<div class="alert alert-info mb-1"><strong>Dica:</strong> sua maior dificuldade atual é <strong>${App.esc(weak.materia)}</strong> (${weak.pct}% de acertos). Considere intercalá-la no final da sessão.</div>`;
+  }
+  return "";
 }
 
 function taskEntries(day, scheduleDate, origin) {
@@ -175,17 +224,22 @@ function taskBaseKey(entry) {
 
 function stepDone(key) {
   const progress = Storage.get();
-  const base = key.replace(/_(learn|read|practice)$/, "");
-  return (
-    ["concluida", "dispensada"].includes(progress.taskStatus?.[key]) ||
-    ["concluida", "dispensada"].includes(progress.taskStatus?.[base])
-  );
+  if (["concluida", "dispensada"].includes(progress.taskStatus?.[key]))
+    return true;
+  // fallback da chave base só para learn/read/practice (não para pretest)
+  if (/_(learn|read|practice)$/.test(key)) {
+    const base = key.replace(/_(learn|read|practice)$/, "");
+    return ["concluida", "dispensada"].includes(progress.taskStatus?.[base]);
+  }
+  return false;
 }
 
 function findFirstPendingStep(tasks) {
   for (const entry of tasks) {
+    const base = taskBaseKey(entry);
+    if (!stepDone(`${base}_pretest`)) return `${base}_pretest`;
     for (const step of ["learn", "read", "practice"]) {
-      const key = `${taskBaseKey(entry)}_${step}`;
+      const key = `${base}_${step}`;
       if (!stepDone(key)) return key;
     }
   }
@@ -203,33 +257,84 @@ function renderStudyTask(entry, data, firstPending) {
   const lessonAction = App.lessonAction(lesson);
   const materialUrl = App.resolveUrl(material?.url, task.materia);
   const base = taskBaseKey(entry);
+  const pretestKey = `${base}_pretest`;
   const practiceKey = `${base}_practice`;
-  const questionUrl = `questoes.html?${task.questoesTag ? `tag=${encodeURIComponent(task.questoesTag)}` : `materia=${encodeURIComponent(task.materia)}`}&n=10&taskKey=${encodeURIComponent(practiceKey)}`;
-  const steps = [
-    ["learn", "1", "Aprender o conteúdo", lessonAction],
-    [
-      "read",
-      "2",
-      "Ler ou revisar",
-      { available: true, label: App.materialActionLabel(material || { tipo: "fonte" }), url: materialUrl },
-    ],
-    ["practice", "3", "Praticar", { available: true, label: "Responder 10 questões", url: questionUrl }],
-  ];
+  const pretestDone = stepDone(pretestKey);
+  const filterQs = task.questoesTag
+    ? `tag=${encodeURIComponent(task.questoesTag)}`
+    : `materia=${encodeURIComponent(task.materia)}`;
+  const pretestUrl = `questoes.html?${filterQs}&n=3&auto=1&taskKey=${encodeURIComponent(pretestKey)}`;
+  const questionUrl = `questoes.html?${filterQs}&n=10&taskKey=${encodeURIComponent(practiceKey)}`;
+
+  const learnDone = stepDone(`${base}_learn`);
+  const readDone = stepDone(`${base}_read`);
+  const practiceDone = stepDone(`${base}_practice`);
+
+  // 0. Pré-teste
+  const pretestHtml = `
+    <div class="roadmap-step ${pretestDone ? "is-done" : ""} ${firstPending === pretestKey ? "is-next" : ""}" data-step="${pretestKey}">
+      <span class="step-number">${pretestDone ? "✓" : "0"}</span>
+      <div>
+        <h4>Pré-teste (obrigatório)</h4>
+        <p class="muted" style="margin:0 0 0.5rem">3 questões antes da teoria — mostra o que você ainda não sabe.</p>
+        <div class="actions">
+          ${pretestDone
+            ? '<span class="badge badge-ok">Pré-teste concluído</span>'
+            : `<a class="btn" href="${App.esc(pretestUrl)}">Fazer pré-teste (3 questões)</a>`}
+        </div>
+      </div>
+    </div>`;
+
+  // 1. Aprender
+  let learnControl;
+  if (!pretestDone) {
+    learnControl = `<p class="muted">Libere esta etapa concluindo o pré-teste.</p>`;
+  } else if (lessonAction.available) {
+    learnControl = `<div class="actions">
+      <a class="btn ${learnDone ? "btn-secondary" : ""}" ${App.linkAttrs(lessonAction.url)}>${lessonAction.label}</a>
+      <button class="btn btn-secondary" type="button" data-complete-step="${base}_learn" ${learnDone ? "disabled" : ""}>${learnDone ? "Concluído" : "Marcar etapa como concluída"}</button>
+    </div>`;
+  } else {
+    learnControl = `<span class="alert alert-info" data-lesson-unavailable>${lessonAction.label}</span>
+      <div class="actions mt-1">
+        <button class="btn btn-secondary" type="button" data-complete-step="${base}_learn" ${learnDone ? "disabled" : ""}>${learnDone ? "Concluído" : "Marcar etapa como concluída"}</button>
+      </div>`;
+  }
+
+  const learnHtml = `
+    <div class="roadmap-step ${learnDone ? "is-done" : ""} ${firstPending === `${base}_learn` ? "is-next" : ""}" data-step="${base}_learn">
+      <span class="step-number">${learnDone ? "✓" : "1"}</span>
+      <div><h4>Aprender o conteúdo</h4>${learnControl}</div>
+    </div>`;
+
+  // 2. Ler
+  const readHtml = `
+    <div class="roadmap-step ${readDone ? "is-done" : ""} ${firstPending === `${base}_read` ? "is-next" : ""}" data-step="${base}_read">
+      <span class="step-number">${readDone ? "✓" : "2"}</span>
+      <div>
+        <h4>Ler ou revisar</h4>
+        <div class="actions">
+          <a class="btn ${readDone ? "btn-secondary" : ""}" ${App.linkAttrs(materialUrl)}>${App.materialActionLabel(material || { tipo: "fonte" })}</a>
+          <button class="btn btn-secondary" type="button" data-complete-step="${base}_read" ${readDone ? "disabled" : ""}>${readDone ? "Concluído" : "Marcar etapa como concluída"}</button>
+        </div>
+      </div>
+    </div>`;
+
+  // 3. Praticar
+  const practiceHtml = `
+    <div class="roadmap-step ${practiceDone ? "is-done" : ""} ${firstPending === practiceKey ? "is-next" : ""}" data-step="${practiceKey}">
+      <span class="step-number">${practiceDone ? "✓" : "3"}</span>
+      <div>
+        <h4>Praticar</h4>
+        <div class="actions">
+          <a class="btn ${practiceDone ? "btn-secondary" : ""}" href="${App.esc(questionUrl)}">Responder 10 questões</a>
+        </div>
+      </div>
+    </div>`;
+
   return `<article class="card study-task">
     <div class="task-title"><div><p class="eyebrow">${entry.origin === "recovery" ? `Recuperação de ${App.formatDateBR(entry.scheduleDate)}` : "Estudo de hoje"}</p><h3>${App.esc(task.materia)} — ${App.esc(task.assunto)}</h3></div><span>${App.formatMinutes(task.tempo)}</span></div>
-    ${steps
-      .map(([name, number, title, action]) => {
-        const key = `${base}_${name}`;
-        const done = stepDone(key);
-        const control = action.available
-          ? `<div class="actions"><a class="btn ${done ? "btn-secondary" : ""}" ${App.linkAttrs(action.url)} data-step-key="${key}">${action.label}</a>${name !== "practice" ? `<button class="btn btn-secondary" type="button" data-complete-step="${key}" ${done ? "disabled" : ""}>${done ? "Concluído" : "Marcar etapa como concluída"}</button>` : ""}</div>`
-          : `<span class="alert alert-info" data-lesson-unavailable>${action.label}</span>`;
-        return `<div class="roadmap-step ${done ? "is-done" : ""} ${firstPending === key ? "is-next" : ""}" data-step="${key}">
-        <span class="step-number">${done ? "✓" : number}</span>
-        <div><h4>${title}</h4>${control}</div>
-      </div>`;
-      })
-      .join("")}
+    ${pretestHtml}${learnHtml}${readHtml}${practiceHtml}
     <button class="link-button" type="button" data-dismiss="${base}">Dispensar esta tarefa</button>
   </article>`;
 }
@@ -370,6 +475,11 @@ function bindTodayActions(context) {
   document.querySelectorAll("[data-dismiss]").forEach((button) => {
     button.onclick = () => {
       Storage.setTaskStatus(button.dataset.dismiss, "dispensada");
+      // também dispensa pretest/learn/read/practice dessa tarefa
+      const base = button.dataset.dismiss;
+      ["pretest", "learn", "read", "practice"].forEach((s) =>
+        Storage.setTaskStatus(`${base}_${s}`, "dispensada"),
+      );
       renderHoje(data);
     };
   });
@@ -426,16 +536,29 @@ function bindTodayActions(context) {
         return alert(
           "Registre ao menos uma sessão real ou responda questões antes de concluir.",
         );
+
       const pending = tasks
         .filter((entry) => entry.scheduleDate === scheduleDate)
-        .flatMap((entry) =>
-          ["learn", "read", "practice"].map(
-            (step) => `${taskBaseKey(entry)}_${step}`,
-          ),
-        )
+        .flatMap((entry) => {
+          const base = taskBaseKey(entry);
+          return ["pretest", "learn", "read", "practice"].map(
+            (step) => `${base}_${step}`,
+          );
+        })
         .filter((key) => !stepDone(key));
       if (pending.length)
-        return alert(`Conclua as etapas pendentes antes de finalizar (${pending.length}).`);
+        return alert(
+          `Conclua as etapas pendentes antes de finalizar (${pending.length}). Inclui pré-teste, teoria, leitura e prática.`,
+        );
+
+      const dueNow = getDueErros(progress, studyDate);
+      if (dueNow.length) {
+        const ok = await Modal.waitConfirm(
+          `Há ${dueNow.length} revisão(ões) vencida(s). É fortemente recomendado revisá-las antes de concluir o dia. Concluir mesmo assim?`,
+        );
+        if (!ok) return;
+      }
+
       Storage.closeDay(scheduleDate, studyDate);
       Storage.setDayStatus(
         scheduleDate,
