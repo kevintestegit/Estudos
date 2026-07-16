@@ -119,6 +119,8 @@ function renderHoje(data) {
   const goals = getTodayGoals(progress);
   const status = App.studyStatus(progress, data.cronograma);
   const firstPending = findFirstPendingStep(tasks);
+  const due = getDueErros(progress, studyDate);
+  const weak = getWeakSubjects(progress, 3)[0];
 
   const hour = new Date().getHours();
   const greet =
@@ -132,12 +134,20 @@ function renderHoje(data) {
       <p><strong>${App.esc(primaryDay?.titulo || "Plano do dia")}</strong></p>
       <p class="muted">Meta: ${App.formatMinutes(goals.minutesGoal)} · ${goals.questionsGoal} questões</p>
     </header>
+
     <div class="alert ${status.code === "parcial" ? "alert-warn" : "alert-info"}">${App.esc(status.message)}</div>
+
+    ${renderDueErrorsBlock(due)}
+
+    ${renderPriorityHint(due, weak)}
+
     ${renderRecoveryChoices(plan.recovery, recovery)}
+
     <section class="study-roadmap" aria-label="Roteiro de estudo">
       ${tasks.length ? tasks.map((entry) => renderStudyTask(entry, data, firstPending)).join("") : '<div class="card"><p>Nenhuma tarefa programada.</p></div>'}
       ${renderFinishCards(tasks, studyDate, primaryDate, firstPending)}
     </section>
+
     <details class="card mt-1" id="timer-panel">
       <summary>Cronômetro e registro</summary>
       <div class="timer" id="timer-display">00:00:00</div>
@@ -147,16 +157,55 @@ function renderHoje(data) {
         <button class="btn btn-secondary" type="button" id="btn-save">Salvar sessão</button>
       </div>
     </details>
+
     <details class="card mt-1" id="more-options">
       <summary>Mais opções</summary>
       <button class="btn btn-secondary mt-1" type="button" id="btn-manual">Registrar estudo manual</button>
       <div class="hidden mt-1" id="manual-box">
         ${manualStudyForm(tasks[0]?.task)}
       </div>
-    </details>
-    ${getDueErros(progress, studyDate).length ? '<div class="card mt-1"><p><strong>Recomendação:</strong> há revisões vencidas.</p><a class="btn btn-secondary" href="caderno-erros.html">Ver revisões</a></div>' : ""}`;
+    </details>`;
 
   bindTodayActions({ data, tasks, studyDate, primaryDate });
+}
+
+function renderDueErrorsBlock(due) {
+  if (!due.length) return "";
+
+  const items = due
+    .slice(0, 5)
+    .map((e) => {
+      const keys = (e.dueKeys || []).join(", ");
+      const tipo = e.tipo
+        ? `<span class="badge badge-muted">${App.esc(e.tipo)}</span>`
+        : "";
+      return `<li>
+        <strong>${App.esc(e.materia || "Sem matéria")}</strong>
+        ${tipo}
+        <span class="badge badge-warn">${App.esc(keys)}</span>
+        <br><span class="muted">${App.esc((e.motivo || e.questao || "").slice(0, 90))}${(e.motivo || e.questao || "").length > 90 ? "…" : ""}</span>
+      </li>`;
+    })
+    .join("");
+
+  return `
+    <section class="card mb-1" style="border-left: 4px solid var(--warn, #d97706)">
+      <p class="eyebrow">Prioridade máxima</p>
+      <h3 style="margin:0 0 0.35rem">Revisões vencidas (${due.length})</h3>
+      <p class="muted" style="margin:0 0 0.75rem">Faça essas revisões antes do conteúdo novo. É o que mais aumenta retenção.</p>
+      <ul class="list" style="margin:0 0 1rem">${items}</ul>
+      <a class="btn btn-accent" href="caderno-erros.html">Abrir Caderno de erros e revisar</a>
+    </section>`;
+}
+
+function renderPriorityHint(due, weak) {
+  if (due.length) {
+    return `<div class="alert alert-warn mb-1"><strong>Ordem recomendada hoje:</strong> 1) Revisar erros vencidos → 2) Fazer o plano do dia → 3) Treinar matéria fraca se sobrar tempo.</div>`;
+  }
+  if (weak) {
+    return `<div class="alert alert-info mb-1"><strong>Dica:</strong> sua maior dificuldade atual é <strong>${App.esc(weak.materia)}</strong> (${weak.pct}% de acertos). Considere intercalá-la no final da sessão.</div>`;
+  }
+  return "";
 }
 
 function taskEntries(day, scheduleDate, origin) {
