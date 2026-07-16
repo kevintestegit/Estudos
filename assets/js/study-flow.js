@@ -25,6 +25,24 @@
     "20 questões comentadas": "prev-",
   };
 
+  const RESUMOS = [
+    {"id": "resumo-prev-seguridade", "titulo": "Resumo objetivo — Seguridade Social", "materia": "Direito Previdenciário", "topico": "Seguridade Social", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-seguridade.html", "tipo": "resumo"},
+    {"id": "resumo-prev-segurados", "titulo": "Resumo objetivo — Segurados e dependentes", "materia": "Direito Previdenciário", "topico": "Segurados", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-segurados.html", "tipo": "resumo"},
+    {"id": "resumo-prev-carencia", "titulo": "Resumo objetivo — Carência e qualidade de segurado", "materia": "Direito Previdenciário", "topico": "Carência", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-carencia.html", "tipo": "resumo"},
+    {"id": "resumo-prev-aposentadorias", "titulo": "Resumo objetivo — Aposentadorias e incapacidade", "materia": "Direito Previdenciário", "topico": "Aposentadorias", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-aposentadorias.html", "tipo": "resumo"},
+    {"id": "resumo-prev-pensao-bpc", "titulo": "Resumo objetivo — Pensão por morte e BPC", "materia": "Direito Previdenciário", "topico": "Pensão por morte", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-pensao-bpc.html", "tipo": "resumo"},
+  ];
+
+  function injectResumos(data) {
+    if (!data?.pdfs) return data;
+    if (!Array.isArray(data.pdfs.pdfs)) data.pdfs.pdfs = [];
+    const ids = new Set(data.pdfs.pdfs.map((p) => p.id));
+    RESUMOS.forEach((r) => {
+      if (!ids.has(r.id)) data.pdfs.pdfs.push(r);
+    });
+    return data;
+  }
+
   function hasVideo(entry, data) {
     const lesson = (data?.aulas?.aulas || []).find((item) => item.id === entry.task.aulaId);
     return App.lessonAction(lesson).available;
@@ -47,6 +65,39 @@
       : ["pretest", "read", "practice"];
   }
 
+  const _renderHoje = window.renderHoje;
+  window.renderHoje = function renderHoje(data) {
+    data = injectResumos(data);
+    window.__studyData = data;
+    // auto-conclui learn quando não há vídeo (não bloqueia o dia)
+    const progress = Storage.get();
+    const plan = App.getTodayPlan(data.cronograma, progress);
+    const studyDate = todayISO();
+    const target = progress.recoveryTarget;
+    const recovery = target
+      ? plan.recovery.find((item) => item.date === target.date)
+      : null;
+    const todayTasks = typeof taskEntries === "function"
+      ? taskEntries(plan.day, studyDate, "today")
+      : [];
+    const recoveryTasks =
+      recovery && typeof taskEntries === "function"
+        ? taskEntries(recovery.day, recovery.date, "recovery")
+        : [];
+    const tasks = recovery
+      ? target.merge
+        ? [...todayTasks, ...recoveryTasks]
+        : recoveryTasks
+      : todayTasks;
+    tasks.forEach((entry) => {
+      if (!hasVideo(entry, data)) {
+        const key = `${taskBaseKey(entry)}_learn`;
+        if (!stepDone(key)) Storage.setTaskStatus(key, "concluida");
+      }
+    });
+    return _renderHoje(data);
+  };
+
   window.findFirstPendingStep = function findFirstPendingStep(tasks, data) {
     data = data || window.__studyData || {};
     for (const entry of tasks) {
@@ -59,7 +110,6 @@
     return "finish";
   };
 
-  const _renderStudyTask = window.renderStudyTask;
   window.renderStudyTask = function renderStudyTask(entry, data, firstPending) {
     window.__studyData = data;
     const task = entry.task;
@@ -73,8 +123,7 @@
     const pretestKey = `${base}_pretest`;
     const practiceKey = `${base}_practice`;
     const pretestDone = stepDone(pretestKey);
-    const tag =
-      task.questoesTag || TAG_BY_ASSUNTO[task.assunto] || "";
+    const tag = task.questoesTag || TAG_BY_ASSUNTO[task.assunto] || "";
     const filterQs = tag
       ? `tag=${encodeURIComponent(tag)}`
       : `materia=${encodeURIComponent(task.materia)}`;
@@ -109,16 +158,13 @@
       <button class="btn btn-secondary" type="button" data-complete-step="${base}_learn" ${learnDone ? "disabled" : ""}>${learnDone ? "Concluído" : "Marcar etapa como concluída"}</button>
     </div>`;
     } else {
-      learnControl = `<p class="alert alert-info">Videoaula ainda não disponível. Use o resumo/leitura abaixo e avance para a prática.</p>
-      <div class="actions mt-1">
-        <button class="btn btn-secondary" type="button" data-complete-step="${base}_learn" ${learnDone ? "disabled" : ""}>${learnDone ? "Concluído" : "Dispensar videoaula"}</button>
-      </div>`;
+      learnControl = `<p class="alert alert-info" style="margin:0">Videoaula ainda não disponível. Use o resumo/leitura e avance para a prática.</p>`;
     }
 
     const learnHtml = `
     <div class="roadmap-step ${learnDone || !videoOk ? "is-done" : ""} ${firstPending === `${base}_learn` ? "is-next" : ""}" data-step="${base}_learn">
       <span class="step-number">${learnDone || !videoOk ? "✓" : "1"}</span>
-      <div><h4>Aprender o conteúdo ${videoOk ? "" : "(opcional)"}</h4>${learnControl}</div>
+      <div><h4>Aprender ${videoOk ? "o conteúdo" : "(vídeo indisponível)"}</h4>${learnControl}</div>
     </div>`;
 
     const readLabel =
@@ -154,7 +200,7 @@
       <span class="step-number">${practiceDone ? "✓" : "3"}</span>
       <div>
         <h4>Praticar</h4>
-        <p class="muted" style="margin:0 0 0.5rem">${pretestDone ? "Responda com atenção e classifique cada erro." : "Conclua o pré-teste e a leitura antes, se possível."}</p>
+        <p class="muted" style="margin:0 0 0.5rem">Classifique cada erro (teoria, interpretação, atenção ou memorização).</p>
         <div class="actions">
           <a class="btn ${practiceDone ? "btn-secondary" : ""}" href="${App.esc(questionUrl)}">Responder 10 questões</a>
         </div>
@@ -168,18 +214,9 @@
   </article>`;
   };
 
-  // Ajusta verificação de pendências ao concluir o dia (sem exigir vídeo inexistente)
-  document.addEventListener(
-    "click",
-    (ev) => {
-      const btn = ev.target.closest?.("[data-finish-date]");
-      if (!btn || !window.__studyData) return;
-      // deixa o handler original rodar; só normaliza learn quando não há vídeo
-      const data = window.__studyData;
-      const progress = Storage.get();
-      // pré-marca learn como concluída quando não há vídeo
-      document.querySelectorAll(".study-task").forEach(() => {});
-    },
-    true,
-  );
+  const _label = App.materialActionLabel.bind(App);
+  App.materialActionLabel = function (item) {
+    if (item?.tipo === "resumo") return "Abrir resumo objetivo";
+    return _label(item);
+  };
 })();
