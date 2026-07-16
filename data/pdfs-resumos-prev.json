@@ -1,0 +1,10 @@
+{
+  "nota": "Entradas de resumo — mescladas em pdfs.json via ids abaixo",
+  "pdfs": [
+    {"id": "resumo-prev-seguridade", "titulo": "Resumo objetivo — Seguridade Social", "materia": "Direito Previdenciário", "topico": "Seguridade Social", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-seguridade.html", "tipo": "resumo"},
+    {"id": "resumo-prev-segurados", "titulo": "Resumo objetivo — Segurados e dependentes", "materia": "Direito Previdenciário", "topico": "Segurados", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-segurados.html", "tipo": "resumo"},
+    {"id": "resumo-prev-carencia", "titulo": "Resumo objetivo — Carência e qualidade de segurado", "materia": "Direito Previdenciário", "topico": "Carência", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-carencia.html", "tipo": "resumo"},
+    {"id": "resumo-prev-aposentadorias", "titulo": "Resumo objetivo — Aposentadorias e incapacidade", "materia": "Direito Previdenciário", "topico": "Aposentadorias", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-aposentadorias.html", "tipo": "resumo"},
+    {"id": "resumo-prev-pensao-bpc", "titulo": "Resumo objetivo — Pensão por morte e BPC", "materia": "Direito Previdenciário", "topico": "Pensão por morte", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-pensao-bpc.html", "tipo": "resumo"}
+  ]
+}
