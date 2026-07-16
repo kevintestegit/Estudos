@@ -255,7 +255,10 @@ function renderStudyTask(entry, data, firstPending) {
     (item) => item.id === task.pdfId,
   );
   const lessonAction = App.lessonAction(lesson);
-  const materialUrl = App.resolveUrl(material?.url, task.materia);
+  // Se não há PDF/resumo próprio, abre a fonte oficial da matéria (não a biblioteca vazia)
+  const materialUrl = App.resolveMaterialUrl
+    ? App.resolveMaterialUrl(material, task.materia)
+    : App.resolveUrl(material?.url, task.materia);
   const base = taskBaseKey(entry);
   const pretestKey = `${base}_pretest`;
   const practiceKey = `${base}_practice`;
@@ -308,13 +311,18 @@ function renderStudyTask(entry, data, firstPending) {
     </div>`;
 
   // 2. Ler
+  const readLabel = App.materialActionLabel(material || { tipo: "fonte" });
+  const materialTitle = material?.titulo
+    ? `<p class="muted" style="margin:0 0 0.5rem">${App.esc(material.titulo)}</p>`
+    : "";
   const readHtml = `
     <div class="roadmap-step ${readDone ? "is-done" : ""} ${firstPending === `${base}_read` ? "is-next" : ""}" data-step="${base}_read">
       <span class="step-number">${readDone ? "✓" : "2"}</span>
       <div>
         <h4>Ler ou revisar</h4>
+        ${materialTitle}
         <div class="actions">
-          <a class="btn ${readDone ? "btn-secondary" : ""}" ${App.linkAttrs(materialUrl)}>${App.materialActionLabel(material || { tipo: "fonte" })}</a>
+          <a class="btn ${readDone ? "btn-secondary" : ""}" ${App.linkAttrs(materialUrl)}>${readLabel}</a>
           <button class="btn btn-secondary" type="button" data-complete-step="${base}_read" ${readDone ? "disabled" : ""}>${readDone ? "Concluído" : "Marcar etapa como concluída"}</button>
         </div>
       </div>
