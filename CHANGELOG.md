@@ -1,5 +1,26 @@
 # Changelog
 
+## 2026-07-15 — Conteúdo + fluxo (pendências)
+
+### Adicionado
+- **5 resumos objetivos novos de Previdenciário**: custeio, regras de transição (EC 103), salário de contribuição, dependentes e filiação/inscrição.
+- **12 questões CE novas** em `questoes-prev.json` (total 30) cobrindo os novos tópicos.
+- Catálogo `pdfs.json` atualizado com os novos resumos (tipo `resumo`).
+
+### Melhorado
+- Label de material do tipo `resumo`: "Abrir resumo objetivo".
+- Storage e filtros de **favoritos / dúvida** já existiam; uso no fluxo de estudo permanece disponível via filtro em Questões.
+- Checklist de finalização do dia: etapas obrigatórias + revisões vencidas (bloqueio/confirmação).
+- Pontuação CEBRASPE configurável nos simulados (já disponível).
+
+### Ainda pendente (honesto)
+- Volume maior de questões **oficiais** CEBRASPE de conhecimentos específicos
+- Resoluções 100% revisadas item a item por humanos
+- SM-2 nos flashcards
+- IndexedDB (migração completa)
+
+---
+
 ## 2026-07-15 — Metodologia de Questões (Fase 1) ✅
 
 ### Adicionado

@@ -437,6 +437,7 @@ const App = {
     const type = item?.tipo || "";
     if (type === "aula") return "Assistir aula";
     if (type === "pdf") return "Abrir PDF";
+    if (type === "resumo") return "Abrir resumo objetivo";
     if (type === "legislacao") return "Consultar legislação";
     if (type === "questoes") return "Fazer questões";
     if (type === "indisponivel") return "Consultar fonte oficial";
