@@ -106,7 +106,7 @@ for (const item of pdfs) {
     /\.pdf(?:$|[?#])/i.test(item.url || "") ||
     String(item.url || "").startsWith("materiais/");
   log(
-    ["pdf", "legislacao", "fonte", "indisponivel"].includes(item.tipo),
+    ["pdf", "legislacao", "fonte", "resumo", "indisponivel"].includes(item.tipo),
     `tipo válido: ${item.id}`,
   );
   log(item.tipo !== "pdf" || isPdf, `PDF aponta para arquivo: ${item.id}`);

@@ -73,9 +73,7 @@
   }
 
   function requiredSteps(entry, data) {
-    return hasVideo(entry, data)
-      ? ["pretest", "learn", "read", "practice"]
-      : ["pretest", "read", "practice"];
+    return ["pretest", "learn", "read", "practice"];
   }
 
   const _renderHoje = window.renderHoje;
@@ -101,12 +99,6 @@
         ? [...todayTasks, ...recoveryTasks]
         : recoveryTasks
       : todayTasks;
-    tasks.forEach((entry) => {
-      if (!hasVideo(entry, data)) {
-        const key = `${taskBaseKey(entry)}_learn`;
-        if (!stepDone(key)) Storage.setTaskStatus(key, "concluida");
-      }
-    });
     return _renderHoje(data);
   };
 
@@ -166,17 +158,20 @@
       learnControl = `<p class="muted">Libere esta etapa concluindo o pré-teste.</p>`;
     } else if (videoOk) {
       learnControl = `<div class="actions">
-      <a class="btn ${learnDone ? "btn-secondary" : ""}" ${App.linkAttrs(lessonAction.url)}>${lessonAction.label}</a>
+      <a class="btn ${learnDone ? "btn-secondary" : ""}" ${App.linkAttrs(lessonAction.url)} data-step-key="${base}_learn">${lessonAction.label}</a>
       <button class="btn btn-secondary" type="button" data-complete-step="${base}_learn" ${learnDone ? "disabled" : ""}>${learnDone ? "Concluído" : "Marcar etapa como concluída"}</button>
     </div>`;
     } else {
-      learnControl = `<p class="alert alert-info" style="margin:0">Videoaula ainda não disponível. Use o resumo/leitura e avance para a prática.</p>`;
+      learnControl = `<span class="alert alert-info" data-lesson-unavailable>${lessonAction.label}</span>
+      <div class="actions mt-1">
+        <button class="btn btn-secondary" type="button" data-complete-step="${base}_learn" ${learnDone ? "disabled" : ""}>${learnDone ? "Concluído" : "Marcar etapa como concluída"}</button>
+      </div>`;
     }
 
     const learnHtml = `
-    <div class="roadmap-step ${learnDone || !videoOk ? "is-done" : ""} ${firstPending === `${base}_learn` ? "is-next" : ""}" data-step="${base}_learn">
-      <span class="step-number">${learnDone || !videoOk ? "✓" : "1"}</span>
-      <div><h4>Aprender ${videoOk ? "o conteúdo" : "(vídeo indisponível)"}</h4>${learnControl}</div>
+    <div class="roadmap-step ${learnDone ? "is-done" : ""} ${firstPending === `${base}_learn` ? "is-next" : ""}" data-step="${base}_learn">
+      <span class="step-number">${learnDone ? "✓" : "1"}</span>
+      <div><h4>Aprender o conteúdo</h4>${learnControl}</div>
     </div>`;
 
     const readLabel =
@@ -214,7 +209,7 @@
         <h4>Praticar</h4>
         <p class="muted" style="margin:0 0 0.5rem">Classifique cada erro (teoria, interpretação, atenção ou memorização).</p>
         <div class="actions">
-          <a class="btn ${practiceDone ? "btn-secondary" : ""}" href="${App.esc(questionUrl)}">Responder 10 questões</a>
+          <a class="btn ${practiceDone ? "btn-secondary" : ""}" href="${App.esc(questionUrl)}" data-step-key="${practiceKey}">Responder 10 questões</a>
         </div>
       </div>
     </div>`;

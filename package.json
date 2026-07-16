@@ -4,11 +4,12 @@
   "scripts": {
     "validate": "node scripts/validate.mjs",
     "test:calendar": "node scripts/test-calendar.mjs",
+    "test:syntax": "node --check assets/js/app.js",
     "check:links": "node scripts/check-links.mjs",
     "check:links:internal": "node scripts/check-links.mjs --internal-only",
     "test:links": "node --test tests/check-links.test.mjs",
     "test:e2e": "playwright test",
-    "test": "npm run validate && npm run test:calendar && npm run test:links && npm run test:e2e"
+    "test": "npm run validate && npm run test:calendar && npm run test:syntax && npm run test:links && npm run test:e2e"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1"
