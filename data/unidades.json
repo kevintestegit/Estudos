@@ -517,6 +517,129 @@
         "estrategia": "baseada-em-desempenho"
       },
       "statusEditorial": "publicada"
+    },
+    {
+      "id": "unidade-et-etica-01",
+      "materia": "Ética no Serviço Público",
+      "assunto": "Princípios e deveres do servidor",
+      "titulo": "Ética e moral no serviço público",
+      "objetivos": [
+        "et-moral",
+        "et-servico"
+      ],
+      "leitura": {
+        "conteudoId": "leitura-et-etica-01",
+        "tempoMinutos": 8,
+        "objetivosCobertos": [
+          "et-moral",
+          "et-servico"
+        ],
+        "secoes": [
+          {
+            "id": "etic-moral",
+            "titulo": "Ética x moral",
+            "objetivosCobertos": [
+              "et-moral"
+            ],
+            "conteudo": "Ética e moral se aproximam, mas não se confundem. A moral é o conjunto de costumes e valores de uma comunidade em um dado momento; ela varia conforme o contexto cultural e histórico. A ética é a reflexão sobre esses valores: procura princípios mais estáveis para julgar se uma ação é correta. Em prova, a armadilha recorrente é tratar os dois como sinônimos. Use o teste: a afirmação fala de 'o que a sociedade considera' (moral, contextual) ou de 'princípio que deve guiar a conduta' (ética, mais estável)? Não esqueça: no serviço público, a base legal da conduta ética é o Decreto 1.171/1994, que lista deveres como honestidade, probidade, decoro, segurança, eficácia e lealdade às instituições."
+          },
+          {
+            "id": "et-servico",
+            "titulo": "Aplicação no serviço público",
+            "objetivosCobertos": [
+              "et-servico"
+            ],
+            "conteudo": "O Código de Ética do servidor público federal (Decreto 1.171/1994) aplica-se a todos os servidores, de qualquer nível ou cargo. Ele exige não só o cumprimento da legalidade formal, mas o elemento ético: honestidade, probidade, respeito aos direitos do cidadão e vedação de vantagens indevidas. Erro comum: achar que 'legal = ético'. Uma ação pode ser formalmente legal e, ainda assim, desonesta ou desrespeitosa. Outro erro: restringir o Código às autoridades de cúpula. Ao julgar item de C/E, pergunte: a conduta respeita os deveres do Decreto e os direitos de quem é atendido? Se o item ignorar o aspecto ético ou limitar o Código a um grupo, está provavelmente errado."
+          },
+          {
+            "id": "armadilhas-etica",
+            "titulo": "Armadilhas de banca",
+            "objetivosCobertos": [
+              "et-moral",
+              "et-servico"
+            ],
+            "conteudo": "1) Sinonimizar ética e moral. 2) Reduzir ética a 'cumprir a lei'. 3) Achar que o Código de Ética vale só para cargos altos. 4) Confundir vedação de vantagem indevida com mera proibição de suborno. Ao errar, classifique: conceitual (não sabe o conceito), interpretação (leu mal o enunciado) ou atenção (trocou os termos)."
+          },
+          {
+            "id": "roteiro-etica",
+            "titulo": "Roteiro de decisão",
+            "objetivosCobertos": [
+              "et-moral",
+              "et-servico"
+            ],
+            "conteudo": "1) É moral (contextual) ou ética (princípio)? 2) Há menção ao Decreto 1.171/94 ou a um dever específico? 3) O item respeita os direitos de quem recebe o serviço? 4) O Código está sendo aplicado a todos os servidores? Esse roteiro cobre a maior parte dos itens de ética no serviço público de nível médio."
+          }
+        ],
+        "pontosChave": [
+          "Moral é contextual; ética busca princípios.",
+          "Decreto 1.171/94 aplica-se a todo servidor.",
+          "Legal ≠ ético.",
+          "Deveres: honestidade, probidade, decoro, segurança."
+        ],
+        "armadilhasDeBanca": [
+          "Dizer que ética e moral são a mesma coisa.",
+          "Achar que só cumprir a lei basta.",
+          "Restringir o Código aos cargos altos."
+        ],
+        "fontes": [
+          {
+            "titulo": "FAZ QUESTÃO — Aula 01 Ética no Serviço Público",
+            "url": "https://www.youtube.com/watch?v=ETtAvAcLEFA",
+            "verificada": true,
+            "verificadoEm": "2026-07-16"
+          }
+        ]
+      },
+      "video": {
+        "aulaId": "aula-et-01",
+        "duracaoTotalSegundos": 2658,
+        "inicioSegundos": 0,
+        "fimSegundos": 510,
+        "objetivosCobertos": [
+          "et-moral",
+          "et-servico"
+        ],
+        "fonte": "YouTube — FAZ QUESTÃO CONCURSOS PÚBLICOS",
+        "fonteUrl": "https://www.youtube.com/watch?v=ETtAvAcLEFA",
+        "fonteVerificada": true,
+        "coberturaPedagogicaVerificada": true,
+        "verificadoEm": "2026-07-16",
+        "statusVerificacao": "aprovado",
+        "motivoSelecao": "ASR (yt-dlp pt) de ETtAvAcLEFA (~2658s): o início (0–510s) trata ética x moral, a imutabilidade da ética versus a contextualidade da moral e a ponte para a ação no serviço público. O trecho não detalha o Decreto 1.171/94, cujos deveres são cobertos pela leitura e pelas questões autorais. Vídeo mantém tom filosófico (Platão/Kant) e faz a virada 'para prova de ética no serviço público' por volta de 1306s."
+      },
+      "checagem": {
+        "questionIds": [
+          "check-et-01",
+          "check-et-02",
+          "check-et-03",
+          "check-et-04"
+        ],
+        "quantidadeMinima": 3
+      },
+      "pratica": {
+        "questionIds": [
+          "et-etica-p01",
+          "et-etica-p02",
+          "et-etica-p03",
+          "et-etica-p04",
+          "et-etica-p05"
+        ],
+        "quantidadeMinima": 5
+      },
+      "correcao": {
+        "agruparPorObjetivo": true,
+        "permitirNovaTentativa": true,
+        "classificacoesErro": [
+          "conceitual",
+          "interpretacao",
+          "atencao"
+        ]
+      },
+      "revisao": {
+        "habilitada": true,
+        "estrategia": "baseada-em-desempenho"
+      },
+      "statusEditorial": "publicada"
     }
   ],
   "checagens": [
@@ -953,6 +1076,122 @@
         "correta": "Correto. Multitarefa alterna processos na CPU.",
         "incorreta": "SO gerencia processos; não é periférico.",
         "leituraSecaoId": "sistemas-operacionais"
+      }
+    },
+    {
+      "id": "check-et-01",
+      "unitId": "unidade-et-etica-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "et-moral"
+      ],
+      "enunciado": "Qual afirmação distingue corretamente ética e moral?",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "São sinônimos; usar um ou outro não muda o sentido."
+        },
+        {
+          "id": "B",
+          "texto": "A moral é contextual; a ética busca princípios mais estáveis."
+        },
+        {
+          "id": "C",
+          "texto": "A ética varia conforme a cultura; a moral é fixa."
+        }
+      ],
+      "respostaCorreta": "B",
+      "feedback": {
+        "correta": "Correto. Moral = contexto; ética = reflexão sobre princípios.",
+        "incorreta": "Revise a distinção entre os dois conceitos.",
+        "leituraSecaoId": "etic-moral"
+      }
+    },
+    {
+      "id": "check-et-02",
+      "unitId": "unidade-et-etica-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "et-servico"
+      ],
+      "enunciado": "Sobre o Decreto 1.171/1994, é correto afirmar:",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "Aplica-se somente a autoridades de nível superior."
+        },
+        {
+          "id": "B",
+          "texto": "Exige apenas o cumprimento estrito da lei."
+        },
+        {
+          "id": "C",
+          "texto": "Alcanca todos os servidores e exige o elemento ético."
+        }
+      ],
+      "respostaCorreta": "C",
+      "feedback": {
+        "correta": "Correto. O Código vale para todo servidor e soma a ética à legalidade.",
+        "incorreta": "O Código não é só para cúpula nem só 'cumprir a lei'.",
+        "leituraSecaoId": "et-servico"
+      }
+    },
+    {
+      "id": "check-et-03",
+      "unitId": "unidade-et-etica-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "et-moral"
+      ],
+      "enunciado": "Dizer que 'legal é o mesmo que ético' é:",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "CERTO, pois a lei resumo a ética."
+        },
+        {
+          "id": "B",
+          "texto": "ERRADO, porque uma ação pode ser legal e ainda assim desonesta."
+        },
+        {
+          "id": "C",
+          "texto": "CERTO para o serviço público, mas não para a iniciativa privada."
+        }
+      ],
+      "respostaCorreta": "B",
+      "feedback": {
+        "correta": "Correto. Legalidade formal ≠ conduta ética.",
+        "incorreta": "Compare lei e ética; não os iguale.",
+        "leituraSecaoId": "et-servico"
+      }
+    },
+    {
+      "id": "check-et-04",
+      "unitId": "unidade-et-etica-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "et-servico"
+      ],
+      "enunciado": "Entre os deveres do servidor, NÃO se inclui:",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "Probidade."
+        },
+        {
+          "id": "B",
+          "texto": "Honestidade."
+        },
+        {
+          "id": "C",
+          "texto": "Filiação partidária obrigatória."
+        }
+      ],
+      "respostaCorreta": "C",
+      "feedback": {
+        "correta": "Correto. O Código não exige filiação partidária.",
+        "incorreta": "Probidade e honestidade estão previstos no Decreto.",
+        "leituraSecaoId": "et-servico"
       }
     }
   ]

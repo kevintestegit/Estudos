@@ -31,6 +31,14 @@
       "avisos": [],
       "pendenciasEditoriais": [],
       "dadosNaoVerificados": []
+    },
+    {
+      "unitId": "unidade-et-etica-01",
+      "status": "valida",
+      "erros": [],
+      "avisos": [],
+      "pendenciasEditoriais": [],
+      "dadosNaoVerificados": []
     }
   ],
   "falhou": false

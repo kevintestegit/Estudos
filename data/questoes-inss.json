@@ -1651,6 +1651,132 @@
       "objetivos": [
         "inf-hw-sistemas"
       ]
+    },
+    {
+      "id": "et-etica-p01",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Ética no Serviço Público",
+      "assunto": "Princípios e deveres do servidor",
+      "tag": "etica",
+      "enunciado": "Ética e moral são conceitos idênticos; portanto, agir com ética é o mesmo que seguir a moral vigente.",
+      "gabarito": "E",
+      "comentario": "ERRADO. Ética e moral se aproximam, mas não se confundem: a moral é contextual e variável; a ética busca princípios mais estáveis para julgar a ação.",
+      "fonte": "Elaboração própria (vídeo de referência FAZ QUESTÃO)",
+      "fonteUrl": "https://www.youtube.com/watch?v=ETtAvAcLEFA",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "origemQuestao": "autoral",
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "fácil",
+      "unitIds": [
+        "unidade-et-etica-01"
+      ],
+      "objetivos": [
+        "et-moral",
+        "et-servico"
+      ]
+    },
+    {
+      "id": "et-etica-p02",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Ética no Serviço Público",
+      "assunto": "Princípios e deveres do servidor",
+      "tag": "etica",
+      "enunciado": "No serviço público, o servidor deve pautar sua conduta apenas pelo cumprimento estrito da legalidade formal.",
+      "gabarito": "E",
+      "comentario": "ERRADO. O Decreto 1.171/1994 exige também o elemento ético: o servidor deve agir com honestidade, probidade e respeito aos direitos do cidadão, não só legalidade.",
+      "fonte": "Elaboração própria (vídeo de referência FAZ QUESTÃO)",
+      "fonteUrl": "https://www.youtube.com/watch?v=ETtAvAcLEFA",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "origemQuestao": "autoral",
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "médio",
+      "unitIds": [
+        "unidade-et-etica-01"
+      ],
+      "objetivos": [
+        "et-servico"
+      ]
+    },
+    {
+      "id": "et-etica-p03",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Ética no Serviço Público",
+      "assunto": "Princípios e deveres do servidor",
+      "tag": "etica",
+      "enunciado": "A moral, ao contrário da ética, admite variação conforme o contexto cultural e histórico.",
+      "gabarito": "C",
+      "comentario": "CERTO. A moral é contextual; a ética procura princípios mais duradouros para avaliar a ação.",
+      "fonte": "Elaboração própria (vídeo de referência FAZ QUESTÃO)",
+      "fonteUrl": "https://www.youtube.com/watch?v=ETtAvAcLEFA",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "origemQuestao": "autoral",
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "fácil",
+      "unitIds": [
+        "unidade-et-etica-01"
+      ],
+      "objetivos": [
+        "et-moral"
+      ]
+    },
+    {
+      "id": "et-etica-p04",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Ética no Serviço Público",
+      "assunto": "Princípios e deveres do servidor",
+      "tag": "etica",
+      "enunciado": "Entre os deveres do servidor público previstos no Decreto 1.171/1994, está incluída a vedação de receber vantagens indevidas.",
+      "gabarito": "C",
+      "comentario": "CERTO. O Decreto 1.171/1994 lista deveres como honestidade, probidade, decoro, segurança, eficácia, lealdade às instituições e vedação de vantagens indevidas.",
+      "fonte": "Elaboração própria (vídeo de referência FAZ QUESTÃO)",
+      "fonteUrl": "https://www.youtube.com/watch?v=ETtAvAcLEFA",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "origemQuestao": "autoral",
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "médio",
+      "unitIds": [
+        "unidade-et-etica-01"
+      ],
+      "objetivos": [
+        "et-servico"
+      ]
+    },
+    {
+      "id": "et-etica-p05",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Ética no Serviço Público",
+      "assunto": "Princípios e deveres do servidor",
+      "tag": "etica",
+      "enunciado": "A ética no serviço público aplica-se somente às autoridades de hierarquia superior, não aos servidores de nível básico.",
+      "gabarito": "E",
+      "comentario": "ERRADO. O Código de Ética abrange todos os servidores públicos federais, independentemente do cargo ou nível.",
+      "fonte": "Elaboração própria (vídeo de referência FAZ QUESTÃO)",
+      "fonteUrl": "https://www.youtube.com/watch?v=ETtAvAcLEFA",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "origemQuestao": "autoral",
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "médio",
+      "unitIds": [
+        "unidade-et-etica-01"
+      ],
+      "objetivos": [
+        "et-servico"
+      ]
     }
   ]
 }

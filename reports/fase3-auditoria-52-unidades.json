@@ -4,8 +4,8 @@
   "totalAulasCronogramaUnicas": 52,
   "comVideo": 51,
   "indisponivel": 1,
-  "auditoriaAprovada": 4,
-  "auditoriaPendente": 47,
+  "auditoriaAprovada": 5,
+  "auditoriaPendente": 46,
   "auditoriaBloqueada": 1,
   "registros": [
     {
@@ -106,7 +106,7 @@
       "aulaId": "aula-et-01",
       "materia": "Ética no Serviço Público",
       "assunto": "Princípios e deveres do servidor",
-      "unitIdCronograma": null,
+      "unitIdCronograma": "unidade-et-etica-01",
       "videoStatus": "video",
       "videoId": "ETtAvAcLEFA",
       "canal": "FAZ QUESTÃO CONCURSOS PÚBLICOS",
@@ -114,8 +114,15 @@
       "duracaoTotalSegundos": null,
       "verificadoEm": "2026-07-14",
       "auditoriaPedagogica": {
-        "status": "pendente",
-        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+        "status": "aprovada",
+        "unitId": "unidade-et-etica-01",
+        "inicioSegundos": 0,
+        "fimSegundos": 510,
+        "objetivosCobertos": [
+          "et-moral",
+          "et-servico"
+        ],
+        "evidencia": "reports/unidade-et-etica-evidence.json"
       }
     },
     {

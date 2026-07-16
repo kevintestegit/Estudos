@@ -197,10 +197,11 @@
       "tipo": "video",
       "url": "https://www.youtube.com/watch?v=ETtAvAcLEFA",
       "notas": "Aula pública diretamente dedicada a Ética no serviço público; título, canal, duração e página foram confirmados.",
-      "verificadoEm": "2026-07-14",
+      "verificadoEm": "2026-07-16",
       "videoId": "ETtAvAcLEFA",
       "canal": "FAZ QUESTÃO CONCURSOS PÚBLICOS",
-      "tituloYoutube": "AULA 01 - ÉTICA no SERVIÇO PÚBLICO (para QUALQUER CONCURSO)"
+      "tituloYoutube": "AULA 01 - ÉTICA no SERVIÇO PÚBLICO (para QUALQUER CONCURSO)",
+      "duracaoTotalSegundos": 2658
     },
     {
       "id": "aula-et-02",
