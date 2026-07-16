@@ -1,0 +1,851 @@
+{
+  "geradoEm": "2026-07-16",
+  "fase": 3,
+  "totalAulasCronogramaUnicas": 52,
+  "comVideo": 51,
+  "indisponivel": 1,
+  "auditoriaAprovada": 1,
+  "auditoriaPendente": 50,
+  "auditoriaBloqueada": 1,
+  "registros": [
+    {
+      "aulaId": "aula-pt-01",
+      "materia": "Português",
+      "assunto": "Interpretação de textos",
+      "unitIdCronograma": "unidade-pt-interpretacao-01",
+      "videoStatus": "video",
+      "videoId": "B1lk04l-dRU",
+      "canal": "FZ Concursos",
+      "tituloYoutube": "PORTUGUÊS PARA CONCURSOS: INTERPRETAÇÃO DE TEXTO",
+      "duracaoTotalSegundos": 1959,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "aprovada",
+        "unitId": "unidade-pt-interpretacao-01",
+        "inicioSegundos": 76,
+        "fimSegundos": 466,
+        "objetivosCobertos": [
+          "pt-int-compreensao-explicita",
+          "pt-int-inferencia-valida"
+        ],
+        "evidencia": "reports/unidade-pt-interpretacao-evidence.json"
+      }
+    },
+    {
+      "aulaId": "aula-pt-02",
+      "materia": "Português",
+      "assunto": "Ortografia e acentuação",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "BpDHOqagBRo",
+      "canal": "IMP Concursos",
+      "tituloYoutube": "[AULA 01] Gramática do Zero: Ortografia Oficial - Acentuação Gráfica com professora Janaína Souto",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-rl-01",
+      "materia": "Raciocínio Lógico",
+      "assunto": "Proposições e conectivos",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "KXm8Hi-I_G0",
+      "canal": "Professora Angela Matemática",
+      "tituloYoutube": "RACIOCÍNIO LÓGICO - PROPOSIÇÕES E TABELA VERDADE - Professora Angela Matemática",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-inf-01",
+      "materia": "Informática",
+      "assunto": "Hardware, software e sistemas",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "mzwDUdlZIJE",
+      "canal": "Matemorfose com Prof. Leandro de Souza",
+      "tituloYoutube": "Informática para Concursos 2025 - Aula #01 - Noções de Hardware e Software",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-et-01",
+      "materia": "Ética no Serviço Público",
+      "assunto": "Princípios e deveres do servidor",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "ETtAvAcLEFA",
+      "canal": "FAZ QUESTÃO CONCURSOS PÚBLICOS",
+      "tituloYoutube": "AULA 01 - ÉTICA no SERVIÇO PÚBLICO (para QUALQUER CONCURSO)",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-pt-03",
+      "materia": "Português",
+      "assunto": "Classes de palavras e sintaxe",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "DbWb5y4mWXk",
+      "canal": "Prof. Álvaro Ferreira",
+      "tituloYoutube": "Diferença entre MORFOLOGIA e SINTAXE - Para concurso",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-rl-02",
+      "materia": "Raciocínio Lógico",
+      "assunto": "Equivalências e negações",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "hy9IpY2c6l0",
+      "canal": "Wagner Aguiar",
+      "tituloYoutube": "LÓGICA PROPOSICIONAL - Negações e Equivalências | Descomplicando RLM com Waguinho",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-dc-01",
+      "materia": "Direito Constitucional",
+      "assunto": "Direitos e garantias fundamentais",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "-QD3w6jdzeY",
+      "canal": "Adriane Fauth",
+      "tituloYoutube": "Aula Gratuita: Teoria Geral dos Direitos Fundamentais para Concursos",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-da-01",
+      "materia": "Direito Administrativo",
+      "assunto": "Organização da Administração",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "pdAEuiH0Rt4",
+      "canal": "Estratégia Concursos",
+      "tituloYoutube": "Organização Administrativa: Resumo em UMA AULA - Nunca mais seja demitido 2026",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-inf-02",
+      "materia": "Informática",
+      "assunto": "Sistemas operacionais",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "zrQQl8fyihI",
+      "canal": "Prof. Marcelo Narciso",
+      "tituloYoutube": "Sistema Operacional | Informática para Concursos",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-pt-04",
+      "materia": "Português",
+      "assunto": "Concordância verbal e nominal",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "C8JPK8vBfa0",
+      "canal": "Prof. Álvaro Ferreira",
+      "tituloYoutube": "Você ainda erra CONCORDÂNCIA VERBAL e NOMINAL? Veja isto antes da prova...",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-da-02",
+      "materia": "Direito Administrativo",
+      "assunto": "Atos administrativos",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "U0YFO6l7GGM",
+      "canal": "Nova Concursos",
+      "tituloYoutube": "Direito Administrativo para Concursos: Atos Administrativos",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-dc-02",
+      "materia": "Direito Constitucional",
+      "assunto": "Organização do Estado",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "pg9SorCGwGI",
+      "canal": "Adriane Fauth",
+      "tituloYoutube": "Organização do Estado Brasileiro | Aula Completa para Concursos",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-rl-03",
+      "materia": "Raciocínio Lógico",
+      "assunto": "Diagramas lógicos",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "l_20kYKKZk0",
+      "canal": "Felippe Loureiro",
+      "tituloYoutube": "Aprenda DIAGRAMAS LÓGICOS em 30 minutos - Aula 1",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-prev-01",
+      "materia": "Direito Previdenciário",
+      "assunto": "Seguridade Social — conceitos",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "32KFs2sBOWw",
+      "canal": "Me Julga - Cíntia Brunelli",
+      "tituloYoutube": "Direito Previdenciário - Seguridade Social - Conceito e Organização",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-prev-02",
+      "materia": "Direito Previdenciário",
+      "assunto": "Segurados e dependentes",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "mz7zSeCeCIo",
+      "canal": "Prep Concursos",
+      "tituloYoutube": "Direito Previdenciário Para o INSS: Tudo Sobre Segurados e Dependentes!",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-prev-03",
+      "materia": "Direito Previdenciário",
+      "assunto": "Filiação e inscrição",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "HBvoAN4QEG4",
+      "canal": "Prof. Eduardo Tanaka",
+      "tituloYoutube": "Filiação e Inscrição - parte 1 - aula 25 - Bloco 1 - Professor Eduardo Tanaka",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-da-03",
+      "materia": "Direito Administrativo",
+      "assunto": "Licitações — noções",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "s8tNutu-Y_U",
+      "canal": "Estratégia Concursos",
+      "tituloYoutube": "Tudo o que você precisa saber sobre a Lei das Licitações",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-pt-05",
+      "materia": "Português",
+      "assunto": "Regência e crase",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "4jgY7ZFTUng",
+      "canal": "Português com Edson",
+      "tituloYoutube": "Semana Ultra Português para concursos - Aula 02 - Regência e Crase",
+      "duracaoTotalSegundos": 5303,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-admin-01",
+      "materia": "Noções de Administração",
+      "assunto": "Fundamentos de Administração: eficiência, eficácia e efetividade",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "fYZnik71ZmM",
+      "canal": "Carranza Cursos",
+      "tituloYoutube": "Eficiência, Eficácia e Efetividade: Você Precisa Dominar Isso pra Passar no Concurso!",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-prev-04",
+      "materia": "Direito Previdenciário",
+      "assunto": "Carência e qualidade de segurado",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "dbubiicuEws",
+      "canal": "Gabarite Previdenciario",
+      "tituloYoutube": "Concurso INSS 2026 | CARÊNCIA E QUALIDADE DE SEGURADO: Aula Descomplicada para Quem Voltou a Estudar",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-prev-05",
+      "materia": "Direito Previdenciário",
+      "assunto": "Salário de contribuição",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "3IVngawMlRU",
+      "canal": "Cursos do Portal",
+      "tituloYoutube": "CONCURSO INSS: SALÁRIO DE CONTRIBUIÇÃO | Com o Profº. Harlenson Fonseca",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-arq-01",
+      "materia": "Arquivologia",
+      "assunto": "Gestão documental, arquivos e protocolo",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "oqOBQTFH2Rc",
+      "canal": "Carranza Cursos",
+      "tituloYoutube": "CONCURSO ALECE: GESTÃO DOCUMENTAL, ARQUIVOLOGIA E PROTOCOLO | FUNDAMENTOS PARA A PROVA",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-da-04",
+      "materia": "Direito Administrativo",
+      "assunto": "Poderes administrativos",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "oGdXyqvcx2g",
+      "canal": "FZ Concursos",
+      "tituloYoutube": "PODERES ADMINISTRATIVOS | AULA COMPLETA | TEORIA + QUESTÕES (2026)",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-inf-03",
+      "materia": "Informática",
+      "assunto": "Internet, e-mail e segurança",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "kxN8GFJbGuc",
+      "canal": "Léo Matos",
+      "tituloYoutube": "Informática para concursos: Curso básico (episódio 6) - Internet, Intranet e Segurança da Informação",
+      "duracaoTotalSegundos": 5302,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-admin-02",
+      "materia": "Noções de Administração",
+      "assunto": "Planejamento, organização, direção e controle (PODC)",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "Q5-8EXP5u0M",
+      "canal": "Prof. Filipe Costa | Área Administrativa",
+      "tituloYoutube": "Aula - Processo Administrativo (Planejamento, Organização, Direção, Controle) - PODC - Administração",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-prev-06",
+      "materia": "Direito Previdenciário",
+      "assunto": "Aposentadorias",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "ZrXMfzVWws8",
+      "canal": "Gabarite Previdenciario",
+      "tituloYoutube": "Aposentadoria Pós-Reforma INSS: Guia Completo sobre as Novas Regras e Como \"Gabaritar\" a Prova",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-prev-07",
+      "materia": "Direito Previdenciário",
+      "assunto": "Auxílios e salário-maternidade",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "WPggHzlUSdY",
+      "canal": "Legislação em áudio",
+      "tituloYoutube": "Do Auxílio-Doença, Salário-Família e Salário-Maternidade - Art. 59 a 73 - Lei 8213 em áudio ATUAL.",
+      "duracaoTotalSegundos": 1066,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-arq-02",
+      "materia": "Arquivologia",
+      "assunto": "Classificação, métodos de arquivamento e protocolo",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "O_fjg-IIANM",
+      "canal": "Arquivologia e Concursos - Luciana Rodrigues",
+      "tituloYoutube": "Aula 03  - Classificação dos documentos",
+      "duracaoTotalSegundos": 1977,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-dc-03",
+      "materia": "Direito Constitucional",
+      "assunto": "Administração Pública na CF",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "FaZEZV4qYXU",
+      "canal": "Evaldo Rodrigues",
+      "tituloYoutube": "CONSTITUCIONAL: Administração Pública - Art. 37 ao 41 (Parte 1)",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-et-02",
+      "materia": "Ética no Serviço Público",
+      "assunto": "Cidadania e ética profissional",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "7rNy8ua-JLY",
+      "canal": "AlfaCon",
+      "tituloYoutube": "Aula de Ética no Serviço Público professor Tiago Vidal | Concurso PRF Agente Administrativo-AlfaCon",
+      "duracaoTotalSegundos": 1580,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-admin-03",
+      "materia": "Noções de Administração",
+      "assunto": "Estruturas organizacionais e departamentalização",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "Sc24Y2k92O0",
+      "canal": "Carranza Cursos",
+      "tituloYoutube": "Concurso CORE-SE 2025: Tipos de Estrutura Organizacional – Administração Geral Aula Teórica",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-prev-08",
+      "materia": "Direito Previdenciário",
+      "assunto": "Pensão por morte e BPC/LOAS",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "Al2LjT-yA-E",
+      "canal": "Lac Concursos - Principal",
+      "tituloYoutube": "INSS 2022 - Aula 21/146 - Pensão por Morte PT1",
+      "duracaoTotalSegundos": 1219,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-prev-09",
+      "materia": "Direito Previdenciário",
+      "assunto": "Processo administrativo no INSS",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "3B3epMZusfw",
+      "canal": "Cppem Concursos Públicos",
+      "tituloYoutube": "PROCESSO ADMINISTRATIVO [PASSO A PASSO] -DIREITO PREVIDENCIÁRIO PARA CONCURSOS (AULA 01)",
+      "duracaoTotalSegundos": 1904,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-da-05",
+      "materia": "Direito Administrativo",
+      "assunto": "Agentes e responsabilidade",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "TprXbKOQBoo",
+      "canal": "Me Julga - Cíntia Brunelli",
+      "tituloYoutube": "AGENTES PÚBLICOS - Espécies, Cargos, Funções, Direitos e Deveres | Direito Administrativo",
+      "duracaoTotalSegundos": 1340,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-arq-03",
+      "materia": "Arquivologia",
+      "assunto": "Temporalidade, avaliação e destinação de documentos",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "wTACbF76_VY",
+      "canal": "TecConcursos",
+      "tituloYoutube": "03.02.03. Tabela de Temporalidade de Documentos (Arquivologia) Prof.ª Izabel Ataíde",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-pt-06",
+      "materia": "Português",
+      "assunto": "Pontuação e coerência",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "KD2TAJyZECc",
+      "canal": "Português sem Enrolação - Professora Lis",
+      "tituloYoutube": "PONTUAÇÃO FÁCIL: Aprenda o Emprego dos Sinais de Pontuação (Concursos e Vestibulares)",
+      "duracaoTotalSegundos": 577,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-prev-10",
+      "materia": "Direito Previdenciário",
+      "assunto": "Custeio da Seguridade Social",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "juPeJ-yZo_c",
+      "canal": "Neto oliveira prof",
+      "tituloYoutube": "Direito Previdenciário - Concurso INSS 2026 - Financiamento da Seguridade social",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-admin-04",
+      "materia": "Noções de Administração",
+      "assunto": "Gestão de pessoas, liderança e motivação",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "NXl46P5Vmmc",
+      "canal": "Professor Ravazolo",
+      "tituloYoutube": "TSE - Gestão de Pessoas - Liderança",
+      "duracaoTotalSegundos": 1287,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-da-06",
+      "materia": "Direito Administrativo",
+      "assunto": "Controle da Administração",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "eDhK7GcTAOY",
+      "canal": "Supremo",
+      "tituloYoutube": "Controle da Administração | Prof. Barney Bichara",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-prev-11",
+      "materia": "Direito Previdenciário",
+      "assunto": "Tempo de contribuição e contagem",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "UGFqYpikwnQ",
+      "canal": "Prof. Harlenson  - Concursos Públicos",
+      "tituloYoutube": "Concurso INSS - Certidão de Tempo de Contribuição",
+      "duracaoTotalSegundos": 4328,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-prev-12",
+      "materia": "Direito Previdenciário",
+      "assunto": "Regras de transição",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "ihvY2f089NY",
+      "canal": "Nathy Bueno ",
+      "tituloYoutube": "Concurso INSS: REGRAS DE TRANSIÇÃO - EC 103/2019",
+      "duracaoTotalSegundos": 829,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-leg-prf-01",
+      "materia": "Legislação PRF",
+      "assunto": "Competências e organização institucional da PRF",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "d9KejeSs1i0",
+      "canal": "Sandro Gonçalves",
+      "tituloYoutube": "Decreto 1655   Competência da Polícia Rodoviária Federal",
+      "duracaoTotalSegundos": 245,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-rl-04",
+      "materia": "Raciocínio Lógico",
+      "assunto": "Contagem e probabilidade básica",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "-dTgmq1rOuM",
+      "canal": "Gran Cursos Online",
+      "tituloYoutube": "Concurso PC PI | Destravando RLM: Problemas de Contagem e Noções de Probabilidade",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-inf-04",
+      "materia": "Informática",
+      "assunto": "Word, Excel e PowerPoint",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "keFgZOS989g",
+      "canal": "Prof. Marcelo Narciso",
+      "tituloYoutube": "Informática para Concursos Pacote Office",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-prev-13",
+      "materia": "Direito Previdenciário",
+      "assunto": "Lei 8.213 e 8.212 — pontos-chave",
+      "unitIdCronograma": null,
+      "videoStatus": "indisponivel",
+      "videoId": null,
+      "canal": null,
+      "tituloYoutube": null,
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "bloqueada_sem_video",
+        "nota": "Sem videoaula aprovada no catálogo."
+      }
+    },
+    {
+      "aulaId": "aula-admin-05",
+      "materia": "Noções de Administração",
+      "assunto": "Gestão de processos e qualidade",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "PnWa561etk8",
+      "canal": "CERS Cursos Online",
+      "tituloYoutube": "Gestão de Processos | Profa. Elisabete Moreira",
+      "duracaoTotalSegundos": 3030,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-arq-04",
+      "materia": "Arquivologia",
+      "assunto": "Preservação, conservação e documentos digitais",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "D9ag0dAK4H4",
+      "canal": "Help Concursos",
+      "tituloYoutube": "Arquivamento - pt.6 - Preservação de Documentos",
+      "duracaoTotalSegundos": 1333,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-dc-04",
+      "materia": "Direito Constitucional",
+      "assunto": "Poderes Legislativo, Executivo e Judiciário",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "jMiN6HbxsZM",
+      "canal": "Monster Concursos",
+      "tituloYoutube": "Concurso PMBA - Direito Constitucional -  Da Organização Dos Poderes e Suas Competências",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-prev-14",
+      "materia": "Direito Previdenciário",
+      "assunto": "Mapa mental de benefícios",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "2MAVOaVTGT4",
+      "canal": "Estratégia Concursos",
+      "tituloYoutube": "Benefícios Previdenciários - Domine o principal tema da prova - Guia da aprovação INSS",
+      "duracaoTotalSegundos": 6965,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-admin-06",
+      "materia": "Noções de Administração",
+      "assunto": "Administração de materiais e patrimônio",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "WSzViE4JOy8",
+      "canal": "TecConcursos",
+      "tituloYoutube": "01. Aula de Noções de Administração de Materiais (Administração de Recursos Materiais)",
+      "duracaoTotalSegundos": null,
+      "verificadoEm": "2026-07-14",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    },
+    {
+      "aulaId": "aula-leg-prf-02",
+      "materia": "Legislação PRF",
+      "assunto": "Decreto 1.655/1995 e atribuições institucionais",
+      "unitIdCronograma": null,
+      "videoStatus": "video",
+      "videoId": "oEt1y11nE8w",
+      "canal": "Professor Ronaldo Paiva - Fala, Xerife!",
+      "tituloYoutube": "Decreto 1.655/95 e Artigo 47, da Lei 9.662/19 - Legislação Específica da Polícia Rodoviária Federal.",
+      "duracaoTotalSegundos": 4157,
+      "verificadoEm": "2026-07-16",
+      "auditoriaPedagogica": {
+        "status": "pendente",
+        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+      }
+    }
+  ]
+}
