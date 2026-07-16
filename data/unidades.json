@@ -93,6 +93,7 @@
       },
       "video": {
         "aulaId": "aula-pt-01",
+        "duracaoTotalSegundos": 1959,
         "inicioSegundos": null,
         "fimSegundos": null,
         "objetivosCobertos": [],
@@ -100,7 +101,7 @@
         "fonteUrl": "https://www.youtube.com/watch?v=B1lk04l-dRU",
         "fonteVerificada": true,
         "coberturaPedagogicaVerificada": false,
-        "verificadoEm": "2026-07-15",
+        "verificadoEm": "2026-07-16",
         "statusVerificacao": "pendente_revisao_manual"
       },
       "checagem": {

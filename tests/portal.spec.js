@@ -565,7 +565,7 @@ test("Service Worker remove o cache da versão anterior", async ({ page }) => {
     }
     return caches.keys();
   });
-  expect(cacheNames).toContain("portal-estudos-v17");
+  expect(cacheNames).toContain("portal-estudos-v18");
   expect(cacheNames).not.toContain("portal-estudos-v16");
   expect(cacheNames).toContain("cache-de-outro-aplicativo");
 });
@@ -578,7 +578,7 @@ test("primeira abertura offline de Hoje mantém a unidade disponível", async ({
   await page.reload();
   await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
   const cached = await page.evaluate(async () => {
-    const cache = await caches.open("portal-estudos-v17");
+    const cache = await caches.open("portal-estudos-v18");
     const url = (path) => new URL(path, location.href).href;
     return {
       unitScript: Boolean(await cache.match(url("assets/js/unit.js?v=1"))),

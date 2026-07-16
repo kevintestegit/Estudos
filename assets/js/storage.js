@@ -916,7 +916,7 @@ const Storage = {
       return { ok: false, state };
     }
   },
-  recordUnitCorrection(attemptId, questionId, classification) {
+  recordUnitCorrection(attemptId, questionId, classification, question = {}) {
     const data = this.get(),
       attempt = data.unitAttempts.find((item) => item.id === attemptId),
       answer = attempt?.answers.find((item) => item.questionId === questionId),
@@ -940,6 +940,24 @@ const Storage = {
       classifiedAt: now,
       reviewedAt: now,
     };
+    const notebookEntry = data.erros.find((item) => item.questionId === questionId);
+    if (notebookEntry) {
+      notebookEntry.tipo = classification;
+      notebookEntry.unitId = attempt.unitId;
+      notebookEntry.objetivos = [...answer.objetivos];
+    } else {
+      data.erros.push({
+        id: uid(), questionId, unitId: attempt.unitId,
+        objetivos: [...answer.objetivos], occurrences: 1,
+        lastSeen: todayISO(), materia: question.materia || "",
+        assunto: question.assunto || "", questao: question.enunciado || "",
+        motivo: "Erro classificado durante a correção da unidade.",
+        comentario: question.comentario || "", tipo: classification,
+        createdAt: todayISO(), reviews: {
+          d1: addDaysISO(todayISO(), 1), d7: addDaysISO(todayISO(), 7), d30: addDaysISO(todayISO(), 30),
+        }, done: { d1: false, d7: false, d30: false },
+      });
+    }
     try {
       this.set(data);
       return { ok: true, state };

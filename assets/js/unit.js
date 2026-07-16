@@ -52,6 +52,33 @@
   const cleanupTasks = new Set();
   const restoredReadings = new Set();
 
+  const reviewPlan = (unit) => {
+    const data = Storage.get();
+    const progress = data.unitProgress[unit.id];
+    const active = data.unitAttempts.find((attempt) => attempt.id === progress?.activeAttemptId);
+    if (!active?.finishedAt) return null;
+    const attempts = data.unitAttempts.filter((attempt) => attempt.unitId === unit.id && attempt.finishedAt);
+    const wrong = {};
+    attempts.forEach((attempt) => attempt.answers.forEach((answer) => {
+      if (!answer.correct) answer.objetivos.forEach((objective) => wrong[objective] = (wrong[objective] || 0) + 1);
+    }));
+    const objectives = Object.keys(wrong);
+    if (objectives.length) {
+      const total = Object.values(wrong).reduce((sum, count) => sum + count, 0);
+      return { objectives, days: 1, reason: `${total} erro(s) em ${objectives.length} objetivo(s) da unidade.` };
+    }
+    const covered = Object.keys(active.performanceByObjective || {});
+    if (!covered.length) return null;
+    const repeated = attempts.filter((attempt) => attempt.phase === "pratica").length > 1;
+    return {
+      objectives: covered,
+      days: repeated ? 3 : 7,
+      reason: repeated
+        ? "Objetivos corretos após mais de uma tentativa."
+        : "Objetivos concluídos sem erro na primeira tentativa.",
+    };
+  };
+
   const UnitFlow = {
     async load(unitId) {
       this.dataPromise ||= App.loadJSON("data/unidades.json");
@@ -145,14 +172,50 @@
             : practicing.has(state)
               ? '<section class="unit-step is-done"><h4>Questões reais</h4><p>Prática concluída.</p></section>'
               : locked("Questões reais", "Conclua a checagem rápida para desbloquear.");
+      const correctionHtml = this.renderCorrection(unit, state, progress);
       return `<article class="card study-task unit-flow" data-unit-id="${App.esc(unit.id)}" data-unit-entry="${App.esc(entryKey)}">
         ${header}
         <section class="unit-step ${readingDone ? "is-done" : ""}"><h4>Leitura guiada</h4>${readingSections}${readingAction}</section>
         ${videoHtml}
         ${checkHtml}
         ${practiceHtml}
-        ${locked("Correção e revisão", "Conclua as etapas anteriores para desbloquear.")}
+        ${correctionHtml}
       </article>`;
+    },
+
+    renderCorrection(unit, state, progress) {
+      if (!["pratica_concluida", "correcao_pendente", "correcao_concluida", "revisao_agendada", "concluida"].includes(state))
+        return locked("Correção e revisão", "Conclua as etapas anteriores para desbloquear.");
+      if (state === "concluida")
+        return '<section class="unit-step is-done"><h4>Correção e revisão</h4><p>Unidade concluída.</p></section>';
+      if (state === "revisao_agendada") {
+        const review = Storage.get().unitReviews.find((item) => item.id === progress.activeReviewId);
+        return `<section class="unit-step"><h4>Revisão futura</h4><p>Revisão agendada para <strong>${App.esc(App.formatDateBR(review?.scheduledDate || ""))}</strong>.</p><button class="btn" type="button" data-primary-action data-unit-event="concluir_unidade">Concluir unidade</button></section>`;
+      }
+      if (state === "correcao_concluida")
+        return '<section class="unit-step"><h4>Revisão futura</h4><p>O intervalo será calculado a partir das tentativas registradas.</p><button class="btn" type="button" data-primary-action data-unit-review>Agendar revisão</button></section>';
+
+      const data = Storage.get();
+      const attempt = data.unitAttempts.find((item) => item.id === progress.activeAttemptId);
+      const wrong = attempt?.answers.filter((answer) => !answer.correct) || [];
+      if (!wrong.length)
+        return '<section class="unit-step"><h4>Correção dos erros</h4><p>Nenhum erro nesta tentativa.</p><button class="btn" type="button" data-primary-action data-unit-event="concluir_correcao">Concluir correção</button></section>';
+      if (!this.practiceBank)
+        return `<section class="unit-step"><h4>Correção dos erros</h4><p>${this.practiceBankError ? "Não foi possível carregar as resoluções." : "Carregando correção…"}</p></section>`;
+
+      const byId = Object.fromEntries(this.practiceBank.map((question) => [question.id, question]));
+      const groups = {};
+      wrong.forEach((answer) => answer.objetivos.forEach((objective) => (groups[objective] ||= []).push(answer)));
+      const cards = Object.entries(groups).map(([objective, answers]) => {
+        const section = (unit.leitura?.secoes || []).find((item) => item.objetivosCobertos?.includes(objective));
+        return `<section class="unit-correction-group"><h5>${App.esc(objective)}</h5>${answers.map((answer) => {
+          const question = byId[answer.questionId] || {};
+          const classified = answer.correction?.classification;
+          return `<article class="card"><p>${App.esc(question.enunciado || answer.questionId)}</p><p><strong>Sua resposta: ${App.esc(String(answer.answer))}</strong> · <strong>Gabarito: ${App.esc(String(question.gabarito || "não disponível"))}</strong></p><p>${App.esc(question.comentario || "Resolução não disponível.")}</p>${section ? `<p><a href="#${App.esc(section.id)}">Revisar ${App.esc(section.titulo)}</a></p>` : ""}${classified ? `<p class="alert alert-ok">Erro classificado: ${App.esc(classified)}.</p>` : `<label>Classificação do erro ${App.esc(answer.questionId)}<select data-unit-correction-type="${App.esc(answer.questionId)}"><option value="">Selecione…</option><option value="conceitual">Conceitual</option><option value="interpretacao">Interpretação</option><option value="atencao">Atenção</option></select></label><button class="btn btn-secondary" type="button" data-unit-correction="${App.esc(answer.questionId)}">Salvar classificação</button>`}</article>`;
+        }).join("")}</section>`;
+      }).join("");
+      const complete = wrong.every((answer) => answer.correction);
+      return `<section class="unit-step"><h4>Correção dos erros</h4>${cards}${complete ? '<button class="btn" type="button" data-primary-action data-unit-event="concluir_correcao">Concluir correção</button>' : ""}</section>`;
     },
 
     readingSupport(reading = {}) {
@@ -196,6 +259,15 @@
         cleanupTasks.add(() => window.removeEventListener("scroll", track));
       }
       const progress = Storage.getUnitProgress(unit.id);
+      if (["correcao_pendente", "pratica_concluida"].includes(progress.state) && !this.practiceBank && !this.practiceBankError) {
+        this.practicePromise ||= App.loadJSON("data/questoes-inss.json").then((bank) => {
+          this.practiceBank = bank.questoes || [];
+          rerender();
+        }).catch(() => {
+          this.practiceBankError = true;
+          rerender();
+        });
+      }
       const savedSection = progress.reading.sectionId;
       const restoreKey = `${unit.id}:${entryKey}`;
       if (progress.state === "leitura_em_andamento" && savedSection && !restoredReadings.has(restoreKey)) {
@@ -210,9 +282,34 @@
             button.dataset.unitEvent,
           );
           if (result.ok) {
+            if (button.dataset.unitEvent === "concluir_unidade")
+              Storage.update((data) => ["learn", "read", "practice"].forEach((step) => data.taskStatus[`${entryKey}_${step}`] = "concluida"));
             UnitFlow.cleanup();
             rerender();
           }
+        };
+      root?.querySelectorAll("[data-unit-correction]").forEach((button) => {
+        button.onclick = () => {
+          const questionId = button.dataset.unitCorrection;
+          const classification = root.querySelector(`[data-unit-correction-type="${CSS.escape(questionId)}"]`)?.value;
+          const question = this.practiceBank?.find((item) => item.id === questionId);
+          const attemptId = Storage.getUnitProgress(unit.id).activeAttemptId;
+          const result = Storage.recordUnitCorrection(attemptId, questionId, classification, question);
+          if (result.ok) rerender();
+        };
+      });
+      const reviewButton = root?.querySelector("[data-unit-review]");
+      if (reviewButton)
+        reviewButton.onclick = () => {
+          const plan = reviewPlan(unit);
+          if (!plan) return;
+          const result = Storage.scheduleUnitReview({
+            unitId: unit.id,
+            objetivos: plan.objectives,
+            scheduledDate: addDaysISO(todayISO(), plan.days),
+            reason: plan.reason,
+          });
+          if (result.ok) rerender();
         };
       const phase = root?.querySelector("[data-unit-quiz]")?.dataset.unitQuiz;
       if (phase) this.startPhase({ unit, phase, root, rerender });
@@ -238,6 +335,7 @@
           }));
       } else {
         const bank = await App.loadJSON("data/questoes-inss.json");
+        this.practiceBank = bank.questoes || [];
         const byId = Object.fromEntries(
           (bank.questoes || []).map((question) => [question.id, question]),
         );

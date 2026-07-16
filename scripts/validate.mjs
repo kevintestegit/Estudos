@@ -11,6 +11,11 @@ const log = (ok, msg) => {
   if (!ok) fails++;
 };
 const warn = (msg) => console.log(`WARN  ${msg}`);
+const isRealPastISODate = (value) => {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(date.valueOf()) && date.toISOString().slice(0, 10) === value && value <= new Date().toISOString().slice(0, 10);
+};
 
 function load(name) {
   const p = path.join(dataDir, name);
@@ -70,7 +75,7 @@ for (const aula of aulas) {
   log(["video", "playlist", "indisponivel"].includes(aula.tipo), `aula com tipo válido: ${aula.id}`);
   log(!("yt" in aula), `aula sem campo yt: ${aula.id}`);
   log(!/youtube\.com\/results|[?&]search_query=/i.test(aula.url || ""), `aula sem pesquisa: ${aula.id}`);
-  log(aula.verificadoEm === "2026-07-14", `aula com data real: ${aula.id}`);
+  log(isRealPastISODate(aula.verificadoEm), `aula com data real: ${aula.id}`);
   if (aula.tipo === "indisponivel") {
     log(aula.url === null, `aula indisponível sem link: ${aula.id}`);
     continue;
@@ -230,7 +235,7 @@ for (const file of sourceFiles) {
 }
 
 const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-log(serviceWorker.includes("portal-estudos-v17"), "Service Worker usa cache v17");
+log(serviceWorker.includes("portal-estudos-v18"), "Service Worker usa cache v18");
 log(serviceWorker.includes("./assets/js/calendar.js"), "Service Worker inclui calendar.js");
 log(serviceWorker.includes("./assets/js/unit.js?v=1"), "Service Worker inclui a URL exata de unit.js");
 log(["interleaving.js", "study-flow.js", "study-day.js"].every((name) => serviceWorker.includes(`./assets/js/${name}`)), "Service Worker inclui scripts da página Hoje");

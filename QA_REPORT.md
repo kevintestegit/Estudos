@@ -39,10 +39,10 @@ O relatório anterior registrava bloqueio FortiGate. Esse é apenas o histórico
 - Os 69 candidatos antigos foram consultados novamente: 61 retornaram HTTP 404 no oEmbed, quatro receberam uma resposta HTTP 200 de bloqueio/consentimento e ficaram como `erro_de_rede`, duas ocorrências de `dQw4w9WgXcQ` foram incompatíveis e duas páginas do Planalto eram URLs inválidas como videoaula. Nenhum candidato histórico está publicado.
 - Foram executadas 69 pesquisas específicas no YouTube e avaliados 550 resultados com título, canal, descrição visível, duração e data exibida.
 - Os 45 selecionados foram consultados novamente no oEmbed e na página pública. Título e canal coincidiram em 45/45; duração e data foram obtidas em 45/45.
-- A revalidação externa final gerou o relatório em `2026-07-16T12:16:58.354Z`, mantendo 45 `ok` e 24 `indisponivel`.
+- A revalidação externa final gerou o relatório em `2026-07-16T12:43:54.802Z`, mantendo 45 `ok` e 24 `indisponivel`.
 - Uma sobreposição posterior (`data/aulas-patch.json`) tentava publicar os 24 registros indisponíveis fora da fonte canônica. A auditoria efetiva encontrou 13 incompatibilidades de título e 19 usos afetados por duplicações suspeitas; o patch e seu carregador foram removidos. Esses endereços não foram incorporados a `data/aulas.json`.
-- `aula-pt-01` foi substituída por `B1lk04l-dRU` após relato de falha de acesso ao vídeo anterior. O substituto respondeu HTTP 200, `playabilityStatus: OK` e oEmbed com título e canal em 2026-07-14.
-- A consulta às legendas públicas retornou corpo vazio e não foi usada como evidência de aprovação.
+- `aula-pt-01` foi substituída por `B1lk04l-dRU` após relato de falha de acesso ao vídeo anterior. Em 2026-07-16, o substituto respondeu HTTP 200 e oEmbed com o título `PORTUGUÊS PARA CONCURSOS: INTERPRETAÇÃO DE TEXTO` e o canal `FZ Concursos`; a página informou duração de 1.959 segundos.
+- Para a unidade piloto, a página anunciou transcrição, mas o painel não recebeu segmentos; o endpoint de transcrição respondeu HTTP 400 (`FAILED_PRECONDITION`) e as faixas públicas dos sete candidatos consultados responderam HTTP 200 com corpo vazio. Esses resultados não foram usados como evidência de cobertura pedagógica ou timestamps.
 - Os 24 casos ambíguos permaneceram com `tipo: indisponivel` e `url: null`.
 
 Os detalhes por aula estão em `reports/aulas-link-report.json`; consultas, alternativas e motivos ficam em `reports/aulas-research.json`. Os endereços históricos permanecem em `reports/aulas-candidates.json` e não são consumidos pela aplicação.
@@ -56,7 +56,7 @@ Foram usados 28 canais identificados, incluindo Estratégia Concursos, Gran Curs
 - `url` continua sendo a única fonte da interface.
 - Vídeos usam `Assistir videoaula`, URL exata, nova aba e `rel="noopener noreferrer"`.
 - Indisponíveis continuam sem `<a>` e sem conclusão por clique.
-- O Service Worker usa `portal-estudos-v17`; durante `activate`, somente caches anteriores do portal, inclusive v16, são removidos. Caches de outras aplicações são preservados.
+- O Service Worker usa `portal-estudos-v18`; durante `activate`, somente caches anteriores do portal, inclusive v17, são removidos. Caches de outras aplicações são preservados.
 - A URL exata de `unit.js?v=1` e `data/unidades.json` entram no precache para permitir a primeira abertura offline da unidade piloto após a ativação.
 - Navegação e `/data/` continuam em network-first.
 
@@ -68,6 +68,8 @@ Foram usados 28 canais identificados, incluindo Estratégia Concursos, Gran Curs
 - O Caderno de erros agrupa reincidências por questão. A fila de revisão preserva data e link acionável.
 - As 11 questões PRF que usavam `Língua Portuguesa` agora usam a matéria canônica `Português`.
 - Aulas e PDFs previdenciários aparecem no filtro INSS; assuntos administrativos e de Arquivologia são classificados no filtro PRF.
+- O fluxo legado não conclui mais uma videoaula indisponível e bloqueia leitura e prática até a conclusão explícita da etapa anterior.
+- A unidade piloto renderiza a correção por objetivo, preserva a resposta original, mostra gabarito, resolução e seção da leitura, registra a classificação no Caderno de erros e agenda revisão em 1, 3 ou 7 dias conforme as tentativas. O vídeo segue como pendência editorial, portanto a unidade continua em rascunho e não é declarada integralmente publicada.
 - Três URLs HTTP 404 foram substituídas após GET real: primeira retificação INSS 2022 (Cebraspe), acordos internacionais previdenciários (Ministério da Previdência) e referência oficial do concurso PRF Agente Administrativo 2014 (Ministério da Gestão).
 - HTTP 403 do YouTube passa a ser `nao_verificado`, não prova de conteúdo privado. Playlists são consultadas por GET na página pública.
 - Navegação expõe `aria-current`, menu móvel expõe `aria-expanded`, existe link de salto, barras de edital usam `progressbar` e movimentos respeitam `prefers-reduced-motion`.
@@ -82,14 +84,15 @@ Foram usados 28 canais identificados, incluindo Estratégia Concursos, Gran Curs
 | `node scripts/test-calendar.mjs` | 0 | 27 casos aprovados |
 | `node scripts/check-links.mjs` | 0 | 45 `ok`, 24 `indisponivel` |
 | `node --test tests/check-links.test.mjs` | 0 | 17 aprovados, 0 falhos, 0 ignorados |
+| `node --test tests/validate-units.test.mjs` | 0 | 24 aprovados, 0 falhos, 0 ignorados |
+| `node scripts/validate-units.mjs` | 0 | Unidade em rascunho válida; pendência editorial do vídeo registrada |
 | `node --check assets/js/app.js` | 0 | Sintaxe aprovada |
 | `node --check assets/js/dashboard.js` | 0 | Sintaxe aprovada |
 | `node --check assets/js/biblioteca.js` | 0 | Sintaxe aprovada |
 | `node --check assets/js/quiz.js` | 0 | Sintaxe aprovada |
-| `npx playwright test` | 0 | 67 aprovados, 0 falhos, 0 ignorados |
-| `npm test` (antes de isolar o relógio) | 1 | 57 Playwright aprovados e 10 falhos por dependência da data corrente |
-| `npx playwright test tests/portal.spec.js --workers=2` | 0 | 54 aprovados após estabilizar a data |
-| `npm test` | 0 | Suíte agregada aprovada; 67 testes Playwright aprovados |
+| `npx playwright test tests/portal.spec.js --reporter=line` | 0 | 58 aprovados, 0 falhos, 0 ignorados |
+| `npx playwright test tests/unit-flow.spec.js --reporter=line` | 0 | 45 aprovados, 0 falhos, 0 ignorados |
+| `PLAYWRIGHT_PORT=3068 npm test` | 0 | Suíte agregada aprovada; 116 testes Playwright aprovados |
 | `git diff --check` | 0 | Nenhum erro |
 
 ## Limitações

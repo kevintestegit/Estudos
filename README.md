@@ -74,6 +74,20 @@ Erros repetidos da mesma questão são agrupados no Caderno de erros, com
 contagem e data da última ocorrência. Materiais enviados para revisão mantêm
 data, link de abertura e ação de remoção.
 
+### Unidade piloto
+
+`data/unidades.json` define a unidade piloto de **Português — Interpretação de
+textos** e seus objetivos estáveis. A página Hoje preserva a sequência leitura,
+vídeo, checagem, prática, correção e revisão. Tentativas não são sobrescritas;
+erros são classificados por objetivo e a primeira revisão é agendada em 1, 3
+ou 7 dias conforme o desempenho registrado.
+
+A unidade permanece em `statusEditorial: "rascunho"`: a existência, o título,
+o canal e a duração da aula foram confirmados, mas o YouTube não entregou a
+transcrição necessária para validar cobertura e timestamps dos três objetivos.
+Por isso, a interface bloqueia as etapas posteriores ao vídeo em vez de
+publicar um trecho presumido.
+
 ## Validação
 
 ```bash
@@ -81,6 +95,8 @@ node scripts/validate.mjs
 node scripts/test-calendar.mjs
 node scripts/check-links.mjs
 node --test tests/check-links.test.mjs
+node --test tests/validate-units.test.mjs
+node scripts/validate-units.mjs
 for file in assets/js/*.js; do node --check "$file" || exit 1; done
 npm run test:e2e
 ```

@@ -1,5 +1,5 @@
 {
-  "geradoEm": "2026-07-16T12:16:58.354Z",
+  "geradoEm": "2026-07-16T12:43:54.802Z",
   "resultados": [
     {
       "id": "aula-pt-01",
@@ -11,7 +11,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DB1lk04l-dRU&format=json",
-      "durationMs": 526,
+      "durationMs": 534,
       "idExtraido": "B1lk04l-dRU",
       "tituloYoutube": "PORTUGUÊS PARA CONCURSOS: INTERPRETAÇÃO DE TEXTO",
       "canal": "FZ Concursos",
@@ -21,7 +21,7 @@
         "httpStatus": 200,
         "idExtraido": "B1lk04l-dRU",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DB1lk04l-dRU&format=json",
-        "duracaoRequisicaoMs": 526,
+        "duracaoRequisicaoMs": 534,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -44,7 +44,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DCE4tJWEb5XU&format=json",
-        "durationMs": 407,
+        "durationMs": 289,
         "idExtraido": "CE4tJWEb5XU",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -154,7 +154,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DBpDHOqagBRo&format=json",
-      "durationMs": 289,
+      "durationMs": 313,
       "idExtraido": "BpDHOqagBRo",
       "tituloYoutube": "[AULA 01] Gramática do Zero: Ortografia Oficial - Acentuação Gráfica com professora Janaína Souto",
       "canal": "IMP Concursos",
@@ -164,7 +164,7 @@
         "httpStatus": 200,
         "idExtraido": "BpDHOqagBRo",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DBpDHOqagBRo&format=json",
-        "duracaoRequisicaoMs": 289,
+        "duracaoRequisicaoMs": 313,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -187,7 +187,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D3v2DpEWUDOE&format=json",
-        "durationMs": 489,
+        "durationMs": 721,
         "idExtraido": "3v2DpEWUDOE",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -297,7 +297,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DDbWb5y4mWXk&format=json",
-      "durationMs": 277,
+      "durationMs": 310,
       "idExtraido": "DbWb5y4mWXk",
       "tituloYoutube": "Diferença entre MORFOLOGIA e SINTAXE - Para concurso",
       "canal": "Prof. Álvaro Ferreira",
@@ -307,7 +307,7 @@
         "httpStatus": 200,
         "idExtraido": "DbWb5y4mWXk",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DDbWb5y4mWXk&format=json",
-        "duracaoRequisicaoMs": 277,
+        "duracaoRequisicaoMs": 310,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -330,7 +330,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D3_ZNpXSwGxo&format=json",
-        "durationMs": 513,
+        "durationMs": 480,
         "idExtraido": "3_ZNpXSwGxo",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -440,7 +440,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DC8JPK8vBfa0&format=json",
-      "durationMs": 333,
+      "durationMs": 313,
       "idExtraido": "C8JPK8vBfa0",
       "tituloYoutube": "Você ainda erra CONCORDÂNCIA VERBAL e NOMINAL? Veja isto antes da prova...",
       "canal": "Prof. Álvaro Ferreira",
@@ -450,7 +450,7 @@
         "httpStatus": 200,
         "idExtraido": "C8JPK8vBfa0",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DC8JPK8vBfa0&format=json",
-        "duracaoRequisicaoMs": 333,
+        "duracaoRequisicaoMs": 313,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -473,7 +473,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DEHHCMMs2nNE&format=json",
-        "durationMs": 510,
+        "durationMs": 719,
         "idExtraido": "EHHCMMs2nNE",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -598,7 +598,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DP_otPMgIx2Q&format=json",
-        "durationMs": 473,
+        "durationMs": 836,
         "idExtraido": "P_otPMgIx2Q",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -733,7 +733,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DELTDNsu4v1Y&format=json",
-        "durationMs": 493,
+        "durationMs": 469,
         "idExtraido": "ELTDNsu4v1Y",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -853,7 +853,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DKXm8Hi-I_G0&format=json",
-      "durationMs": 301,
+      "durationMs": 310,
       "idExtraido": "KXm8Hi-I_G0",
       "tituloYoutube": "RACIOCÍNIO LÓGICO - PROPOSIÇÕES E TABELA VERDADE - Professora Angela Matemática",
       "canal": "Professora Angela Matemática",
@@ -863,7 +863,7 @@
         "httpStatus": 200,
         "idExtraido": "KXm8Hi-I_G0",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DKXm8Hi-I_G0&format=json",
-        "duracaoRequisicaoMs": 301,
+        "duracaoRequisicaoMs": 310,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -886,7 +886,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DUijM_4wDgE4&format=json",
-        "durationMs": 647,
+        "durationMs": 285,
         "idExtraido": "UijM_4wDgE4",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -996,7 +996,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dhy9IpY2c6l0&format=json",
-      "durationMs": 265,
+      "durationMs": 298,
       "idExtraido": "hy9IpY2c6l0",
       "tituloYoutube": "LÓGICA PROPOSICIONAL - Negações e Equivalências | Descomplicando RLM com Waguinho",
       "canal": "Wagner Aguiar",
@@ -1006,7 +1006,7 @@
         "httpStatus": 200,
         "idExtraido": "hy9IpY2c6l0",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dhy9IpY2c6l0&format=json",
-        "duracaoRequisicaoMs": 265,
+        "duracaoRequisicaoMs": 298,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -1029,7 +1029,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DhFsYHBE8pHM&format=json",
-        "durationMs": 301,
+        "durationMs": 289,
         "idExtraido": "hFsYHBE8pHM",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -1139,7 +1139,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dl_20kYKKZk0&format=json",
-      "durationMs": 300,
+      "durationMs": 286,
       "idExtraido": "l_20kYKKZk0",
       "tituloYoutube": "Aprenda DIAGRAMAS LÓGICOS em 30 minutos - Aula 1",
       "canal": "Felippe Loureiro",
@@ -1149,7 +1149,7 @@
         "httpStatus": 200,
         "idExtraido": "l_20kYKKZk0",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dl_20kYKKZk0&format=json",
-        "duracaoRequisicaoMs": 300,
+        "duracaoRequisicaoMs": 286,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -1172,7 +1172,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DqX0GvtP4oZ4&format=json",
-        "durationMs": 310,
+        "durationMs": 290,
         "idExtraido": "qX0GvtP4oZ4",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -1282,7 +1282,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D-dTgmq1rOuM&format=json",
-      "durationMs": 367,
+      "durationMs": 321,
       "idExtraido": "-dTgmq1rOuM",
       "tituloYoutube": "Concurso PC PI | Destravando RLM: Problemas de Contagem e Noções de Probabilidade",
       "canal": "Gran Cursos Online",
@@ -1292,7 +1292,7 @@
         "httpStatus": 200,
         "idExtraido": "-dTgmq1rOuM",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D-dTgmq1rOuM&format=json",
-        "duracaoRequisicaoMs": 367,
+        "duracaoRequisicaoMs": 321,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -1315,7 +1315,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DCHUHJY4tSmE&format=json",
-        "durationMs": 313,
+        "durationMs": 290,
         "idExtraido": "CHUHJY4tSmE",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -1425,7 +1425,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DmzwDUdlZIJE&format=json",
-      "durationMs": 303,
+      "durationMs": 310,
       "idExtraido": "mzwDUdlZIJE",
       "tituloYoutube": "Informática para Concursos 2025 - Aula #01 - Noções de Hardware e Software",
       "canal": "Matemorfose com Prof. Leandro de Souza",
@@ -1435,7 +1435,7 @@
         "httpStatus": 200,
         "idExtraido": "mzwDUdlZIJE",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DmzwDUdlZIJE&format=json",
-        "duracaoRequisicaoMs": 303,
+        "duracaoRequisicaoMs": 310,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -1458,7 +1458,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DJRsYhVKBjlA&format=json",
-        "durationMs": 287,
+        "durationMs": 284,
         "idExtraido": "JRsYhVKBjlA",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -1568,7 +1568,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DzrQQl8fyihI&format=json",
-      "durationMs": 296,
+      "durationMs": 333,
       "idExtraido": "zrQQl8fyihI",
       "tituloYoutube": "Sistema Operacional | Informática para Concursos",
       "canal": "Prof. Marcelo Narciso",
@@ -1578,7 +1578,7 @@
         "httpStatus": 200,
         "idExtraido": "zrQQl8fyihI",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DzrQQl8fyihI&format=json",
-        "duracaoRequisicaoMs": 296,
+        "duracaoRequisicaoMs": 333,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -1601,7 +1601,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DkSHCWksksEM&format=json",
-        "durationMs": 299,
+        "durationMs": 287,
         "idExtraido": "kSHCWksksEM",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -1726,7 +1726,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DoXgyCav8WU4&format=json",
-        "durationMs": 294,
+        "durationMs": 295,
         "idExtraido": "oXgyCav8WU4",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -1846,7 +1846,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DkeFgZOS989g&format=json",
-      "durationMs": 294,
+      "durationMs": 322,
       "idExtraido": "keFgZOS989g",
       "tituloYoutube": "Informática para Concursos Pacote Office",
       "canal": "Prof. Marcelo Narciso",
@@ -1856,7 +1856,7 @@
         "httpStatus": 200,
         "idExtraido": "keFgZOS989g",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DkeFgZOS989g&format=json",
-        "duracaoRequisicaoMs": 294,
+        "duracaoRequisicaoMs": 322,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -1879,7 +1879,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D9J_2W08b7w0&format=json",
-        "durationMs": 293,
+        "durationMs": 330,
         "idExtraido": "9J_2W08b7w0",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -1989,7 +1989,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DETtAvAcLEFA&format=json",
-      "durationMs": 1099,
+      "durationMs": 286,
       "idExtraido": "ETtAvAcLEFA",
       "tituloYoutube": "AULA 01 - ÉTICA no SERVIÇO PÚBLICO (para QUALQUER CONCURSO)",
       "canal": "FAZ QUESTÃO CONCURSOS PÚBLICOS",
@@ -1999,7 +1999,7 @@
         "httpStatus": 200,
         "idExtraido": "ETtAvAcLEFA",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DETtAvAcLEFA&format=json",
-        "duracaoRequisicaoMs": 1099,
+        "duracaoRequisicaoMs": 286,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -2022,7 +2022,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DzPhB7XeVVPA&format=json",
-        "durationMs": 281,
+        "durationMs": 295,
         "idExtraido": "zPhB7XeVVPA",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -2147,7 +2147,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DzPhB7XeVVPA&format=json",
-        "durationMs": 295,
+        "durationMs": 297,
         "idExtraido": "zPhB7XeVVPA",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -2267,7 +2267,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D-QD3w6jdzeY&format=json",
-      "durationMs": 314,
+      "durationMs": 312,
       "idExtraido": "-QD3w6jdzeY",
       "tituloYoutube": "Aula Gratuita: Teoria Geral dos Direitos Fundamentais para Concursos",
       "canal": "Adriane Fauth",
@@ -2277,7 +2277,7 @@
         "httpStatus": 200,
         "idExtraido": "-QD3w6jdzeY",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D-QD3w6jdzeY&format=json",
-        "duracaoRequisicaoMs": 314,
+        "duracaoRequisicaoMs": 312,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -2300,7 +2300,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DK8YVzLNyJO8&format=json",
-        "durationMs": 282,
+        "durationMs": 302,
         "idExtraido": "K8YVzLNyJO8",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -2410,7 +2410,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dpg9SorCGwGI&format=json",
-      "durationMs": 670,
+      "durationMs": 300,
       "idExtraido": "pg9SorCGwGI",
       "tituloYoutube": "Organização do Estado Brasileiro | Aula Completa para Concursos",
       "canal": "Adriane Fauth",
@@ -2420,7 +2420,7 @@
         "httpStatus": 200,
         "idExtraido": "pg9SorCGwGI",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dpg9SorCGwGI&format=json",
-        "duracaoRequisicaoMs": 670,
+        "duracaoRequisicaoMs": 300,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -2443,7 +2443,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DpRTHOo7sXfQ&format=json",
-        "durationMs": 298,
+        "durationMs": 666,
         "idExtraido": "pRTHOo7sXfQ",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -2553,7 +2553,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DFaZEZV4qYXU&format=json",
-      "durationMs": 285,
+      "durationMs": 324,
       "idExtraido": "FaZEZV4qYXU",
       "tituloYoutube": "CONSTITUCIONAL: Administração Pública - Art. 37 ao 41 (Parte 1)",
       "canal": "Evaldo Rodrigues",
@@ -2563,7 +2563,7 @@
         "httpStatus": 200,
         "idExtraido": "FaZEZV4qYXU",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DFaZEZV4qYXU&format=json",
-        "duracaoRequisicaoMs": 285,
+        "duracaoRequisicaoMs": 324,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -2586,7 +2586,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DZJqoAPnRcq0&format=json",
-        "durationMs": 673,
+        "durationMs": 291,
         "idExtraido": "ZJqoAPnRcq0",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -2696,7 +2696,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DjMiN6HbxsZM&format=json",
-      "durationMs": 680,
+      "durationMs": 286,
       "idExtraido": "jMiN6HbxsZM",
       "tituloYoutube": "Concurso PMBA - Direito Constitucional -  Da Organização Dos Poderes e Suas Competências",
       "canal": "Monster Concursos",
@@ -2706,7 +2706,7 @@
         "httpStatus": 200,
         "idExtraido": "jMiN6HbxsZM",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DjMiN6HbxsZM&format=json",
-        "duracaoRequisicaoMs": 680,
+        "duracaoRequisicaoMs": 286,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -2729,7 +2729,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DZJqoAPnRcq0&format=json",
-        "durationMs": 287,
+        "durationMs": 275,
         "idExtraido": "ZJqoAPnRcq0",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -2839,7 +2839,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DpdAEuiH0Rt4&format=json",
-      "durationMs": 285,
+      "durationMs": 354,
       "idExtraido": "pdAEuiH0Rt4",
       "tituloYoutube": "Organização Administrativa: Resumo em UMA AULA - Nunca mais seja demitido 2026",
       "canal": "Estratégia Concursos",
@@ -2849,7 +2849,7 @@
         "httpStatus": 200,
         "idExtraido": "pdAEuiH0Rt4",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DpdAEuiH0Rt4&format=json",
-        "duracaoRequisicaoMs": 285,
+        "duracaoRequisicaoMs": 354,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -2872,7 +2872,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D_cWkFN3K0GQ&format=json",
-        "durationMs": 308,
+        "durationMs": 305,
         "idExtraido": "_cWkFN3K0GQ",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -2982,7 +2982,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DU0YFO6l7GGM&format=json",
-      "durationMs": 282,
+      "durationMs": 316,
       "idExtraido": "U0YFO6l7GGM",
       "tituloYoutube": "Direito Administrativo para Concursos: Atos Administrativos",
       "canal": "Nova Concursos",
@@ -2992,7 +2992,7 @@
         "httpStatus": 200,
         "idExtraido": "U0YFO6l7GGM",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DU0YFO6l7GGM&format=json",
-        "duracaoRequisicaoMs": 282,
+        "duracaoRequisicaoMs": 316,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -3015,7 +3015,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DZYvKbjpVpEU&format=json",
-        "durationMs": 290,
+        "durationMs": 289,
         "idExtraido": "ZYvKbjpVpEU",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -3125,7 +3125,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Ds8tNutu-Y_U&format=json",
-      "durationMs": 268,
+      "durationMs": 307,
       "idExtraido": "s8tNutu-Y_U",
       "tituloYoutube": "Tudo o que você precisa saber sobre a Lei das Licitações",
       "canal": "Estratégia Concursos",
@@ -3135,7 +3135,7 @@
         "httpStatus": 200,
         "idExtraido": "s8tNutu-Y_U",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Ds8tNutu-Y_U&format=json",
-        "duracaoRequisicaoMs": 268,
+        "duracaoRequisicaoMs": 307,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -3158,7 +3158,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DZfE_NWKlMSo&format=json",
-        "durationMs": 673,
+        "durationMs": 504,
         "idExtraido": "ZfE_NWKlMSo",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -3268,7 +3268,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DoGdXyqvcx2g&format=json",
-      "durationMs": 280,
+      "durationMs": 328,
       "idExtraido": "oGdXyqvcx2g",
       "tituloYoutube": "PODERES ADMINISTRATIVOS | AULA COMPLETA | TEORIA + QUESTÕES (2026)",
       "canal": "FZ Concursos",
@@ -3278,7 +3278,7 @@
         "httpStatus": 200,
         "idExtraido": "oGdXyqvcx2g",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DoGdXyqvcx2g&format=json",
-        "duracaoRequisicaoMs": 280,
+        "duracaoRequisicaoMs": 328,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -3301,7 +3301,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DmFHrx1Cq_lM&format=json",
-        "durationMs": 302,
+        "durationMs": 307,
         "idExtraido": "mFHrx1Cq_lM",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -3543,7 +3543,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DeDhK7GcTAOY&format=json",
-      "durationMs": 294,
+      "durationMs": 317,
       "idExtraido": "eDhK7GcTAOY",
       "tituloYoutube": "Controle da Administração | Prof. Barney Bichara",
       "canal": "Supremo",
@@ -3553,7 +3553,7 @@
         "httpStatus": 200,
         "idExtraido": "eDhK7GcTAOY",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DeDhK7GcTAOY&format=json",
-        "duracaoRequisicaoMs": 294,
+        "duracaoRequisicaoMs": 317,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -3576,7 +3576,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DZfE_NWKlMSo&format=json",
-        "durationMs": 284,
+        "durationMs": 307,
         "idExtraido": "ZfE_NWKlMSo",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -3686,7 +3686,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D32KFs2sBOWw&format=json",
-      "durationMs": 283,
+      "durationMs": 308,
       "idExtraido": "32KFs2sBOWw",
       "tituloYoutube": "Direito Previdenciário - Seguridade Social - Conceito e Organização",
       "canal": "Me Julga - Cíntia Brunelli",
@@ -3696,7 +3696,7 @@
         "httpStatus": 200,
         "idExtraido": "32KFs2sBOWw",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D32KFs2sBOWw&format=json",
-        "duracaoRequisicaoMs": 283,
+        "duracaoRequisicaoMs": 308,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -3719,7 +3719,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DB4GdCjWGM4o&format=json",
-        "durationMs": 303,
+        "durationMs": 292,
         "idExtraido": "B4GdCjWGM4o",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -3829,7 +3829,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dmz7zSeCeCIo&format=json",
-      "durationMs": 371,
+      "durationMs": 297,
       "idExtraido": "mz7zSeCeCIo",
       "tituloYoutube": "Direito Previdenciário Para o INSS: Tudo Sobre Segurados e Dependentes!",
       "canal": "Prep Concursos",
@@ -3839,7 +3839,7 @@
         "httpStatus": 200,
         "idExtraido": "mz7zSeCeCIo",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dmz7zSeCeCIo&format=json",
-        "duracaoRequisicaoMs": 371,
+        "duracaoRequisicaoMs": 297,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -3862,7 +3862,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DckgYeMmsJEo&format=json",
-        "durationMs": 307,
+        "durationMs": 293,
         "idExtraido": "ckgYeMmsJEo",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -3972,7 +3972,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DHBvoAN4QEG4&format=json",
-      "durationMs": 314,
+      "durationMs": 297,
       "idExtraido": "HBvoAN4QEG4",
       "tituloYoutube": "Filiação e Inscrição - parte 1 - aula 25 - Bloco 1 - Professor Eduardo Tanaka",
       "canal": "Prof. Eduardo Tanaka",
@@ -3982,7 +3982,7 @@
         "httpStatus": 200,
         "idExtraido": "HBvoAN4QEG4",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DHBvoAN4QEG4&format=json",
-        "duracaoRequisicaoMs": 314,
+        "duracaoRequisicaoMs": 297,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -4005,7 +4005,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DckgYeMmsJEo&format=json",
-        "durationMs": 306,
+        "durationMs": 301,
         "idExtraido": "ckgYeMmsJEo",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -4115,7 +4115,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdbubiicuEws&format=json",
-      "durationMs": 282,
+      "durationMs": 310,
       "idExtraido": "dbubiicuEws",
       "tituloYoutube": "Concurso INSS 2026 | CARÊNCIA E QUALIDADE DE SEGURADO: Aula Descomplicada para Quem Voltou a Estudar",
       "canal": "Gabarite Previdenciario",
@@ -4125,7 +4125,7 @@
         "httpStatus": 200,
         "idExtraido": "dbubiicuEws",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdbubiicuEws&format=json",
-        "duracaoRequisicaoMs": 282,
+        "duracaoRequisicaoMs": 310,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -4148,7 +4148,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DEqhR3HJcuow&format=json",
-        "durationMs": 394,
+        "durationMs": 310,
         "idExtraido": "EqhR3HJcuow",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -4258,7 +4258,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D3IVngawMlRU&format=json",
-      "durationMs": 303,
+      "durationMs": 284,
       "idExtraido": "3IVngawMlRU",
       "tituloYoutube": "CONCURSO INSS: SALÁRIO DE CONTRIBUIÇÃO | Com o Profº. Harlenson Fonseca",
       "canal": "Cursos do Portal",
@@ -4268,7 +4268,7 @@
         "httpStatus": 200,
         "idExtraido": "3IVngawMlRU",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D3IVngawMlRU&format=json",
-        "duracaoRequisicaoMs": 303,
+        "duracaoRequisicaoMs": 284,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -4398,7 +4398,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DZrXMfzVWws8&format=json",
-      "durationMs": 293,
+      "durationMs": 312,
       "idExtraido": "ZrXMfzVWws8",
       "tituloYoutube": "Aposentadoria Pós-Reforma INSS: Guia Completo sobre as Novas Regras e Como \"Gabaritar\" a Prova",
       "canal": "Gabarite Previdenciario",
@@ -4408,7 +4408,7 @@
         "httpStatus": 200,
         "idExtraido": "ZrXMfzVWws8",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DZrXMfzVWws8&format=json",
-        "duracaoRequisicaoMs": 293,
+        "duracaoRequisicaoMs": 312,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -4556,7 +4556,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DkE6lNMmHnF0&format=json",
-        "durationMs": 290,
+        "durationMs": 281,
         "idExtraido": "kE6lNMmHnF0",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -4691,7 +4691,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DkE6lNMmHnF0&format=json",
-        "durationMs": 292,
+        "durationMs": 288,
         "idExtraido": "kE6lNMmHnF0",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -4826,7 +4826,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DTqKCJ8E6pKs&format=json",
-        "durationMs": 288,
+        "durationMs": 285,
         "idExtraido": "TqKCJ8E6pKs",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -4979,7 +4979,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DB4GdCjWGM4o&format=json",
-        "durationMs": 297,
+        "durationMs": 292,
         "idExtraido": "B4GdCjWGM4o",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -5236,7 +5236,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DHo5KqvInh6g&format=json",
-        "durationMs": 297,
+        "durationMs": 289,
         "idExtraido": "Ho5KqvInh6g",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -5371,7 +5371,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DB4GdCjWGM4o&format=json",
-        "durationMs": 281,
+        "durationMs": 280,
         "idExtraido": "B4GdCjWGM4o",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -5506,7 +5506,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DkE6lNMmHnF0&format=json",
-        "durationMs": 289,
+        "durationMs": 287,
         "idExtraido": "kE6lNMmHnF0",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -5626,7 +5626,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DzrAN3H4ZaMg&format=json",
-      "durationMs": 295,
+      "durationMs": 303,
       "idExtraido": "zrAN3H4ZaMg",
       "tituloYoutube": "DOMINE o Novo Acordo Ortográfico: O Guia COMPLETO! TUDO Sobre o Novo Acordo Ortográfico!",
       "canal": "Português sem Enrolação - Professora Lis",
@@ -5636,7 +5636,7 @@
         "httpStatus": 200,
         "idExtraido": "zrAN3H4ZaMg",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DzrAN3H4ZaMg&format=json",
-        "duracaoRequisicaoMs": 295,
+        "duracaoRequisicaoMs": 303,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -5659,7 +5659,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D3v2DpEWUDOE&format=json",
-        "durationMs": 280,
+        "durationMs": 296,
         "idExtraido": "3v2DpEWUDOE",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -5769,7 +5769,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D5uMooAjtVis&format=json",
-      "durationMs": 760,
+      "durationMs": 313,
       "idExtraido": "5uMooAjtVis",
       "tituloYoutube": "CRASE - As 6 regras mais cobradas em CONCURSO (Teoria + Questões)",
       "canal": "Prof. Álvaro Ferreira",
@@ -5779,7 +5779,7 @@
         "httpStatus": 200,
         "idExtraido": "5uMooAjtVis",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D5uMooAjtVis&format=json",
-        "duracaoRequisicaoMs": 760,
+        "duracaoRequisicaoMs": 313,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -5802,7 +5802,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 200,
         "urlFinal": "https://www.youtube.com/playlist?list=PL8vXuI6zMPdgutl2G2PpG1tI2TBCX3qgG",
-        "durationMs": 499,
+        "durationMs": 443,
         "idExtraido": "PL8vXuI6zMPdgutl2G2PpG1tI2TBCX3qgG",
         "status": "erro_de_rede",
         "motivo": "Bloqueio de rede impediu a consulta ao YouTube.",
@@ -5915,7 +5915,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DRM4Sv5jZ9B4&format=json",
-      "durationMs": 275,
+      "durationMs": 289,
       "idExtraido": "RM4Sv5jZ9B4",
       "tituloYoutube": "Sequências Lógicas Aula 1",
       "canal": "Felippe Loureiro",
@@ -5925,7 +5925,7 @@
         "httpStatus": 200,
         "idExtraido": "RM4Sv5jZ9B4",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DRM4Sv5jZ9B4&format=json",
-        "duracaoRequisicaoMs": 275,
+        "duracaoRequisicaoMs": 289,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -5948,7 +5948,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 200,
         "urlFinal": "https://www.youtube.com/playlist?list=PL8vXuI6zMPdh3QePBSRqYJNW6Cgm8bBT-",
-        "durationMs": 562,
+        "durationMs": 611,
         "idExtraido": "PL8vXuI6zMPdh3QePBSRqYJNW6Cgm8bBT-",
         "status": "erro_de_rede",
         "motivo": "Bloqueio de rede impediu a consulta ao YouTube.",
@@ -6061,7 +6061,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D_8mZOSXCRp8&format=json",
-      "durationMs": 326,
+      "durationMs": 308,
       "idExtraido": "_8mZOSXCRp8",
       "tituloYoutube": "ANÁLISE COMBINATÓRIA | PERMUTAÇÃO | ARRANJO | COMBINAÇÃO",
       "canal": "Dicasdemat Sandro Curió",
@@ -6071,7 +6071,7 @@
         "httpStatus": 200,
         "idExtraido": "_8mZOSXCRp8",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D_8mZOSXCRp8&format=json",
-        "duracaoRequisicaoMs": 326,
+        "duracaoRequisicaoMs": 308,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -6094,7 +6094,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 200,
         "urlFinal": "https://www.youtube.com/playlist?list=PL8vXuI6zMPdh3QePBSRqYJNW6Cgm8bBT-",
-        "durationMs": 411,
+        "durationMs": 517,
         "idExtraido": "PL8vXuI6zMPdh3QePBSRqYJNW6Cgm8bBT-",
         "status": "erro_de_rede",
         "motivo": "Bloqueio de rede impediu a consulta ao YouTube.",
@@ -6207,7 +6207,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DnCDGLy8oFDc&format=json",
-      "durationMs": 286,
+      "durationMs": 295,
       "idExtraido": "nCDGLy8oFDc",
       "tituloYoutube": "DIREITO CONSTITUCIONAL | ART. 5º DIREITOS E DEVERES INDIVIDUAIS E COLETIVOS | ATUALIZADO 2026",
       "canal": "FZ Concursos",
@@ -6217,7 +6217,7 @@
         "httpStatus": 200,
         "idExtraido": "nCDGLy8oFDc",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DnCDGLy8oFDc&format=json",
-        "duracaoRequisicaoMs": 286,
+        "duracaoRequisicaoMs": 295,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -6240,7 +6240,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DK8YVzLNyJO8&format=json",
-        "durationMs": 278,
+        "durationMs": 301,
         "idExtraido": "K8YVzLNyJO8",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -6350,7 +6350,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D8chcaVX2ElM&format=json",
-      "durationMs": 271,
+      "durationMs": 310,
       "idExtraido": "8chcaVX2ElM",
       "tituloYoutube": "Controle de Constitucionalidade: Resumo em UMA AULA - Nunca mais seja demitido 2026",
       "canal": "Estratégia Concursos",
@@ -6360,7 +6360,7 @@
         "httpStatus": 200,
         "idExtraido": "8chcaVX2ElM",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D8chcaVX2ElM&format=json",
-        "duracaoRequisicaoMs": 271,
+        "duracaoRequisicaoMs": 310,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -6383,7 +6383,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 200,
         "urlFinal": "https://www.youtube.com/playlist?list=PLl7qns5F9CQc6Y7I5gq3lC4qRX8QXgD0x",
-        "durationMs": 558,
+        "durationMs": 598,
         "idExtraido": "PLl7qns5F9CQc6Y7I5gq3lC4qRX8QXgD0x",
         "status": "erro_de_rede",
         "motivo": "Bloqueio de rede impediu a consulta ao YouTube.",
@@ -6496,7 +6496,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DCmghqRLURW4&format=json",
-      "durationMs": 279,
+      "durationMs": 419,
       "idExtraido": "CmghqRLURW4",
       "tituloYoutube": "Tudo sobre Lei de Licitações para Concursos de Nível Médio - Prof. Herbert Almeida",
       "canal": "Estratégia Concursos",
@@ -6506,7 +6506,7 @@
         "httpStatus": 200,
         "idExtraido": "CmghqRLURW4",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DCmghqRLURW4&format=json",
-        "duracaoRequisicaoMs": 279,
+        "duracaoRequisicaoMs": 419,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -6529,7 +6529,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DZfE_NWKlMSo&format=json",
-        "durationMs": 327,
+        "durationMs": 290,
         "idExtraido": "ZfE_NWKlMSo",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -6771,7 +6771,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DCYa11nyu47Y&format=json",
-      "durationMs": 278,
+      "durationMs": 306,
       "idExtraido": "CYa11nyu47Y",
       "tituloYoutube": "Regimes Previdenciários: Entenda RGPS, RPPS e RPC para OAB e Concursos | Direito Previdenciário",
       "canal": "Aprendendo Direito",
@@ -6781,7 +6781,7 @@
         "httpStatus": 200,
         "idExtraido": "CYa11nyu47Y",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DCYa11nyu47Y&format=json",
-        "duracaoRequisicaoMs": 278,
+        "duracaoRequisicaoMs": 306,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -6804,7 +6804,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DckgYeMmsJEo&format=json",
-        "durationMs": 672,
+        "durationMs": 307,
         "idExtraido": "ckgYeMmsJEo",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -6914,7 +6914,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DIhGZv-DB-G4&format=json",
-      "durationMs": 291,
+      "durationMs": 309,
       "idExtraido": "IhGZv-DB-G4",
       "tituloYoutube": "INSS 2026 | BENEFÍCIOS PREVIDENCIÁRIOS: Aposentadorias Programadas | Com o Profº. Harlenson Fonseca",
       "canal": "Cursos do Portal",
@@ -6924,7 +6924,7 @@
         "httpStatus": 200,
         "idExtraido": "IhGZv-DB-G4",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DIhGZv-DB-G4&format=json",
-        "duracaoRequisicaoMs": 291,
+        "duracaoRequisicaoMs": 309,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -6947,7 +6947,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DkE6lNMmHnF0&format=json",
-        "durationMs": 284,
+        "durationMs": 271,
         "idExtraido": "kE6lNMmHnF0",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -7072,7 +7072,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DkE6lNMmHnF0&format=json",
-        "durationMs": 267,
+        "durationMs": 648,
         "idExtraido": "kE6lNMmHnF0",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -7207,7 +7207,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D9J_2W08b7w0&format=json",
-        "durationMs": 303,
+        "durationMs": 532,
         "idExtraido": "9J_2W08b7w0",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -7360,7 +7360,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DjX5G8KJzV2E&format=json",
-        "durationMs": 292,
+        "durationMs": 295,
         "idExtraido": "jX5G8KJzV2E",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -7470,7 +7470,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DQ5-8EXP5u0M&format=json",
-      "durationMs": 308,
+      "durationMs": 317,
       "idExtraido": "Q5-8EXP5u0M",
       "tituloYoutube": "Aula - Processo Administrativo (Planejamento, Organização, Direção, Controle) - PODC - Administração",
       "canal": "Prof. Filipe Costa | Área Administrativa",
@@ -7480,7 +7480,7 @@
         "httpStatus": 200,
         "idExtraido": "Q5-8EXP5u0M",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DQ5-8EXP5u0M&format=json",
-        "duracaoRequisicaoMs": 308,
+        "duracaoRequisicaoMs": 317,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -7503,7 +7503,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DjX5G8KJzV2E&format=json",
-        "durationMs": 291,
+        "durationMs": 297,
         "idExtraido": "jX5G8KJzV2E",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -7613,7 +7613,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DSc24Y2k92O0&format=json",
-      "durationMs": 303,
+      "durationMs": 319,
       "idExtraido": "Sc24Y2k92O0",
       "tituloYoutube": "Concurso CORE-SE 2025: Tipos de Estrutura Organizacional – Administração Geral Aula Teórica",
       "canal": "Carranza Cursos",
@@ -7623,7 +7623,7 @@
         "httpStatus": 200,
         "idExtraido": "Sc24Y2k92O0",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DSc24Y2k92O0&format=json",
-        "duracaoRequisicaoMs": 303,
+        "duracaoRequisicaoMs": 319,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -7646,7 +7646,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DjX5G8KJzV2E&format=json",
-        "durationMs": 308,
+        "durationMs": 288,
         "idExtraido": "jX5G8KJzV2E",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -7771,7 +7771,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DjX5G8KJzV2E&format=json",
-        "durationMs": 290,
+        "durationMs": 275,
         "idExtraido": "jX5G8KJzV2E",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -7906,7 +7906,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DjX5G8KJzV2E&format=json",
-        "durationMs": 666,
+        "durationMs": 293,
         "idExtraido": "jX5G8KJzV2E",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -8026,7 +8026,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DWSzViE4JOy8&format=json",
-      "durationMs": 311,
+      "durationMs": 289,
       "idExtraido": "WSzViE4JOy8",
       "tituloYoutube": "01. Aula de Noções de Administração de Materiais (Administração de Recursos Materiais)",
       "canal": "TecConcursos",
@@ -8036,7 +8036,7 @@
         "httpStatus": 200,
         "idExtraido": "WSzViE4JOy8",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DWSzViE4JOy8&format=json",
-        "duracaoRequisicaoMs": 311,
+        "duracaoRequisicaoMs": 289,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -8059,7 +8059,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DjX5G8KJzV2E&format=json",
-        "durationMs": 285,
+        "durationMs": 292,
         "idExtraido": "jX5G8KJzV2E",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -8293,7 +8293,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DHB-TD1n5C9A&format=json",
-      "durationMs": 304,
+      "durationMs": 290,
       "idExtraido": "HB-TD1n5C9A",
       "tituloYoutube": "Curso Completo de Administração Pública - Prof. Elisabete Moreira",
       "canal": "Estratégia Concursos",
@@ -8303,7 +8303,7 @@
         "httpStatus": 200,
         "idExtraido": "HB-TD1n5C9A",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DHB-TD1n5C9A&format=json",
-        "duracaoRequisicaoMs": 304,
+        "duracaoRequisicaoMs": 290,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -8326,7 +8326,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DjX5G8KJzV2E&format=json",
-        "durationMs": 280,
+        "durationMs": 292,
         "idExtraido": "jX5G8KJzV2E",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -8436,7 +8436,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DoqOBQTFH2Rc&format=json",
-      "durationMs": 324,
+      "durationMs": 314,
       "idExtraido": "oqOBQTFH2Rc",
       "tituloYoutube": "CONCURSO ALECE: GESTÃO DOCUMENTAL, ARQUIVOLOGIA E PROTOCOLO | FUNDAMENTOS PARA A PROVA",
       "canal": "Carranza Cursos",
@@ -8446,7 +8446,7 @@
         "httpStatus": 200,
         "idExtraido": "oqOBQTFH2Rc",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DoqOBQTFH2Rc&format=json",
-        "duracaoRequisicaoMs": 324,
+        "duracaoRequisicaoMs": 314,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -8469,7 +8469,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D7xK0YPCqBSQ&format=json",
-        "durationMs": 281,
+        "durationMs": 293,
         "idExtraido": "7xK0YPCqBSQ",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -8594,7 +8594,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D7xK0YPCqBSQ&format=json",
-        "durationMs": 291,
+        "durationMs": 661,
         "idExtraido": "7xK0YPCqBSQ",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -8714,7 +8714,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DwTACbF76_VY&format=json",
-      "durationMs": 319,
+      "durationMs": 286,
       "idExtraido": "wTACbF76_VY",
       "tituloYoutube": "03.02.03. Tabela de Temporalidade de Documentos (Arquivologia) Prof.ª Izabel Ataíde",
       "canal": "TecConcursos",
@@ -8724,7 +8724,7 @@
         "httpStatus": 200,
         "idExtraido": "wTACbF76_VY",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DwTACbF76_VY&format=json",
-        "duracaoRequisicaoMs": 319,
+        "duracaoRequisicaoMs": 286,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -8747,7 +8747,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D7xK0YPCqBSQ&format=json",
-        "durationMs": 297,
+        "durationMs": 283,
         "idExtraido": "7xK0YPCqBSQ",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -8872,7 +8872,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D7xK0YPCqBSQ&format=json",
-        "durationMs": 297,
+        "durationMs": 277,
         "idExtraido": "7xK0YPCqBSQ",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -8992,7 +8992,7 @@
       "verificadoEm": "2026-07-16",
       "httpStatus": 200,
       "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DPAGxRD4th9A&format=json",
-      "durationMs": 291,
+      "durationMs": 302,
       "idExtraido": "PAGxRD4th9A",
       "tituloYoutube": "03.08.01. Protocolo e suas Atividades (Arquivologia) Prof.ª Izabel Ataíde",
       "canal": "TecConcursos",
@@ -9002,7 +9002,7 @@
         "httpStatus": 200,
         "idExtraido": "PAGxRD4th9A",
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DPAGxRD4th9A&format=json",
-        "duracaoRequisicaoMs": 291,
+        "duracaoRequisicaoMs": 302,
         "pesquisaHttpStatus": 200,
         "detalhes": [
           "YouTube oEmbed retornou title e author_name"
@@ -9025,7 +9025,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D7xK0YPCqBSQ&format=json",
-        "durationMs": 289,
+        "durationMs": 288,
         "idExtraido": "7xK0YPCqBSQ",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -9150,7 +9150,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D7xK0YPCqBSQ&format=json",
-        "durationMs": 292,
+        "durationMs": 288,
         "idExtraido": "7xK0YPCqBSQ",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -9285,7 +9285,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DWl3BKiQYjmM&format=json",
-        "durationMs": 284,
+        "durationMs": 310,
         "idExtraido": "Wl3BKiQYjmM",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -9420,7 +9420,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DWl3BKiQYjmM&format=json",
-        "durationMs": 538,
+        "durationMs": 295,
         "idExtraido": "Wl3BKiQYjmM",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."
@@ -9544,7 +9544,7 @@
         "verificadoEm": "2026-07-16",
         "httpStatus": 404,
         "urlFinal": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DWl3BKiQYjmM&format=json",
-        "durationMs": 687,
+        "durationMs": 308,
         "idExtraido": "Wl3BKiQYjmM",
         "status": "removido",
         "motivo": "oEmbed respondeu HTTP 404."

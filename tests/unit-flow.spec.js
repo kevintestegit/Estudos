@@ -1382,7 +1382,7 @@ const mountQuizUnit = async (page, state = "video_concluido") => {
     const unit = {
       id: unitId, titulo: "Unidade válida para teste", materia: "Português",
       assunto: "Interpretação de textos", objetivos: ["obj"],
-      leitura: { tempoMinutos: 8, secoes: [{ id: "secao", titulo: "Seção", conteudo: "Conteúdo" }] },
+      leitura: { tempoMinutos: 8, secoes: [{ id: "secao", titulo: "Seção", conteudo: "Conteúdo", objetivosCobertos: ["obj"] }] },
       video: {
         aulaId: "aula-teste", inicioSegundos: 10, fimSegundos: 90,
         duracaoTotalSegundos: 120, objetivosCobertos: ["obj"],
@@ -1498,4 +1498,87 @@ test("falha ao persistir resposta mantém a questão e não avança", async ({ p
   await expect(page.getByRole("alert")).toContainText("salvar");
   await expect(page.getByText("Checagem 1")).toBeVisible();
   expect(await page.evaluate(() => Storage.get().unitAttempts[0].answers)).toEqual([]);
+});
+
+test("correção mostra evidências, classifica o erro e agenda revisão para o dia seguinte", async ({ page }) => {
+  await mountQuizUnit(page);
+  await page.evaluate((unitId) => {
+    const now = new Date().toISOString();
+    Storage.update((data) => {
+      data.unitAttempts = [{
+        id: "attempt-erro", unitId, phase: "pratica", number: 1,
+        questionIds: ["inss-2022-i1"], startedAt: now, finishedAt: now,
+        durationSeconds: 0,
+        answers: [{ questionId: "inss-2022-i1", answer: "C", correct: false, objetivos: ["obj"], answeredAt: now }],
+        result: { answered: 1, correct: 0, wrong: 1 },
+        performanceByObjective: { obj: { answered: 1, correct: 0, wrong: 1 } },
+      }];
+      data.unitProgress[unitId] = {
+        state: "correcao_pendente", updatedAt: now,
+        reading: { startedAt: now, completedAt: now, sectionId: null },
+        video: { startedAt: now, completedAt: now },
+        activeAttemptId: "attempt-erro", activeReviewId: null,
+      };
+    });
+    UnitFlow.practiceBank = [{
+      id: "inss-2022-i1", enunciado: "Item real", gabarito: "E",
+      comentario: "A relação causal foi invertida.", objetivos: ["obj"],
+      materia: "Português", assunto: "Interpretação de textos",
+    }];
+    window.__renderQuizUnit();
+  }, UNIT_ID);
+
+  await expect(page.getByRole("heading", { name: "Correção dos erros" })).toBeVisible();
+  await expect(page.getByText("Sua resposta: C")).toBeVisible();
+  await expect(page.getByText("Gabarito: E")).toBeVisible();
+  await expect(page.getByText("A relação causal foi invertida.")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Revisar Seção" })).toHaveAttribute("href", "#secao");
+
+  await page.getByLabel("Classificação do erro inss-2022-i1").selectOption("interpretacao");
+  await page.getByRole("button", { name: "Salvar classificação" }).click();
+  expect(await page.evaluate(() => Storage.get().unitAttempts[0].answers[0].correction.classification)).toBe("interpretacao");
+  expect(await page.evaluate(() => Storage.get().erros[0])).toMatchObject({
+    questionId: "inss-2022-i1", unitId: UNIT_ID, objetivos: ["obj"], tipo: "interpretacao",
+  });
+  await page.getByRole("button", { name: "Concluir correção" }).click();
+  await page.getByRole("button", { name: "Agendar revisão" }).click();
+
+  const review = await page.evaluate(() => Storage.get().unitReviews[0]);
+  expect(review).toMatchObject({ unitId: UNIT_ID, objetivos: ["obj"], scheduledDate: await page.evaluate(() => addDaysISO(todayISO(), 1)), status: "pendente" });
+  await page.getByRole("button", { name: "Concluir unidade" }).click();
+  const result = await page.evaluate((unitId) => ({ progress: Storage.getUnitProgress(unitId), taskStatus: Storage.get().taskStatus }), UNIT_ID);
+  expect(result.progress.state).toBe("concluida");
+  expect(result.taskStatus).toMatchObject({ unit_0_learn: "concluida", unit_0_read: "concluida", unit_0_practice: "concluida" });
+});
+
+test("prática sem erro agenda revisão em sete dias sem criar correção artificial", async ({ page }) => {
+  await mountQuizUnit(page);
+  await page.evaluate((unitId) => {
+    const now = new Date().toISOString();
+    Storage.update((data) => {
+      data.unitAttempts = [{
+        id: "attempt-sem-erro", unitId, phase: "pratica", number: 1,
+        questionIds: ["inss-2022-i1"], startedAt: now, finishedAt: now,
+        durationSeconds: 0,
+        answers: [{ questionId: "inss-2022-i1", answer: "E", correct: true, objetivos: ["obj"], answeredAt: now }],
+        result: { answered: 1, correct: 1, wrong: 0 },
+        performanceByObjective: { obj: { answered: 1, correct: 1, wrong: 0 } },
+      }];
+      data.unitProgress[unitId] = {
+        state: "pratica_concluida", updatedAt: now,
+        reading: { startedAt: now, completedAt: now, sectionId: null },
+        video: { startedAt: now, completedAt: now },
+        activeAttemptId: "attempt-sem-erro", activeReviewId: null,
+      };
+    });
+    UnitFlow.practiceBank = [{ id: "inss-2022-i1", gabarito: "E", objetivos: ["obj"] }];
+    window.__renderQuizUnit();
+  }, UNIT_ID);
+
+  await expect(page.getByText("Nenhum erro nesta tentativa.")).toBeVisible();
+  await page.getByRole("button", { name: "Concluir correção" }).click();
+  await page.getByRole("button", { name: "Agendar revisão" }).click();
+  const result = await page.evaluate(() => ({ review: Storage.get().unitReviews[0], expected: addDaysISO(todayISO(), 7) }));
+  expect(result.review.scheduledDate).toBe(result.expected);
+  expect(result.review.reason).toContain("sem erro");
 });
