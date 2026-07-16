@@ -1,29 +1,21 @@
 # Roadmap
 
 ## Feito
-- [x] Remover PRF Policial do plano e dados
-- [x] Cronograma real 16 semanas
-- [x] Plano com início explícito + dias de estudo
-- [x] Faltas só em dias programados passados
-- [x] Horas só por atividade real
-- [x] Cronômetro persistente
-- [x] Editar/excluir sessões
-- [x] Edital verticalizado
-- [x] Validadores e testes de calendário
-- [x] GitHub Actions validate
-- [x] Pré-teste + classificação forçada de erros + erros vencidos no Hoje
-- [x] Resumos objetivos prioritários de Previdenciário (10 tópicos)
-- [x] Banco expandido de questões CE de lei seca (prev)
-- [x] Favoritos / dúvida no storage + filtro em Questões
-- [x] Pontuação CEBRASPE configurável no simulado
-- [x] Checklist/bloqueio ao finalizar dia (etapas + revisões)
+- [x] Cronograma real 16 semanas + escolha livre de dia
+- [x] Pré-teste + classificação de erros + caderno
+- [x] Resumos Previdenciário + Ética/Constitucional/Administrativo
+- [x] Resumos Português, RL, Informática, Arquivologia, Administração (PODC)
+- [x] Banco de questões comum (elaboração própria) + PRF/INSS/Prev
+- [x] Favoritos/dúvida no card da questão
+- [x] Resoluções PRF reescritas + overrides INSS
+- [x] Videoaulas públicas para a maioria dos tópicos (patch 2026-07-15)
+- [x] Pontuação CEBRASPE configurável
 
-## Próximo (pendências honestas)
-- [ ] IndexedDB (estrutura preparada via schema; migração completa sob risco)
-- [ ] Mais questões oficiais de conhecimentos específicos INSS (PDF CE1 quando disponível)
-- [ ] Resoluções 100% revisadas item a item por humanos
-- [ ] Verificador HTTP de links externos (rede)
-- [ ] UI de favorito/dúvida **dentro** do card da questão (filtro já existe)
-- [ ] Melhorar algoritmo de flashcards (SM-2)
-- [ ] Resumos objetivos de Constitucional / Administrativo / Ética
-- [ ] Interleaving nas semanas finais do cronograma
+## Próximo
+- [ ] Mais questões oficiais CEBRASPE de conhecimentos específicos INSS
+- [ ] Completar videoaulas ainda marcadas como indisponíveis (Prev avançado, PRF leg., alguns Admin/Arq)
+- [ ] Flashcards com SM-2
+- [ ] Interleaving nas semanas finais
+- [ ] Sync online do progresso (Supabase/Firebase)
+- [ ] IndexedDB
+- [ ] Verificador HTTP de links externos
