@@ -72,11 +72,8 @@
     return material;
   }
 
-  function requiredSteps(entry, data) {
-    return ["pretest", "learn", "read", "practice"];
-  }
-
   const _renderHoje = window.renderHoje;
+  const _renderStudyTask = window.renderStudyTask;
   window.renderHoje = function renderHoje(data) {
     data = injectResumos(data);
     window.__studyData = data;
@@ -102,21 +99,10 @@
     return _renderHoje(data);
   };
 
-  window.findFirstPendingStep = function findFirstPendingStep(tasks, data) {
-    data = data || window.__studyData || {};
-    for (const entry of tasks) {
-      const base = taskBaseKey(entry);
-      for (const step of requiredSteps(entry, data)) {
-        const key = `${base}_${step}`;
-        if (!stepDone(key)) return key;
-      }
-    }
-    return "finish";
-  };
-
   window.renderStudyTask = function renderStudyTask(entry, data, firstPending) {
     window.__studyData = data;
     const task = entry.task;
+    if (task.unitId) return _renderStudyTask(entry, data, firstPending);
     const lesson = (data.aulas.aulas || []).find((item) => item.id === task.aulaId);
     const material = resolveMaterial(entry, data);
     const lessonAction = App.lessonAction(lesson);

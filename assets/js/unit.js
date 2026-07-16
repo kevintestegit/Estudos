@@ -56,6 +56,7 @@
     async load(unitId) {
       this.dataPromise ||= App.loadJSON("data/unidades.json");
       const data = await this.dataPromise;
+      this.catalog = data;
       return (data.unidades || []).find((unit) => unit.id === unitId) || null;
     },
 
@@ -105,17 +106,51 @@
       else
         videoHtml = `<section class="unit-step"><h4>Videoaula</h4><div class="unit-video"><iframe src="https://www.youtube.com/embed/${video.videoId}?start=${video.inicioSegundos}&end=${video.fimSegundos}&rel=0" title="Videoaula: ${App.esc(unit.titulo)}" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>${state === "video_em_andamento" ? '<button class="btn" type="button" data-primary-action data-unit-event="concluir_video">Concluir videoaula</button>' : '<p class="unit-resume">Videoaula concluída.</p>'}</section>`;
 
-      const nextRequirement = videoDone
-        ? "A integração desta etapa será apresentada na sequência."
-        : video
-          ? "Conclua a videoaula para desbloquear."
-          : "Aguarde a validação da videoaula para desbloquear.";
+      const checking = new Set([
+        "checagem_em_andamento",
+        "checagem_concluida",
+        "pratica_em_andamento",
+        "pratica_concluida",
+        "correcao_pendente",
+        "correcao_concluida",
+        "revisao_agendada",
+        "concluida",
+      ]);
+      const practicing = new Set([
+        "pratica_em_andamento",
+        "pratica_concluida",
+        "correcao_pendente",
+        "correcao_concluida",
+        "revisao_agendada",
+        "concluida",
+      ]);
+      const checkHtml = !videoDone
+        ? locked(
+            "Checagem rápida",
+            video
+              ? "Conclua a videoaula para desbloquear."
+              : "Aguarde a validação da videoaula para desbloquear.",
+          )
+        : state === "video_concluido"
+          ? '<section class="unit-step"><h4>Checagem rápida</h4><p>Responda às questões sobre os objetivos estudados.</p><button class="btn" type="button" data-primary-action data-unit-event="iniciar_checagem">Iniciar checagem</button></section>'
+          : state === "checagem_em_andamento"
+            ? '<section class="unit-step"><h4>Checagem rápida</h4><div id="q-area" data-unit-quiz="checagem"></div></section>'
+            : `<section class="unit-step is-done"><h4>Checagem rápida</h4><p>Checagem concluída.</p></section>`;
+      const practiceHtml = !checking.has(state)
+        ? locked("Questões reais", "Conclua a checagem rápida para desbloquear.")
+        : state === "checagem_concluida"
+          ? '<section class="unit-step"><h4>Questões reais</h4><p>Pratique com os itens editoriais selecionados.</p><button class="btn" type="button" data-primary-action data-unit-event="iniciar_pratica">Iniciar prática</button></section>'
+          : state === "pratica_em_andamento"
+            ? '<section class="unit-step"><h4>Questões reais</h4><div id="q-area" data-unit-quiz="pratica"></div></section>'
+            : practicing.has(state)
+              ? '<section class="unit-step is-done"><h4>Questões reais</h4><p>Prática concluída.</p></section>'
+              : locked("Questões reais", "Conclua a checagem rápida para desbloquear.");
       return `<article class="card study-task unit-flow" data-unit-id="${App.esc(unit.id)}" data-unit-entry="${App.esc(entryKey)}">
         ${header}
         <section class="unit-step ${readingDone ? "is-done" : ""}"><h4>Leitura guiada</h4>${readingSections}${readingAction}</section>
         ${videoHtml}
-        ${locked("Checagem rápida", nextRequirement)}
-        ${locked("Questões reais", nextRequirement)}
+        ${checkHtml}
+        ${practiceHtml}
         ${locked("Correção e revisão", "Conclua as etapas anteriores para desbloquear.")}
       </article>`;
     },
@@ -168,14 +203,107 @@
         requestAnimationFrame(() => root?.querySelector(`#${CSS.escape(savedSection)}`)?.scrollIntoView());
       }
       const button = root?.querySelector("[data-unit-event]");
-      if (!button) return;
-      button.onclick = () => {
-        const result = Storage.transitionUnit(unit.id, button.dataset.unitEvent);
-        if (result.ok) {
-          UnitFlow.cleanup();
-          rerender();
-        }
-      };
+      if (button)
+        button.onclick = () => {
+          const result = Storage.transitionUnit(
+            unit.id,
+            button.dataset.unitEvent,
+          );
+          if (result.ok) {
+            UnitFlow.cleanup();
+            rerender();
+          }
+        };
+      const phase = root?.querySelector("[data-unit-quiz]")?.dataset.unitQuiz;
+      if (phase) this.startPhase({ unit, phase, root, rerender });
+    },
+
+    async startPhase({ unit, phase, root, rerender }) {
+      const catalog = await this.dataPromise;
+      this.catalog = catalog;
+      let questions;
+      if (phase === "checagem") {
+        const byId = Object.fromEntries(
+          (catalog.checagens || []).map((question) => [question.id, question]),
+        );
+        questions = (unit.checagem?.questionIds || [])
+          .map((id) => byId[id])
+          .filter(Boolean)
+          .map((question) => ({
+            ...question,
+            tipo: "me",
+            alternativas: question.alternativas.map((item) => item.texto),
+            _alternativeIds: question.alternativas.map((item) => item.id),
+            gabarito: question.respostaCorreta,
+          }));
+      } else {
+        const bank = await App.loadJSON("data/questoes-inss.json");
+        const byId = Object.fromEntries(
+          (bank.questoes || []).map((question) => [question.id, question]),
+        );
+        questions = (unit.pratica?.questionIds || [])
+          .map((id) => byId[id])
+          .filter(Boolean);
+      }
+      const expected =
+        phase === "checagem"
+          ? unit.checagem?.questionIds || []
+          : unit.pratica?.questionIds || [];
+      if (questions.length !== expected.length) {
+        root.querySelector("#q-area").innerHTML =
+          '<div class="alert alert-danger" role="alert">Não foi possível carregar todas as questões desta etapa.</div>';
+        return;
+      }
+      let data = Storage.get();
+      let progress = data.unitProgress[unit.id];
+      let attempt = data.unitAttempts.find(
+        (item) => item.id === progress?.activeAttemptId && item.phase === phase,
+      );
+      if (!attempt) {
+        const started = Storage.startUnitAttempt(unit.id, phase, expected);
+        if (!started.ok) return;
+        data = Storage.get();
+        progress = data.unitProgress[unit.id];
+        attempt = data.unitAttempts.find((item) => item.id === started.attemptId);
+      }
+      window.startQuiz(questions, {
+        unitId: unit.id,
+        phase,
+        attemptId: attempt.id,
+        resumeAnswers: attempt.answers,
+        onAnswer: (answer) => Storage.recordUnitAnswer(attempt.id, answer),
+        onCancel: rerender,
+        onFinish: (_summary, area) => {
+          const current = Storage.get().unitAttempts.find(
+            (item) => item.id === attempt.id,
+          );
+          if (!current?.finishedAt) {
+            const finished = Storage.finishUnitAttempt(attempt.id);
+            if (!finished.ok) {
+              area.insertAdjacentHTML(
+                "beforeend",
+                '<div class="alert alert-danger" role="alert">Não foi possível salvar a tentativa.</div>',
+              );
+              return;
+            }
+          }
+          const actions = document.createElement("div");
+          actions.className = "actions";
+          actions.innerHTML = `<button class="btn btn-secondary" type="button" data-unit-retry>Nova tentativa</button><button class="btn" type="button" data-primary-action data-unit-complete>Concluir ${phase === "checagem" ? "checagem" : "prática"}</button>`;
+          area.appendChild(actions);
+          actions.querySelector("[data-unit-retry]").onclick = () => {
+            const next = Storage.startUnitAttempt(unit.id, phase, expected);
+            if (next.ok) rerender();
+          };
+          actions.querySelector("[data-unit-complete]").onclick = () => {
+            const result = Storage.transitionUnit(
+              unit.id,
+              phase === "checagem" ? "concluir_checagem" : "concluir_pratica",
+            );
+            if (result.ok) rerender();
+          };
+        },
+      });
     },
   };
 

@@ -6,6 +6,9 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/hoje.html");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
+  await page.waitForFunction(
+    () => document.getElementById("app-root")?.children.length > 0,
+  );
 });
 
 test("migra schema 4 sem perder progresso", async ({ page }) => {
@@ -935,7 +938,7 @@ for (const [name, viewport] of [
     await expect(page.getByText("Videoaula pendente de validação")).toBeVisible();
     await expect(page.locator("iframe, a[href*='youtube.com']")).toHaveCount(0);
     await expect(primary).toHaveCount(0);
-    await expect(page.getByText(/Aguarde a validação da videoaula/)).toHaveCount(2);
+    await expect(page.getByText(/Aguarde a validação da videoaula/)).toHaveCount(1);
     expect(
       await page.evaluate((unitId) => Storage.getUnitProgress(unitId).state, UNIT_ID),
     ).toBe("leitura_concluida");
@@ -1200,7 +1203,7 @@ test("falha ao carregar unidades preserva tarefas legadas e isola o erro", async
   await page.reload();
 
   await expect(page.getByRole("heading", { name: "Português — Ortografia" })).toBeVisible();
-  await expect(page.locator("[data-step]")).toHaveCount(3);
+  await expect(page.locator("[data-step]")).toHaveCount(4);
   const unitError = page.locator(`[data-unit-id="${UNIT_ID}"] [role="alert"]`);
   await expect(unitError).toHaveCount(1);
   await expect(unitError).toContainText("Não foi possível carregar esta unidade");
@@ -1311,4 +1314,188 @@ test("etapa bloqueada mantém contraste e indicação não visual", async ({ pag
   expect(style.background).not.toBe("rgba(0, 0, 0, 0)");
   expect(parseFloat(style.borderLeftWidth)).toBeGreaterThanOrEqual(3);
   expect(style.contrast).toBeGreaterThanOrEqual(4.5);
+});
+
+test("quiz expõe hooks da unidade e retoma na primeira resposta pendente", async ({ page }) => {
+  await page.addScriptTag({ url: "/assets/js/quiz.js" });
+  const result = await page.evaluate(() => {
+    document.getElementById("app-root").innerHTML = '<div id="q-area"></div>';
+    window.__quizEvents = [];
+    window.startQuiz([
+      { id: "q-1", tipo: "ce", materia: "Português", assunto: "Interpretação", enunciado: "Questão já respondida", gabarito: "C", objetivos: ["obj-1"] },
+      { id: "q-2", tipo: "ce", materia: "Português", assunto: "Interpretação", enunciado: "Questão pendente", gabarito: "E", objetivos: ["obj-2"] },
+    ], {
+      unitId: "unidade-teste",
+      phase: "checagem",
+      attemptId: "attempt-1",
+      resumeAnswers: [{ questionId: "q-1", answer: "C", correct: true, objetivos: ["obj-1"] }],
+      onAnswer: (answer) => window.__quizEvents.push({ type: "answer", answer }),
+      onFinish: (summary) => window.__quizEvents.push({ type: "finish", summary }),
+      onCancel: () => window.__quizEvents.push({ type: "cancel" }),
+    });
+    return {
+      question: document.querySelector("#quiz-card h3")?.textContent,
+      exposed: typeof window.startQuiz,
+    };
+  });
+
+  expect(result).toEqual({ question: "Questão pendente", exposed: "function" });
+  await page.getByRole("button", { name: "Errado" }).click();
+  await page.getByRole("button", { name: "Confirmar" }).click();
+  await page.getByRole("button", { name: "Ver resultado" }).click();
+  const events = await page.evaluate(() => window.__quizEvents);
+  expect(events[0]).toMatchObject({
+    type: "answer",
+    answer: {
+      unitId: "unidade-teste",
+      phase: "checagem",
+      attemptId: "attempt-1",
+      questionId: "q-2",
+      answer: "E",
+      correct: true,
+      objetivos: ["obj-2"],
+    },
+  });
+  expect(events[1]).toMatchObject({
+    type: "finish",
+    summary: { correct: 2, wrong: 0, total: 2 },
+  });
+});
+
+test("quiz sem metadados mantém o fluxo legado", async ({ page }) => {
+  await page.addScriptTag({ url: "/assets/js/quiz.js" });
+  await page.evaluate(() => {
+    document.getElementById("app-root").innerHTML = '<div id="q-area"></div>';
+    window.startQuiz([
+      { id: "q-legada", tipo: "ce", materia: "Português", assunto: "Interpretação", enunciado: "Questão legada", gabarito: "C" },
+    ]);
+  });
+  await page.getByRole("button", { name: "Certo" }).click();
+  await page.getByRole("button", { name: "Confirmar" }).click();
+  await page.getByRole("button", { name: "Ver resultado" }).click();
+  await expect(page.getByRole("heading", { name: "Resultado" })).toBeVisible();
+  expect(await page.evaluate(() => Storage.get().quiz)).toMatchObject({ answered: 1, correct: 1, wrong: 0 });
+});
+
+const mountQuizUnit = async (page, state = "video_concluido") => {
+  await page.evaluate(({ unitId, state }) => {
+    const unit = {
+      id: unitId, titulo: "Unidade válida para teste", materia: "Português",
+      assunto: "Interpretação de textos", objetivos: ["obj"],
+      leitura: { tempoMinutos: 8, secoes: [{ id: "secao", titulo: "Seção", conteudo: "Conteúdo" }] },
+      video: {
+        aulaId: "aula-teste", inicioSegundos: 10, fimSegundos: 90,
+        duracaoTotalSegundos: 120, objetivosCobertos: ["obj"],
+        fonteVerificada: true, coberturaPedagogicaVerificada: true,
+        statusVerificacao: "aprovado", motivoSelecao: "Trecho conferido.",
+        fonte: "YouTube", fonteUrl: "https://www.youtube.com/watch?v=B1lk04l-dRU",
+        verificadoEm: "2026-07-15",
+      },
+      checagem: { questionIds: ["check-1", "check-2", "check-3"], quantidadeMinima: 3 },
+      pratica: {
+        questionIds: ["inss-2022-i1", "inss-2022-i2", "inss-2022-i4", "inss-2022-i5", "inss-2022-i7"],
+        quantidadeMinima: 5,
+      },
+    };
+    UnitFlow.dataPromise = Promise.resolve({
+      unidades: [unit],
+      checagens: [1, 2, 3].map((number) => ({
+        id: `check-${number}`, unitId, tipo: "me", materia: "Português",
+        assunto: "Interpretação de textos", objetivos: ["obj"],
+        enunciado: `Checagem ${number}`,
+        alternativas: [{ id: "A", texto: "Incorreta" }, { id: "B", texto: "Correta" }],
+        respostaCorreta: "B",
+        feedback: { correta: "Muito bem.", incorreta: "Revise a seção.", leituraSecaoId: "secao" },
+      })),
+    });
+    Storage.update((data) => {
+      data.unitProgress[unitId] = {
+        state, updatedAt: new Date().toISOString(),
+        reading: { startedAt: null, completedAt: new Date().toISOString(), sectionId: null },
+        video: { startedAt: null, completedAt: new Date().toISOString() },
+        activeAttemptId: null, activeReviewId: null,
+      };
+    });
+    const render = () => {
+      document.getElementById("app-root").innerHTML = UnitFlow.render({
+        unit, task: unit, entry: {},
+        data: { aulas: { aulas: [{
+          id: "aula-teste", tipo: "video",
+          url: "https://www.youtube.com/watch?v=B1lk04l-dRU", videoId: "B1lk04l-dRU",
+          canal: "Canal verificado", tituloYoutube: "Aula verificada",
+          verificadoEm: "2026-07-15", duracaoTotalSegundos: 120,
+        }] } },
+      });
+      UnitFlow.bind({ unit, entry: {}, rerender: render });
+    };
+    window.__renderQuizUnit = render;
+    render();
+  }, { unitId: UNIT_ID, state });
+};
+
+test("checagem persiste resposta, feedback e retomada após recarga visual", async ({ page }) => {
+  await mountQuizUnit(page);
+  await page.getByRole("button", { name: "Iniciar checagem" }).click();
+  await page.getByRole("button", { name: /^B\)/ }).click();
+  await page.getByRole("button", { name: "Confirmar" }).click();
+  await expect(page.getByText("Muito bem.")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Revisar seção" })).toHaveAttribute("href", "#secao");
+  const first = await page.evaluate(() => Storage.get().unitAttempts[0]);
+  expect(first.answers).toHaveLength(1);
+  expect(first.answers[0]).toMatchObject({ questionId: "check-1", answer: "B", correct: true, objetivos: ["obj"] });
+  await page.evaluate(() => window.__renderQuizUnit());
+  await expect(page.getByText("Checagem 2")).toBeVisible();
+});
+
+test("checagem preserva tentativa anterior ao refazer antes de concluir", async ({ page }) => {
+  await mountQuizUnit(page);
+  await page.getByRole("button", { name: "Iniciar checagem" }).click();
+  for (let number = 1; number <= 3; number++) {
+    await page.getByRole("button", { name: /^B\)/ }).click();
+    await page.getByRole("button", { name: "Confirmar" }).click();
+    await page.getByRole("button", { name: number < 3 ? "Próxima" : "Ver resultado" }).click();
+  }
+  await page.getByRole("button", { name: "Nova tentativa" }).click();
+  const attempts = await page.evaluate(() => Storage.get().unitAttempts);
+  expect(attempts).toHaveLength(2);
+  expect(attempts[0].finishedAt).toBeTruthy();
+  expect(attempts[0].answers).toHaveLength(3);
+  expect(attempts[1].answers).toEqual([]);
+});
+
+test("prática usa exatamente os IDs editoriais na ordem cadastrada", async ({ page }) => {
+  await mountQuizUnit(page);
+  await page.route("**/data/questoes-inss.json", (route) => route.fulfill({ json: {
+    questoes: [1, 2, 3, 4, 5, 7].map((number) => ({
+      id: `inss-2022-i${number}`, tipo: "ce", materia: "Português",
+      assunto: "Interpretação de textos", enunciado: `Item ${number}`,
+      gabarito: number % 2 ? "E" : "C", objetivos: ["obj"],
+    })),
+  } }));
+  await page.route("**/data/questoes-prf.json", (route) => route.fulfill({ json: { questoes: [] } }));
+  await page.evaluate(() => {
+    window.__capturedPracticeIds = null;
+    window.startQuiz = (questions) => {
+      window.__capturedPracticeIds = questions.map((question) => question.id);
+    };
+    Storage.update((data) => {
+      data.unitProgress["unidade-pt-interpretacao-01"].state = "pratica_em_andamento";
+      data.unitProgress["unidade-pt-interpretacao-01"].activeAttemptId = null;
+    });
+    window.__renderQuizUnit();
+  });
+  await expect.poll(async () => page.evaluate(() => window.__capturedPracticeIds)).toEqual([
+    "inss-2022-i1", "inss-2022-i2", "inss-2022-i4", "inss-2022-i5", "inss-2022-i7",
+  ]);
+});
+
+test("falha ao persistir resposta mantém a questão e não avança", async ({ page }) => {
+  await mountQuizUnit(page);
+  await page.getByRole("button", { name: "Iniciar checagem" }).click();
+  await page.evaluate(() => { Storage.recordUnitAnswer = () => ({ ok: false }); });
+  await page.getByRole("button", { name: /^B\)/ }).click();
+  await page.getByRole("button", { name: "Confirmar" }).click();
+  await expect(page.getByRole("alert")).toContainText("salvar");
+  await expect(page.getByText("Checagem 1")).toBeVisible();
+  expect(await page.evaluate(() => Storage.get().unitAttempts[0].answers)).toEqual([]);
 });

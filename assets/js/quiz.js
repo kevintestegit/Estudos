@@ -164,10 +164,20 @@ function startQuiz(questions, meta) {
     return;
   }
 
-  let idx = 0;
-  let correct = 0;
-  let wrong = 0;
-  const answers = [];
+  const unitMode = Boolean(meta.unitId && meta.phase && meta.attemptId);
+  const resumed = Array.isArray(meta.resumeAnswers) ? meta.resumeAnswers : [];
+  const answeredIds = new Set(resumed.map((answer) => answer.questionId));
+  const pendingIndex = questions.findIndex(
+    (question) => !answeredIds.has(question.id),
+  );
+  let idx = pendingIndex < 0 ? questions.length : pendingIndex;
+  let correct = resumed.filter((answer) => answer.correct).length;
+  let wrong = resumed.length - correct;
+  const answers = resumed.map((answer) => ({
+    id: answer.questionId,
+    ok: answer.correct,
+    selected: answer.answer,
+  }));
   const bySubject = {};
   const started = Date.now();
   let timerId = null;
@@ -290,7 +300,8 @@ function startQuiz(questions, meta) {
 
     document.getElementById("q-cancel").addEventListener("click", () => {
       if (timerId) clearInterval(timerId);
-      location.href = "questoes.html";
+      if (typeof meta.onCancel === "function") meta.onCancel();
+      else location.href = "questoes.html";
     });
 
     document.getElementById("q-confirm").addEventListener("click", () => {
@@ -311,22 +322,43 @@ function startQuiz(questions, meta) {
         return;
       }
       answeredCurrent = true;
+      const answerValue =
+        tipo === "ce" ? selected : q._alternativeIds?.[selected] ?? selected;
       const ok =
         tipo === "ce"
-          ? selected === q.gabarito
-          : Number(selected) === Number(q.gabarito);
+          ? answerValue === q.gabarito
+          : q._alternativeIds
+            ? answerValue === q.gabarito
+            : Number(answerValue) === Number(q.gabarito);
+      if (typeof meta.onAnswer === "function") {
+        const saved = meta.onAnswer({
+          unitId: meta.unitId,
+          phase: meta.phase,
+          attemptId: meta.attemptId,
+          questionId: q.id,
+          answer: answerValue,
+          correct: ok,
+          objetivos: [...(q.objetivos || [])],
+        });
+        if (saved === false || saved?.ok === false) {
+          answeredCurrent = false;
+          document.getElementById("q-feedback").innerHTML =
+            '<div class="alert alert-danger" role="alert">Não foi possível salvar a resposta. Tente novamente.</div>';
+          return;
+        }
+      }
       const subj = ensureSubject(q.materia);
       bySubject[subj].total++;
       if (ok) {
         correct++;
         bySubject[subj].correct++;
-        answers.push({ id: q.id, ok, selected });
-        showFeedback(q, ok, selected, tipo);
       } else {
         wrong++;
-        answers.push({ id: q.id, ok, selected });
-        showFeedbackWithClassification(q, selected, tipo);
       }
+      answers.push({ id: q.id, ok, selected: answerValue });
+      if (!ok && !unitMode)
+        showFeedbackWithClassification(q, selected, tipo);
+      else showFeedback(q, ok, selected, tipo);
     });
   }
 
@@ -340,13 +372,18 @@ function startQuiz(questions, meta) {
         : typeof q.gabarito === "number"
           ? String.fromCharCode(65 + q.gabarito)
           : q.gabarito;
+    const unitFeedback = ok ? q.feedback?.correta : q.feedback?.incorreta;
+    const sectionLink = unitMode && q.feedback?.leituraSecaoId
+      ? `<p><a href="#${App.esc(q.feedback.leituraSecaoId)}">Revisar seção</a></p>`
+      : "";
     fb.innerHTML = `
       <div class="alert ${ok ? "alert-ok" : "alert-danger"}">
         <strong>${ok ? "Correto" : "Incorreto"}</strong> · Gabarito: <strong>${App.esc(String(gabLabel))}</strong>
       </div>
       <div class="card mt-1" style="border-left:4px solid ${ok ? "var(--ok)" : "var(--danger)"}">
         <h3 style="margin:0 0 0.5rem;font-size:1rem">Resolução</h3>
-        <p style="margin:0;color:var(--text)">${App.esc(q.comentario || "Sem resolução cadastrada.")}</p>
+        <p style="margin:0;color:var(--text)">${App.esc(unitFeedback || q.comentario || "Sem resolução cadastrada.")}</p>
+        ${sectionLink}
       </div>`;
     const opts = document.getElementById("opts");
     opts.querySelectorAll(".quiz-option").forEach((btn, i) => {
@@ -526,7 +563,7 @@ function startQuiz(questions, meta) {
       });
     }
 
-    Storage.update((d) => {
+    if (!unitMode) Storage.update((d) => {
       if (meta.mode !== "simulado") {
         d.quiz.answered += correct + wrong;
         d.quiz.correct += correct;
@@ -554,6 +591,14 @@ function startQuiz(questions, meta) {
     const pct = questions.length
       ? Math.round((correct / questions.length) * 100)
       : 0;
+    const summary = {
+      correct,
+      wrong,
+      total: questions.length,
+      blank,
+      minutes,
+      answers: answers.slice(),
+    };
     const reviewHtml = provaMode
       ? `
       <h3 class="mt-2">Gabarito comentado</h3>
@@ -595,6 +640,7 @@ function startQuiz(questions, meta) {
       </div>`;
     const again = document.getElementById("q-again");
     if (again) again.onclick = () => location.reload();
+    if (typeof meta.onFinish === "function") meta.onFinish(summary, area);
   }
 
   function fmtTime(sec) {
@@ -617,6 +663,8 @@ function startQuiz(questions, meta) {
 
   renderQuestion();
 }
+
+window.startQuiz = startQuiz;
 
 async function initSimulados() {
   App.initShell("simulados");

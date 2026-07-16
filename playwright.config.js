@@ -1,4 +1,5 @@
 const { defineConfig } = require("@playwright/test");
+const port = process.env.PLAYWRIGHT_PORT || "3050";
 
 module.exports = defineConfig({
   testDir: "./tests",
@@ -6,7 +7,7 @@ module.exports = defineConfig({
   timeout: 20_000,
   fullyParallel: false,
   use: {
-    baseURL: "http://127.0.0.1:3050",
+    baseURL: `http://127.0.0.1:${port}`,
     browserName: "chromium",
     launchOptions: process.env.CI
       ? {}
@@ -14,8 +15,8 @@ module.exports = defineConfig({
     viewport: { width: 1280, height: 800 },
   },
   webServer: {
-    command: "python3 -m http.server 3050 --directory .",
-    url: "http://127.0.0.1:3050/hoje.html",
+    command: `python3 -m http.server ${port} --directory .`,
+    url: `http://127.0.0.1:${port}/hoje.html`,
     reuseExistingServer: true,
   },
 });
