@@ -1,0 +1,174 @@
+{
+  "geradoEm": "2026-07-16",
+  "lote": "B",
+  "aprovados": 12,
+  "total": 13,
+  "mantidosIndisponivel": [
+    "aula-prev-13"
+  ],
+  "registros": [
+    {
+      "id": "aula-da-05",
+      "resultado": "aprovado",
+      "tituloCatalogo": "Agentes e responsabilidade",
+      "aprovado": {
+        "videoId": "TprXbKOQBoo",
+        "url": "https://www.youtube.com/watch?v=TprXbKOQBoo",
+        "tituloYoutube": "AGENTES PÚBLICOS - Espécies, Cargos, Funções, Direitos e Deveres | Direito Administrativo",
+        "canal": "Me Julga - Cíntia Brunelli",
+        "duracaoTotalSegundos": 1340
+      },
+      "verificadoEm": "2026-07-16"
+    },
+    {
+      "id": "aula-da-08",
+      "resultado": "aprovado",
+      "tituloCatalogo": "Servidores públicos — Lei 8.112",
+      "aprovado": {
+        "videoId": "jR_vZ4B-pJY",
+        "url": "https://www.youtube.com/watch?v=jR_vZ4B-pJY",
+        "tituloYoutube": "Lei 8.112/90 | Aula 03 | Estatuto dos Servidores Federais | Da Nomeação, Concurso, Posse e Exercício",
+        "canal": "Professor Alê",
+        "duracaoTotalSegundos": 2511
+      },
+      "verificadoEm": "2026-07-16"
+    },
+    {
+      "id": "aula-prev-07",
+      "resultado": "aprovado",
+      "tituloCatalogo": "Auxílios e salário-maternidade",
+      "aprovado": {
+        "videoId": "WPggHzlUSdY",
+        "url": "https://www.youtube.com/watch?v=WPggHzlUSdY",
+        "tituloYoutube": "Do Auxílio-Doença, Salário-Família e Salário-Maternidade - Art. 59 a 73 - Lei 8213 em áudio ATUAL.",
+        "canal": "Legislação em áudio",
+        "duracaoTotalSegundos": 1066
+      },
+      "verificadoEm": "2026-07-16"
+    },
+    {
+      "id": "aula-prev-08",
+      "resultado": "aprovado",
+      "tituloCatalogo": "Pensão por morte e BPC",
+      "aprovado": {
+        "videoId": "Al2LjT-yA-E",
+        "url": "https://www.youtube.com/watch?v=Al2LjT-yA-E",
+        "tituloYoutube": "INSS 2022 - Aula 21/146 - Pensão por Morte PT1",
+        "canal": "Lac Concursos - Principal",
+        "duracaoTotalSegundos": 1219
+      },
+      "verificadoEm": "2026-07-16"
+    },
+    {
+      "id": "aula-prev-09",
+      "resultado": "aprovado",
+      "tituloCatalogo": "Processo administrativo no INSS",
+      "aprovado": {
+        "videoId": "3B3epMZusfw",
+        "url": "https://www.youtube.com/watch?v=3B3epMZusfw",
+        "tituloYoutube": "PROCESSO ADMINISTRATIVO [PASSO A PASSO] -DIREITO PREVIDENCIÁRIO PARA CONCURSOS (AULA 01)",
+        "canal": "Cppem Concursos Públicos",
+        "duracaoTotalSegundos": 1904
+      },
+      "verificadoEm": "2026-07-16"
+    },
+    {
+      "id": "aula-prev-11",
+      "resultado": "aprovado",
+      "tituloCatalogo": "Tempo de contribuição",
+      "aprovado": {
+        "videoId": "UGFqYpikwnQ",
+        "url": "https://www.youtube.com/watch?v=UGFqYpikwnQ",
+        "tituloYoutube": "Concurso INSS - Certidão de Tempo de Contribuição",
+        "canal": "Prof. Harlenson  - Concursos Públicos",
+        "duracaoTotalSegundos": 4328
+      },
+      "verificadoEm": "2026-07-16"
+    },
+    {
+      "id": "aula-prev-12",
+      "resultado": "aprovado",
+      "tituloCatalogo": "Regras de transição",
+      "aprovado": {
+        "videoId": "ihvY2f089NY",
+        "url": "https://www.youtube.com/watch?v=ihvY2f089NY",
+        "tituloYoutube": "Concurso INSS: REGRAS DE TRANSIÇÃO - EC 103/2019",
+        "canal": "Nathy Bueno ",
+        "duracaoTotalSegundos": 829
+      },
+      "verificadoEm": "2026-07-16"
+    },
+    {
+      "id": "aula-prev-13",
+      "resultado": "mantido_indisponivel",
+      "tituloCatalogo": "Leis 8.212 e 8.213",
+      "motivo": "Lote B pesquisado: candidatos de Lei 8.212/8.213 isolados; nenhum vídeo único comprova ambas as leis com metadados compatíveis ao título do catálogo. Mantido indisponível.",
+      "verificadoEm": "2026-07-16"
+    },
+    {
+      "id": "aula-prev-14",
+      "resultado": "aprovado",
+      "tituloCatalogo": "Mapa de benefícios",
+      "aprovado": {
+        "videoId": "2MAVOaVTGT4",
+        "url": "https://www.youtube.com/watch?v=2MAVOaVTGT4",
+        "tituloYoutube": "Benefícios Previdenciários - Domine o principal tema da prova - Guia da aprovação INSS",
+        "canal": "Estratégia Concursos",
+        "duracaoTotalSegundos": 6965
+      },
+      "verificadoEm": "2026-07-16"
+    },
+    {
+      "id": "aula-prev-17",
+      "resultado": "aprovado",
+      "tituloCatalogo": "Pensão por morte e auxílio-reclusão",
+      "aprovado": {
+        "videoId": "pUeV4ESZdKQ",
+        "url": "https://www.youtube.com/watch?v=pUeV4ESZdKQ",
+        "tituloYoutube": "Auxílio Reclusão - Regras Básicas - Aula 162 - Dto Previdenciário -Prof. Eduardo Tanaka",
+        "canal": "Prof. Eduardo Tanaka",
+        "duracaoTotalSegundos": 965
+      },
+      "verificadoEm": "2026-07-16"
+    },
+    {
+      "id": "aula-leg-prf-01",
+      "resultado": "aprovado",
+      "tituloCatalogo": "Competências institucionais da PRF",
+      "aprovado": {
+        "videoId": "d9KejeSs1i0",
+        "url": "https://www.youtube.com/watch?v=d9KejeSs1i0",
+        "tituloYoutube": "Decreto 1655   Competência da Polícia Rodoviária Federal",
+        "canal": "Sandro Gonçalves",
+        "duracaoTotalSegundos": 245
+      },
+      "verificadoEm": "2026-07-16"
+    },
+    {
+      "id": "aula-leg-prf-02",
+      "resultado": "aprovado",
+      "tituloCatalogo": "Decreto 1.655/1995",
+      "aprovado": {
+        "videoId": "oEt1y11nE8w",
+        "url": "https://www.youtube.com/watch?v=oEt1y11nE8w",
+        "tituloYoutube": "Decreto 1.655/95 e Artigo 47, da Lei 9.662/19 - Legislação Específica da Polícia Rodoviária Federal.",
+        "canal": "Professor Ronaldo Paiva - Fala, Xerife!",
+        "duracaoTotalSegundos": 4157
+      },
+      "verificadoEm": "2026-07-16"
+    },
+    {
+      "id": "aula-leg-prf-03",
+      "resultado": "aprovado",
+      "tituloCatalogo": "Lei 9.654/1998 — carreira PRF",
+      "aprovado": {
+        "videoId": "cGFWDjuZpGI",
+        "url": "https://www.youtube.com/watch?v=cGFWDjuZpGI",
+        "tituloYoutube": "Lei 9.654, de 1998 e Decreto 8.282, de 2014.",
+        "canal": "Professor Ronaldo Paiva - Fala, Xerife!",
+        "duracaoTotalSegundos": 3383
+      },
+      "verificadoEm": "2026-07-16"
+    }
+  ]
+}
