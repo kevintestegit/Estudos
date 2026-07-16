@@ -352,10 +352,10 @@ const App = {
   },
   esc(s) {
     return String(s ?? "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
+      .replace(/&/g, "&")
+      .replace(/</g, "<")
+      .replace(/>/g, ">")
+      .replace(/"/g, """);
   },
   MATERIA_URL: {
     Português:
@@ -376,13 +376,15 @@ const App = {
     "Assistência Social / BPC":
       "https://www.planalto.gov.br/ccivil_03/leis/l8742.htm",
     "Legislação PRF": "https://www.planalto.gov.br/ccivil_03/decreto/d1655.htm",
+    "Legislação institucional da PRF":
+      "https://www.planalto.gov.br/ccivil_03/decreto/d1655.htm",
     Arquivologia:
       "https://www.gov.br/arquivonacional/pt-br/servicos/publicacoes/Guiadegestaodedocumentos.pdf",
     "Noções de Administração":
       "https://repositorio.enap.gov.br/bitstream/1/2260/1/1.%20Apostila%20-%20M%C3%B3dulo%201%20-%20Administra%C3%A7%C3%A3o%20P%C3%BAblica.pdf",
     Informática: "https://www.gov.br/governodigital/pt-br",
-    "Raciocínio Lógico": "biblioteca.html",
-    Revisão: "biblioteca.html",
+    "Raciocínio Lógico": "questoes.html?materia=Racioc%C3%ADnio%20L%C3%B3gico",
+    Revisão: "caderno-erros.html",
     Simulado: "simulados.html",
     Questões: "questoes.html",
     Prova: "provas.html",
@@ -402,8 +404,26 @@ const App = {
       ? `<a class="btn btn-sm" ${this.linkAttrs(action.url)} ${attributes}>${action.label}</a>`
       : `<span class="alert alert-info" data-lesson-unavailable>${action.label}</span>`;
   },
+  /**
+   * Resolve URL de material de estudo.
+   * - Se o item existe e tem URL útil (não biblioteca genérica / indisponível), usa essa URL.
+   * - Caso contrário, cai na fonte oficial da matéria (MATERIA_URL).
+   */
+  resolveMaterialUrl(material, materia) {
+    const url = material?.url || "";
+    const tipo = material?.tipo || "";
+    const isLibraryFallback =
+      !url ||
+      url === "#" ||
+      tipo === "indisponivel" ||
+      /^biblioteca\.html/i.test(url);
+    if (!isLibraryFallback) return url;
+    return this.MATERIA_URL[materia] || this.MATERIA_URL[material?.materia] || "questoes.html";
+  },
   resolveUrl(u, m) {
-    return u && u !== "#" ? u : this.MATERIA_URL[m] || "biblioteca.html";
+    return u && u !== "#" && !/^biblioteca\.html/i.test(u)
+      ? u
+      : this.MATERIA_URL[m] || "questoes.html";
   },
   isExternal(u) {
     return /^https?:\/\//i.test(u || "");
@@ -419,7 +439,8 @@ const App = {
     if (type === "pdf") return "Abrir PDF";
     if (type === "legislacao") return "Consultar legislação";
     if (type === "questoes") return "Fazer questões";
-    return "Abrir fonte oficial";
+    if (type === "indisponivel") return "Consultar fonte oficial";
+    return "Consultar fonte oficial";
   },
 };
 window.Modal = (() => {
