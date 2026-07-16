@@ -1,0 +1,1248 @@
+{
+  "geradoEm": "2026-07-16",
+  "lote": "A",
+  "registros": [
+    {
+      "id": "aula-pt-05",
+      "tituloCatalogo": "Regência e crase",
+      "pesquisa": "regência verbal nominal crase concursos português aula",
+      "candidatosAvaliados": [
+        {
+          "videoId": "P_otPMgIx2Q",
+          "url": "https://www.youtube.com/watch?v=P_otPMgIx2Q",
+          "fonte": "candidato_historico",
+          "titulo": null,
+          "canal": null,
+          "duracaoSegundos": null,
+          "oembedOk": false,
+          "status": "rejeitado",
+          "motivo": "oEmbed falhou: HTTP Error 404: Not Found"
+        },
+        {
+          "videoId": "B0EgJVneeGE",
+          "url": "https://www.youtube.com/watch?v=B0EgJVneeGE",
+          "fonte": "ytsearch",
+          "titulo": "Regência Verbal - Aula 01 [Prof Noslen]",
+          "canal": "Professor Noslen",
+          "duracaoSegundos": 714,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "aS-ZDEQTK5M",
+          "url": "https://www.youtube.com/watch?v=aS-ZDEQTK5M",
+          "fonte": "ytsearch",
+          "titulo": "Método INFALÍVEL pra saber QUANDO usar a CRASE #TôCarecaDeSaber | Professor Noslen",
+          "canal": "Professor Noslen",
+          "duracaoSegundos": 240,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Duração fora da faixa 5min–2h."
+        },
+        {
+          "videoId": "1IRO-p95oo0",
+          "url": "https://www.youtube.com/watch?v=1IRO-p95oo0",
+          "fonte": "ytsearch",
+          "titulo": "REGÊNCIA VERBAL E NOMINAL - Muitos exemplos e questões",
+          "canal": "Prof. Álvaro Ferreira",
+          "duracaoSegundos": 2635,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "oziOOkwah2E",
+          "url": "https://www.youtube.com/watch?v=oziOOkwah2E",
+          "fonte": "ytsearch",
+          "titulo": "🟣 REGÊNCIA VERBAL || Aula de Português COMPLETA para concursos, vestibulares, provas, ENEM",
+          "canal": "Português com Letícia",
+          "duracaoSegundos": 1526,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "5uMooAjtVis",
+          "url": "https://www.youtube.com/watch?v=5uMooAjtVis",
+          "fonte": "ytsearch",
+          "titulo": "CRASE - As 6 regras mais cobradas em CONCURSO (Teoria + Questões)",
+          "canal": "Prof. Álvaro Ferreira",
+          "duracaoSegundos": 2159,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Substituído na seleção final manual do Lote A."
+        },
+        {
+          "videoId": "hA4ip53JcK8",
+          "url": "https://www.youtube.com/watch?v=hA4ip53JcK8",
+          "fonte": "ytsearch",
+          "titulo": "REGÊNCIA VERBAL E NOMINAL - Profa. Pamba",
+          "canal": "Professora Pamba",
+          "duracaoSegundos": 906,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "4jgY7ZFTUng",
+          "url": "https://www.youtube.com/watch?v=4jgY7ZFTUng",
+          "fonte": "ytsearch",
+          "titulo": "Semana Ultra Português para concursos - Aula 02 - Regência e Crase",
+          "canal": "Português com Edson",
+          "duracaoSegundos": 5303,
+          "oembedOk": true,
+          "status": "aprovado",
+          "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+        },
+        {
+          "videoId": "TxZTrg2FDTU",
+          "url": "https://www.youtube.com/watch?v=TxZTrg2FDTU",
+          "fonte": "ytsearch",
+          "titulo": "CRASE: 5 Dicas SIMPLES Sobre Como Usar Crase (CONCURSOS E VESTIBULARES)",
+          "canal": "Português sem Enrolação - Professora Lis",
+          "duracaoSegundos": 682,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        }
+      ],
+      "resultado": "aprovado",
+      "aprovado": {
+        "videoId": "4jgY7ZFTUng",
+        "url": "https://www.youtube.com/watch?v=4jgY7ZFTUng",
+        "tituloYoutube": "Semana Ultra Português para concursos - Aula 02 - Regência e Crase",
+        "canal": "Português com Edson",
+        "duracaoTotalSegundos": 5303,
+        "uploadDate": "20250318"
+      },
+      "verificadoEm": "2026-07-16",
+      "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+    },
+    {
+      "id": "aula-pt-06",
+      "tituloCatalogo": "Pontuação e coerência",
+      "pesquisa": "pontuação vírgula coerência textual concursos português",
+      "candidatosAvaliados": [
+        {
+          "videoId": "ELTDNsu4v1Y",
+          "url": "https://www.youtube.com/watch?v=ELTDNsu4v1Y",
+          "fonte": "candidato_historico",
+          "titulo": null,
+          "canal": null,
+          "duracaoSegundos": null,
+          "oembedOk": false,
+          "status": "rejeitado",
+          "motivo": "oEmbed falhou: HTTP Error 404: Not Found"
+        },
+        {
+          "videoId": "ODkVN0kRciE",
+          "url": "https://www.youtube.com/watch?v=ODkVN0kRciE",
+          "fonte": "ytsearch",
+          "titulo": "Pontuação - ponto final, exclamação e interrogação [Prof Noslen]",
+          "canal": "Professor Noslen",
+          "duracaoSegundos": 627,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "-uUtlvKifiY",
+          "url": "https://www.youtube.com/watch?v=-uUtlvKifiY",
+          "fonte": "ytsearch",
+          "titulo": "Uso da Vírgula! Com Prof. Noslen!",
+          "canal": "Professor Noslen",
+          "duracaoSegundos": 1469,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "BqOR1DEIuzY",
+          "url": "https://www.youtube.com/watch?v=BqOR1DEIuzY",
+          "fonte": "ytsearch",
+          "titulo": "PONTUAÇÃO: (Quais são os Sinais de Pontuação?) APRENDA Agora Mesmo Em 12 Minutos!",
+          "canal": "Português sem Enrolação - Professora Lis",
+          "duracaoSegundos": 701,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Substituído na seleção final manual do Lote A."
+        },
+        {
+          "videoId": "aKT6HIGODaE",
+          "url": "https://www.youtube.com/watch?v=aKT6HIGODaE",
+          "fonte": "ytsearch",
+          "titulo": "O erro mais comum em provas de português e redação nos concursos!",
+          "canal": "Professora Adriana Figueiredo",
+          "duracaoSegundos": 864,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "IIU6i3UXyi0",
+          "url": "https://www.youtube.com/watch?v=IIU6i3UXyi0",
+          "fonte": "ytsearch",
+          "titulo": "Coesão e coerência [Prof. Noslen]",
+          "canal": "Professor Noslen",
+          "duracaoSegundos": 347,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "1tVB0fSXrns",
+          "url": "https://www.youtube.com/watch?v=1tVB0fSXrns",
+          "fonte": "ytsearch",
+          "titulo": "Como usar a VÍRGULA na REDAÇÃO? Fácil e Prático | PROFINHO",
+          "canal": "Profinho",
+          "duracaoSegundos": 1963,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "9KfnQ_uosuc",
+          "url": "https://www.youtube.com/watch?v=9KfnQ_uosuc",
+          "fonte": "ytsearch",
+          "titulo": "COESÃO E COERÊNCIA TEXTUAL: Qual é a Diferença? Aprenda Passo a Passo!",
+          "canal": "Português sem Enrolação - Professora Lis",
+          "duracaoSegundos": 930,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "-6tdXMc6wKU",
+          "url": "https://www.youtube.com/watch?v=-6tdXMc6wKU",
+          "fonte": "ytsearch",
+          "titulo": "Como usar a vírgula? | Português | Quer Que Desenhe | Descomplica",
+          "canal": "Descomplica",
+          "duracaoSegundos": 291,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "KD2TAJyZECc",
+          "url": "https://www.youtube.com/watch?v=KD2TAJyZECc",
+          "titulo": "PONTUAÇÃO FÁCIL: Aprenda o Emprego dos Sinais de Pontuação (Concursos e Vestibulares)",
+          "canal": "Português sem Enrolação - Professora Lis",
+          "duracaoSegundos": 577,
+          "fonte": "selecao_final_lote_a",
+          "status": "aprovado",
+          "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+        }
+      ],
+      "resultado": "aprovado",
+      "aprovado": {
+        "videoId": "KD2TAJyZECc",
+        "url": "https://www.youtube.com/watch?v=KD2TAJyZECc",
+        "tituloYoutube": "PONTUAÇÃO FÁCIL: Aprenda o Emprego dos Sinais de Pontuação (Concursos e Vestibulares)",
+        "canal": "Português sem Enrolação - Professora Lis",
+        "duracaoTotalSegundos": 577,
+        "uploadDate": "20230525"
+      },
+      "verificadoEm": "2026-07-16",
+      "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+    },
+    {
+      "id": "aula-inf-03",
+      "tituloCatalogo": "Internet e segurança",
+      "pesquisa": "internet segurança da informação informática concursos",
+      "candidatosAvaliados": [
+        {
+          "videoId": "oXgyCav8WU4",
+          "url": "https://www.youtube.com/watch?v=oXgyCav8WU4",
+          "fonte": "candidato_historico",
+          "titulo": null,
+          "canal": null,
+          "duracaoSegundos": null,
+          "oembedOk": false,
+          "status": "rejeitado",
+          "motivo": "oEmbed falhou: HTTP Error 404: Not Found"
+        },
+        {
+          "videoId": "X2wgk02Bqt0",
+          "url": "https://www.youtube.com/watch?v=X2wgk02Bqt0",
+          "fonte": "ytsearch",
+          "titulo": "Resumo DIRETO AO PONTO - Segurança da informação - Informática Concursos (Professor Danilo Vilanova)",
+          "canal": "Professor Danilo Vilanova | Informática Concursos",
+          "duracaoSegundos": 1746,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "fzy6v5wZHJY",
+          "url": "https://www.youtube.com/watch?v=fzy6v5wZHJY",
+          "fonte": "ytsearch",
+          "titulo": "PROGRAMAS MALICIOSOS MAIS COBRADOS - SEGURANÇA DA INFORMAÇÃO PARA CONCURSOS",
+          "canal": "Prof. Marcelo Narciso",
+          "duracaoSegundos": 3528,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "jLYXwMY9lQQ",
+          "url": "https://www.youtube.com/watch?v=jLYXwMY9lQQ",
+          "fonte": "ytsearch",
+          "titulo": "Informática para concursos e a segurança da informação",
+          "canal": "Veon Aprova Logo",
+          "duracaoSegundos": 3361,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "pyUEhWJz64U",
+          "url": "https://www.youtube.com/watch?v=pyUEhWJz64U",
+          "fonte": "ytsearch",
+          "titulo": "500 Questões de Informática [Segurança da Informação] - Prof. Alan Souza",
+          "canal": "Prof. Alan Souza",
+          "duracaoSegundos": 7577,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "cNg0XbM2elA",
+          "url": "https://www.youtube.com/watch?v=cNg0XbM2elA",
+          "fonte": "ytsearch",
+          "titulo": "Curso intensivo PF - Segurança da Informação - Informática - com Ricardo Beck",
+          "canal": "DSO Concursos",
+          "duracaoSegundos": 2138,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "HawgvoXDm0M",
+          "url": "https://www.youtube.com/watch?v=HawgvoXDm0M",
+          "fonte": "ytsearch",
+          "titulo": "Concurso Banco do Brasil - Aula 4 - Segurança da Informação - Cesgranrio | Informática Concursos",
+          "canal": "Professor Danilo Vilanova | Informática Concursos",
+          "duracaoSegundos": 3808,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "0DN3QjU7xV4",
+          "url": "https://www.youtube.com/watch?v=0DN3QjU7xV4",
+          "fonte": "ytsearch",
+          "titulo": "Informática concursos - Princípios da segurança da informação CIDA. Professor Danilo Vilanova #oPior",
+          "canal": "Professor Danilo Vilanova | Informática Concursos",
+          "duracaoSegundos": 612,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "k7vK0JTfTEA",
+          "url": "https://www.youtube.com/watch?v=k7vK0JTfTEA",
+          "fonte": "ytsearch",
+          "titulo": "Resumo DIRETO AO PONTO - NAVEGADORES(BROWSERS) - Informática Concursos (Professor Danilo Vilanova)",
+          "canal": "Professor Danilo Vilanova | Informática Concursos",
+          "duracaoSegundos": 2087,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "kxN8GFJbGuc",
+          "url": "https://www.youtube.com/watch?v=kxN8GFJbGuc",
+          "titulo": "Informática para concursos: Curso básico (episódio 6) - Internet, Intranet e Segurança da Informação",
+          "canal": "Léo Matos",
+          "duracaoSegundos": 5302,
+          "fonte": "selecao_final_lote_a",
+          "status": "aprovado",
+          "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+        }
+      ],
+      "resultado": "aprovado",
+      "aprovado": {
+        "videoId": "kxN8GFJbGuc",
+        "url": "https://www.youtube.com/watch?v=kxN8GFJbGuc",
+        "tituloYoutube": "Informática para concursos: Curso básico (episódio 6) - Internet, Intranet e Segurança da Informação",
+        "canal": "Léo Matos",
+        "duracaoTotalSegundos": 5302,
+        "uploadDate": "20180629"
+      },
+      "verificadoEm": "2026-07-16",
+      "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+    },
+    {
+      "id": "aula-inf-05",
+      "tituloCatalogo": "Excel avançado para concurso",
+      "pesquisa": "excel avançado fórmulas concursos informática",
+      "candidatosAvaliados": [
+        {
+          "videoId": "yvcCGm-T4Ak",
+          "url": "https://www.youtube.com/watch?v=yvcCGm-T4Ak",
+          "fonte": "ytsearch",
+          "titulo": "Top 10 Funções mais Importantes no Excel | Exemplos Práticos Fórmulas Essenciais 🏆🥇",
+          "canal": "Excelente João",
+          "duracaoSegundos": 1597,
+          "oembedOk": true,
+          "status": "aprovado",
+          "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+        },
+        {
+          "videoId": "BQ6FTcJUJPw",
+          "url": "https://www.youtube.com/watch?v=BQ6FTcJUJPw",
+          "fonte": "ytsearch",
+          "titulo": "5 Funções Obrigatórias para Testes de Excel em Entrevista de Emprego",
+          "canal": "Curso de Excel Online",
+          "duracaoSegundos": 942,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "Pas4D2tiE9c",
+          "url": "https://www.youtube.com/watch?v=Pas4D2tiE9c",
+          "fonte": "ytsearch",
+          "titulo": "Top 20 Funções mais Importantes no Excel | Exemplos Práticos Fórmulas Essenciais 🏆🥇",
+          "canal": "Excelente João",
+          "duracaoSegundos": 3496,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "cYSa7rmBfzg",
+          "url": "https://www.youtube.com/watch?v=cYSa7rmBfzg",
+          "fonte": "ytsearch",
+          "titulo": "Questões de Informática| EXCEL - As +cobradas de 2025 | Professor Danilo Vilanova #opior",
+          "canal": "Professor Danilo Vilanova | Informática Concursos",
+          "duracaoSegundos": 4132,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "byHZh2oQAu8",
+          "url": "https://www.youtube.com/watch?v=byHZh2oQAu8",
+          "fonte": "ytsearch",
+          "titulo": "Informática Básica para Concurso Público | Questões Comentadas sobre EXCEL | Fórmulas e Funções",
+          "canal": "Informática para Concurso Público",
+          "duracaoSegundos": 732,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "Yhvh7dRGBbI",
+          "url": "https://www.youtube.com/watch?v=Yhvh7dRGBbI",
+          "fonte": "ytsearch",
+          "titulo": "QUESTÕES DE EXCEL PARA CONCURSOS",
+          "canal": "Prof. Marcelo Narciso",
+          "duracaoSegundos": 2347,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "VAyKSGZwMUg",
+          "url": "https://www.youtube.com/watch?v=VAyKSGZwMUg",
+          "fonte": "ytsearch",
+          "titulo": "Domine Tabela Dinâmica no Excel – Do Básico ao Avançado",
+          "canal": "Curso de Excel Online",
+          "duracaoSegundos": 894,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "R1dHJmpuTqg",
+          "url": "https://www.youtube.com/watch?v=R1dHJmpuTqg",
+          "fonte": "ytsearch",
+          "titulo": "Curso de Excel Completo e Gratuito",
+          "canal": "Léo Matos",
+          "duracaoSegundos": 5345,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        }
+      ],
+      "resultado": "aprovado",
+      "aprovado": {
+        "videoId": "yvcCGm-T4Ak",
+        "url": "https://www.youtube.com/watch?v=yvcCGm-T4Ak",
+        "tituloYoutube": "Top 10 Funções mais Importantes no Excel | Exemplos Práticos Fórmulas Essenciais 🏆🥇",
+        "canal": "Excelente João",
+        "duracaoTotalSegundos": 1597,
+        "uploadDate": "20230731"
+      },
+      "verificadoEm": "2026-07-16",
+      "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+    },
+    {
+      "id": "aula-et-02",
+      "tituloCatalogo": "Cidadania e ética profissional",
+      "pesquisa": "ética no serviço público cidadania concursos",
+      "candidatosAvaliados": [
+        {
+          "videoId": "zPhB7XeVVPA",
+          "url": "https://www.youtube.com/watch?v=zPhB7XeVVPA",
+          "fonte": "candidato_historico",
+          "titulo": null,
+          "canal": null,
+          "duracaoSegundos": null,
+          "oembedOk": false,
+          "status": "rejeitado",
+          "motivo": "oEmbed falhou: HTTP Error 404: Not Found"
+        },
+        {
+          "videoId": "rYac_rkUIEg",
+          "url": "https://www.youtube.com/watch?v=rYac_rkUIEg",
+          "fonte": "ytsearch",
+          "titulo": "Ética no Serviço Público. Ética e Democracia. Exercício da Cidadania (aula completa, atualizada)",
+          "canal": "Felipe Medeiros",
+          "duracaoSegundos": 197,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Duração fora da faixa 5min–2h."
+        },
+        {
+          "videoId": "ETtAvAcLEFA",
+          "url": "https://www.youtube.com/watch?v=ETtAvAcLEFA",
+          "fonte": "ytsearch",
+          "titulo": "AULA 01 - ÉTICA no SERVIÇO PÚBLICO (para QUALQUER CONCURSO)",
+          "canal": "FAZ QUESTÃO CONCURSOS PÚBLICOS",
+          "duracaoSegundos": 2658,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "vU_RXiBzYsI",
+          "url": "https://www.youtube.com/watch?v=vU_RXiBzYsI",
+          "fonte": "ytsearch",
+          "titulo": "ÉTICA NO SERVIÇO PÚBLICO - BANCA IDECAN - CONCURSO DE CAMPINA GRANDE - PARA TODOS OS CARGOS  - 2026",
+          "canal": "PROF LUIZ PAULO",
+          "duracaoSegundos": 1690,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "AqXhXsrTj8g",
+          "url": "https://www.youtube.com/watch?v=AqXhXsrTj8g",
+          "fonte": "ytsearch",
+          "titulo": "Ética no Serviço Público para Concursos DO ZERO – Prof. Thállius Moraes",
+          "canal": "Estratégia Concursos",
+          "duracaoSegundos": 9766,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Duração fora da faixa 5min–2h."
+        },
+        {
+          "videoId": "qjkR6ohgOx8",
+          "url": "https://www.youtube.com/watch?v=qjkR6ohgOx8",
+          "fonte": "ytsearch",
+          "titulo": "CURSO COMPLETO DE ÉTICA NO SERVIÇO PÚBLICO - AULA 1 - Professor Franco - Teoria + Questões",
+          "canal": "JUS POLIS",
+          "duracaoSegundos": 6862,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "7rNy8ua-JLY",
+          "url": "https://www.youtube.com/watch?v=7rNy8ua-JLY",
+          "fonte": "ytsearch",
+          "titulo": "Aula de Ética no Serviço Público professor Tiago Vidal | Concurso PRF Agente Administrativo-AlfaCon",
+          "canal": "AlfaCon",
+          "duracaoSegundos": 1581,
+          "oembedOk": true,
+          "status": "aprovado",
+          "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+        },
+        {
+          "videoId": "2LSFeG9HIQg",
+          "url": "https://www.youtube.com/watch?v=2LSFeG9HIQg",
+          "fonte": "ytsearch",
+          "titulo": "Concurso PRF 2023 - Começando do Zero - Ética e Cidadania - AlfaCon",
+          "canal": "AlfaCon",
+          "duracaoSegundos": 4522,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "GQ6EyOB_xpU",
+          "url": "https://www.youtube.com/watch?v=GQ6EyOB_xpU",
+          "fonte": "ytsearch",
+          "titulo": "Decreto 1.171/94 - Código de Ética - Completo | Questões resolvidas",
+          "canal": "Marks EDU",
+          "duracaoSegundos": 3192,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        }
+      ],
+      "resultado": "aprovado",
+      "aprovado": {
+        "videoId": "7rNy8ua-JLY",
+        "url": "https://www.youtube.com/watch?v=7rNy8ua-JLY",
+        "tituloYoutube": "Aula de Ética no Serviço Público professor Tiago Vidal | Concurso PRF Agente Administrativo-AlfaCon",
+        "canal": "AlfaCon",
+        "duracaoTotalSegundos": 1580,
+        "uploadDate": "20251021"
+      },
+      "verificadoEm": "2026-07-16",
+      "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+    },
+    {
+      "id": "aula-admin-04",
+      "tituloCatalogo": "Gestão de pessoas e liderança",
+      "pesquisa": "gestão de pessoas liderança administração pública concursos",
+      "candidatosAvaliados": [
+        {
+          "videoId": "f4G_JxAM_eE",
+          "url": "https://www.youtube.com/watch?v=f4G_JxAM_eE",
+          "fonte": "ytsearch",
+          "titulo": "Curso Completo de Administração Geral - Prof. Elisabete Moreira",
+          "canal": "Estratégia Concursos",
+          "duracaoSegundos": 12463,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "6dJyysPLq0s",
+          "url": "https://www.youtube.com/watch?v=6dJyysPLq0s",
+          "fonte": "ytsearch",
+          "titulo": "Liderança - Aula Completa - Prof. Rodrigo Rennó",
+          "canal": "Rodrigo Rennó",
+          "duracaoSegundos": 3597,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "ERdErn3Wq0s",
+          "url": "https://www.youtube.com/watch?v=ERdErn3Wq0s",
+          "fonte": "ytsearch",
+          "titulo": "Concurso SES-SC: Gestão de Pessoas para Gabaritar | Administração Pública",
+          "canal": "Carranza Cursos",
+          "duracaoSegundos": 2554,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "NXl46P5Vmmc",
+          "url": "https://www.youtube.com/watch?v=NXl46P5Vmmc",
+          "fonte": "ytsearch",
+          "titulo": "TSE - Gestão de Pessoas - Liderança",
+          "canal": "Professor Ravazolo",
+          "duracaoSegundos": 1287,
+          "oembedOk": true,
+          "status": "aprovado",
+          "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+        },
+        {
+          "videoId": "MvRr202Pjns",
+          "url": "https://www.youtube.com/watch?v=MvRr202Pjns",
+          "fonte": "ytsearch",
+          "titulo": "As 5 Teorias da Motivação para Concursos — Aula Completa + Questões",
+          "canal": "Prof. Marcelo Soares",
+          "duracaoSegundos": 6766,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "HlfF70Q89BE",
+          "url": "https://www.youtube.com/watch?v=HlfF70Q89BE",
+          "fonte": "ytsearch",
+          "titulo": "Concurso UFRGS 2025 • Gestão de Pessoas • Disciplina Cobrada • O Que Mais Cai • Aula Teórica",
+          "canal": "Carranza Cursos",
+          "duracaoSegundos": 2494,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "5T8fUzvNnec",
+          "url": "https://www.youtube.com/watch?v=5T8fUzvNnec",
+          "fonte": "ytsearch",
+          "titulo": "Hora da Verdade TRT SP: Noções de Gestão de Pessoas - Prof. Douglas Schneider",
+          "canal": "Estratégia Concursos",
+          "duracaoSegundos": 12031,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Duração fora da faixa 5min–2h."
+        },
+        {
+          "videoId": "3h-0YbKiC_Q",
+          "url": "https://www.youtube.com/watch?v=3h-0YbKiC_Q",
+          "fonte": "ytsearch",
+          "titulo": "GESTÃO de PESSOAS para CONCURSOS - CONCEITOS FUNDAMENTAIS",
+          "canal": "FAZ QUESTÃO CONCURSOS PÚBLICOS",
+          "duracaoSegundos": 5826,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        }
+      ],
+      "resultado": "aprovado",
+      "aprovado": {
+        "videoId": "NXl46P5Vmmc",
+        "url": "https://www.youtube.com/watch?v=NXl46P5Vmmc",
+        "tituloYoutube": "TSE - Gestão de Pessoas - Liderança",
+        "canal": "Professor Ravazolo",
+        "duracaoTotalSegundos": 1287,
+        "uploadDate": "20240922"
+      },
+      "verificadoEm": "2026-07-16",
+      "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+    },
+    {
+      "id": "aula-admin-05",
+      "tituloCatalogo": "Gestão de processos e qualidade",
+      "pesquisa": "gestão de processos qualidade PDCA administração concursos",
+      "candidatosAvaliados": [
+        {
+          "videoId": "h02nyBNMB5U",
+          "url": "https://www.youtube.com/watch?v=h02nyBNMB5U",
+          "fonte": "ytsearch",
+          "titulo": "🔵 PDCA NA PRÁTICA - O QUE É PDCA - COMO FUNCIONA O CICLO PDCA",
+          "canal": "Brains Desenvolvimento Profissional",
+          "duracaoSegundos": 572,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "n7CIpiVytfw",
+          "url": "https://www.youtube.com/watch?v=n7CIpiVytfw",
+          "fonte": "ytsearch",
+          "titulo": "Questões CEBRASPE - Ciclo PDCA - Petronio Castro",
+          "canal": "Prof. Petronio Castro - Administração",
+          "duracaoSegundos": 1407,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Substituído na seleção final manual do Lote A."
+        },
+        {
+          "videoId": "ENUS1fyJpdg",
+          "url": "https://www.youtube.com/watch?v=ENUS1fyJpdg",
+          "fonte": "ytsearch",
+          "titulo": "CNU [BLOCO 7] Ferramentas de Gestão: CICLO PDCA |Prof. Marcelo Soares",
+          "canal": "Prof. Marcelo Soares",
+          "duracaoSegundos": 1401,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "AZcLM6sd_oo",
+          "url": "https://www.youtube.com/watch?v=AZcLM6sd_oo",
+          "fonte": "ytsearch",
+          "titulo": "PDCA O QUE É (Entenda o Significado da Melhoria Contínua para Resolver Problema)",
+          "canal": "Blog Abri Minha Empresa",
+          "duracaoSegundos": 477,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "n3dezeCW6XM",
+          "url": "https://www.youtube.com/watch?v=n3dezeCW6XM",
+          "fonte": "ytsearch",
+          "titulo": "16. Aula de Gestão por Processos (Administração) - Parte 1",
+          "canal": "TecConcursos",
+          "duracaoSegundos": 2117,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "YapF7ZptBOY",
+          "url": "https://www.youtube.com/watch?v=YapF7ZptBOY",
+          "fonte": "ytsearch",
+          "titulo": "Gestão por Processos - Reengenharia - BPM - Prof. Rodrigo Rennó",
+          "canal": "Rodrigo Rennó",
+          "duracaoSegundos": 3260,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "8D4VTzMUxvs",
+          "url": "https://www.youtube.com/watch?v=8D4VTzMUxvs",
+          "fonte": "ytsearch",
+          "titulo": "Concurso MPSE – Gestão da Qualidade | Aula Completa de Administração para Concursos",
+          "canal": "Carranza Cursos",
+          "duracaoSegundos": 1799,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "9smyyxI5sEE",
+          "url": "https://www.youtube.com/watch?v=9smyyxI5sEE",
+          "fonte": "ytsearch",
+          "titulo": "Administração para Concursos | Gestão de Qualidade | Ciclo PDCA | Ciclo de Deming",
+          "canal": "Prof. Sergio Santoro",
+          "duracaoSegundos": 1072,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "PnWa561etk8",
+          "url": "https://www.youtube.com/watch?v=PnWa561etk8",
+          "titulo": "Gestão de Processos | Profa. Elisabete Moreira",
+          "canal": "CERS Cursos Online",
+          "duracaoSegundos": 3030,
+          "fonte": "selecao_final_lote_a",
+          "status": "aprovado",
+          "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+        }
+      ],
+      "resultado": "aprovado",
+      "aprovado": {
+        "videoId": "PnWa561etk8",
+        "url": "https://www.youtube.com/watch?v=PnWa561etk8",
+        "tituloYoutube": "Gestão de Processos | Profa. Elisabete Moreira",
+        "canal": "CERS Cursos Online",
+        "duracaoTotalSegundos": 3030,
+        "uploadDate": "20210503"
+      },
+      "verificadoEm": "2026-07-16",
+      "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+    },
+    {
+      "id": "aula-admin-07",
+      "tituloCatalogo": "Controle e avaliação",
+      "pesquisa": "controle e avaliação administração pública concursos",
+      "candidatosAvaliados": [
+        {
+          "videoId": "pxSGNzXNg_I",
+          "url": "https://www.youtube.com/watch?v=pxSGNzXNg_I",
+          "fonte": "ytsearch",
+          "titulo": "Controle da Administração Pública (Conceito e Classificações)",
+          "canal": "Prof. Diego Pureza",
+          "duracaoSegundos": 941,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "nFDz87_ymZ0",
+          "url": "https://www.youtube.com/watch?v=nFDz87_ymZ0",
+          "fonte": "ytsearch",
+          "titulo": "12. Aula do Processo de Controle e Avaliação (Administração) - Parte 1",
+          "canal": "TecConcursos",
+          "duracaoSegundos": 1437,
+          "oembedOk": true,
+          "status": "aprovado",
+          "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+        },
+        {
+          "videoId": "X9j2xGTELbs",
+          "url": "https://www.youtube.com/watch?v=X9j2xGTELbs",
+          "fonte": "ytsearch",
+          "titulo": "Funções Administrativas: Planejamento, Organização, Direção e Controle",
+          "canal": "Nota Dez Play",
+          "duracaoSegundos": 1871,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "_KS3YlU4U1o",
+          "url": "https://www.youtube.com/watch?v=_KS3YlU4U1o",
+          "fonte": "ytsearch",
+          "titulo": "Avaliação e Controle - Processo Administrativo - Aula Completa - Rodrigo Rennó",
+          "canal": "Rodrigo Rennó",
+          "duracaoSegundos": 3677,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "1__mOgj2BcE",
+          "url": "https://www.youtube.com/watch?v=1__mOgj2BcE",
+          "fonte": "ytsearch",
+          "titulo": "CONTROLE da Administração Pública - Conceito - Interno - Aula 149 - D Administrativo Eduardo Tanaka",
+          "canal": "Prof. Eduardo Tanaka",
+          "duracaoSegundos": 1817,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "0Wg3Gsstr98",
+          "url": "https://www.youtube.com/watch?v=0Wg3Gsstr98",
+          "fonte": "ytsearch",
+          "titulo": "Direito Administrativo - Controle de Administração com Luciano Franco",
+          "canal": "Focus Concursos",
+          "duracaoSegundos": 9542,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Duração fora da faixa 5min–2h."
+        },
+        {
+          "videoId": "kAuK1JELMNc",
+          "url": "https://www.youtube.com/watch?v=kAuK1JELMNc",
+          "fonte": "ytsearch",
+          "titulo": "CONTROLE DA ADMINISTRAÇÃO PÚBLICA: CONCEITOS RELATIVOS AOS SISTEMAS DE CONTROLE INTERNO",
+          "canal": "Ser Aprovado - Concursos Públicos",
+          "duracaoSegundos": 6932,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "BiDRCZ2I3Qg",
+          "url": "https://www.youtube.com/watch?v=BiDRCZ2I3Qg",
+          "fonte": "ytsearch",
+          "titulo": "Direito Administrativo: Questões sobre Controle da Administração Pública",
+          "canal": "Nova Concursos",
+          "duracaoSegundos": 3530,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        }
+      ],
+      "resultado": "aprovado",
+      "aprovado": {
+        "videoId": "nFDz87_ymZ0",
+        "url": "https://www.youtube.com/watch?v=nFDz87_ymZ0",
+        "tituloYoutube": "12. Aula do Processo de Controle e Avaliação (Administração) - Parte 1",
+        "canal": "TecConcursos",
+        "duracaoTotalSegundos": 1436,
+        "uploadDate": "20210901"
+      },
+      "verificadoEm": "2026-07-16",
+      "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+    },
+    {
+      "id": "aula-arq-02",
+      "tituloCatalogo": "Classificação e arquivamento",
+      "pesquisa": "classificação arquivamento arquivologia concursos",
+      "candidatosAvaliados": [
+        {
+          "videoId": "7anbmUVauus",
+          "url": "https://www.youtube.com/watch?v=7anbmUVauus",
+          "fonte": "ytsearch",
+          "titulo": "01.01. Definição e Classificação dos Arquivos (Arquivologia) Prof.ª Izabel Ataíde",
+          "canal": "TecConcursos",
+          "duracaoSegundos": 2831,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "uYLIWUt7IY8",
+          "url": "https://www.youtube.com/watch?v=uYLIWUt7IY8",
+          "fonte": "ytsearch",
+          "titulo": "Arquivologia - Classificação dos Arquivos - Petronio Castro",
+          "canal": "Prof. Petronio Castro - Administração",
+          "duracaoSegundos": 2291,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "7GoLA3VfA3Q",
+          "url": "https://www.youtube.com/watch?v=7GoLA3VfA3Q",
+          "fonte": "ytsearch",
+          "titulo": "01.02. Definição e Classificação dos Documentos (Arquivologia) Prof.ª Izabel Ataíde",
+          "canal": "TecConcursos",
+          "duracaoSegundos": 2341,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "O_fjg-IIANM",
+          "url": "https://www.youtube.com/watch?v=O_fjg-IIANM",
+          "fonte": "ytsearch",
+          "titulo": "Aula 03  - Classificação dos documentos",
+          "canal": "Arquivologia e Concursos - Luciana Rodrigues",
+          "duracaoSegundos": 1978,
+          "oembedOk": true,
+          "status": "aprovado",
+          "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+        },
+        {
+          "videoId": "0aZhWhBpFpc",
+          "url": "https://www.youtube.com/watch?v=0aZhWhBpFpc",
+          "fonte": "ytsearch",
+          "titulo": "Aulao Arquivologia",
+          "canal": "Carranza Cursos",
+          "duracaoSegundos": 2008,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "qRO_7qhhzuw",
+          "url": "https://www.youtube.com/watch?v=qRO_7qhhzuw",
+          "fonte": "ytsearch",
+          "titulo": "Aula - Métodos de Arquivamento",
+          "canal": "Carranza Cursos",
+          "duracaoSegundos": 791,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "UoEnDgeFyz8",
+          "url": "https://www.youtube.com/watch?v=UoEnDgeFyz8",
+          "fonte": "ytsearch",
+          "titulo": "Aula 02 -  Classificação dos arquivos",
+          "canal": "Arquivologia e Concursos - Luciana Rodrigues",
+          "duracaoSegundos": 2026,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "Y3dG3bWUOiY",
+          "url": "https://www.youtube.com/watch?v=Y3dG3bWUOiY",
+          "fonte": "ytsearch",
+          "titulo": "Princípios da Arquivologia - Alexandre Oliveira - Concursos Públicos - Resumo",
+          "canal": "Alexandre Oliveira",
+          "duracaoSegundos": 239,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Duração fora da faixa 5min–2h."
+        }
+      ],
+      "resultado": "aprovado",
+      "aprovado": {
+        "videoId": "O_fjg-IIANM",
+        "url": "https://www.youtube.com/watch?v=O_fjg-IIANM",
+        "tituloYoutube": "Aula 03  - Classificação dos documentos",
+        "canal": "Arquivologia e Concursos - Luciana Rodrigues",
+        "duracaoTotalSegundos": 1977,
+        "uploadDate": "20230912"
+      },
+      "verificadoEm": "2026-07-16",
+      "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+    },
+    {
+      "id": "aula-arq-04",
+      "tituloCatalogo": "Preservação e documentos digitais",
+      "pesquisa": "preservação documentos digitais arquivologia concursos",
+      "candidatosAvaliados": [
+        {
+          "videoId": "D9ag0dAK4H4",
+          "url": "https://www.youtube.com/watch?v=D9ag0dAK4H4",
+          "fonte": "ytsearch",
+          "titulo": "Arquivamento - pt.6 - Preservação de Documentos",
+          "canal": "Help Concursos",
+          "duracaoSegundos": 1334,
+          "oembedOk": true,
+          "status": "aprovado",
+          "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+        },
+        {
+          "videoId": "sLbfUYqaaCQ",
+          "url": "https://www.youtube.com/watch?v=sLbfUYqaaCQ",
+          "fonte": "ytsearch",
+          "titulo": "04. Preservação, Conservação e Restauração de Acervos - Parte 1 (Arquivologia) Prof.ª Izabel Ataíde",
+          "canal": "TecConcursos",
+          "duracaoSegundos": 2260,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "YjHYgXKio7o",
+          "url": "https://www.youtube.com/watch?v=YjHYgXKio7o",
+          "fonte": "ytsearch",
+          "titulo": "Aula 16 – Conservação de Documentos",
+          "canal": "Seu Concurso",
+          "duracaoSegundos": 884,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "Mkfq1tiJnKw",
+          "url": "https://www.youtube.com/watch?v=Mkfq1tiJnKw",
+          "fonte": "ytsearch",
+          "titulo": "Arquivologia - Automação de Arquivos - Documentos Digitais e Preservação",
+          "canal": "Concursando Você",
+          "duracaoSegundos": 1809,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "0aZhWhBpFpc",
+          "url": "https://www.youtube.com/watch?v=0aZhWhBpFpc",
+          "fonte": "ytsearch",
+          "titulo": "Aulao Arquivologia",
+          "canal": "Carranza Cursos",
+          "duracaoSegundos": 2008,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "Xh4U84EgR3o",
+          "url": "https://www.youtube.com/watch?v=Xh4U84EgR3o",
+          "fonte": "ytsearch",
+          "titulo": "Aula 28 - Arquivologia - Gestão dos Documentos",
+          "canal": "Lac Concursos - Principal",
+          "duracaoSegundos": 1475,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "gHFOmcV0xl4",
+          "url": "https://www.youtube.com/watch?v=gHFOmcV0xl4",
+          "fonte": "ytsearch",
+          "titulo": "Concurso SES-SC: Organização e Controle de Documentos | Arquivologia",
+          "canal": "Carranza Cursos",
+          "duracaoSegundos": 2854,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "EDI3Un8FuT0",
+          "url": "https://www.youtube.com/watch?v=EDI3Un8FuT0",
+          "fonte": "ytsearch",
+          "titulo": "Preservação digital na Arquivologia: teorias e tecnologias envolvidas",
+          "canal": "Canal da Revista Digital Preservação Digital",
+          "duracaoSegundos": 131,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Duração fora da faixa 5min–2h."
+        }
+      ],
+      "resultado": "aprovado",
+      "aprovado": {
+        "videoId": "D9ag0dAK4H4",
+        "url": "https://www.youtube.com/watch?v=D9ag0dAK4H4",
+        "tituloYoutube": "Arquivamento - pt.6 - Preservação de Documentos",
+        "canal": "Help Concursos",
+        "duracaoTotalSegundos": 1333,
+        "uploadDate": "20210512"
+      },
+      "verificadoEm": "2026-07-16",
+      "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+    },
+    {
+      "id": "aula-arq-06",
+      "tituloCatalogo": "CONARQ e política de arquivos",
+      "pesquisa": "CONARQ política nacional de arquivos concursos",
+      "candidatosAvaliados": [
+        {
+          "videoId": "O_no2ybZUqk",
+          "url": "https://www.youtube.com/watch?v=O_no2ybZUqk",
+          "fonte": "ytsearch",
+          "titulo": "06.01. Lei nº 8.159-1991 - Política Nacional de Arquivos (Arquivologia) Prof.ª Izabel Ataíde",
+          "canal": "TecConcursos",
+          "duracaoSegundos": 2372,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "7SqLOJ3ctLE",
+          "url": "https://www.youtube.com/watch?v=7SqLOJ3ctLE",
+          "fonte": "ytsearch",
+          "titulo": "Sinar e Conarq",
+          "canal": "Professora Katia Quadros",
+          "duracaoSegundos": 458,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "OEvle_Ms7Fg",
+          "url": "https://www.youtube.com/watch?v=OEvle_Ms7Fg",
+          "fonte": "ytsearch",
+          "titulo": "Aula 21 - Lei nº 8.15991",
+          "canal": "Seu Concurso",
+          "duracaoSegundos": 1128,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "RX32O7nFUvQ",
+          "url": "https://www.youtube.com/watch?v=RX32O7nFUvQ",
+          "fonte": "ytsearch",
+          "titulo": "Decreto 4.073/2002 - Política Nacional de Arquivos Públicos e Privados  (Art. 1º a 9º)",
+          "canal": "LexPlay",
+          "duracaoSegundos": 580,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "qlCSzqCkhT4",
+          "url": "https://www.youtube.com/watch?v=qlCSzqCkhT4",
+          "fonte": "ytsearch",
+          "titulo": "SIGAD sistema ou funcionalidade voz",
+          "canal": "Conselho Nacional de Arquivos - CONARQ ",
+          "duracaoSegundos": 903,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "9_Ey9qu53Yg",
+          "url": "https://www.youtube.com/watch?v=9_Ey9qu53Yg",
+          "fonte": "ytsearch",
+          "titulo": "Arquivologia - Lei 8.159/91",
+          "canal": "Aprova Concursos",
+          "duracaoSegundos": 2314,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Candidato válido; outro selecionado."
+        },
+        {
+          "videoId": "weqXyEz1hbE",
+          "url": "https://www.youtube.com/watch?v=weqXyEz1hbE",
+          "fonte": "ytsearch",
+          "titulo": "Aula 22 - Decreto nº 4.0732002",
+          "canal": "Seu Concurso",
+          "duracaoSegundos": 1068,
+          "oembedOk": true,
+          "status": "rejeitado",
+          "motivo": "Título sem palavra-chave do assunto."
+        },
+        {
+          "videoId": "NtqtWSaR-QQ",
+          "url": "https://www.youtube.com/watch?v=NtqtWSaR-QQ",
+          "fonte": "ytsearch",
+          "titulo": "LEGISLAÇÃO ARQUIVÍSTICA BRASILEIRA  CONSELHO NACIONAL DE ARQUIVOS  CONARQ",
+          "canal": "Paulo Alves Guerra João Pessoa Paraíba",
+          "duracaoSegundos": 1273,
+          "oembedOk": true,
+          "status": "aprovado",
+          "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+        }
+      ],
+      "resultado": "aprovado",
+      "aprovado": {
+        "videoId": "NtqtWSaR-QQ",
+        "url": "https://www.youtube.com/watch?v=NtqtWSaR-QQ",
+        "tituloYoutube": "LEGISLAÇÃO ARQUIVÍSTICA BRASILEIRA  CONSELHO NACIONAL DE ARQUIVOS  CONARQ",
+        "canal": "Paulo Alves Guerra João Pessoa Paraíba",
+        "duracaoTotalSegundos": 1272,
+        "uploadDate": "20190720"
+      },
+      "verificadoEm": "2026-07-16",
+      "motivo": "Seleção final Lote A: oEmbed OK, tema compatível com o catálogo, duração e canal confirmados."
+    }
+  ],
+  "aprovados": 11,
+  "total": 11
+}
