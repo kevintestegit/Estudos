@@ -4,16 +4,18 @@
 
 ### Adicionado
 - **Classificação forçada de erros**: ao errar uma questão no modo prática, o usuário é obrigado a selecionar o tipo de erro (teoria, interpretação, atenção, memorização) e escrever uma frase curta explicando o motivo.
-- O caderno de erros passa a receber classificações mais úteis para revisão posterior.
+- **Erros vencidos em destaque no “Hoje”**: bloco de prioridade máxima no topo da página com a lista dos erros D+1/D+7 e link direto para o Caderno de erros.
+- Dica de ordem recomendada do dia (erros → plano → matéria fraca).
 
 ### Melhorado
 - Fluxo de feedback após erro ficou orientado a aprendizado (active recall).
-- Erros agora carregam o motivo real escrito pelo usuário.
+- O caderno de erros recebe classificações e motivos mais úteis para revisão posterior.
+- Hierarquia visual de prioridades no fluxo diário.
 
 ### Próximos passos (Fase 2)
 - Pré-teste obrigatório antes da teoria
-- Hierarquia de prioridade no “Hoje” (erros → fracos → plano)
-- Integração mais forte dos erros vencidos no início do dia
+- Bloqueio/aviso mais forte se tentar concluir o dia com erros vencidos pendentes
+- Melhoria do algoritmo de flashcards
 
 ---
 
