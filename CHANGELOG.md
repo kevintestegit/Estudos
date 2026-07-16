@@ -1,29 +1,28 @@
 # Changelog
 
+## 2026-07-15 — Escolher qualquer dia do plano
+
+### Adicionado
+- Seletor de dia em **Hoje**: lista todos os dias do cronograma + data específica
+- Atalhos para matéria, videoaulas, biblioteca e questões livres
+- No **Cronograma**, botão **Estudar** em cada dia (abre vídeo, leitura e questões daquele conteúdo)
+- URL `hoje.html?dia=AAAA-MM-DD` para abrir um dia direto
+
+### Comportamento
+- Você não fica preso ao dia de hoje
+- Dias de descanso avisam e oferecem estudo livre por matéria/vídeo
+- Progresso do dia escolhido continua sendo registrado nas tarefas daquela data
+
+---
+
 ## 2026-07-15 — Resoluções fundamentadas
 
-### Reescrito
-- **Todas as resoluções do banco PRF** (`questoes-prf.json`): cada item explica o porquê do gabarito e por que as outras alternativas falham, quando aplicável.
-- Itens INSS 2016 com comentário genérico ou desalinhado corrigidos via `comentarios-override.json`.
-- Resoluções previdenciárias críticas expandidas (segurados, carência, BPC, EC 103, filiação, etc.).
-
-### Infra
-- `assets/js/quiz-resolucoes.js` aplica overrides por `id` no momento do questionário.
-- Cache-bust `?v=9` em Questões e Simulados.
-
-### Ainda em evolução
-- Itens oficiais com enunciado truncado na extração original continuam limitados pelo texto disponível.
-- Revisões humanas pontuais de gabarito oficial continuam bem-vindas.
+- Banco PRF 100% reescrito
+- Overrides INSS/Prev
 
 ---
 
-## 2026-07-15 — Flags no card + resumos comuns
+## 2026-07-15 — Flags + resumos comuns
 
-- Favoritar / marcar dúvida no card da questão
-- Resumos Ética, Constitucional e Administrativo
-
----
-
-## 2026-07-15 — Conteúdo previdenciário
-
-- Resumos + 30 questões CE de lei seca
+- Favoritar / dúvida no card
+- Resumos Ética, Constitucional, Administrativo
