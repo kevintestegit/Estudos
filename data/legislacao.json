@@ -33,7 +33,7 @@
       "concurso": "Comum",
       "materia": "Direito Administrativo",
       "titulo": "Lei nº 14.133/2021 - Licitações e Contratos Administrativos",
-      "url": "https://legislacao.planalto.gov.br/legisla/legislacao.nsf/Viw_Identificacao/lei%2014.133-2021?OpenDocument="
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm"
     },
     {
       "id": "lei-8212-custeio",
@@ -153,6 +153,69 @@
       "materia": "Direito Previdenciário",
       "titulo": "Lei nº 13.146/2015 — Estatuto da Pessoa com Deficiência",
       "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm"
+    },
+    {
+      "id": "colecao-prev-vol15",
+      "concurso": "INSS",
+      "materia": "Direito Previdenciário",
+      "titulo": "Coleção Previdência Social vol. 15 — Consolidação da legislação do RGPS (PDF oficial)",
+      "url": "https://www.gov.br/previdencia/pt-br/assuntos/previdencia-social/colecao-previdencia-social/vol-15.pdf"
+    },
+    {
+      "id": "enap-admin-mod1",
+      "concurso": "PRF Administrativo",
+      "materia": "Noções de Administração",
+      "titulo": "ENAP — Administração Pública (Módulo 1) PDF",
+      "url": "https://repositorio.enap.gov.br/bitstream/1/2260/1/1.%20Apostila%20-%20M%C3%B3dulo%201%20-%20Administra%C3%A7%C3%A3o%20P%C3%BAblica.pdf"
+    },
+    {
+      "id": "enap-gestao-processos",
+      "concurso": "PRF Administrativo",
+      "materia": "Noções de Administração",
+      "titulo": "ENAP — Gestão de Processos (Módulo 3) PDF",
+      "url": "https://repositorio.enap.gov.br/bitstream/1/2332/1/1.%20Apostila%20-%20M%C3%B3dulo%203%20-%20Gest%C3%A3o%20de%20Processos.pdf"
+    },
+    {
+      "id": "enap-gestao-pessoas",
+      "concurso": "PRF Administrativo",
+      "materia": "Noções de Administração",
+      "titulo": "ENAP — Gestão de Pessoas (Módulo 5) PDF",
+      "url": "https://repositorio.enap.gov.br/bitstream/1/2263/1/1.%20Apostila%20-%20M%C3%B3dulo%205%20-%20Gest%C3%A3o%20Pessoas.pdf"
+    },
+    {
+      "id": "enap-gestao-materiais",
+      "concurso": "PRF Administrativo",
+      "materia": "Noções de Administração",
+      "titulo": "ENAP — Gestão de Materiais PDF",
+      "url": "https://repositorio.enap.gov.br/bitstream/1/2259/1/Apostila_Gest%C3%A3o%20de%20Materiais.pdf"
+    },
+    {
+      "id": "enap-lideranca-competencias",
+      "concurso": "PRF Administrativo",
+      "materia": "Noções de Administração",
+      "titulo": "ENAP — Gestão de pessoas: liderança e competências para o setor público",
+      "url": "https://repositorio.enap.gov.br/bitstream/1/4283/1/7_Livro_Gest%C3%A3o%20de%20pessoas%20lideran%C3%A7a%20e%20compet%C3%AAncias%20para%20o%20setor%20p%C3%BAblico.pdf"
+    },
+    {
+      "id": "conarq-temporalidade-2020",
+      "concurso": "PRF Administrativo",
+      "materia": "Arquivologia",
+      "titulo": "CONARQ — Código de classificação e tabela de temporalidade (2020) PDF",
+      "url": "https://www.gov.br/conarq/pt-br/centrais-de-conteudo/publicacoes/Portaria_47_CCD_TTD_poder_executivo_federal_2020_instrumento.pdf"
+    },
+    {
+      "id": "arquivo-nacional-guia-gestao",
+      "concurso": "PRF Administrativo",
+      "materia": "Arquivologia",
+      "titulo": "Arquivo Nacional — Guia de gestão de documentos PDF",
+      "url": "https://www.gov.br/arquivonacional/pt-br/servicos/publicacoes/Guiadegestaodedocumentos.pdf"
+    },
+    {
+      "id": "lei-8112-servidores",
+      "concurso": "Comum",
+      "materia": "Direito Administrativo",
+      "titulo": "Lei nº 8.112/1990 — Regime jurídico dos servidores públicos civis da União",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm"
     }
   ]
 }
