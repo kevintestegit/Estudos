@@ -1,463 +1,59 @@
 {
   "pdfs": [
-    {
-      "id": "pdf-prev-segurados",
-      "titulo": "Lei seca — Segurados obrigatórios e facultativos (Lei 8.213, arts. 11–14)",
-      "materia": "Direito Previdenciário",
-      "topico": "Segurados",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-dependentes",
-      "titulo": "Lei seca — Dependentes (Lei 8.213, art. 16)",
-      "materia": "Direito Previdenciário",
-      "topico": "Dependentes",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-qualidade-graca",
-      "titulo": "Lei seca — Qualidade de segurado e período de graça (Lei 8.213, art. 15)",
-      "materia": "Direito Previdenciário",
-      "topico": "Qualidade de segurado",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-carencia",
-      "titulo": "Lei seca — Carência (Lei 8.213, arts. 24–27)",
-      "materia": "Direito Previdenciário",
-      "topico": "Carência",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-beneficios",
-      "titulo": "Lei seca — Benefícios do RGPS (Lei 8.213, Título III)",
-      "materia": "Direito Previdenciário",
-      "topico": "Benefícios",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-aposentadorias",
-      "titulo": "Lei seca — Aposentadorias + Reforma (Lei 8.213 e EC 103/2019)",
-      "materia": "Direito Previdenciário",
-      "topico": "Aposentadorias",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc103.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-incapacidade",
-      "titulo": "Lei seca — Benefícios por incapacidade (Lei 8.213)",
-      "materia": "Direito Previdenciário",
-      "topico": "Incapacidade",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-pensao",
-      "titulo": "Lei seca — Pensão por morte (Lei 8.213 + EC 103/2019)",
-      "materia": "Direito Previdenciário",
-      "topico": "Pensão por morte",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-maternidade",
-      "titulo": "Lei seca — Salário-maternidade (Lei 8.213)",
-      "materia": "Direito Previdenciário",
-      "topico": "Salário-maternidade",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-bpc",
-      "titulo": "Lei seca — BPC/LOAS (Lei 8.742 + Decreto 6.214/2007)",
-      "materia": "Direito Previdenciário",
-      "topico": "LOAS / BPC",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8742compilado.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-bpc-reg",
-      "titulo": "Regulamento do BPC — Decreto nº 6.214/2007",
-      "materia": "Direito Previdenciário",
-      "topico": "LOAS / BPC",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/d6214.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-custeio",
-      "titulo": "Lei seca — Custeio e salário de contribuição (Lei 8.212)",
-      "materia": "Direito Previdenciário",
-      "topico": "Custeio",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8212cons.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-rps",
-      "titulo": "Regulamento da Previdência Social — Decreto nº 3.048/1999",
-      "materia": "Direito Previdenciário",
-      "topico": "RPS",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/decreto/d3048.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-ec103",
-      "titulo": "Emenda Constitucional nº 103/2019 — Reforma da Previdência",
-      "materia": "Direito Previdenciário",
-      "topico": "EC 103/2019",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc103.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-in128",
-      "titulo": "IN PRES/INSS nº 128/2022",
-      "materia": "Direito Previdenciário",
-      "topico": "IN 128/2022",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.in.gov.br/en/web/dou/-/instrucao-normativa-pres/inss-n-128-de-28-de-marco-de-2022-389275446",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-seguridade-cf",
-      "titulo": "Constituição — Seguridade Social (arts. 194–204)",
-      "materia": "Direito Previdenciário",
-      "topico": "Seguridade Social",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-lc142",
-      "titulo": "Lei Complementar nº 142/2013 — Aposentadoria da pessoa com deficiência",
-      "materia": "Direito Previdenciário",
-      "topico": "LC 142/2013",
-      "prioridade": "media",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp142.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-prev-resumo-carencia",
-      "titulo": "Resumo objetivo ainda não disponível — Carência e qualidade de segurado",
-      "materia": "Direito Previdenciário",
-      "topico": "Carência",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "biblioteca.html?materia=Direito%20Previdenci%C3%A1rio",
-      "tipo": "indisponivel"
-    },
-    {
-      "id": "pdf-prev-resumo-beneficios",
-      "titulo": "Resumo objetivo ainda não disponível — Mapa de benefícios",
-      "materia": "Direito Previdenciário",
-      "topico": "Benefícios",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "biblioteca.html?materia=Direito%20Previdenci%C3%A1rio",
-      "tipo": "indisponivel"
-    },
-
-    {
-      "id": "pdf-et-01",
-      "titulo": "Código de Ética — Decreto nº 1.171/1994",
-      "materia": "Ética no Serviço Público",
-      "topico": "Dec. 1.171",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/decreto/d1171.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-et-02",
-      "titulo": "Sistema de Gestão da Ética — Decreto nº 6.029/2007",
-      "materia": "Ética no Serviço Público",
-      "topico": "Dec. 6.029",
-      "prioridade": "media",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/D6029.htm",
-      "tipo": "legislacao"
-    },
-
-    {
-      "id": "pdf-dc-01",
-      "titulo": "Constituição Federal — Direitos fundamentais (art. 5º)",
-      "materia": "Direito Constitucional",
-      "topico": "Direitos fundamentais",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-dc-02",
-      "titulo": "Constituição Federal — Organização do Estado",
-      "materia": "Direito Constitucional",
-      "topico": "Organização do Estado",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-dc-03",
-      "titulo": "Constituição Federal — Administração Pública",
-      "materia": "Direito Constitucional",
-      "topico": "Administração Pública",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-dc-04",
-      "titulo": "Constituição Federal — Poderes",
-      "materia": "Direito Constitucional",
-      "topico": "Poderes",
-      "prioridade": "media",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
-      "tipo": "legislacao"
-    },
-
-    {
-      "id": "pdf-da-8112",
-      "titulo": "Lei nº 8.112/1990 — Regime jurídico dos servidores",
-      "materia": "Direito Administrativo",
-      "topico": "Lei 8.112",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-da-14133",
-      "titulo": "Lei nº 14.133/2021 — Licitações e contratos",
-      "materia": "Direito Administrativo",
-      "topico": "Licitações",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-da-9784",
-      "titulo": "Lei nº 9.784/1999 — Processo administrativo federal",
-      "materia": "Direito Administrativo",
-      "topico": "Processo administrativo",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l9784.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-da-8429",
-      "titulo": "Lei nº 8.429/1992 — Improbidade administrativa",
-      "materia": "Direito Administrativo",
-      "topico": "Improbidade",
-      "prioridade": "media",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8429.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-da-atos",
-      "titulo": "Resumo objetivo ainda não disponível — Atos administrativos",
-      "materia": "Direito Administrativo",
-      "topico": "Atos",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "biblioteca.html?materia=Direito%20Administrativo",
-      "tipo": "indisponivel"
-    },
-    {
-      "id": "pdf-da-poderes",
-      "titulo": "Resumo objetivo ainda não disponível — Poderes administrativos",
-      "materia": "Direito Administrativo",
-      "topico": "Poderes",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "biblioteca.html?materia=Direito%20Administrativo",
-      "tipo": "indisponivel"
-    },
-
-    {
-      "id": "pdf-pt-redacao",
-      "titulo": "Manual de Redação da Presidência da República",
-      "materia": "Português",
-      "topico": "Redação Oficial",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica/manual-de-redacao.pdf",
-      "tipo": "pdf"
-    },
-    {
-      "id": "pdf-pt-01",
-      "titulo": "Resumo objetivo ainda não disponível — Interpretação de textos",
-      "materia": "Português",
-      "topico": "Interpretação",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "biblioteca.html?materia=Portugu%C3%AAs",
-      "tipo": "indisponivel"
-    },
-    {
-      "id": "pdf-pt-02",
-      "titulo": "Resumo objetivo ainda não disponível — Ortografia e acentuação",
-      "materia": "Português",
-      "topico": "Ortografia",
-      "prioridade": "media",
-      "paginas": null,
-      "url": "biblioteca.html?materia=Portugu%C3%AAs",
-      "tipo": "indisponivel"
-    },
-    {
-      "id": "pdf-pt-04",
-      "titulo": "Resumo objetivo ainda não disponível — Concordância",
-      "materia": "Português",
-      "topico": "Concordância",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "biblioteca.html?materia=Portugu%C3%AAs",
-      "tipo": "indisponivel"
-    },
-    {
-      "id": "pdf-pt-05",
-      "titulo": "Resumo objetivo ainda não disponível — Regência e crase",
-      "materia": "Português",
-      "topico": "Regência",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "biblioteca.html?materia=Portugu%C3%AAs",
-      "tipo": "indisponivel"
-    },
-
-    {
-      "id": "pdf-rl-01",
-      "titulo": "Resumo objetivo ainda não disponível — Proposições",
-      "materia": "Raciocínio Lógico",
-      "topico": "Proposições",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "biblioteca.html?materia=Racioc%C3%ADnio%20L%C3%B3gico",
-      "tipo": "indisponivel"
-    },
-    {
-      "id": "pdf-rl-02",
-      "titulo": "Resumo objetivo ainda não disponível — Equivalências",
-      "materia": "Raciocínio Lógico",
-      "topico": "Equivalências",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "biblioteca.html?materia=Racioc%C3%ADnio%20L%C3%B3gico",
-      "tipo": "indisponivel"
-    },
-
-    {
-      "id": "pdf-inf-gov",
-      "titulo": "Governo Digital — referências oficiais",
-      "materia": "Informática",
-      "topico": "Segurança",
-      "prioridade": "media",
-      "paginas": null,
-      "url": "https://www.gov.br/governodigital/pt-br",
-      "tipo": "fonte"
-    },
-
-    {
-      "id": "pdf-admin-enap",
-      "titulo": "ENAP — Administração Pública (Módulo 1)",
-      "materia": "Noções de Administração",
-      "topico": "PODC",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://repositorio.enap.gov.br/bitstream/1/2260/1/1.%20Apostila%20-%20M%C3%B3dulo%201%20-%20Administra%C3%A7%C3%A3o%20P%C3%BAblica.pdf",
-      "tipo": "pdf"
-    },
-    {
-      "id": "pdf-arq-01",
-      "titulo": "Guia de gestão de documentos (Arquivo Nacional)",
-      "materia": "Arquivologia",
-      "topico": "Gestão documental",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.gov.br/arquivonacional/pt-br/servicos/publicacoes/Guiadegestaodedocumentos.pdf",
-      "tipo": "pdf"
-    },
-    {
-      "id": "pdf-arq-conarq",
-      "titulo": "CONARQ — publicações oficiais",
-      "materia": "Arquivologia",
-      "topico": "CONARQ",
-      "prioridade": "media",
-      "paginas": null,
-      "url": "https://www.gov.br/conarq/pt-br/centrais-de-conteudo/publicacoes/publicacoes-conarq",
-      "tipo": "fonte"
-    },
-
-    {
-      "id": "pdf-leg-prf-01",
-      "titulo": "Decreto nº 1.655/1995 — Competências da PRF",
-      "materia": "Legislação institucional da PRF",
-      "topico": "Competências",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/decreto/d1655.htm",
-      "tipo": "legislacao"
-    },
-    {
-      "id": "pdf-leg-prf-02",
-      "titulo": "Lei nº 9.654/1998 — Carreira PRF",
-      "materia": "Legislação institucional da PRF",
-      "topico": "Carreira",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://www.planalto.gov.br/ccivil_03/leis/L9654compilado.htm",
-      "tipo": "legislacao"
-    },
-
-    {
-      "id": "prova-inss-2016",
-      "titulo": "Prova INSS (caderno CEBRASPE — estudo)",
-      "materia": "Prova",
-      "topico": "Prova oficial",
-      "prioridade": "alta",
-      "paginas": null,
-      "url": "https://cdn.cebraspe.org.br/concursos/INSS_2015/arquivos/234INSS_002_01_Caderno_ALGA.PDF",
-      "tipo": "pdf"
-    }
+    {"id": "pdf-pt-01", "titulo": "Resumo objetivo ainda não disponível — Interpretação de textos", "materia": "Português", "topico": "Interpretação", "prioridade": "alta", "paginas": null, "url": "biblioteca.html?materia=Portugu%C3%AAs", "tipo": "indisponivel"},
+    {"id": "pdf-pt-02", "titulo": "Resumo objetivo ainda não disponível — Ortografia e acentuação", "materia": "Português", "topico": "Ortografia", "prioridade": "media", "paginas": null, "url": "biblioteca.html?materia=Portugu%C3%AAs", "tipo": "indisponivel"},
+    {"id": "pdf-pt-03", "titulo": "Resumo objetivo ainda não disponível — Morfossintaxe", "materia": "Português", "topico": "Morfossintaxe", "prioridade": "media", "paginas": null, "url": "biblioteca.html?materia=Portugu%C3%AAs", "tipo": "indisponivel"},
+    {"id": "pdf-pt-04", "titulo": "Resumo objetivo ainda não disponível — Concordância", "materia": "Português", "topico": "Concordância", "prioridade": "alta", "paginas": null, "url": "biblioteca.html?materia=Portugu%C3%AAs", "tipo": "indisponivel"},
+    {"id": "pdf-pt-05", "titulo": "Resumo objetivo ainda não disponível — Regência e crase", "materia": "Português", "topico": "Regência", "prioridade": "alta", "paginas": null, "url": "biblioteca.html?materia=Portugu%C3%AAs", "tipo": "indisponivel"},
+    {"id": "pdf-pt-06", "titulo": "Resumo objetivo ainda não disponível — Pontuação e coerência", "materia": "Português", "topico": "Pontuação", "prioridade": "media", "paginas": null, "url": "biblioteca.html?materia=Portugu%C3%AAs", "tipo": "indisponivel"},
+    {"id": "pdf-rl-01", "titulo": "Resumo objetivo ainda não disponível — Proposições", "materia": "Raciocínio Lógico", "topico": "Proposições", "prioridade": "alta", "paginas": null, "url": "biblioteca.html?materia=Racioc%C3%ADnio%20L%C3%B3gico", "tipo": "indisponivel"},
+    {"id": "pdf-rl-02", "titulo": "Resumo objetivo ainda não disponível — Equivalências", "materia": "Raciocínio Lógico", "topico": "Equivalências", "prioridade": "alta", "paginas": null, "url": "biblioteca.html?materia=Racioc%C3%ADnio%20L%C3%B3gico", "tipo": "indisponivel"},
+    {"id": "pdf-rl-03", "titulo": "Resumo objetivo ainda não disponível — Diagramas", "materia": "Raciocínio Lógico", "topico": "Diagramas", "prioridade": "media", "paginas": null, "url": "biblioteca.html?materia=Racioc%C3%ADnio%20L%C3%B3gico", "tipo": "indisponivel"},
+    {"id": "pdf-rl-04", "titulo": "Resumo objetivo ainda não disponível — Probabilidade", "materia": "Raciocínio Lógico", "topico": "Probabilidade", "prioridade": "media", "paginas": null, "url": "biblioteca.html?materia=Racioc%C3%ADnio%20L%C3%B3gico", "tipo": "indisponivel"},
+    {"id": "pdf-inf-01", "titulo": "Fonte oficial — Governo Digital (hardware/software)", "materia": "Informática", "topico": "Hardware/Software", "prioridade": "media", "paginas": null, "url": "https://www.gov.br/governodigital/pt-br", "tipo": "fonte"},
+    {"id": "pdf-inf-02", "titulo": "Fonte oficial — Governo Digital (sistemas operacionais)", "materia": "Informática", "topico": "SO", "prioridade": "media", "paginas": null, "url": "https://www.gov.br/governodigital/pt-br", "tipo": "fonte"},
+    {"id": "pdf-inf-03", "titulo": "Fonte oficial — Governo Digital (internet e segurança)", "materia": "Informática", "topico": "Internet", "prioridade": "media", "paginas": null, "url": "https://www.gov.br/governodigital/pt-br", "tipo": "fonte"},
+    {"id": "pdf-inf-04", "titulo": "Fonte oficial — Governo Digital (Office)", "materia": "Informática", "topico": "Office", "prioridade": "media", "paginas": null, "url": "https://www.gov.br/governodigital/pt-br", "tipo": "fonte"},
+    {"id": "pdf-et-01", "titulo": "Lei seca — Código de Ética (Decreto nº 1.171/1994)", "materia": "Ética no Serviço Público", "topico": "Dec. 1.171", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/decreto/d1171.htm", "tipo": "legislacao"},
+    {"id": "pdf-et-02", "titulo": "Lei seca — Sistema de Gestão da Ética (Decreto nº 6.029/2007)", "materia": "Ética no Serviço Público", "topico": "Dec. 6.029", "prioridade": "media", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/D6029.htm", "tipo": "legislacao"},
+    {"id": "pdf-dc-01", "titulo": "Lei seca — CF/88 Direitos fundamentais (art. 5º)", "materia": "Direito Constitucional", "topico": "Direitos fundamentais", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm", "tipo": "legislacao"},
+    {"id": "pdf-dc-02", "titulo": "Lei seca — CF/88 Organização do Estado", "materia": "Direito Constitucional", "topico": "Organização do Estado", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm", "tipo": "legislacao"},
+    {"id": "pdf-dc-03", "titulo": "Lei seca — CF/88 Administração Pública", "materia": "Direito Constitucional", "topico": "Administração Pública", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm", "tipo": "legislacao"},
+    {"id": "pdf-dc-04", "titulo": "Lei seca — CF/88 Poderes", "materia": "Direito Constitucional", "topico": "Poderes", "prioridade": "media", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm", "tipo": "legislacao"},
+    {"id": "pdf-da-01", "titulo": "Resumo objetivo ainda não disponível — Organização da Administração", "materia": "Direito Administrativo", "topico": "Administração", "prioridade": "alta", "paginas": null, "url": "biblioteca.html?materia=Direito%20Administrativo", "tipo": "indisponivel"},
+    {"id": "pdf-da-02", "titulo": "Resumo objetivo ainda não disponível — Atos administrativos", "materia": "Direito Administrativo", "topico": "Atos", "prioridade": "alta", "paginas": null, "url": "biblioteca.html?materia=Direito%20Administrativo", "tipo": "indisponivel"},
+    {"id": "pdf-da-03", "titulo": "Lei seca — Licitações e contratos (Lei nº 14.133/2021)", "materia": "Direito Administrativo", "topico": "Licitações", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm", "tipo": "legislacao"},
+    {"id": "pdf-da-04", "titulo": "Resumo objetivo ainda não disponível — Poderes administrativos", "materia": "Direito Administrativo", "topico": "Poderes", "prioridade": "alta", "paginas": null, "url": "biblioteca.html?materia=Direito%20Administrativo", "tipo": "indisponivel"},
+    {"id": "pdf-da-05", "titulo": "Lei seca — Regime jurídico dos servidores (Lei nº 8.112/1990)", "materia": "Direito Administrativo", "topico": "Agentes", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm", "tipo": "legislacao"},
+    {"id": "pdf-da-06", "titulo": "Resumo objetivo ainda não disponível — Controle da Administração", "materia": "Direito Administrativo", "topico": "Controle", "prioridade": "media", "paginas": null, "url": "biblioteca.html?materia=Direito%20Administrativo", "tipo": "indisponivel"},
+    {"id": "pdf-prev-01", "titulo": "Lei seca — Seguridade Social (CF arts. 194–204)", "materia": "Direito Previdenciário", "topico": "Seguridade Social", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm", "tipo": "legislacao"},
+    {"id": "pdf-prev-02", "titulo": "Lei seca — Segurados e dependentes (Lei 8.213, arts. 11–16)", "materia": "Direito Previdenciário", "topico": "Segurados", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm", "tipo": "legislacao"},
+    {"id": "pdf-prev-03", "titulo": "Lei seca — Filiação e inscrição (Lei 8.213 / RPS)", "materia": "Direito Previdenciário", "topico": "Filiação e inscrição", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm", "tipo": "legislacao"},
+    {"id": "pdf-prev-04", "titulo": "Lei seca — Carência e qualidade de segurado (Lei 8.213, arts. 15 e 24–27)", "materia": "Direito Previdenciário", "topico": "Carência", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm", "tipo": "legislacao"},
+    {"id": "pdf-prev-05", "titulo": "Lei seca — Salário de contribuição (Lei 8.212)", "materia": "Direito Previdenciário", "topico": "Salário de contribuição", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/leis/l8212cons.htm", "tipo": "legislacao"},
+    {"id": "pdf-prev-06", "titulo": "Lei seca — Aposentadorias + EC 103/2019", "materia": "Direito Previdenciário", "topico": "Aposentadorias", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc103.htm", "tipo": "legislacao"},
+    {"id": "pdf-prev-07", "titulo": "Lei seca — Auxílios e salário-maternidade (Lei 8.213)", "materia": "Direito Previdenciário", "topico": "Incapacidade", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm", "tipo": "legislacao"},
+    {"id": "pdf-prev-08", "titulo": "Lei seca — Pensão por morte e BPC/LOAS (Lei 8.213 + Lei 8.742)", "materia": "Direito Previdenciário", "topico": "Pensão por morte", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/leis/l8742compilado.htm", "tipo": "legislacao"},
+    {"id": "pdf-prev-09", "titulo": "Lei seca — Processo administrativo previdenciário (Lei 8.213 / RPS)", "materia": "Direito Previdenciário", "topico": "Processo", "prioridade": "media", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm", "tipo": "legislacao"},
+    {"id": "pdf-prev-10", "titulo": "Lei seca — Custeio da Seguridade (Lei 8.212)", "materia": "Direito Previdenciário", "topico": "Custeio", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/leis/l8212cons.htm", "tipo": "legislacao"},
+    {"id": "pdf-prev-11", "titulo": "Lei seca — Tempo de contribuição (Lei 8.213 + EC 103)", "materia": "Direito Previdenciário", "topico": "Tempo de contribuição", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm", "tipo": "legislacao"},
+    {"id": "pdf-prev-12", "titulo": "Lei seca — Regras de transição (EC 103/2019)", "materia": "Direito Previdenciário", "topico": "EC 103/2019", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc103.htm", "tipo": "legislacao"},
+    {"id": "pdf-prev-13", "titulo": "Lei seca — Leis 8.212 e 8.213 (visão geral)", "materia": "Direito Previdenciário", "topico": "Leis", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213compilado.htm", "tipo": "legislacao"},
+    {"id": "pdf-prev-14", "titulo": "Prática — banco de questões do portal (Direito Previdenciário)", "materia": "Direito Previdenciário", "topico": "Questões", "prioridade": "alta", "paginas": null, "url": "questoes.html?materia=Direito%20Previdenci%C3%A1rio", "tipo": "fonte"},
+    {"id": "pdf-prev-15", "titulo": "Resumo objetivo ainda não disponível — Mapa de benefícios", "materia": "Direito Previdenciário", "topico": "Benefícios", "prioridade": "alta", "paginas": null, "url": "biblioteca.html?materia=Direito%20Previdenci%C3%A1rio", "tipo": "indisponivel"},
+    {"id": "pdf-prev-16", "titulo": "Lei seca — Custeio + processo (revisão)", "materia": "Direito Previdenciário", "topico": "Custeio", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/leis/l8212cons.htm", "tipo": "legislacao"},
+    {"id": "pdf-admin-01", "titulo": "ENAP — Administração Pública (Módulo 1)", "materia": "Noções de Administração", "topico": "PODC", "prioridade": "alta", "paginas": null, "url": "https://repositorio.enap.gov.br/bitstream/1/2260/1/1.%20Apostila%20-%20M%C3%B3dulo%201%20-%20Administra%C3%A7%C3%A3o%20P%C3%BAblica.pdf", "tipo": "pdf"},
+    {"id": "pdf-admin-02", "titulo": "Resumo objetivo ainda não disponível — Planejamento e controle", "materia": "Noções de Administração", "topico": "PODC", "prioridade": "media", "paginas": null, "url": "biblioteca.html?materia=No%C3%A7%C3%B5es%20de%20Administra%C3%A7%C3%A3o", "tipo": "indisponivel"},
+    {"id": "pdf-admin-03", "titulo": "Resumo objetivo ainda não disponível — Estruturas organizacionais", "materia": "Noções de Administração", "topico": "Estruturas", "prioridade": "media", "paginas": null, "url": "biblioteca.html?materia=No%C3%A7%C3%B5es%20de%20Administra%C3%A7%C3%A3o", "tipo": "indisponivel"},
+    {"id": "pdf-admin-04", "titulo": "Resumo objetivo ainda não disponível — Gestão de pessoas", "materia": "Noções de Administração", "topico": "Pessoas", "prioridade": "media", "paginas": null, "url": "biblioteca.html?materia=No%C3%A7%C3%B5es%20de%20Administra%C3%A7%C3%A3o", "tipo": "indisponivel"},
+    {"id": "pdf-admin-05", "titulo": "Resumo objetivo ainda não disponível — Processos e qualidade", "materia": "Noções de Administração", "topico": "Processos", "prioridade": "media", "paginas": null, "url": "biblioteca.html?materia=No%C3%A7%C3%B5es%20de%20Administra%C3%A7%C3%A3o", "tipo": "indisponivel"},
+    {"id": "pdf-admin-06", "titulo": "Resumo objetivo ainda não disponível — Administração de materiais", "materia": "Noções de Administração", "topico": "Materiais", "prioridade": "media", "paginas": null, "url": "biblioteca.html?materia=No%C3%A7%C3%B5es%20de%20Administra%C3%A7%C3%A3o", "tipo": "indisponivel"},
+    {"id": "pdf-arq-01", "titulo": "Guia de gestão de documentos (Arquivo Nacional)", "materia": "Arquivologia", "topico": "Gestão documental", "prioridade": "alta", "paginas": null, "url": "https://www.gov.br/arquivonacional/pt-br/servicos/publicacoes/Guiadegestaodedocumentos.pdf", "tipo": "pdf"},
+    {"id": "pdf-arq-02", "titulo": "Resumo objetivo ainda não disponível — Classificação e arquivamento", "materia": "Arquivologia", "topico": "Classificação", "prioridade": "media", "paginas": null, "url": "biblioteca.html?materia=Arquivologia", "tipo": "indisponivel"},
+    {"id": "pdf-arq-03", "titulo": "CONARQ — temporalidade e destinação", "materia": "Arquivologia", "topico": "Temporalidade", "prioridade": "media", "paginas": null, "url": "https://www.gov.br/conarq/pt-br/centrais-de-conteudo/publicacoes/publicacoes-conarq", "tipo": "fonte"},
+    {"id": "pdf-arq-04", "titulo": "CONARQ — preservação e documentos digitais", "materia": "Arquivologia", "topico": "Preservação", "prioridade": "media", "paginas": null, "url": "https://www.gov.br/conarq/pt-br/centrais-de-conteudo/publicacoes/publicacoes-conarq", "tipo": "fonte"},
+    {"id": "pdf-leg-prf-01", "titulo": "Lei seca — Competências da PRF (Decreto nº 1.655/1995)", "materia": "Legislação institucional da PRF", "topico": "Competências", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/decreto/d1655.htm", "tipo": "legislacao"},
+    {"id": "pdf-leg-prf-02", "titulo": "Lei seca — Decreto 1.655/1995 (atribuições institucionais)", "materia": "Legislação institucional da PRF", "topico": "Organização", "prioridade": "alta", "paginas": null, "url": "https://www.planalto.gov.br/ccivil_03/decreto/d1655.htm", "tipo": "legislacao"},
+    {"id": "prova-inss-2016", "titulo": "Prova INSS (caderno CEBRASPE — estudo)", "materia": "Prova", "topico": "Prova oficial", "prioridade": "alta", "paginas": null, "url": "https://cdn.cebraspe.org.br/concursos/INSS_2015/arquivos/234INSS_002_01_Caderno_ALGA.PDF", "tipo": "pdf"}
   ]
 }
