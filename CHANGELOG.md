@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-07-15 — Metodologia de Questões (Fase 1)
+
+### Adicionado
+- **Classificação forçada de erros**: ao errar uma questão no modo prática, o usuário é obrigado a selecionar o tipo de erro (teoria, interpretação, atenção, memorização) e escrever uma frase curta explicando o motivo.
+- O caderno de erros passa a receber classificações mais úteis para revisão posterior.
+
+### Melhorado
+- Fluxo de feedback após erro ficou orientado a aprendizado (active recall).
+- Erros agora carregam o motivo real escrito pelo usuário.
+
+### Próximos passos (Fase 2)
+- Pré-teste obrigatório antes da teoria
+- Hierarquia de prioridade no “Hoje” (erros → fracos → plano)
+- Integração mais forte dos erros vencidos no início do dia
+
+---
+
 ## 2026-07-10
 
 ### Corrigido
