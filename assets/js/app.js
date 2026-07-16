@@ -43,7 +43,6 @@ const App = {
         if (e.getAttribute("data-nav") !== active) return;
         e.classList.add("active");
         e.setAttribute("aria-current", "page");
-        // dropdown stays closed by default; mark trigger if child active
         const group = e.closest("details.nav-group");
         if (group) group.classList.add("has-active");
       });
@@ -87,7 +86,6 @@ const App = {
         if (group.open) closeAll(group);
       });
     });
-    // click outside closes dropdowns
     if (!this._navDropdownOutsideBound) {
       this._navDropdownOutsideBound = true;
       document.addEventListener("click", (e) => {
@@ -252,6 +250,9 @@ const App = {
   },
   nextAction(p, c) {
     if (!p.startDate) return "Definir a data de início do plano";
+    const due = typeof getDueErros === "function" ? getDueErros(p) : [];
+    if (due.length)
+      return `Revisar ${due.length} erro(s) vencido(s) no Caderno de erros`;
     const s = this.studyStatus(p, c);
     if (s.code === "aguardando")
       return `Aguardar o início em ${this.formatDateBR(p.startDate)}`;
@@ -476,7 +477,6 @@ window.Modal = (() => {
           `<button type="button" class="btn btn-sm ${b.accent || "btn-secondary"}" data-mb="${i}">${App.esc(b.label)}</button>`,
       )
       .join("");
-    // reflow so enter animation restarts
     void m.el.offsetWidth;
     m.el.classList.remove("hidden");
     m.actions.querySelector("button")?.focus();
@@ -538,7 +538,6 @@ window.Modal = (() => {
   };
   return m;
 })();
-// Substitui apenas alert. Confirm mantém nativo por ser síncrono.
 window.alert = (...a) => window.Modal.alert(...a);
 window.Modal.waitConfirm = (msg) => window.Modal.confirm(msg);
 window.App = App;
