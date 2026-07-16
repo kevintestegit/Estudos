@@ -1023,6 +1023,8 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 .unit-resume { color: var(--primary); font-weight: 700; }
 .unit-video { aspect-ratio: 16 / 9; margin-bottom: 1rem; max-width: 800px; }
 .unit-video iframe { border: 0; height: 100%; width: 100%; }
+/* respiro lateral: card tem padding 0, então o texto e o vídeo encostavam na borda */
+.unit-flow > *:not(.task-title) { padding-left: 1.1rem; padding-right: 1.1rem; }
 .fc-card {
   position: relative;
   min-height: 280px;
