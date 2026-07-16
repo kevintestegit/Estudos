@@ -4,19 +4,17 @@
       "id": "unidade-pt-interpretacao-01",
       "materia": "Português",
       "assunto": "Interpretação de textos",
-      "titulo": "Compreensão explícita, inferência válida e coesão referencial",
+      "titulo": "Compreensão explícita e inferência válida",
       "objetivos": [
         "pt-int-compreensao-explicita",
-        "pt-int-inferencia-valida",
-        "pt-int-coesao-referencial"
+        "pt-int-inferencia-valida"
       ],
       "leitura": {
         "conteudoId": "leitura-pt-interpretacao-01",
         "tempoMinutos": 8,
         "objetivosCobertos": [
           "pt-int-compreensao-explicita",
-          "pt-int-inferencia-valida",
-          "pt-int-coesao-referencial"
+          "pt-int-inferencia-valida"
         ],
         "secoes": [
           {
@@ -36,45 +34,35 @@
             "conteudo": "Inferência é uma conclusão apoiada por pistas do texto, mesmo quando não aparece escrita com as mesmas palavras. Ela precisa ser necessária ou, ao menos, claramente sustentada pelo conjunto das informações; uma hipótese apenas possível não basta. Use um teste simples: liste as premissas fornecidas e pergunte se a conclusão continua verdadeira sem acrescentar conhecimento externo. Exemplo autoral: 'A biblioteca fechou às 18 horas. Lara chegou às 18h20 e encontrou a porta trancada.' É válido inferir que Lara chegou depois do fechamento. Não é válido afirmar que ela perdeu uma prova, porque o texto nada diz sobre prova. As armadilhas mais comuns são atribuir intenção ao autor, transformar descrição em recomendação e criar causa onde há apenas sequência ou coexistência. Se uma pesquisa relata que determinado serviço é prestado pelo Estado em alguns lugares, isso não autoriza dizer que os pesquisadores recomendam esse modelo para todos. Observe também verbos modalizadores: 'indica', 'sugere' e 'pode' expressam graus de certeza menores que 'comprova', 'determina' e 'sempre'. Uma inferência válida preserva esse grau. Na dúvida, formule a pergunta: qual frase ou combinação de frases obriga esta conclusão? Se não houver resposta objetiva, o item provavelmente extrapola. O conhecimento de mundo ajuda a entender palavras e situações, mas não pode preencher uma justificativa que o texto não ofereceu."
           },
           {
-            "id": "coesao-referencial",
-            "titulo": "Siga a cadeia de referências",
-            "objetivosCobertos": [
-              "pt-int-coesao-referencial"
-            ],
-            "conteudo": "Coesão referencial é o conjunto de recursos que liga expressões a elementos já apresentados ou que ainda serão apresentados. Pronomes, sinônimos, repetições controladas e expressões resumidoras evitam que cada frase recomece do zero. Para descobrir o referente, não escolha apenas o substantivo mais próximo. Substitua mentalmente a expressão pelo candidato e verifique concordância, sentido e continuidade temática. Exemplo autoral: 'A comissão publicou uma nova regra. A medida entra em vigor amanhã.' A expressão 'a medida' retoma 'uma nova regra'; a proximidade ajuda, mas a equivalência de sentido confirma a ligação. Em 'Paula conversou com Renata quando ela chegou', o pronome 'ela' pode ser ambíguo sem contexto adicional. A banca pode explorar justamente essa falta de referente inequívoco. Há retomada anafórica quando a expressão aponta para algo anterior e catafórica quando anuncia algo posterior. Também existe coesão lexical: 'noção', 'ideia' e 'entendimento' podem formar uma cadeia, desde que o contexto mostre que tratam do mesmo conteúdo. A troca por um termo parecido não é automaticamente válida; é preciso preservar o referente e a relação argumentativa. Ao resolver, marque a expressão, procure os candidatos no trecho próximo e faça a substituição completa. Se a frase resultar incoerente, contrariar o número ou o gênero, ou deslocar o foco temático, rejeite aquele candidato."
-          },
-          {
             "id": "armadilhas-de-banca",
             "titulo": "Armadilhas recorrentes",
             "objetivosCobertos": [
               "pt-int-compreensao-explicita",
-              "pt-int-inferencia-valida",
-              "pt-int-coesao-referencial"
+              "pt-int-inferencia-valida"
             ],
-            "conteudo": "Quatro operações aparecem com frequência em itens de interpretação. A inversão causal troca causa e consequência, embora preserve quase todas as palavras. A generalização amplia 'alguns', 'em certos casos' ou 'pode' para 'todos', 'sempre' ou 'necessariamente'. A extrapolação acrescenta recomendação, avaliação ou finalidade que o autor não declarou. A troca de referente liga pronome ou expressão resumidora a um termo próximo, mas semanticamente incompatível. Faça uma leitura desconfiada dos absolutos e dos verbos fortes, sem adotar a regra simplista de que toda palavra absoluta torna o item errado: ela pode reproduzir exatamente o texto. Outro erro frequente do candidato é responder com a própria opinião. A questão pede fidelidade ao texto, não concordância pessoal com o tema. Em itens longos, divida a afirmação em blocos e verifique cada um. Se a primeira parte estiver correta e a segunda introduzir uma conclusão indevida, o item inteiro está errado. Por fim, volte ao contexto suficiente: uma frase isolada pode esconder a oposição estabelecida no parágrafo seguinte ou o referente apresentado no período anterior."
+            "conteudo": "Três operações aparecem com frequência em itens de interpretação. A inversão causal troca causa e consequência, embora preserve quase todas as palavras. A generalização amplia 'alguns', 'em certos casos' ou 'pode' para 'todos', 'sempre' ou 'necessariamente'. A extrapolação acrescenta recomendação, avaliação ou finalidade que o autor não declarou. Faça uma leitura desconfiada dos absolutos e dos verbos fortes, sem adotar a regra simplista de que toda palavra absoluta torna o item errado: ela pode reproduzir exatamente o texto. Outro erro frequente do candidato é responder com a própria opinião. A questão pede fidelidade ao texto, não concordância pessoal com o tema. Em itens longos, divida a afirmação em blocos e verifique cada um. Se a primeira parte estiver correta e a segunda introduzir uma conclusão indevida, o item inteiro está errado. Por fim, volte ao contexto suficiente: uma frase isolada pode esconder a oposição estabelecida no parágrafo seguinte."
           },
           {
             "id": "resumo",
             "titulo": "Roteiro de decisão",
             "objetivosCobertos": [
               "pt-int-compreensao-explicita",
-              "pt-int-inferencia-valida",
-              "pt-int-coesao-referencial"
+              "pt-int-inferencia-valida"
             ],
-            "conteudo": "Para cada item, siga cinco passos. Primeiro, identifique exatamente o que a afirmação pede. Segundo, localize no texto as passagens necessárias. Terceiro, compare sujeitos, relações, intensidade e restrições. Quarto, se houver inferência, escreva mentalmente as premissas e rejeite qualquer conclusão que dependa de informação externa. Quinto, se houver retomada, substitua a expressão pelo referente proposto e teste concordância e sentido. Ao errar, classifique a causa: erro conceitual, quando a regra não estava clara; erro de interpretação, quando a relação do texto foi lida de modo incorreto; ou erro de atenção, quando uma palavra decisiva passou despercebida. Essa classificação orientará a correção e a revisão futura."
+            "conteudo": "Para cada item, siga quatro passos. Primeiro, identifique exatamente o que a afirmação pede. Segundo, localize no texto as passagens necessárias. Terceiro, compare sujeitos, relações, intensidade e restrições. Quarto, se houver inferência, escreva mentalmente as premissas e rejeite qualquer conclusão que dependa de informação externa. Ao errar, classifique a causa: erro conceitual, quando a regra não estava clara; erro de interpretação, quando a relação do texto foi lida de modo incorreto; ou erro de atenção, quando uma palavra decisiva passou despercebida. Essa classificação orientará a correção e a revisão futura."
           }
         ],
         "pontosChave": [
           "Compare relações completas, não apenas palavras repetidas.",
           "Aceite uma inferência somente quando as premissas do texto a sustentarem.",
-          "Confirme o referente por concordância, sentido e continuidade temática.",
+          "Rejeite extrapolação: o que o texto não afirma não pode ser concluído.",
           "Uma parte incorreta torna o item inteiro incorreto."
         ],
         "armadilhasDeBanca": [
           "Inverter causa e consequência.",
           "Transformar possibilidade em certeza ou parte em totalidade.",
           "Atribuir ao autor recomendação que o texto apenas descreve.",
-          "Escolher como referente apenas o termo mais próximo."
+          "Preencher lacunas com conhecimento de mundo em vez de pistas do texto."
         ],
         "fontes": [
           {
@@ -94,22 +82,25 @@
       "video": {
         "aulaId": "aula-pt-01",
         "duracaoTotalSegundos": 1959,
-        "inicioSegundos": null,
-        "fimSegundos": null,
-        "objetivosCobertos": [],
+        "inicioSegundos": 76,
+        "fimSegundos": 466,
+        "objetivosCobertos": [
+          "pt-int-compreensao-explicita",
+          "pt-int-inferencia-valida"
+        ],
         "fonte": "YouTube — FZ Concursos",
         "fonteUrl": "https://www.youtube.com/watch?v=B1lk04l-dRU",
         "fonteVerificada": true,
-        "coberturaPedagogicaVerificada": false,
+        "coberturaPedagogicaVerificada": true,
         "verificadoEm": "2026-07-16",
-        "statusVerificacao": "pendente_revisao_manual"
+        "statusVerificacao": "aprovado",
+        "motivoSelecao": "Transcrição automática (yt-dlp ASR pt) do vídeo B1lk04l-dRU confirma, entre 76s e 466s, os três macetes centrais: (1) “questão de referência está no texto” — localizar informação explícita sem filosofar (compreensão explícita); (2) inferência como conclusão lógica a partir de pistas, com contraste à informação literal; (3) erros por extrapolação e contradição. O vídeo não ensina coesão referencial (pronomes/anáfora); esse objetivo foi retirado desta unidade e fica pendente de unidade própria. Trecho encerra antes da resolução de questões da Prefeitura de Laranjal Paulista."
       },
       "checagem": {
         "questionIds": [
           "check-pt-int-01",
           "check-pt-int-02",
-          "check-pt-int-03",
-          "check-pt-int-04"
+          "check-pt-int-03"
         ],
         "quantidadeMinima": 3
       },
@@ -118,10 +109,9 @@
           "inss-2022-i1",
           "inss-2022-i2",
           "inss-2022-i4",
-          "inss-2022-i5",
-          "inss-2022-i7"
+          "inss-2022-i5"
         ],
-        "quantidadeMinima": 5
+        "quantidadeMinima": 4
       },
       "correcao": {
         "agruparPorObjetivo": true,
@@ -136,7 +126,7 @@
         "habilitada": true,
         "estrategia": "baseada-em-desempenho"
       },
-      "statusEditorial": "rascunho"
+      "statusEditorial": "publicada"
     }
   ],
   "checagens": [
@@ -225,35 +215,6 @@
         "correta": "Correto. A descrição de uma prática não equivale a uma recomendação universal.",
         "incorreta": "Revise a diferença entre relatar um fato e atribuir uma recomendação ao autor.",
         "leituraSecaoId": "inferencia-valida"
-      }
-    },
-    {
-      "id": "check-pt-int-04",
-      "unitId": "unidade-pt-interpretacao-01",
-      "origemQuestao": "autoral",
-      "objetivos": [
-        "pt-int-coesao-referencial"
-      ],
-      "enunciado": "No trecho 'O conselho aprovou uma nova regra. A medida vale a partir de junho.', a expressão 'A medida' retoma qual elemento?",
-      "alternativas": [
-        {
-          "id": "A",
-          "texto": "O conselho."
-        },
-        {
-          "id": "B",
-          "texto": "Uma nova regra."
-        },
-        {
-          "id": "C",
-          "texto": "O mês de junho."
-        }
-      ],
-      "respostaCorreta": "B",
-      "feedback": {
-        "correta": "Correto. 'A medida' funciona como expressão resumidora de 'uma nova regra'.",
-        "incorreta": "Substitua a expressão pelos candidatos e verifique qual preserva o sentido da sequência.",
-        "leituraSecaoId": "coesao-referencial"
       }
     }
   ]

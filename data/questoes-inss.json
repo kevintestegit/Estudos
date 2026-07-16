@@ -154,9 +154,6 @@
       "gabarito": "C",
       "comentario": "CERTO. No terceiro parágrafo, 'a ideia' retoma, por coesão lexical, a 'noção' (arraigada) de que o cuidado seria manifestação de amor, mencionada no período anterior. É retomada anafórica típica.",
       "fonte": "INSS 2022 Cebraspe",
-      "unitIds": [
-        "unidade-pt-interpretacao-01"
-      ],
       "objetivos": [
         "pt-int-coesao-referencial"
       ],

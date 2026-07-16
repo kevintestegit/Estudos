@@ -2,9 +2,24 @@
   "aulaId": "aula-pt-01",
   "videoId": "B1lk04l-dRU",
   "duracaoTotalSegundos": 1959,
-  "inicioSegundos": null,
-  "fimSegundos": null,
-  "objetivosConfirmados": [],
+  "inicioSegundos": 76,
+  "fimSegundos": 466,
+  "objetivosConfirmados": [
+    "pt-int-compreensao-explicita",
+    "pt-int-inferencia-valida"
+  ],
+  "objetivoNaoCobertoPeloVideo": {
+    "id": "pt-int-coesao-referencial",
+    "decisao": "removido_desta_unidade",
+    "motivo": "ASR e varredura lexical não encontraram ensino de coesão referencial (pronome, anáfora, catáfora, retomada lexical). O termo “referência” no vídeo significa “a resposta está no texto”, não coesão.",
+    "candidatoFuturo": {
+      "videoId": "FYjTTHVuRJA",
+      "titulo": "Coesão Referencial - Brasil Escola",
+      "canal": "Brasil Escola Oficial",
+      "duracaoSegundos": 528,
+      "nota": "Transcrição confirma coesão referencial e pronomes de retomada; não integrado nesta fase."
+    }
+  },
   "candidatosAvaliados": [
     {
       "videoId": "B1lk04l-dRU",
@@ -12,103 +27,50 @@
       "titulo": "PORTUGUÊS PARA CONCURSOS: INTERPRETAÇÃO DE TEXTO",
       "canal": "FZ Concursos",
       "duracaoSegundos": 1959,
-      "resultado": "mantido_pendente",
-      "motivo": "O vídeo está público e o UI oferece a ação Mostrar transcrição, mas o painel permaneceu carregando sem exibir segmentos, trechos ou timestamps; assim, os três objetivos não puderam ser comprovados."
+      "resultado": "aprovado_trecho_teoria",
+      "inicioSegundos": 76,
+      "fimSegundos": 466,
+      "motivo": "Trecho teórico dos macetes referência-no-texto + inferência + extrapolação/contradição comprovado por legenda automática pt via yt-dlp."
     }
   ],
-  "buscaSubstitutos": {
-    "limiteOperacionalSegundos": 120,
-    "limiteSolicitadoPeloControlador": true,
-    "candidatosSubstitutosAvaliadosExternamente": 0,
-    "urlsSubstitutasTestadas": 0,
-    "urlsSubstitutasAprovadas": 0,
-    "resultado": "Nenhum candidato substituto chegou à avaliação externa dentro do limite operacional.",
-    "motivo": "O tempo disponível foi consumido na tentativa de obter a transcrição do vídeo atual pelo UI do YouTube. Isto registra ausência de candidato substituto avaliado no limite, não rejeição de vídeos específicos."
+  "metodoTranscricao": {
+    "ferramenta": "yt-dlp --write-auto-sub --sub-lang pt",
+    "arquivo": "/tmp/opencode/pt-int.pt.vtt",
+    "cuesAprox": 1388,
+    "data": "2026-07-16"
   },
-  "pesquisaSubstitutos": {
-    "consultasExecutadas": 7,
-    "pistasEncontradas": 4,
-    "candidatosComUrlOuVideoId": 0,
-    "candidatosAvaliados": 0,
-    "candidatosAprovados": 0,
-    "resultado": "bloqueado_sem_url_de_video",
-    "consultas": [
-      "interpretação de textos concursos inferência coesão aula",
-      "interpretação textual Cebraspe aula inferência",
-      "compreensão inferência coesão concurso português",
-      "YouTube Gran Cursos interpretação de texto inferência coesão",
-      "YouTube Estratégia Concursos interpretação de textos inferência coesão",
-      "YouTube Direção Concursos interpretação textual inferência",
-      "YouTube professor português concurso coesão referencial interpretação texto"
-    ],
-    "pistas": [
-      {
-        "url": "https://jcconcursos.com.br/noticia/videos-videoaulas-portugues-interpretacao-de-textos/aula-gratis-interpretacao-de-textos-aula-01-dicas-importantes-1432",
-        "evidenciaObservada": "A página editorial informa dois níveis de leitura, qualidade textual, coesão e coerência, mas não expôs URL nem videoId do vídeo incorporado.",
-        "resultado": "nao_avaliado_sem_url_de_video"
-      },
-      {
-        "url": "https://www.cursou.com.br/educacao/portugues/interpretacao-textos-concursos/",
-        "evidenciaObservada": "A estrutura pública lista aulas de interpretação, exercícios e coesão e coerência, mas o conteúdo observável não expôs URL nem videoId de nenhuma aula.",
-        "resultado": "nao_avaliado_sem_url_de_video"
-      },
-      {
-        "url": "https://gist.ly/youtube-summarizer/interpretacao-de-textos-dicas-e-estrategias-para-concursos",
-        "evidenciaObservada": "O resumo atribuído ao Direção Concursos menciona informação explícita, informação implícita e inferência, mas não comprova coesão referencial e não expôs URL nem videoId do vídeo-fonte.",
-        "resultado": "nao_avaliado_sem_url_de_video"
-      },
-      {
-        "url": "https://www.estrategiaconcursos.com.br/blog/semana-especial-de-interpretacao-de-textos/",
-        "evidenciaObservada": "A página do Estratégia registra uma semana gratuita com aulas de interpretação para CESPE, FCC, FGV e VUNESP, mas não expôs URL nem videoId de uma gravação pública.",
-        "resultado": "nao_avaliado_sem_url_de_video"
-      }
-    ],
-    "motivo": "Sem URL ou videoId não foi possível consultar oEmbed, duração, data, descrição, capítulos ou transcrição; nenhuma pista foi promovida a candidato e nenhuma aula foi alterada."
-  },
-  "evidencias": [
+  "trechosChave": [
     {
-      "fonte": "youtube_oembed",
-      "url": "https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DB1lk04l-dRU&format=json",
-      "httpStatus": 200,
-      "titulo": "PORTUGUÊS PARA CONCURSOS: INTERPRETAÇÃO DE TEXTO",
-      "autor": "FZ Concursos"
+      "t": 76,
+      "tema": "intro_macetes",
+      "texto": "trazer Três Macetes muito importantes"
     },
     {
-      "fonte": "pagina_publica_youtube",
-      "url": "https://www.youtube.com/watch?v=B1lk04l-dRU",
-      "httpStatus": 200,
-      "duracaoSegundos": 1959,
-      "publicadoEm": "2024-10-08T15:30:01-07:00",
-      "legendaAutomatica": {
-        "idioma": "pt",
-        "nome": "Português (gerada automaticamente)",
-        "disponivelNaPagina": true
-      }
+      "t": 88,
+      "tema": "compreensao_explicita",
+      "texto": "questão de referência está no texto"
     },
     {
-      "fonte": "youtube_timedtext",
-      "httpStatus": 200,
-      "conteudoObtido": false,
-      "respostaDiretaBytes": 0,
-      "respostaUrlAssinadaBytes": 52,
-      "tipoRespostaUrlAssinada": "image/gif"
+      "t": 183,
+      "tema": "inferencia",
+      "texto": "questão de inferência ... conclusão lógica"
     },
     {
-      "fonte": "youtube_ui_transcricao",
-      "url": "https://www.youtube.com/watch?v=B1lk04l-dRU",
-      "navegador": "Chromium via Playwright",
-      "acaoMostrarTranscricaoDisponivel": true,
-      "painelAberto": true,
-      "segmentosObtidos": 0,
-      "resultado": "O painel Transcrição abriu, mas permaneceu no indicador de carregamento sem conteúdo reproduzível."
+      "t": 281,
+      "tema": "extrapolacao",
+      "texto": "extrapolação a alternativa extrapola o texto"
+    },
+    {
+      "t": 466,
+      "tema": "fim_teoria",
+      "texto": "agora que vocês já pegaram esses macetes ... praticar"
     }
   ],
-  "verificadoEm": "2026-07-15",
-  "status": "pendente_revisao_manual",
+  "verificadoEm": "2026-07-16",
+  "status": "aprovado",
   "limitacoes": [
-    "O título e os metadados confirmam o tema geral, mas não comprovam a cobertura dos objetivos pt-int-compreensao-explicita, pt-int-inferencia-valida e pt-int-coesao-referencial.",
-    "A página anuncia legenda automática em português, porém o endpoint direto retornou corpo vazio e a URL assinada retornou apenas um GIF de 52 bytes.",
-    "A tentativa pelo UI real do YouTube encontrou e acionou Mostrar transcrição, mas o painel permaneceu carregando sem exibir segmentos.",
-    "Sem transcrição, capítulos ou inspeção manual reproduzível do conteúdo, não foi possível confirmar objetivos nem delimitar segundos exatos sem inventar evidência."
+    "Legenda automática ASR pode conter erros de ditado; timestamps arredondados ao segundo da fala-chave.",
+    "Coesão referencial não faz parte desta unidade publicada.",
+    "Prática com 4 questões reais verificadas (mínimo editorial 4); quinta questão de coesão (i7) reservada para unidade futura."
   ]
 }

@@ -935,13 +935,20 @@ for (const [name, viewport] of [
     await expect(primary).toHaveText("Concluir leitura");
 
     await primary.click();
-    await expect(page.getByText("Videoaula pendente de validação")).toBeVisible();
-    await expect(page.locator("iframe, a[href*='youtube.com']")).toHaveCount(0);
-    await expect(primary).toHaveCount(0);
-    await expect(page.getByText(/Aguarde a validação da videoaula/)).toHaveCount(1);
+    await expect(page.getByRole("heading", { name: "Videoaula", exact: true })).toBeVisible();
+    await expect(page.getByText("Trecho verificado e alinhado aos objetivos da unidade.")).toBeVisible();
+    await expect(primary).toHaveText("Assistir videoaula");
+    await expect(page.locator("iframe")).toHaveCount(0);
     expect(
       await page.evaluate((unitId) => Storage.getUnitProgress(unitId).state, UNIT_ID),
     ).toBe("leitura_concluida");
+
+    await primary.click();
+    await expect(page.locator("iframe[src*='youtube.com/embed/B1lk04l-dRU'][src*='start=76'][src*='end=466']")).toHaveCount(1);
+    await expect(primary).toHaveText("Concluir videoaula");
+    expect(
+      await page.evaluate((unitId) => Storage.getUnitProgress(unitId).state, UNIT_ID),
+    ).toBe("video_em_andamento");
   });
 }
 
@@ -1040,12 +1047,12 @@ test("fechamento da unidade real ignora chaves legadas", async ({ page }) => {
 test("retoma a seção estável da leitura após recarregar", async ({ page }) => {
   await openPilot(page, { width: 1280, height: 800 });
   await page.getByRole("button", { name: "Começar leitura" }).click();
-  await page.locator("#coesao-referencial").evaluate((section) => section.scrollIntoView());
-  await expect.poll(() => page.evaluate((id) => Storage.getUnitProgress(id).reading.sectionId, UNIT_ID)).toBe("coesao-referencial");
+  await page.locator("#inferencia-valida").evaluate((section) => section.scrollIntoView());
+  await expect.poll(() => page.evaluate((id) => Storage.getUnitProgress(id).reading.sectionId, UNIT_ID)).toBe("inferencia-valida");
 
   await page.reload();
-  await expect(page.getByText("Retomada: Siga a cadeia de referências")).toBeVisible();
-  await expect.poll(() => page.locator("#coesao-referencial").evaluate((section) => Math.abs(section.getBoundingClientRect().top) < innerHeight)).toBe(true);
+  await expect(page.getByText("Retomada: Inferir sem ultrapassar o texto")).toBeVisible();
+  await expect.poll(() => page.locator("#inferencia-valida").evaluate((section) => Math.abs(section.getBoundingClientRect().top) < innerHeight)).toBe(true);
 });
 
 test("cada data mesclada considera somente suas próprias unidades", async ({ page }) => {
@@ -1148,33 +1155,45 @@ test("bind usa entry para conectar a ocorrência correta da unidade", async ({ p
 
 test("somente a primeira unidade pendente oferece ação principal", async ({ page }) => {
   const today = await page.evaluate(() => todayISO());
-  await page.route("**/data/cronograma.json", (route) => route.fulfill({ json: { days: [{ dia: 1, titulo: "Duas unidades", tasks: [
-    { materia: "Português", assunto: "Primeira", unitId: "unidade-1" },
-    { materia: "Português", assunto: "Segunda", unitId: "unidade-2" },
-  ] }] } }));
-  await page.evaluate((date) => Storage.update((data) => {
-    data.startDate = date;
-    data.studyDays = [0, 1, 2, 3, 4, 5, 6];
-  }), today);
-  await page.reload();
-  await page.evaluate(async () => {
-    App.cache["data/unidades.json"] = { unidades: [1, 2].map((number) => ({
+  const unidades = {
+    unidades: [1, 2].map((number) => ({
       id: `unidade-${number}`,
       titulo: `Unidade ${number}`,
       objetivos: [],
       leitura: { tempoMinutos: 5, secoes: [] },
       video: {},
-    })) };
+    })),
+  };
+  await page.route("**/data/cronograma.json", (route) => route.fulfill({ json: { days: [{ dia: 1, titulo: "Duas unidades", tasks: [
+    { materia: "Português", assunto: "Primeira", unitId: "unidade-1" },
+    { materia: "Português", assunto: "Segunda", unitId: "unidade-2" },
+  ] }] } }));
+  await page.route("**/data/unidades.json", (route) => route.fulfill({ json: unidades }));
+  await page.evaluate(async (date) => {
+    for (const registration of await navigator.serviceWorker.getRegistrations())
+      await registration.unregister();
+    await Promise.all((await caches.keys()).map((key) => caches.delete(key)));
+    delete App.cache["data/unidades.json"];
+    delete App.cache["data/cronograma.json"];
     UnitFlow.dataPromise = null;
-    await initHoje();
-  });
+    Storage.update((data) => {
+      data.startDate = date;
+      data.studyDays = [0, 1, 2, 3, 4, 5, 6];
+    });
+  }, today);
+  await page.reload();
+  await page.waitForFunction(() => document.querySelector("[data-unit-id='unidade-1']"));
 
   await expect(page.locator("[data-primary-action]")).toHaveCount(1);
   await expect(page.locator('[data-unit-id="unidade-1"] [data-primary-action]')).toHaveText("Começar leitura");
   await expect(page.locator('[data-unit-id="unidade-2"]')).toContainText("Conclua a unidade anterior para desbloquear");
 
   await page.evaluate(() => Storage.update((data) => { data.unitProgress["unidade-1"] = { state: "concluida" }; }));
-  await page.evaluate(() => initHoje());
+  await page.evaluate(() => {
+    delete App.cache["data/unidades.json"];
+    UnitFlow.dataPromise = null;
+    return initHoje();
+  });
   await expect(page.locator("[data-primary-action]")).toHaveCount(1);
   await expect(page.locator('[data-unit-id="unidade-2"] [data-primary-action]')).toHaveText("Começar leitura");
 });
@@ -1216,7 +1235,7 @@ test("restaura a seção uma vez somente durante leitura em andamento", async ({
     Storage.update((data) => {
       data.unitProgress[unitId] = {
         state: "leitura_em_andamento",
-        reading: { sectionId: "coesao-referencial" },
+        reading: { sectionId: "inferencia-valida" },
       };
     });
     let scrolls = 0;
@@ -1393,8 +1412,8 @@ const mountQuizUnit = async (page, state = "video_concluido") => {
       },
       checagem: { questionIds: ["check-1", "check-2", "check-3"], quantidadeMinima: 3 },
       pratica: {
-        questionIds: ["inss-2022-i1", "inss-2022-i2", "inss-2022-i4", "inss-2022-i5", "inss-2022-i7"],
-        quantidadeMinima: 5,
+        questionIds: ["inss-2022-i1", "inss-2022-i2", "inss-2022-i4", "inss-2022-i5"],
+        quantidadeMinima: 4,
       },
     };
     UnitFlow.dataPromise = Promise.resolve({
@@ -1466,7 +1485,7 @@ test("checagem preserva tentativa anterior ao refazer antes de concluir", async 
 test("prática usa exatamente os IDs editoriais na ordem cadastrada", async ({ page }) => {
   await mountQuizUnit(page);
   await page.route("**/data/questoes-inss.json", (route) => route.fulfill({ json: {
-    questoes: [1, 2, 3, 4, 5, 7].map((number) => ({
+    questoes: [1, 2, 4, 5].map((number) => ({
       id: `inss-2022-i${number}`, tipo: "ce", materia: "Português",
       assunto: "Interpretação de textos", enunciado: `Item ${number}`,
       gabarito: number % 2 ? "E" : "C", objetivos: ["obj"],
@@ -1485,7 +1504,7 @@ test("prática usa exatamente os IDs editoriais na ordem cadastrada", async ({ p
     window.__renderQuizUnit();
   });
   await expect.poll(async () => page.evaluate(() => window.__capturedPracticeIds)).toEqual([
-    "inss-2022-i1", "inss-2022-i2", "inss-2022-i4", "inss-2022-i5", "inss-2022-i7",
+    "inss-2022-i1", "inss-2022-i2", "inss-2022-i4", "inss-2022-i5",
   ]);
 });
 
