@@ -2,12 +2,13 @@
 async function initQuestoes() {
   App.initShell("questoes");
   try {
-    const [qInss, qPrf, textos] = await Promise.all([
+    const [qInss, qPrf, qPrev, textos] = await Promise.all([
       App.loadJSON("data/questoes-inss.json"),
       App.loadJSON("data/questoes-prf.json"),
+      App.loadJSON("data/questoes-prev.json").catch(() => ({ questoes: [] })),
       App.loadJSON("data/textos.json").catch(() => ({ textos: {} })),
     ]);
-    const data = { qInss, qPrf, textos: textos.textos || {} };
+    const data = { qInss, qPrf, qPrev, textos: textos.textos || {} };
     const params = new URLSearchParams(location.search);
     renderQuestoesHome(data, params);
   } catch (e) {
@@ -17,7 +18,11 @@ async function initQuestoes() {
 }
 
 function allQuestions(data) {
-  return [...(data.qInss?.questoes || []), ...(data.qPrf?.questoes || [])];
+  return [
+    ...(data.qInss?.questoes || []),
+    ...(data.qPrf?.questoes || []),
+    ...(data.qPrev?.questoes || []),
+  ];
 }
 
 function renderQuestoesHome(data, params) {
@@ -53,9 +58,10 @@ function renderQuestoesHome(data, params) {
         <div class="form-row">
           <label for="q-origem">Origem</label>
           <select id="q-origem">
-            <option value="todas">INSS + PRF</option>
+            <option value="todas">Todas</option>
             <option value="inss">INSS / comum</option>
             <option value="prf">PRF / comum</option>
+            <option value="prev">Previdenciário (lei seca)</option>
           </select>
         </div>
         <div class="form-row">
@@ -81,6 +87,7 @@ function renderQuestoesHome(data, params) {
       const origem = document.getElementById("q-origem").value;
       if (origem === "inss") pool = data.qInss.questoes || [];
       if (origem === "prf") pool = data.qPrf.questoes || [];
+      if (origem === "prev") pool = data.qPrev?.questoes || [];
       const mat = document.getElementById("q-materia").value;
       const tg = document.getElementById("q-tag").value.trim();
       if (mat) pool = pool.filter((q) => q.materia === mat);
@@ -289,7 +296,6 @@ function startQuiz(questions, meta) {
     document.getElementById("q-confirm").addEventListener("click", () => {
       if (selected === null || selected === undefined) return;
 
-      // modo prova: só avança; corrige tudo no final
       if (provaMode) {
         selections[idx] = selected;
         idx++;
@@ -384,7 +390,6 @@ function startQuiz(questions, meta) {
       }
     });
 
-    // Esconde o botão de confirmar até classificar o erro
     const conf = document.getElementById("q-confirm");
     conf.disabled = true;
     conf.classList.add("hidden");
@@ -446,13 +451,11 @@ function startQuiz(questions, meta) {
         console.error(e);
       }
 
-      // Restaura botão de continuar
       conf.classList.remove("hidden");
       conf.disabled = false;
       conf.textContent =
         idx + 1 < questions.length ? "Próxima" : "Ver resultado";
 
-      // Remove o formulário de classificação, deixa só a resolução
       const classify = fb.querySelector(".error-classify");
       if (classify) {
         classify.innerHTML = `<p class="alert alert-ok" style="margin:0">Erro classificado e enviado ao caderno.</p>`;
@@ -464,7 +467,6 @@ function startQuiz(questions, meta) {
     if (timerId) clearInterval(timerId);
     const minutes = Math.max(1, Math.round((Date.now() - started) / 60000));
 
-    // modo prova: corrige tudo agora
     if (provaMode) {
       correct = 0;
       wrong = 0;
@@ -619,13 +621,14 @@ function startQuiz(questions, meta) {
 async function initSimulados() {
   App.initShell("simulados");
   try {
-    const [qInss, qPrf, simulados, textos] = await Promise.all([
+    const [qInss, qPrf, qPrev, simulados, textos] = await Promise.all([
       App.loadJSON("data/questoes-inss.json"),
       App.loadJSON("data/questoes-prf.json"),
+      App.loadJSON("data/questoes-prev.json").catch(() => ({ questoes: [] })),
       App.loadJSON("data/simulados.json"),
       App.loadJSON("data/textos.json").catch(() => ({ textos: {} })),
     ]);
-    const bank = allQuestions({ qInss, qPrf });
+    const bank = allQuestions({ qInss, qPrf, qPrev });
     const byId = Object.fromEntries(bank.map((q) => [q.id, q]));
     const textosMap = textos.textos || {};
     const p = Storage.get();
