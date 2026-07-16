@@ -1,13 +1,17 @@
-/** Inclui questões do banco comum (PT, RL, Inf, etc.) */
+/** Inclui questões do banco comum + extra */
 (function () {
   if (typeof allQuestions !== "function") return;
   const _all = allQuestions;
-  window.__qComum = null;
+  window.__qComum = { questoes: [] };
 
-  fetch("data/questoes-comum.json")
-    .then((r) => (r.ok ? r.json() : { questoes: [] }))
-    .then((d) => {
-      window.__qComum = d;
+  Promise.all([
+    fetch("data/questoes-comum.json").then((r) => (r.ok ? r.json() : { questoes: [] })),
+    fetch("data/questoes-comum-extra.json").then((r) => (r.ok ? r.json() : { questoes: [] })),
+  ])
+    .then(([a, b]) => {
+      window.__qComum = {
+        questoes: [...(a.questoes || []), ...(b.questoes || [])],
+      };
     })
     .catch(() => {
       window.__qComum = { questoes: [] };
