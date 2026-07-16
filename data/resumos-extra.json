@@ -1,0 +1,14 @@
+{
+  "pdfs": [
+    {"id": "resumo-etica-1171", "titulo": "Resumo objetivo — Código de Ética (Dec. 1.171)", "materia": "Ética no Serviço Público", "topico": "Dec. 1.171", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/etica-1171.html", "tipo": "resumo"},
+    {"id": "resumo-const-art5", "titulo": "Resumo objetivo — Direitos fundamentais (art. 5º)", "materia": "Direito Constitucional", "topico": "Direitos fundamentais", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/const-art5.html", "tipo": "resumo"},
+    {"id": "resumo-const-adm", "titulo": "Resumo objetivo — Administração Pública na CF", "materia": "Direito Constitucional", "topico": "Administração Pública", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/const-adm.html", "tipo": "resumo"},
+    {"id": "resumo-adm-atos", "titulo": "Resumo objetivo — Atos administrativos", "materia": "Direito Administrativo", "topico": "Atos", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/adm-atos.html", "tipo": "resumo"},
+    {"id": "resumo-adm-8112", "titulo": "Resumo objetivo — Servidores (Lei 8.112)", "materia": "Direito Administrativo", "topico": "Agentes", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/adm-8112.html", "tipo": "resumo"},
+    {"id": "resumo-prev-custeio", "titulo": "Resumo objetivo — Custeio da Seguridade", "materia": "Direito Previdenciário", "topico": "Custeio", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-custeio.html", "tipo": "resumo"},
+    {"id": "resumo-prev-transicao", "titulo": "Resumo objetivo — Regras de transição (EC 103)", "materia": "Direito Previdenciário", "topico": "EC 103/2019", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-transicao.html", "tipo": "resumo"},
+    {"id": "resumo-prev-salario-contribuicao", "titulo": "Resumo objetivo — Salário de contribuição", "materia": "Direito Previdenciário", "topico": "Salário de contribuição", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-salario-contribuicao.html", "tipo": "resumo"},
+    {"id": "resumo-prev-dependentes", "titulo": "Resumo objetivo — Dependentes", "materia": "Direito Previdenciário", "topico": "Dependentes", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-dependentes.html", "tipo": "resumo"},
+    {"id": "resumo-prev-filiacao", "titulo": "Resumo objetivo — Filiação e inscrição", "materia": "Direito Previdenciário", "topico": "Filiação e inscrição", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-filiacao.html", "tipo": "resumo"}
+  ]
+}

@@ -3,18 +3,21 @@
   const RESUMO_BY_ASSUNTO = {
     "Seguridade Social — conceitos": "resumo-prev-seguridade",
     "Segurados e dependentes": "resumo-prev-segurados",
-    "Filiação e inscrição": "resumo-prev-segurados",
+    "Filiação e inscrição": "resumo-prev-filiacao",
     "Carência e qualidade de segurado": "resumo-prev-carencia",
     "Aposentadorias": "resumo-prev-aposentadorias",
     "Auxílios e salário-maternidade": "resumo-prev-aposentadorias",
     "Pensão por morte e BPC/LOAS": "resumo-prev-pensao-bpc",
     "Mapa mental de benefícios": "resumo-prev-pensao-bpc",
+    "Custeio da Seguridade Social": "resumo-prev-custeio",
+    "Regras de transição": "resumo-prev-transicao",
+    "Salário de contribuição": "resumo-prev-salario-contribuicao",
   };
 
   const TAG_BY_ASSUNTO = {
     "Seguridade Social — conceitos": "prev-seguridade",
     "Segurados e dependentes": "prev-segurados",
-    "Filiação e inscrição": "prev-segurados",
+    "Filiação e inscrição": "prev-filiacao",
     "Carência e qualidade de segurado": "prev-carencia",
     "Aposentadorias": "prev-aposentadorias",
     "Auxílios e salário-maternidade": "prev-aposentadorias",
@@ -31,6 +34,16 @@
     {"id": "resumo-prev-carencia", "titulo": "Resumo objetivo — Carência e qualidade de segurado", "materia": "Direito Previdenciário", "topico": "Carência", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-carencia.html", "tipo": "resumo"},
     {"id": "resumo-prev-aposentadorias", "titulo": "Resumo objetivo — Aposentadorias e incapacidade", "materia": "Direito Previdenciário", "topico": "Aposentadorias", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-aposentadorias.html", "tipo": "resumo"},
     {"id": "resumo-prev-pensao-bpc", "titulo": "Resumo objetivo — Pensão por morte e BPC", "materia": "Direito Previdenciário", "topico": "Pensão por morte", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-pensao-bpc.html", "tipo": "resumo"},
+    {"id": "resumo-prev-custeio", "titulo": "Resumo objetivo — Custeio da Seguridade", "materia": "Direito Previdenciário", "topico": "Custeio", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-custeio.html", "tipo": "resumo"},
+    {"id": "resumo-prev-transicao", "titulo": "Resumo objetivo — Regras de transição (EC 103)", "materia": "Direito Previdenciário", "topico": "EC 103/2019", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-transicao.html", "tipo": "resumo"},
+    {"id": "resumo-prev-salario-contribuicao", "titulo": "Resumo objetivo — Salário de contribuição", "materia": "Direito Previdenciário", "topico": "Salário de contribuição", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-salario-contribuicao.html", "tipo": "resumo"},
+    {"id": "resumo-prev-dependentes", "titulo": "Resumo objetivo — Dependentes", "materia": "Direito Previdenciário", "topico": "Dependentes", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-dependentes.html", "tipo": "resumo"},
+    {"id": "resumo-prev-filiacao", "titulo": "Resumo objetivo — Filiação e inscrição", "materia": "Direito Previdenciário", "topico": "Filiação e inscrição", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/prev-filiacao.html", "tipo": "resumo"},
+    {"id": "resumo-etica-1171", "titulo": "Resumo objetivo — Código de Ética (Dec. 1.171)", "materia": "Ética no Serviço Público", "topico": "Dec. 1.171", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/etica-1171.html", "tipo": "resumo"},
+    {"id": "resumo-const-art5", "titulo": "Resumo objetivo — Direitos fundamentais (art. 5º)", "materia": "Direito Constitucional", "topico": "Direitos fundamentais", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/const-art5.html", "tipo": "resumo"},
+    {"id": "resumo-const-adm", "titulo": "Resumo objetivo — Administração Pública na CF", "materia": "Direito Constitucional", "topico": "Administração Pública", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/const-adm.html", "tipo": "resumo"},
+    {"id": "resumo-adm-atos", "titulo": "Resumo objetivo — Atos administrativos", "materia": "Direito Administrativo", "topico": "Atos", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/adm-atos.html", "tipo": "resumo"},
+    {"id": "resumo-adm-8112", "titulo": "Resumo objetivo — Servidores (Lei 8.112)", "materia": "Direito Administrativo", "topico": "Agentes", "prioridade": "alta", "paginas": null, "url": "materiais/resumos/adm-8112.html", "tipo": "resumo"},
   ];
 
   function injectResumos(data) {
@@ -69,7 +82,6 @@
   window.renderHoje = function renderHoje(data) {
     data = injectResumos(data);
     window.__studyData = data;
-    // auto-conclui learn quando não há vídeo (não bloqueia o dia)
     const progress = Storage.get();
     const plan = App.getTodayPlan(data.cronograma, progress);
     const studyDate = todayISO();
