@@ -2,12 +2,13 @@
 async function initQuestoes() {
   App.initShell("questoes");
   try {
-    const [qInss, qPrf, textos] = await Promise.all([
+    const [qInss, qPrf, qPrev, textos] = await Promise.all([
       App.loadJSON("data/questoes-inss.json"),
       App.loadJSON("data/questoes-prf.json"),
+      App.loadJSON("data/questoes-prev.json").catch(() => ({ questoes: [] })),
       App.loadJSON("data/textos.json").catch(() => ({ textos: {} })),
     ]);
-    const data = { qInss, qPrf, textos: textos.textos || {} };
+    const data = { qInss, qPrf, qPrev, textos: textos.textos || {} };
     const params = new URLSearchParams(location.search);
     renderQuestoesHome(data, params);
   } catch (e) {
@@ -17,7 +18,11 @@ async function initQuestoes() {
 }
 
 function allQuestions(data) {
-  return [...(data.qInss?.questoes || []), ...(data.qPrf?.questoes || [])];
+  return [
+    ...(data.qInss?.questoes || []),
+    ...(data.qPrf?.questoes || []),
+    ...(data.qPrev?.questoes || []),
+  ];
 }
 
 function renderQuestoesHome(data, params) {
@@ -53,9 +58,10 @@ function renderQuestoesHome(data, params) {
         <div class="form-row">
           <label for="q-origem">Origem</label>
           <select id="q-origem">
-            <option value="todas">INSS + PRF</option>
+            <option value="todas">Todas</option>
             <option value="inss">INSS / comum</option>
             <option value="prf">PRF / comum</option>
+            <option value="prev">Previdenciário (lei seca)</option>
           </select>
         </div>
         <div class="form-row">
@@ -81,6 +87,7 @@ function renderQuestoesHome(data, params) {
       const origem = document.getElementById("q-origem").value;
       if (origem === "inss") pool = data.qInss.questoes || [];
       if (origem === "prf") pool = data.qPrf.questoes || [];
+      if (origem === "prev") pool = data.qPrev?.questoes || [];
       const mat = document.getElementById("q-materia").value;
       const tg = document.getElementById("q-tag").value.trim();
       if (mat) pool = pool.filter((q) => q.materia === mat);
@@ -289,7 +296,6 @@ function startQuiz(questions, meta) {
     document.getElementById("q-confirm").addEventListener("click", () => {
       if (selected === null || selected === undefined) return;
 
-      // modo prova: só avança; corrige tudo no final
       if (provaMode) {
         selections[idx] = selected;
         idx++;
@@ -314,63 +320,153 @@ function startQuiz(questions, meta) {
       if (ok) {
         correct++;
         bySubject[subj].correct++;
+        answers.push({ id: q.id, ok, selected });
+        showFeedback(q, ok, selected, tipo);
       } else {
         wrong++;
-        try {
-          Storage.addErro({
-            questionId: q.id,
-            materia: q.materia,
-            assunto: q.assunto,
-            questao: q.enunciado,
-            motivo: "Erro no questionário",
-            comentario: q.comentario || "",
-            tipo: "atencao",
-          });
-        } catch (e) {
-          console.error(e);
-        }
+        answers.push({ id: q.id, ok, selected });
+        showFeedbackWithClassification(q, selected, tipo);
       }
-      answers.push({ id: q.id, ok, selected });
-      const fb = document.getElementById("q-feedback");
-      const gabLabel =
-        q.tipo === "ce"
-          ? q.gabarito === "C"
-            ? "Certo"
-            : "Errado"
-          : typeof q.gabarito === "number"
-            ? String.fromCharCode(65 + q.gabarito)
-            : q.gabarito;
-      fb.innerHTML = `
-        <div class="alert ${ok ? "alert-ok" : "alert-danger"}">
-          <strong>${ok ? "Correto" : "Incorreto"}</strong> · Gabarito: <strong>${App.esc(String(gabLabel))}</strong>
+    });
+  }
+
+  function showFeedback(q, ok, selected, tipo) {
+    const fb = document.getElementById("q-feedback");
+    const gabLabel =
+      q.tipo === "ce"
+        ? q.gabarito === "C"
+          ? "Certo"
+          : "Errado"
+        : typeof q.gabarito === "number"
+          ? String.fromCharCode(65 + q.gabarito)
+          : q.gabarito;
+    fb.innerHTML = `
+      <div class="alert ${ok ? "alert-ok" : "alert-danger"}">
+        <strong>${ok ? "Correto" : "Incorreto"}</strong> · Gabarito: <strong>${App.esc(String(gabLabel))}</strong>
+      </div>
+      <div class="card mt-1" style="border-left:4px solid ${ok ? "var(--ok)" : "var(--danger)"}">
+        <h3 style="margin:0 0 0.5rem;font-size:1rem">Resolução</h3>
+        <p style="margin:0;color:var(--text)">${App.esc(q.comentario || "Sem resolução cadastrada.")}</p>
+      </div>`;
+    const opts = document.getElementById("opts");
+    opts.querySelectorAll(".quiz-option").forEach((btn, i) => {
+      btn.disabled = true;
+      if (tipo === "ce") {
+        const val = i === 0 ? "C" : "E";
+        if (val === q.gabarito) btn.classList.add("correct");
+        if (val === selected && !ok) btn.classList.add("wrong");
+      } else {
+        if (i === Number(q.gabarito)) btn.classList.add("correct");
+        if (i === selected && !ok) btn.classList.add("wrong");
+      }
+    });
+    const conf = document.getElementById("q-confirm");
+    conf.textContent =
+      idx + 1 < questions.length ? "Próxima" : "Ver resultado";
+    conf.disabled = false;
+  }
+
+  function showFeedbackWithClassification(q, selected, tipo) {
+    const fb = document.getElementById("q-feedback");
+    const gabLabel =
+      q.tipo === "ce"
+        ? q.gabarito === "C"
+          ? "Certo"
+          : "Errado"
+        : typeof q.gabarito === "number"
+          ? String.fromCharCode(65 + q.gabarito)
+          : q.gabarito;
+
+    const opts = document.getElementById("opts");
+    opts.querySelectorAll(".quiz-option").forEach((btn, i) => {
+      btn.disabled = true;
+      if (tipo === "ce") {
+        const val = i === 0 ? "C" : "E";
+        if (val === q.gabarito) btn.classList.add("correct");
+        if (val === selected) btn.classList.add("wrong");
+      } else {
+        if (i === Number(q.gabarito)) btn.classList.add("correct");
+        if (i === selected) btn.classList.add("wrong");
+      }
+    });
+
+    const conf = document.getElementById("q-confirm");
+    conf.disabled = true;
+    conf.classList.add("hidden");
+
+    fb.innerHTML = `
+      <div class="alert alert-danger">
+        <strong>Incorreto</strong> · Gabarito: <strong>${App.esc(String(gabLabel))}</strong>
+      </div>
+      <div class="card mt-1" style="border-left:4px solid var(--danger)">
+        <h3 style="margin:0 0 0.5rem;font-size:1rem">Resolução</h3>
+        <p style="margin:0 0 1rem;color:var(--text)">${App.esc(q.comentario || "Sem resolução cadastrada.")}</p>
+
+        <div class="error-classify">
+          <h4 style="margin:0 0 0.5rem;font-size:0.95rem">Por que você errou? (obrigatório)</h4>
+          <p class="muted" style="margin:0 0 0.75rem;font-size:0.85rem">Classificar o erro melhora muito a revisão depois.</p>
+          <div class="form-row">
+            <label for="err-tipo">Tipo de erro</label>
+            <select id="err-tipo">
+              <option value="">Selecione…</option>
+              <option value="teoria">Falta de teoria</option>
+              <option value="interpretacao">Interpretação / compreensão</option>
+              <option value="atencao">Atenção / pegadinha de banca</option>
+              <option value="memorizacao">Memorização (lei seca, detalhes)</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="err-motivo">Por que errou? (1 frase)</label>
+            <input id="err-motivo" type="text" placeholder="Ex.: Confundi carência com qualidade de segurado" maxlength="180">
+          </div>
+          <button type="button" class="btn btn-accent" id="err-save">Salvar erro e continuar</button>
         </div>
-        <div class="card mt-1" style="border-left:4px solid ${ok ? "var(--ok)" : "var(--danger)"}">
-          <h3 style="margin:0 0 0.5rem;font-size:1rem">Resolução</h3>
-          <p style="margin:0;color:var(--text)">${App.esc(q.comentario || "Sem resolução cadastrada.")}</p>
-        </div>`;
-      opts.querySelectorAll(".quiz-option").forEach((btn, i) => {
-        btn.disabled = true;
-        if (tipo === "ce") {
-          const val = i === 0 ? "C" : "E";
-          if (val === q.gabarito) btn.classList.add("correct");
-          if (val === selected && !ok) btn.classList.add("wrong");
-        } else {
-          if (i === Number(q.gabarito)) btn.classList.add("correct");
-          if (i === selected && !ok) btn.classList.add("wrong");
-        }
-      });
-      const conf = document.getElementById("q-confirm");
+      </div>`;
+
+    document.getElementById("err-save").onclick = () => {
+      const tipoErro = document.getElementById("err-tipo").value;
+      const motivo = document.getElementById("err-motivo").value.trim();
+
+      if (!tipoErro) {
+        alert("Selecione o tipo de erro.");
+        return;
+      }
+      if (motivo.length < 4) {
+        alert("Escreva uma frase curta explicando por que errou.");
+        return;
+      }
+
+      try {
+        Storage.addErro({
+          questionId: q.id,
+          materia: q.materia,
+          assunto: q.assunto,
+          questao: q.enunciado,
+          motivo: motivo,
+          comentario: q.comentario || "",
+          tipo: tipoErro,
+        });
+      } catch (e) {
+        console.error(e);
+      }
+
+      conf.classList.remove("hidden");
+      conf.disabled = false;
       conf.textContent =
         idx + 1 < questions.length ? "Próxima" : "Ver resultado";
-      conf.disabled = false;
-    });
+
+      const classify = fb.querySelector(".error-classify");
+      if (classify) {
+        classify.innerHTML = `<p class="alert alert-ok" style="margin:0">Erro classificado e enviado ao caderno.</p>`;
+      }
+    };
   }
 
   function finish() {
     if (timerId) clearInterval(timerId);
     const minutes = Math.max(1, Math.round((Date.now() - started) / 60000));
 
-    // modo prova: corrige tudo agora
     if (provaMode) {
       correct = 0;
       wrong = 0;
@@ -525,13 +621,14 @@ function startQuiz(questions, meta) {
 async function initSimulados() {
   App.initShell("simulados");
   try {
-    const [qInss, qPrf, simulados, textos] = await Promise.all([
+    const [qInss, qPrf, qPrev, simulados, textos] = await Promise.all([
       App.loadJSON("data/questoes-inss.json"),
       App.loadJSON("data/questoes-prf.json"),
+      App.loadJSON("data/questoes-prev.json").catch(() => ({ questoes: [] })),
       App.loadJSON("data/simulados.json"),
       App.loadJSON("data/textos.json").catch(() => ({ textos: {} })),
     ]);
-    const bank = allQuestions({ qInss, qPrf });
+    const bank = allQuestions({ qInss, qPrf, qPrev });
     const byId = Object.fromEntries(bank.map((q) => [q.id, q]));
     const textosMap = textos.textos || {};
     const p = Storage.get();

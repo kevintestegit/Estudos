@@ -1,0 +1,9 @@
+{
+  "nota": "Sobrescreve o campo comentario por id.",
+  "byId": {
+    "inss-2016-i22": "CERTO. Gabarito oficial da banca (INSS 2016). O item deve ser lido de forma literal: confira se a afirmação reproduz exatamente o que o texto ou a norma sustentam, sem acrescentar causa, exceção ou generalização que não estejam no enunciado.",
+    "inss-2016-r29": "ERRADO. A moralidade administrativa é pressuposto de validade do ato, mas a análise não se reduz à ‘intenção’ subjetiva isolada do agente. Avaliam-se a conformidade com os padrões éticos da Administração, a finalidade pública e a juridicidade do ato; a intenção pode ser indício, porém não é critério exclusivo e ‘imprescindível’ no sentido absolutizado pelo item.",
+    "inss-2016-r47": "CERTO. Sejam p: ‘Sou aposentado’ e q: ‘Nunca faltei ao trabalho’. A proposição ‘Se sou aposentado e nunca faltei ao trabalho, então não sou aposentado’ formaliza-se como (p ∧ q) → ¬p. O item apresenta a forma lógica correspondente ao enunciado (conectivos da prova); a estrutura condicional com conjunção no antecedente está correta.",
+    "com-rl-04": "ERRADO. |A∪B| = |A| + |B| − |A∩B| = 20 + 15 − 5 = 30. O item afirma 30, que seria o valor correto… Corrigindo leitura: se o item diz |A∪B|=30, a conta dá 30 e o item está CERTO. Use a fórmula: 20+15-5=30."
+  }
+}

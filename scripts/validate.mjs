@@ -106,7 +106,7 @@ for (const item of pdfs) {
     /\.pdf(?:$|[?#])/i.test(item.url || "") ||
     String(item.url || "").startsWith("materiais/");
   log(
-    ["pdf", "legislacao", "fonte", "indisponivel"].includes(item.tipo),
+    ["pdf", "legislacao", "fonte", "resumo", "indisponivel"].includes(item.tipo),
     `tipo válido: ${item.id}`,
   );
   log(item.tipo !== "pdf" || isPdf, `PDF aponta para arquivo: ${item.id}`);
@@ -234,7 +234,7 @@ log(serviceWorker.includes("portal-estudos-v16"), "Service Worker usa cache v16"
 log(serviceWorker.includes("./assets/js/calendar.js"), "Service Worker inclui calendar.js");
 log(serviceWorker.includes("./assets/js/unit.js?v=1"), "Service Worker inclui a URL exata de unit.js");
 log(serviceWorker.includes("./data/unidades.json"), "Service Worker inclui unidades.json");
-log(serviceWorker.includes("e.request.mode==='navigate'||u.pathname.includes('/data/')"), "Service Worker mantém network-first para navegação e dados");
+log(serviceWorker.includes("e.request.mode==='navigate'||u.pathname.includes('/data/')||u.pathname.includes('/assets/')"), "Service Worker mantém network-first para navegação, dados e assets");
 
 console.log(fails ? `\n${fails} falha(s)` : "\nValidação OK");
 process.exit(fails ? 1 : 0);

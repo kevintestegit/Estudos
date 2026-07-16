@@ -43,7 +43,10 @@ const App = {
         if (e.getAttribute("data-nav") !== active) return;
         e.classList.add("active");
         e.setAttribute("aria-current", "page");
+        const group = e.closest("details.nav-group");
+        if (group) group.classList.add("has-active");
       });
+    if (nav) this.bindNavDropdowns(nav);
     const root = document.getElementById("app-root");
     if (root && !document.querySelector(".skip-link")) {
       root.tabIndex = -1;
@@ -71,8 +74,47 @@ const App = {
     }
     this.renderStatusBar();
   },
+  bindNavDropdowns(nav) {
+    const groups = [...nav.querySelectorAll("details.nav-group")];
+    const closeAll = (except) => {
+      groups.forEach((g) => {
+        if (g !== except) g.open = false;
+      });
+    };
+    groups.forEach((group) => {
+      group.addEventListener("toggle", () => {
+        if (group.open) closeAll(group);
+      });
+    });
+    if (!this._navDropdownOutsideBound) {
+      this._navDropdownOutsideBound = true;
+      document.addEventListener("click", (e) => {
+        const t = e.target;
+        if (t && t.closest && t.closest("details.nav-group")) return;
+        document
+          .querySelectorAll("details.nav-group[open]")
+          .forEach((g) => {
+            g.open = false;
+          });
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key !== "Escape") return;
+        document
+          .querySelectorAll("details.nav-group[open]")
+          .forEach((g) => {
+            g.open = false;
+          });
+      });
+    }
+  },
   navigationHtml() {
-    return `<a class="nav-today" href="hoje.html" data-nav="hoje">Hoje</a><details class="nav-group"><summary>Meu plano</summary><a href="cronograma.html" data-nav="cronograma">Cronograma</a><a href="materias.html" data-nav="materias">Matérias</a><a href="edital.html" data-nav="edital">Edital</a></details><details class="nav-group"><summary>Questões</summary><a href="questoes.html" data-nav="questoes">Questionários</a><a href="simulados.html" data-nav="simulados">Simulados</a><a href="provas.html" data-nav="provas">Provas</a><a href="flashcards.html" data-nav="flashcards">Flashcards</a><a href="caderno-erros.html" data-nav="erros">Caderno de erros</a></details><a href="progresso.html" data-nav="progresso">Meu progresso</a><details class="nav-group"><summary>Mais</summary><a href="index.html" data-nav="dashboard">Dashboard</a><a href="biblioteca.html" data-nav="biblioteca">Biblioteca</a><a href="backup.html" data-nav="backup">Backup</a></details>`;
+    return [
+      `<a class="nav-today" href="hoje.html" data-nav="hoje">Hoje</a>`,
+      `<details class="nav-group"><summary>Meu plano</summary><div class="nav-dropdown" role="menu"><a href="cronograma.html" data-nav="cronograma" role="menuitem">Cronograma</a><a href="materias.html" data-nav="materias" role="menuitem">Matérias</a><a href="edital.html" data-nav="edital" role="menuitem">Edital</a></div></details>`,
+      `<details class="nav-group"><summary>Questões</summary><div class="nav-dropdown" role="menu"><a href="questoes.html" data-nav="questoes" role="menuitem">Questionários</a><a href="simulados.html" data-nav="simulados" role="menuitem">Simulados</a><a href="provas.html" data-nav="provas" role="menuitem">Provas</a><a href="flashcards.html" data-nav="flashcards" role="menuitem">Flashcards</a><a href="caderno-erros.html" data-nav="erros" role="menuitem">Caderno de erros</a></div></details>`,
+      `<a href="progresso.html" data-nav="progresso">Meu progresso</a>`,
+      `<details class="nav-group"><summary>Mais</summary><div class="nav-dropdown" role="menu"><a href="index.html" data-nav="dashboard" role="menuitem">Dashboard</a><a href="biblioteca.html" data-nav="biblioteca" role="menuitem">Biblioteca</a><a href="backup.html" data-nav="backup" role="menuitem">Backup</a></div></details>`,
+    ].join("");
   },
   markMissedDays() {
     const p = Storage.get();
@@ -208,6 +250,9 @@ const App = {
   },
   nextAction(p, c) {
     if (!p.startDate) return "Definir a data de início do plano";
+    const due = typeof getDueErros === "function" ? getDueErros(p) : [];
+    if (due.length)
+      return `Revisar ${due.length} erro(s) vencido(s) no Caderno de erros`;
     const s = this.studyStatus(p, c);
     if (s.code === "aguardando")
       return `Aguardar o início em ${this.formatDateBR(p.startDate)}`;
@@ -331,13 +376,15 @@ const App = {
     "Assistência Social / BPC":
       "https://www.planalto.gov.br/ccivil_03/leis/l8742.htm",
     "Legislação PRF": "https://www.planalto.gov.br/ccivil_03/decreto/d1655.htm",
+    "Legislação institucional da PRF":
+      "https://www.planalto.gov.br/ccivil_03/decreto/d1655.htm",
     Arquivologia:
       "https://www.gov.br/arquivonacional/pt-br/servicos/publicacoes/Guiadegestaodedocumentos.pdf",
     "Noções de Administração":
       "https://repositorio.enap.gov.br/bitstream/1/2260/1/1.%20Apostila%20-%20M%C3%B3dulo%201%20-%20Administra%C3%A7%C3%A3o%20P%C3%BAblica.pdf",
     Informática: "https://www.gov.br/governodigital/pt-br",
-    "Raciocínio Lógico": "biblioteca.html",
-    Revisão: "biblioteca.html",
+    "Raciocínio Lógico": "questoes.html?materia=Racioc%C3%ADnio%20L%C3%B3gico",
+    Revisão: "caderno-erros.html",
     Simulado: "simulados.html",
     Questões: "questoes.html",
     Prova: "provas.html",
@@ -357,8 +404,26 @@ const App = {
       ? `<a class="btn btn-sm" ${this.linkAttrs(action.url)} ${attributes}>${action.label}</a>`
       : `<span class="alert alert-info" data-lesson-unavailable>${action.label}</span>`;
   },
+  /**
+   * Resolve URL de material de estudo.
+   * - Se o item existe e tem URL útil (não biblioteca genérica / indisponível), usa essa URL.
+   * - Caso contrário, cai na fonte oficial da matéria (MATERIA_URL).
+   */
+  resolveMaterialUrl(material, materia) {
+    const url = material?.url || "";
+    const tipo = material?.tipo || "";
+    const isLibraryFallback =
+      !url ||
+      url === "#" ||
+      tipo === "indisponivel" ||
+      /^biblioteca\.html/i.test(url);
+    if (!isLibraryFallback) return url;
+    return this.MATERIA_URL[materia] || this.MATERIA_URL[material?.materia] || "questoes.html";
+  },
   resolveUrl(u, m) {
-    return u && u !== "#" ? u : this.MATERIA_URL[m] || "biblioteca.html";
+    return u && u !== "#" && !/^biblioteca\.html/i.test(u)
+      ? u
+      : this.MATERIA_URL[m] || "questoes.html";
   },
   isExternal(u) {
     return /^https?:\/\//i.test(u || "");
@@ -372,9 +437,11 @@ const App = {
     const type = item?.tipo || "";
     if (type === "aula") return "Assistir aula";
     if (type === "pdf") return "Abrir PDF";
+    if (type === "resumo") return "Abrir resumo objetivo";
     if (type === "legislacao") return "Consultar legislação";
     if (type === "questoes") return "Fazer questões";
-    return "Abrir fonte oficial";
+    if (type === "indisponivel") return "Consultar fonte oficial";
+    return "Consultar fonte oficial";
   },
 };
 window.Modal = (() => {
@@ -432,7 +499,6 @@ window.Modal = (() => {
           `<button type="button" class="btn btn-sm ${b.accent || "btn-secondary"}" data-mb="${i}">${App.esc(b.label)}</button>`,
       )
       .join("");
-    // reflow so enter animation restarts
     void m.el.offsetWidth;
     m.el.classList.remove("hidden");
     m.actions.querySelector("button")?.focus();
@@ -494,7 +560,6 @@ window.Modal = (() => {
   };
   return m;
 })();
-// Substitui apenas alert. Confirm mantém nativo por ser síncrono.
 window.alert = (...a) => window.Modal.alert(...a);
 window.Modal.waitConfirm = (msg) => window.Modal.confirm(msg);
 window.App = App;

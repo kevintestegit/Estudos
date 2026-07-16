@@ -1,25 +1,30 @@
 # Changelog
 
-## 2026-07-10
+## 2026-07-15 — Fechamento das pendências
 
-### Corrigido
-- Remoção definitiva de conteúdo de PRF Policial (CTB, trânsito, primeiros socorros, física, geografia rodoviária)
-- `cronograma.json` real sem conversão em runtime
-- Removido `schedule-fix.js`
-- Botão "Ver resultado" (aliases `_daily` / `_level` / `_achievements`)
-- Horas só por cronômetro/manual/simulado (não por marcar concluído)
-- Domingo/descanso não conta como falta
-- Plano exige clique em "Iniciar plano"
+### Vídeos
+- Patch completo dos slots antes “indisponíveis” (PT, Inf, Ética, DA 8.112, Prev, Admin, Arquivologia, Leg. PRF)
 
-### Adicionado
-- Edital verticalizado INSS e PRF Administrativo
-- Página `edital.html` com cobertura e status por tópico
-- Histórico de sessões com editar/excluir
-- Migração de schema do localStorage
-- Scripts `validate.mjs` e `test-calendar.mjs`
-- Workflow GitHub Actions de validação
-- Textos de apoio em questões de interpretação
-- Resoluções detalhadas em questões oficiais
+### Flashcards SM-2
+- Algoritmo SM-2 com EF, intervalo e repetições
+- Botões: Errei · Difícil · Bom · Fácil (+ atalhos 1–4)
 
-### Cache
-- Service Worker `portal-estudos-v6`
+### Interleaving
+- Semanas 14–16 recebem tarefa mista automática de revisão intercalada
+
+### Escopo
+- Sync online automático fica documentado como futuro (Backup JSON cobre troca de aparelho)
+
+---
+
+## 2026-07-15 — Resumos + questões + vídeos prioritários
+
+- Resumos PT/RL/Inf/Arq/Admin
+- `questoes-comum.json`
+- Vídeos regência, pontuação, segurança, BPC
+
+---
+
+## 2026-07-15 — Escolher qualquer dia do plano
+
+- Seletor de dia + Estudar no cronograma

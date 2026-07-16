@@ -2,12 +2,18 @@ async function initBiblioteca() {
   App.initShell("biblioteca");
   const params = new URLSearchParams(location.search);
   try {
-    const [materiaisData, provasData, aulasData, pdfsData] = await Promise.all([
-      App.loadJSON("data/materiais.json"),
-      App.loadJSON("data/provas.json"),
-      App.loadJSON("data/aulas.json"),
-      App.loadJSON("data/pdfs.json"),
-    ]);
+    const [materiaisData, provasData, aulasData, pdfsData, extraResumos] =
+      await Promise.all([
+        App.loadJSON("data/materiais.json"),
+        App.loadJSON("data/provas.json"),
+        App.loadJSON("data/aulas.json"),
+        App.loadJSON("data/pdfs.json"),
+        App.loadJSON("data/resumos-extra.json").catch(() => ({ pdfs: [] })),
+      ]);
+    const pdfMap = new Map((pdfsData.pdfs || []).map((p) => [p.id, p]));
+    (extraResumos.pdfs || []).forEach((p) => {
+      if (!pdfMap.has(p.id)) pdfMap.set(p.id, p);
+    });
     const materiais = (materiaisData.materiais || []).map((item) => ({
       ...item,
       _origem: "material",
@@ -25,7 +31,7 @@ async function initBiblioteca() {
       fonte: item.canal || "Videoaula",
       _origem: "aula",
     }));
-    const pdfs = (pdfsData.pdfs || []).map((item) => ({
+    const pdfs = [...pdfMap.values()].map((item) => ({
       ...item,
       categoria: item.categoria || categoryFromSubject(item.materia),
       fonte: item.fonte || "Fonte indicada",
@@ -93,24 +99,26 @@ function renderBiblioteca(all, params) {
     <section class="card mb-1" aria-labelledby="filter-title">
       <h2 id="filter-title">Encontrar material</h2>
       <div class="actions" id="filters">
-        ${[
-          ["todos", "Todos"],
-          ["inss", "INSS"],
-          ["prf", "PRF Administrativo"],
-          ["comum", "Conteúdo comum"],
-          ["aula", "Aulas"],
-          ["pdf", "PDFs"],
-          ["questoes", "Questões"],
-          ["acertos", "Meu desempenho"],
-          ["legislacao", "Legislação"],
-          ["prova", "Provas"],
-          ["gabarito", "Gabaritos"],
-        ]
-          .map(
-            ([value, label]) =>
-              `<button class="btn btn-sm btn-secondary filter-btn" type="button" data-filter="${value}">${label}</button>`,
-          )
-          .join("")}
+        ${
+          [
+            ["todos", "Todos"],
+            ["inss", "INSS"],
+            ["prf", "PRF Administrativo"],
+            ["comum", "Conteúdo comum"],
+            ["aula", "Aulas"],
+            ["pdf", "PDFs"],
+            ["questoes", "Questões"],
+            ["acertos", "Meu desempenho"],
+            ["legislacao", "Legislação"],
+            ["prova", "Provas"],
+            ["gabarito", "Gabaritos"],
+          ]
+            .map(
+              ([value, label]) =>
+                `<button class="btn btn-sm btn-secondary filter-btn" type="button" data-filter="${value}">${label}</button>`,
+            )
+            .join("")
+        }
       </div>
       <div class="form-row mt-1 library-search">
         <label for="bib-search">Buscar por título, matéria ou fonte</label>
@@ -132,7 +140,8 @@ function renderBiblioteca(all, params) {
     if (["inss", "prf", "comum"].includes(filter) && item.categoria !== filter)
       return false;
     if (filter === "aula" && item._origem !== "aula") return false;
-    if (filter === "pdf" && item.tipo !== "pdf") return false;
+    if (filter === "pdf" && item.tipo !== "pdf" && item.tipo !== "resumo")
+      return false;
     if (
       ["prova", "gabarito", "legislacao"].includes(filter) &&
       item.tipo !== filter
@@ -184,9 +193,10 @@ function renderBiblioteca(all, params) {
       const correct = Number(stats.correct) || 0;
       const accuracy = answered ? Math.round((correct / answered) * 100) : 0;
       const questionUrl = `questoes.html${subject ? `?materia=${encodeURIComponent(subject)}` : ""}`;
-      list.innerHTML = filter === "questoes"
-        ? `<article class="card task-card"><h3>Praticar${subject ? ` — ${App.esc(subject)}` : " questões"}</h3><p>Abra o questionário para responder questões e receber a resolução.</p><a class="btn btn-accent" href="${questionUrl}">Fazer questões</a></article>`
-        : `<article class="card task-card"><h3>Seu desempenho${subject ? ` — ${App.esc(subject)}` : ""}</h3><p><strong>${answered}</strong> questões respondidas · <strong>${accuracy}%</strong> de acertos.</p><div class="actions"><a class="btn btn-accent" href="${questionUrl}">Continuar praticando</a><a class="btn btn-secondary" href="progresso.html">Ver meu progresso</a></div></article>`;
+      list.innerHTML =
+        filter === "questoes"
+          ? `<article class="card task-card"><h3>Praticar${subject ? ` — ${App.esc(subject)}` : " questões"}</h3><p>Abra o questionário para responder questões e receber a resolução.</p><a class="btn btn-accent" href="${questionUrl}">Fazer questões</a></article>`
+          : `<article class="card task-card"><h3>Seu desempenho${subject ? ` — ${App.esc(subject)}` : ""}</h3><p><strong>${answered}</strong> questões respondidas · <strong>${accuracy}%</strong> de acertos.</p><div class="actions"><a class="btn btn-accent" href="${questionUrl}">Continuar praticando</a><a class="btn btn-secondary" href="progresso.html">Ver meu progresso</a></div></article>`;
       return;
     }
     const items = all.filter(matches);
@@ -200,9 +210,10 @@ function renderBiblioteca(all, params) {
         const studied = Storage.isMaterialStudied(item.id);
         const reviewing = Storage.isInRevisao(item.id);
         const url = App.resolveUrl(item.url, item.materia);
-        const action = item._origem === "aula"
-          ? App.lessonActionHtml(item)
-          : `<a class="btn btn-sm" ${App.linkAttrs(url)}>${App.materialActionLabel(item)}</a>`;
+        const action =
+          item._origem === "aula"
+            ? App.lessonActionHtml(item)
+            : `<a class="btn btn-sm" ${App.linkAttrs(url)}>${App.materialActionLabel(item)}</a>`;
         return `<article class="card task-card">
         <h3>${App.esc(item.titulo)}</h3>
         <div class="task-meta">
@@ -247,7 +258,12 @@ function renderBiblioteca(all, params) {
     const box = document.getElementById("bib-revisao");
     const items = Storage.get().materiaisRevisao || [];
     box.innerHTML = items.length
-      ? `<ul class="list">${items.map((item) => `<li><strong>${App.esc(item.titulo)}</strong><p class="muted">Adicionado em ${App.formatDateBR(item.addedAt)}</p><div class="actions">${item.url ? `<a class="btn btn-sm" ${App.linkAttrs(item.url)}>Abrir para revisar</a>` : ""}<button class="btn btn-sm btn-danger" type="button" data-remove-review="${App.esc(item.id)}">Remover</button></div></li>`).join("")}</ul>`
+      ? `<ul class="list">${items
+          .map(
+            (item) =>
+              `<li><strong>${App.esc(item.titulo)}</strong><p class="muted">Adicionado em ${App.formatDateBR(item.addedAt)}</p><div class="actions">${item.url ? `<a class="btn btn-sm" ${App.linkAttrs(item.url)}>Abrir para revisar</a>` : ""}<button class="btn btn-sm btn-danger" type="button" data-remove-review="${App.esc(item.id)}">Remover</button></div></li>`,
+          )
+          .join("")}</ul>`
       : '<p class="muted">Nada na fila de revisão.</p>';
     box.querySelectorAll("[data-remove-review]").forEach((button) => {
       button.onclick = () => {

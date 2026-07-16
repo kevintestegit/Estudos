@@ -61,7 +61,13 @@ async function openClean(page, url) {
 async function answerOneQuestion(page, shouldBeCorrect) {
   const statement = await page.locator("#quiz-card h3").textContent();
   const question = await page.evaluate(async (text) => {
-    const files = ["data/questoes-inss.json", "data/questoes-prf.json"];
+    const files = [
+      "data/questoes-inss.json",
+      "data/questoes-prf.json",
+      "data/questoes-prev.json",
+      "data/questoes-comum.json",
+      "data/questoes-comum-extra.json",
+    ];
     const banks = await Promise.all(
       files.map((file) => fetch(file).then((response) => response.json())),
     );
@@ -79,6 +85,11 @@ async function answerOneQuestion(page, shouldBeCorrect) {
   const index = shouldBeCorrect ? correctIndex : correctIndex === 0 ? 1 : 0;
   await options.nth(index).click();
   await page.locator("#q-confirm").click();
+  if (!shouldBeCorrect) {
+    await page.locator("#err-tipo").selectOption("atencao");
+    await page.locator("#err-motivo").fill("Resposta escolhida para testar a revisão");
+    await page.locator("#err-save").click();
+  }
   await page.locator("#q-confirm").click();
 }
 
@@ -327,6 +338,7 @@ test("concluir recuperação não conclui o dia atual", async ({ page }) => {
         studyDays: [1, 2, 3, 4, 5, 6],
         dayStatus: { "2026-07-06": "faltou" },
         taskStatus: {
+          "2026-07-06_0_pretest": "concluida",
           "2026-07-06_0_learn": "concluida",
           "2026-07-06_0_read": "concluida",
           "2026-07-06_0_practice": "concluida",
@@ -386,6 +398,7 @@ test("concluir estudo normal marca somente o dia atual", async ({ page }) => {
         studyDays: [1, 2, 3, 4, 5, 6],
         dayStatus: {},
         taskStatus: {
+          "2026-07-14_0_pretest": "concluida",
           "2026-07-14_0_learn": "concluida",
           "2026-07-14_0_read": "concluida",
           "2026-07-14_0_practice": "concluida",
@@ -487,6 +500,30 @@ test("navegação expõe página atual e estado do menu", async ({ page }) => {
   await expect(page.locator(".skip-link")).toHaveAttribute("href", "#app-root");
 });
 
+test("sidebar dropdown abre overlay e fecha ao abrir outro", async ({
+  page,
+}) => {
+  await openClean(page, "/cronograma.html");
+  const active = page.locator('[data-nav="cronograma"]');
+  await expect(active).toHaveAttribute("aria-current", "page");
+  const plano = page.locator("details.nav-group", {
+    has: page.locator('[data-nav="cronograma"]'),
+  });
+  const questoes = page.locator("details.nav-group", {
+    has: page.locator('[data-nav="questoes"]'),
+  });
+  await expect(plano).toHaveClass(/has-active/);
+  await expect(plano).not.toHaveAttribute("open");
+  await plano.locator("summary").click();
+  await expect(plano).toHaveAttribute("open", "");
+  await expect(active).toBeVisible();
+  await questoes.locator("summary").click();
+  await expect(questoes).toHaveAttribute("open", "");
+  await expect(plano).not.toHaveAttribute("open");
+  await page.locator("h1").click();
+  await expect(questoes).not.toHaveAttribute("open");
+});
+
 test("progresso do edital expõe valor acessível", async ({ page }) => {
   await openClean(page, "/edital.html");
   const bars = page.getByRole("progressbar");
@@ -568,7 +605,7 @@ for (const viewport of [{ width: 1280, height: 800 }, { width: 390, height: 844 
       await page.setViewportSize(viewport);
       if (path === "hoje.html") {
         await useLegacySchedule(page);
-        await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: {} })));
+        await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: { "2026-07-14_0_pretest": "concluida" } })));
       }
       await page.route("**/data/aulas.json", (route) => route.fulfill({ json: { aulas: [{ id: "aula-pt-01", titulo: "Interpretação de textos — base", materia: "Português", tipo: "indisponivel", url: null, notas: "Videoaula confiável ainda não selecionada.", verificadoEm: "2026-07-14" }] } }));
       await openClean(page, `/${path}`);
@@ -598,24 +635,24 @@ test("Biblioteca usa exatamente a URL cadastrada para vídeo e playlist", async 
 
 test("aula indisponível não conclui a etapa de aprendizado", async ({ page }) => {
   await useLegacySchedule(page);
-  await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: {} })));
+  await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: { "2026-07-14_0_pretest": "concluida" } })));
   await page.route("**/data/aulas.json", (route) => route.fulfill({ json: { aulas: [{ id: "aula-pt-01", titulo: "Interpretação de textos — base", materia: "Português", tipo: "indisponivel", url: null, notas: "Videoaula confiável ainda não selecionada.", verificadoEm: "2026-07-14" }] } }));
   await openClean(page, "/hoje.html");
   const warning = page.locator('[data-lesson-unavailable]').first();
   await expect(warning).toHaveText("Videoaula ainda não disponível");
   await warning.click();
   const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("portal-estudos-v1")));
-  expect(Object.keys(progress.taskStatus || {})).toHaveLength(0);
+  expect(progress.taskStatus).toEqual({ "2026-07-14_0_pretest": "concluida" });
 });
 
 test("abrir videoaula não conclui a etapa", async ({ page }) => {
   await useLegacySchedule(page);
-  await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: {} })));
+  await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: { "2026-07-14_0_pretest": "concluida" } })));
   await openClean(page, "/hoje.html");
   const link = page.locator('[data-step-key$="_learn"]').first();
   await link.click();
   const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("portal-estudos-v1")));
-  expect(progress.taskStatus || {}).toEqual({});
+  expect(progress.taskStatus).toEqual({ "2026-07-14_0_pretest": "concluida" });
 });
 
 test("prática leva taskKey ao quiz sem concluir antes", async ({ page }) => {

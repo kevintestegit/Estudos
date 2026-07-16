@@ -1,22 +1,23 @@
 # Roadmap
 
 ## Feito
-- [x] Remover PRF Policial do plano e dados
-- [x] Cronograma real 16 semanas
-- [x] Plano com início explícito + dias de estudo
-- [x] Faltas só em dias programados passados
-- [x] Horas só por atividade real
-- [x] Cronômetro persistente
-- [x] Editar/excluir sessões
-- [x] Edital verticalizado
-- [x] Validadores e testes de calendário
-- [x] GitHub Actions validate
+- [x] Cronograma 16 semanas + escolha livre de dia
+- [x] Pré-teste, classificação de erros, caderno, checklist ao fechar dia
+- [x] Resumos (Prev, Ética, DC, DA, PT, RL, Inf, Arquivologia, Admin)
+- [x] Questões INSS/PRF/Prev + banco comum
+- [x] Resoluções PRF reescritas + overrides INSS
+- [x] Favoritos/dúvida no card
+- [x] Videoaulas públicas cobrindo praticamente todos os slots do plano
+- [x] Flashcards com **SM-2** (Errei / Difícil / Bom / Fácil)
+- [x] **Interleaving** automático nas semanas 14–16
+- [x] Backup/export JSON (sync manual entre dispositivos)
 
-## Próximo (pendências honestas)
-- [ ] IndexedDB (estrutura preparada via schema; migração completa sob risco)
-- [ ] Mais questões oficiais de conhecimentos específicos INSS (PDF CE1 quando disponível)
-- [ ] Resoluções 100% revisadas item a item por humanos
-- [ ] Verificador HTTP de links externos (rede)
-- [ ] Encerrar dia com checklist completo de pendências obrigatórias
-- [ ] Favoritos / dúvida em questões
-- [ ] Pontuação líquida CEBRASPE configurável no simulado
+## Fora do escopo atual (requer backend)
+- [ ] Sync automático online (Supabase/Firebase) — usar Backup por enquanto
+- [ ] IndexedDB (localStorage atende o volume atual)
+- [ ] Verificador HTTP contínuo de links externos
+- [ ] Banco massivo de questões oficiais CEBRASPE (licença/fonte)
+
+## Manutenção contínua
+- Revisar resoluções quando novos itens oficiais forem adicionados
+- Atualizar vídeos se links caírem
