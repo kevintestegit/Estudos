@@ -15,6 +15,21 @@ test("vídeo relatado como inacessível não volta à biblioteca", () => {
   assert.ok(!aulas.some((aula) => aula.videoId === "22iA3PPjr7c"));
 });
 
+test("biblioteca usa data/aulas.json como única fonte de videoaulas", () => {
+  assert.equal(
+    fs.existsSync(new URL("../data/aulas-patch.json", import.meta.url)),
+    false,
+  );
+  assert.equal(
+    fs.existsSync(new URL("../assets/js/aulas-patch.js", import.meta.url)),
+    false,
+  );
+  for (const arquivo of ["hoje.html", "materias.html"]) {
+    const html = fs.readFileSync(new URL(`../${arquivo}`, import.meta.url), "utf8");
+    assert.doesNotMatch(html, /aulas-patch/, arquivo);
+  }
+});
+
 test("indisponível não faz requisição externa", async () => {
   let called = false;
   const result = await validateLesson(

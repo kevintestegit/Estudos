@@ -549,7 +549,7 @@ test("Service Worker remove o cache da versão anterior", async ({ page }) => {
   await openClean(page, "/hoje.html");
   const cacheNames = await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
-    await caches.open("portal-estudos-v15");
+    await caches.open("portal-estudos-v16");
     await caches.open("cache-de-outro-aplicativo");
     const script = new URL("service-worker.js?upgrade-test=1", location.href);
     const registration = await navigator.serviceWorker.register(script, {
@@ -565,8 +565,8 @@ test("Service Worker remove o cache da versão anterior", async ({ page }) => {
     }
     return caches.keys();
   });
-  expect(cacheNames).toContain("portal-estudos-v16");
-  expect(cacheNames).not.toContain("portal-estudos-v15");
+  expect(cacheNames).toContain("portal-estudos-v17");
+  expect(cacheNames).not.toContain("portal-estudos-v16");
   expect(cacheNames).toContain("cache-de-outro-aplicativo");
 });
 
@@ -578,7 +578,7 @@ test("primeira abertura offline de Hoje mantém a unidade disponível", async ({
   await page.reload();
   await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
   const cached = await page.evaluate(async () => {
-    const cache = await caches.open("portal-estudos-v16");
+    const cache = await caches.open("portal-estudos-v17");
     const url = (path) => new URL(path, location.href).href;
     return {
       unitScript: Boolean(await cache.match(url("assets/js/unit.js?v=1"))),

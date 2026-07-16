@@ -1,4 +1,4 @@
-# QA_REPORT — videoaulas — 2026-07-14
+# QA_REPORT — videoaulas — 2026-07-16
 
 ## Resultado
 
@@ -39,7 +39,8 @@ O relatório anterior registrava bloqueio FortiGate. Esse é apenas o histórico
 - Os 69 candidatos antigos foram consultados novamente: 61 retornaram HTTP 404 no oEmbed, quatro receberam uma resposta HTTP 200 de bloqueio/consentimento e ficaram como `erro_de_rede`, duas ocorrências de `dQw4w9WgXcQ` foram incompatíveis e duas páginas do Planalto eram URLs inválidas como videoaula. Nenhum candidato histórico está publicado.
 - Foram executadas 69 pesquisas específicas no YouTube e avaliados 550 resultados com título, canal, descrição visível, duração e data exibida.
 - Os 45 selecionados foram consultados novamente no oEmbed e na página pública. Título e canal coincidiram em 45/45; duração e data foram obtidas em 45/45.
-- A revalidação externa final gerou o relatório em `2026-07-15T10:33:31.807Z`, mantendo 45 `ok` e 24 `indisponivel`.
+- A revalidação externa final gerou o relatório em `2026-07-16T12:16:58.354Z`, mantendo 45 `ok` e 24 `indisponivel`.
+- Uma sobreposição posterior (`data/aulas-patch.json`) tentava publicar os 24 registros indisponíveis fora da fonte canônica. A auditoria efetiva encontrou 13 incompatibilidades de título e 19 usos afetados por duplicações suspeitas; o patch e seu carregador foram removidos. Esses endereços não foram incorporados a `data/aulas.json`.
 - `aula-pt-01` foi substituída por `B1lk04l-dRU` após relato de falha de acesso ao vídeo anterior. O substituto respondeu HTTP 200, `playabilityStatus: OK` e oEmbed com título e canal em 2026-07-14.
 - A consulta às legendas públicas retornou corpo vazio e não foi usada como evidência de aprovação.
 - Os 24 casos ambíguos permaneceram com `tipo: indisponivel` e `url: null`.
@@ -55,7 +56,7 @@ Foram usados 28 canais identificados, incluindo Estratégia Concursos, Gran Curs
 - `url` continua sendo a única fonte da interface.
 - Vídeos usam `Assistir videoaula`, URL exata, nova aba e `rel="noopener noreferrer"`.
 - Indisponíveis continuam sem `<a>` e sem conclusão por clique.
-- O Service Worker usa `portal-estudos-v16`; durante `activate`, somente caches anteriores do portal, inclusive v15, são removidos. Caches de outras aplicações são preservados.
+- O Service Worker usa `portal-estudos-v17`; durante `activate`, somente caches anteriores do portal, inclusive v16, são removidos. Caches de outras aplicações são preservados.
 - A URL exata de `unit.js?v=1` e `data/unidades.json` entram no precache para permitir a primeira abertura offline da unidade piloto após a ativação.
 - Navegação e `/data/` continuam em network-first.
 
@@ -80,7 +81,7 @@ Foram usados 28 canais identificados, incluindo Estratégia Concursos, Gran Curs
 | `node scripts/validate.mjs` | 0 | Estrutura e cache aprovados |
 | `node scripts/test-calendar.mjs` | 0 | 27 casos aprovados |
 | `node scripts/check-links.mjs` | 0 | 45 `ok`, 24 `indisponivel` |
-| `node --test tests/check-links.test.mjs` | 0 | 16 aprovados, 0 falhos, 0 ignorados |
+| `node --test tests/check-links.test.mjs` | 0 | 17 aprovados, 0 falhos, 0 ignorados |
 | `node --check assets/js/app.js` | 0 | Sintaxe aprovada |
 | `node --check assets/js/dashboard.js` | 0 | Sintaxe aprovada |
 | `node --check assets/js/biblioteca.js` | 0 | Sintaxe aprovada |

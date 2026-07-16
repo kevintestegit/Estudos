@@ -230,11 +230,13 @@ for (const file of sourceFiles) {
 }
 
 const serviceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-log(serviceWorker.includes("portal-estudos-v16"), "Service Worker usa cache v16");
+log(serviceWorker.includes("portal-estudos-v17"), "Service Worker usa cache v17");
 log(serviceWorker.includes("./assets/js/calendar.js"), "Service Worker inclui calendar.js");
 log(serviceWorker.includes("./assets/js/unit.js?v=1"), "Service Worker inclui a URL exata de unit.js");
+log(["interleaving.js", "study-flow.js", "study-day.js"].every((name) => serviceWorker.includes(`./assets/js/${name}`)), "Service Worker inclui scripts da página Hoje");
 log(serviceWorker.includes("./data/unidades.json"), "Service Worker inclui unidades.json");
 log(serviceWorker.includes("e.request.mode==='navigate'||u.pathname.includes('/data/')||u.pathname.includes('/assets/')"), "Service Worker mantém network-first para navegação, dados e assets");
+log(serviceWorker.includes("ignoreSearch:true"), "Service Worker encontra assets versionados no fallback offline");
 
 console.log(fails ? `\n${fails} falha(s)` : "\nValidação OK");
 process.exit(fails ? 1 : 0);
