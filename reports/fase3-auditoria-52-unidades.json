@@ -4,8 +4,8 @@
   "totalAulasCronogramaUnicas": 52,
   "comVideo": 51,
   "indisponivel": 1,
-  "auditoriaAprovada": 1,
-  "auditoriaPendente": 50,
+  "auditoriaAprovada": 2,
+  "auditoriaPendente": 49,
   "auditoriaBloqueada": 1,
   "registros": [
     {
@@ -35,7 +35,7 @@
       "aulaId": "aula-pt-02",
       "materia": "Português",
       "assunto": "Ortografia e acentuação",
-      "unitIdCronograma": null,
+      "unitIdCronograma": "unidade-pt-ortografia-01",
       "videoStatus": "video",
       "videoId": "BpDHOqagBRo",
       "canal": "IMP Concursos",
@@ -43,8 +43,15 @@
       "duracaoTotalSegundos": null,
       "verificadoEm": "2026-07-14",
       "auditoriaPedagogica": {
-        "status": "pendente",
-        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+        "status": "aprovada",
+        "unitId": "unidade-pt-ortografia-01",
+        "inicioSegundos": 428,
+        "fimSegundos": 1980,
+        "objetivosCobertos": [
+          "pt-ort-classificacao-tonica",
+          "pt-ort-regras-acentuacao"
+        ],
+        "evidencia": "reports/unidade-pt-ortografia-evidence.json"
       }
     },
     {

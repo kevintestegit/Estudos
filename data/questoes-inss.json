@@ -213,13 +213,20 @@
       "tipo": "ce",
       "banca": "CEBRASPE",
       "materia": "Português",
-      "assunto": "INSS 2022 item 11",
+      "assunto": "Ortografia e acentuação",
       "tag": "portugues-ortografia",
       "enunciado": "Por constituir um substantivo, o termo ‘bem-estar’, empregado no segundo parágrafo, poderia ser grafado, em conformidade com a ortografia oficial, sem o hífen: bem estar.",
       "gabarito": "E",
       "comentario": "ERRADO. 'Bem-estar' é substantivo composto grafado com hífen pela norma vigente. A forma 'bem estar' (separado) está incorreta.",
       "fonte": "INSS 2022 Cebraspe",
-      "textoId": "inss-2022-cb1a1"
+      "textoId": "inss-2022-cb1a1",
+      "fonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/760_INSS_CB1_01.PDF",
+      "gabaritoFonteUrl": "https://cdn.cebraspe.org.br/concursos/INSS_22/arquivos/GAB_DEFINITIVO_760_INSS_CB1_01.PDF",
+      "origemQuestao": "real",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "concurso": "INSS — Técnico do Seguro Social",
+      "ano": 2022
     },
     {
       "id": "inss-2022-i12",
@@ -1253,6 +1260,113 @@
       "gabarito": "E",
       "comentario": "ERRADO. A igualdade de conjuntos afirmada não se verifica em geral para quaisquer A, B ⊆ C; a operação descrita não equivale necessariamente a C∩B.",
       "fonte": "INSS 2016 Cespe (real)"
+    },
+    {
+      "id": "pt-ort-p01",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Português",
+      "assunto": "Ortografia e acentuação",
+      "tag": "portugues-ortografia",
+      "enunciado": "A palavra “café” é oxítona e recebe acento por terminar em “e”.",
+      "gabarito": "C",
+      "comentario": "CERTO. Oxítonas terminadas em a(s), e(s) ou o(s) são acentuadas; “café” encaixa-se nessa regra.",
+      "fonte": "Elaboração própria (regras de acentuação gráfica do português brasileiro)",
+      "fonteUrl": "https://www.academia.org.br/nossa-lingua/acordo-ortografico",
+      "gabaritoFonteUrl": "https://www.academia.org.br/nossa-lingua/acordo-ortografico",
+      "origemQuestao": "autoral",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "unitIds": [
+        "unidade-pt-ortografia-01"
+      ],
+      "objetivos": [
+        "pt-ort-regras-acentuacao",
+        "pt-ort-classificacao-tonica"
+      ],
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "facil"
+    },
+    {
+      "id": "pt-ort-p02",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Português",
+      "assunto": "Ortografia e acentuação",
+      "tag": "portugues-ortografia",
+      "enunciado": "Toda proparoxítona é acentuada na ortografia oficial vigente.",
+      "gabarito": "C",
+      "comentario": "CERTO. Na classificação tônica, as proparoxítonas recebem acento gráfico sem exceção de terminação.",
+      "fonte": "Elaboração própria (regras de acentuação gráfica do português brasileiro)",
+      "fonteUrl": "https://www.academia.org.br/nossa-lingua/acordo-ortografico",
+      "gabaritoFonteUrl": "https://www.academia.org.br/nossa-lingua/acordo-ortografico",
+      "origemQuestao": "autoral",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "unitIds": [
+        "unidade-pt-ortografia-01"
+      ],
+      "objetivos": [
+        "pt-ort-regras-acentuacao",
+        "pt-ort-classificacao-tonica"
+      ],
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "facil"
+    },
+    {
+      "id": "pt-ort-p03",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Português",
+      "assunto": "Ortografia e acentuação",
+      "tag": "portugues-ortografia",
+      "enunciado": "A palavra “mesa” é paroxítona terminada em “a” e, por isso, deve ser acentuada.",
+      "gabarito": "E",
+      "comentario": "ERRADO. Paroxítonas terminadas em a(s), e(s), o(s), em(ens) não são acentuadas; o acento nas paroxítonas ocorre em terminações específicas (l, n, r, x, i(s), u(s), ã(s), ão(s), ditongo etc.).",
+      "fonte": "Elaboração própria (regras de acentuação gráfica do português brasileiro)",
+      "fonteUrl": "https://www.academia.org.br/nossa-lingua/acordo-ortografico",
+      "gabaritoFonteUrl": "https://www.academia.org.br/nossa-lingua/acordo-ortografico",
+      "origemQuestao": "autoral",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "unitIds": [
+        "unidade-pt-ortografia-01"
+      ],
+      "objetivos": [
+        "pt-ort-regras-acentuacao"
+      ],
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "media"
+    },
+    {
+      "id": "pt-ort-p04",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Português",
+      "assunto": "Ortografia e acentuação",
+      "tag": "portugues-ortografia",
+      "enunciado": "Em “já”, a classificação tônica é de monossílabo tônico terminado em “a”, o que justifica o acento.",
+      "gabarito": "C",
+      "comentario": "CERTO. Monossílabos tônicos terminados em a(s), e(s) ou o(s) são acentuados.",
+      "fonte": "Elaboração própria (regras de acentuação gráfica do português brasileiro)",
+      "fonteUrl": "https://www.academia.org.br/nossa-lingua/acordo-ortografico",
+      "gabaritoFonteUrl": "https://www.academia.org.br/nossa-lingua/acordo-ortografico",
+      "origemQuestao": "autoral",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "unitIds": [
+        "unidade-pt-ortografia-01"
+      ],
+      "objetivos": [
+        "pt-ort-regras-acentuacao",
+        "pt-ort-classificacao-tonica"
+      ],
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "facil"
     }
   ]
 }

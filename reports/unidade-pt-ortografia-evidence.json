@@ -1,0 +1,45 @@
+{
+  "unitId": "unidade-pt-ortografia-01",
+  "aulaId": "aula-pt-02",
+  "videoId": "BpDHOqagBRo",
+  "duracaoTotalSegundos": 4875,
+  "inicioSegundos": 428,
+  "fimSegundos": 1980,
+  "objetivosConfirmados": [
+    "pt-ort-classificacao-tonica",
+    "pt-ort-regras-acentuacao"
+  ],
+  "metodo": "yt-dlp auto-sub pt",
+  "trechosChave": [
+    {
+      "t": 428,
+      "tema": "foco acentuacao"
+    },
+    {
+      "t": 670,
+      "tema": "classificacao oxi/paroxi/proparoxi"
+    },
+    {
+      "t": 707,
+      "tema": "monossilabos"
+    },
+    {
+      "t": 886,
+      "tema": "oxitonas"
+    },
+    {
+      "t": 1487,
+      "tema": "paroxitonas inverso"
+    },
+    {
+      "t": 1756,
+      "tema": "proparoxitonas todas acentuadas"
+    }
+  ],
+  "verificadoEm": "2026-07-16",
+  "status": "aprovado",
+  "limitacoes": [
+    "Prática com questões autorais verificadas (banco INSS estendido); poucos itens reais de acentuação no acervo.",
+    "Vídeo não cobre hífen; objetivo de hífen não entrou nesta unidade."
+  ]
+}

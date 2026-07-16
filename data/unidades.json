@@ -127,6 +127,128 @@
         "estrategia": "baseada-em-desempenho"
       },
       "statusEditorial": "publicada"
+    },
+    {
+      "id": "unidade-pt-ortografia-01",
+      "materia": "Português",
+      "assunto": "Ortografia e acentuação",
+      "titulo": "Classificação tônica e regras de acentuação gráfica",
+      "objetivos": [
+        "pt-ort-classificacao-tonica",
+        "pt-ort-regras-acentuacao"
+      ],
+      "leitura": {
+        "conteudoId": "leitura-pt-ortografia-01",
+        "tempoMinutos": 8,
+        "objetivosCobertos": [
+          "pt-ort-classificacao-tonica",
+          "pt-ort-regras-acentuacao"
+        ],
+        "secoes": [
+          {
+            "id": "classificacao-tonica",
+            "titulo": "Ache a sílaba tônica",
+            "objetivosCobertos": [
+              "pt-ort-classificacao-tonica"
+            ],
+            "conteudo": "Antes de aplicar qualquer acento, classifique a palavra pela posição da sílaba tônica. Oxítona: tônica na última sílaba (café, jiló). Paroxítona: tônica na penúltima (mesa, fácil). Proparoxítona: tônica na antepenúltima (médico, lâmpada). Monossílabo tônico tem uma sílaba só e carrega a força da voz (já, pó, fé). Monossílabo átono não leva acento (de, com, em). Erro comum: chamar monossílabo de oxítona. Oxítona exige pelo menos duas sílabas. Outro erro: contar sílabas sem pronunciar em voz alta; a classificação é da fala, não da grafia isolada. Em prova, se o item discute se a palavra é paroxítona ou oxítona, resolva primeiro a tônica e só depois a regra de acento."
+          },
+          {
+            "id": "regras-acentuacao",
+            "titulo": "Aplique a regra certa",
+            "objetivosCobertos": [
+              "pt-ort-regras-acentuacao"
+            ],
+            "conteudo": "Monossílabos tônicos e oxítonas: acentuam-se quando terminam em a(s), e(s) ou o(s) — já, pá, você, cipó. Paroxítonas: o acento aparece em terminações específicas (l, n, r, x, i(s), u(s), ã(s), ão(s), um(uns), ditongo oral etc.), como fácil, hífen, vírus, órgãos. Paroxítonas em a(s), e(s), o(s), em(ens) não levam acento (mesa, homem). Proparoxítonas: todas são acentuadas (próximo, lâmpada). Depois do Acordo Ortográfico, sumiram acentos diferenciais como pára/para (exceto pôr/pode e pôde em alguns casos de uso). Em item de C/E, desconfie de generalizações do tipo “toda paroxítona é acentuada” — isso é falso. Teste mental: classifique → veja a terminação → compare com a regra da classe."
+          },
+          {
+            "id": "armadilhas-ortografia",
+            "titulo": "Armadilhas de banca",
+            "objetivosCobertos": [
+              "pt-ort-classificacao-tonica",
+              "pt-ort-regras-acentuacao"
+            ],
+            "conteudo": "Três armadilhas frequentes. (1) Confundir terminação de oxítona com de paroxítona: o que acentua oxítona em “e” não acentua automaticamente paroxítona em “e”. (2) Tratar proparoxítona eventual (ditongo) como se a regra tivesse mudado de forma absoluta sem ler o item. (3) Inventar acento por “som aberto” sem regra: a norma é classificatória e de terminação, não de gosto. Ao errar, classifique o erro: conceitual (não sabe a regra), interpretação (leu mal a terminação) ou atenção (trocou oxítona por paroxítona)."
+          },
+          {
+            "id": "roteiro-ortografia",
+            "titulo": "Roteiro de decisão",
+            "objetivosCobertos": [
+              "pt-ort-classificacao-tonica",
+              "pt-ort-regras-acentuacao"
+            ],
+            "conteudo": "1) Pronuncie e marque a tônica. 2) Classifique (mono/oxí/paroxi/proparoxi). 3) Observe a terminação gráfica. 4) Aplique só a regra daquela classe. 5) Rejeite atalhos do tipo “se parece difícil, tem acento”. Esse roteiro cobre a maior parte dos itens de acentuação em concursos de nível médio."
+          }
+        ],
+        "pontosChave": [
+          "Classifique a tônica antes de falar em acento.",
+          "Monossílabo tônico ≠ oxítona.",
+          "Toda proparoxítona é acentuada; nem toda paroxítona é.",
+          "Oxítonas e monossílabos tônicos: a(s), e(s), o(s)."
+        ],
+        "armadilhasDeBanca": [
+          "Dizer que toda paroxítona leva acento.",
+          "Chamar monossílabo de oxítona.",
+          "Aplicar regra de oxítona em paroxítona."
+        ],
+        "fontes": [
+          {
+            "titulo": "Academia Brasileira de Letras — Acordo Ortográfico",
+            "url": "https://www.academia.org.br/nossa-lingua/acordo-ortografico",
+            "verificada": true,
+            "verificadoEm": "2026-07-16"
+          }
+        ]
+      },
+      "video": {
+        "aulaId": "aula-pt-02",
+        "duracaoTotalSegundos": 4875,
+        "inicioSegundos": 428,
+        "fimSegundos": 1980,
+        "objetivosCobertos": [
+          "pt-ort-classificacao-tonica",
+          "pt-ort-regras-acentuacao"
+        ],
+        "fonte": "YouTube — IMP Concursos",
+        "fonteUrl": "https://www.youtube.com/watch?v=BpDHOqagBRo",
+        "fonteVerificada": true,
+        "coberturaPedagogicaVerificada": true,
+        "verificadoEm": "2026-07-16",
+        "statusVerificacao": "aprovado",
+        "motivoSelecao": "ASR (yt-dlp, pt) do vídeo BpDHOqagBRo: a partir de ~428s a aula foca acentuação gráfica; ~670–1250s classifica oxítonas, paroxítonas e proparoxítonas; ~707–1980s desenvolve monossílabos tônicos, regras de oxítonas/paroxítonas e o princípio de que proparoxítonas são todas acentuadas. Trecho encerra antes do bloco extenso de exercícios finais. Hífen não é tema central desta gravação."
+      },
+      "checagem": {
+        "questionIds": [
+          "check-pt-ort-01",
+          "check-pt-ort-02",
+          "check-pt-ort-03",
+          "check-pt-ort-04"
+        ],
+        "quantidadeMinima": 3
+      },
+      "pratica": {
+        "questionIds": [
+          "pt-ort-p01",
+          "pt-ort-p02",
+          "pt-ort-p03",
+          "pt-ort-p04"
+        ],
+        "quantidadeMinima": 4
+      },
+      "correcao": {
+        "agruparPorObjetivo": true,
+        "permitirNovaTentativa": true,
+        "classificacoesErro": [
+          "conceitual",
+          "interpretacao",
+          "atencao"
+        ]
+      },
+      "revisao": {
+        "habilitada": true,
+        "estrategia": "baseada-em-desempenho"
+      },
+      "statusEditorial": "publicada"
     }
   ],
   "checagens": [
@@ -215,6 +337,122 @@
         "correta": "Correto. A descrição de uma prática não equivale a uma recomendação universal.",
         "incorreta": "Revise a diferença entre relatar um fato e atribuir uma recomendação ao autor.",
         "leituraSecaoId": "inferencia-valida"
+      }
+    },
+    {
+      "id": "check-pt-ort-01",
+      "unitId": "unidade-pt-ortografia-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "pt-ort-classificacao-tonica"
+      ],
+      "enunciado": "Na palavra “médico”, a sílaba tônica está em qual posição e qual a classificação?",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "Última sílaba — oxítona."
+        },
+        {
+          "id": "B",
+          "texto": "Penúltima sílaba — paroxítona."
+        },
+        {
+          "id": "C",
+          "texto": "Antepenúltima sílaba — proparoxítona."
+        }
+      ],
+      "respostaCorreta": "C",
+      "feedback": {
+        "correta": "Correto. Em “mé-di-co”, a tônica é “mé” (antepenúltima): proparoxítona.",
+        "incorreta": "Conte as sílabas de trás para frente e marque a tônica.",
+        "leituraSecaoId": "classificacao-tonica"
+      }
+    },
+    {
+      "id": "check-pt-ort-02",
+      "unitId": "unidade-pt-ortografia-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "pt-ort-classificacao-tonica"
+      ],
+      "enunciado": "Por que “já” não deve ser classificado como oxítona?",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "Porque oxítona exige pelo menos duas sílabas; “já” é monossílabo tônico."
+        },
+        {
+          "id": "B",
+          "texto": "Porque monossílabos nunca são tônicos."
+        },
+        {
+          "id": "C",
+          "texto": "Porque “já” é paroxítona."
+        }
+      ],
+      "respostaCorreta": "A",
+      "feedback": {
+        "correta": "Correto. Oxítona tem tônica na última de uma palavra com duas ou mais sílabas.",
+        "incorreta": "Revise a diferença entre monossílabo tônico e oxítona.",
+        "leituraSecaoId": "classificacao-tonica"
+      }
+    },
+    {
+      "id": "check-pt-ort-03",
+      "unitId": "unidade-pt-ortografia-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "pt-ort-regras-acentuacao"
+      ],
+      "enunciado": "Qual afirmação sobre acentuação está correta?",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "Todas as paroxítonas são acentuadas."
+        },
+        {
+          "id": "B",
+          "texto": "Todas as proparoxítonas são acentuadas."
+        },
+        {
+          "id": "C",
+          "texto": "Oxítonas nunca são acentuadas."
+        }
+      ],
+      "respostaCorreta": "B",
+      "feedback": {
+        "correta": "Correto. Proparoxítonas levam acento sem depender da terminação.",
+        "incorreta": "Paroxítonas só em terminações específicas; oxítonas em a/e/o (s).",
+        "leituraSecaoId": "regras-acentuacao"
+      }
+    },
+    {
+      "id": "check-pt-ort-04",
+      "unitId": "unidade-pt-ortografia-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "pt-ort-regras-acentuacao"
+      ],
+      "enunciado": "A oxítona “jiló” é acentuada principalmente porque:",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "Toda palavra com “o” final leva acento."
+        },
+        {
+          "id": "B",
+          "texto": "É oxítona terminada em “o”."
+        },
+        {
+          "id": "C",
+          "texto": "É proparoxítona."
+        }
+      ],
+      "respostaCorreta": "B",
+      "feedback": {
+        "correta": "Correto. Oxítonas terminadas em a(s), e(s) ou o(s) são acentuadas.",
+        "incorreta": "Classifique a tônica e só então aplique a regra da terminação.",
+        "leituraSecaoId": "regras-acentuacao"
       }
     }
   ]
