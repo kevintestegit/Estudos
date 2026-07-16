@@ -640,9 +640,38 @@ test("aula indisponível não conclui a etapa de aprendizado", async ({ page }) 
   await openClean(page, "/hoje.html");
   const warning = page.locator('[data-lesson-unavailable]').first();
   await expect(warning).toHaveText("Videoaula ainda não disponível");
+  await expect(page.locator('[data-step$="_learn"] [data-complete-step]')).toHaveCount(0);
   await warning.click();
   const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("portal-estudos-v1")));
   expect(progress.taskStatus).toEqual({ "2026-07-14_0_pretest": "concluida" });
+});
+
+test("escolher outro dia não conclui videoaula indisponível", async ({ page }) => {
+  await useLegacySchedule(page);
+  await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: { "2026-07-14_0_pretest": "concluida" } })));
+  await page.route("**/data/aulas.json", (route) => route.fulfill({ json: { aulas: [{ id: "aula-pt-01", titulo: "Interpretação de textos — base", materia: "Português", tipo: "indisponivel", url: null, notas: "Videoaula confiável ainda não selecionada.", verificadoEm: "2026-07-14" }] } }));
+  await openClean(page, "/hoje.html?dia=2026-07-14");
+
+  const progress = await page.evaluate(() => JSON.parse(localStorage.getItem("portal-estudos-v1")));
+  expect(progress.taskStatus).toEqual({ "2026-07-14_0_pretest": "concluida" });
+});
+
+test("fluxo legado bloqueia leitura e prática até a etapa anterior", async ({ page }) => {
+  await useLegacySchedule(page);
+  await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: { "2026-07-14_0_pretest": "concluida" } })));
+  await openClean(page, "/hoje.html");
+
+  const read = page.locator('[data-step$="_read"]');
+  const practice = page.locator('[data-step$="_practice"]');
+  await expect(read.getByRole("link")).toHaveCount(0);
+  await expect(practice.getByRole("link")).toHaveCount(0);
+
+  await page.locator('[data-complete-step$="_learn"]').click();
+  await expect(read.getByRole("link")).toHaveCount(1);
+  await expect(practice.getByRole("link")).toHaveCount(0);
+
+  await page.locator('[data-complete-step$="_read"]').click();
+  await expect(practice.getByRole("link")).toHaveCount(1);
 });
 
 test("abrir videoaula não conclui a etapa", async ({ page }) => {
@@ -657,12 +686,17 @@ test("abrir videoaula não conclui a etapa", async ({ page }) => {
 
 test("prática leva taskKey ao quiz sem concluir antes", async ({ page }) => {
   await useLegacySchedule(page);
-  await page.addInitScript(() => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus: {} })));
+  const previousSteps = {
+    "2026-07-14_0_pretest": "concluida",
+    "2026-07-14_0_learn": "concluida",
+    "2026-07-14_0_read": "concluida"
+  };
+  await page.addInitScript((taskStatus) => localStorage.setItem("portal-estudos-v1", JSON.stringify({ schemaVersion: 4, startDate: "2026-07-14", studyDays: [2], taskStatus })), previousSteps);
   await openClean(page, "/hoje.html");
   const link = page.locator('[data-step-key$="_practice"]').first();
   const key = await link.getAttribute("data-step-key");
   expect(await link.getAttribute("href")).toContain(`taskKey=${encodeURIComponent(key)}`);
-  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("portal-estudos-v1")).taskStatus || {})).toEqual({});
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("portal-estudos-v1")).taskStatus || {})).toEqual(previousSteps);
 });
 
 test("finalizar quiz conclui somente taskKey recebido", async ({ page }) => {

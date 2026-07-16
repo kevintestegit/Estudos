@@ -335,10 +335,7 @@ function renderStudyTask(entry, data, firstPending) {
       <button class="btn btn-secondary" type="button" data-complete-step="${base}_learn" ${learnDone ? "disabled" : ""}>${learnDone ? "Concluído" : "Marcar etapa como concluída"}</button>
     </div>`;
   } else {
-    learnControl = `<span class="alert alert-info" data-lesson-unavailable>${lessonAction.label}</span>
-      <div class="actions mt-1">
-        <button class="btn btn-secondary" type="button" data-complete-step="${base}_learn" ${learnDone ? "disabled" : ""}>${learnDone ? "Concluído" : "Marcar etapa como concluída"}</button>
-      </div>`;
+    learnControl = `<span class="alert alert-info" data-lesson-unavailable>${lessonAction.label}</span>`;
   }
 
   const learnHtml = `
@@ -352,28 +349,32 @@ function renderStudyTask(entry, data, firstPending) {
   const materialTitle = material?.titulo
     ? `<p class="muted" style="margin:0 0 0.5rem">${App.esc(material.titulo)}</p>`
     : "";
+  const readControl = learnDone
+    ? `<div class="actions">
+          <a class="btn ${readDone ? "btn-secondary" : ""}" ${App.linkAttrs(materialUrl)}>${readLabel}</a>
+          <button class="btn btn-secondary" type="button" data-complete-step="${base}_read" ${readDone ? "disabled" : ""}>${readDone ? "Concluído" : "Marcar etapa como concluída"}</button>
+        </div>`
+    : '<p class="muted">Conclua a etapa de aprendizado para desbloquear a leitura.</p>';
   const readHtml = `
     <div class="roadmap-step ${readDone ? "is-done" : ""} ${firstPending === `${base}_read` ? "is-next" : ""}" data-step="${base}_read">
       <span class="step-number">${readDone ? "✓" : "2"}</span>
       <div>
         <h4>Ler ou revisar</h4>
         ${materialTitle}
-        <div class="actions">
-          <a class="btn ${readDone ? "btn-secondary" : ""}" ${App.linkAttrs(materialUrl)}>${readLabel}</a>
-          <button class="btn btn-secondary" type="button" data-complete-step="${base}_read" ${readDone ? "disabled" : ""}>${readDone ? "Concluído" : "Marcar etapa como concluída"}</button>
-        </div>
+        ${readControl}
       </div>
     </div>`;
 
   // 3. Praticar
+  const practiceControl = readDone
+    ? `<div class="actions"><a class="btn ${practiceDone ? "btn-secondary" : ""}" href="${App.esc(questionUrl)}">Responder 10 questões</a></div>`
+    : '<p class="muted">Conclua a leitura para desbloquear a prática.</p>';
   const practiceHtml = `
     <div class="roadmap-step ${practiceDone ? "is-done" : ""} ${firstPending === practiceKey ? "is-next" : ""}" data-step="${practiceKey}">
       <span class="step-number">${practiceDone ? "✓" : "3"}</span>
       <div>
         <h4>Praticar</h4>
-        <div class="actions">
-          <a class="btn ${practiceDone ? "btn-secondary" : ""}" href="${App.esc(questionUrl)}">Responder 10 questões</a>
-        </div>
+        ${practiceControl}
       </div>
     </div>`;
 

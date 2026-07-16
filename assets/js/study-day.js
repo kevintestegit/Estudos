@@ -218,8 +218,6 @@
         );
       }
       if (focus.type === "study") {
-        // Auto-completa learn se não há vídeo (mesma lógica do study-flow)
-        tasksPrep(data, focus);
         return renderFreeDay(data, focus, items, today);
       }
     }
@@ -229,20 +227,6 @@
     injectPickerIntoRendered(data, items, today);
     return result;
   };
-
-  function tasksPrep(data, focus) {
-    const tasks = taskEntries(focus.day, focus.focusDate, "chosen");
-    tasks.forEach((entry) => {
-      const lesson = (data.aulas?.aulas || []).find((a) => a.id === entry.task.aulaId);
-      const available = App.lessonAction(lesson).available;
-      if (!available) {
-        const key = `${entry.scheduleDate}_${entry.index}_learn`;
-        if (typeof stepDone === "function" && !stepDone(key)) {
-          Storage.setTaskStatus(key, "concluida");
-        }
-      }
-    });
-  }
 
   function injectPickerIntoRendered(data, items, today) {
     const root = document.getElementById("app-root");

@@ -148,10 +148,7 @@
       <button class="btn btn-secondary" type="button" data-complete-step="${base}_learn" ${learnDone ? "disabled" : ""}>${learnDone ? "Concluído" : "Marcar etapa como concluída"}</button>
     </div>`;
     } else {
-      learnControl = `<span class="alert alert-info" data-lesson-unavailable>${lessonAction.label}</span>
-      <div class="actions mt-1">
-        <button class="btn btn-secondary" type="button" data-complete-step="${base}_learn" ${learnDone ? "disabled" : ""}>${learnDone ? "Concluído" : "Marcar etapa como concluída"}</button>
-      </div>`;
+      learnControl = `<span class="alert alert-info" data-lesson-unavailable>${lessonAction.label}</span>`;
     }
 
     const learnHtml = `
@@ -169,8 +166,8 @@
       : "";
 
     let readControl;
-    if (!pretestDone) {
-      readControl = `<p class="muted">Libere esta etapa concluindo o pré-teste.</p>`;
+    if (!learnDone) {
+      readControl = `<p class="muted">Conclua a etapa de aprendizado para desbloquear a leitura.</p>`;
     } else {
       readControl = `${materialTitle}
         <div class="actions">
@@ -188,15 +185,18 @@
       </div>
     </div>`;
 
+    const practiceControl = readDone
+      ? `<div class="actions">
+          <a class="btn ${practiceDone ? "btn-secondary" : ""}" href="${App.esc(questionUrl)}" data-step-key="${practiceKey}">Responder 10 questões</a>
+        </div>`
+      : '<p class="muted">Conclua a leitura para desbloquear a prática.</p>';
     const practiceHtml = `
     <div class="roadmap-step ${practiceDone ? "is-done" : ""} ${firstPending === practiceKey ? "is-next" : ""}" data-step="${practiceKey}">
       <span class="step-number">${practiceDone ? "✓" : "3"}</span>
       <div>
         <h4>Praticar</h4>
         <p class="muted" style="margin:0 0 0.5rem">Classifique cada erro (teoria, interpretação, atenção ou memorização).</p>
-        <div class="actions">
-          <a class="btn ${practiceDone ? "btn-secondary" : ""}" href="${App.esc(questionUrl)}" data-step-key="${practiceKey}">Responder 10 questões</a>
-        </div>
+        ${practiceControl}
       </div>
     </div>`;
 
