@@ -381,6 +381,142 @@
         "estrategia": "baseada-em-desempenho"
       },
       "statusEditorial": "publicada"
+    },
+    {
+      "id": "unidade-inf-hardware-software-01",
+      "materia": "Informática",
+      "assunto": "Hardware, software e sistemas",
+      "titulo": "Hardware, software e sistemas operacionais",
+      "objetivos": [
+        "inf-hw-componentes",
+        "inf-hw-software",
+        "inf-hw-sistemas"
+      ],
+      "leitura": {
+        "conteudoId": "leitura-inf-hardware-01",
+        "tempoMinutos": 8,
+        "objetivosCobertos": [
+          "inf-hw-componentes",
+          "inf-hw-software",
+          "inf-hw-sistemas"
+        ],
+        "secoes": [
+          {
+            "id": "hardware-componentes",
+            "titulo": "O que é hardware",
+            "objetivosCobertos": [
+              "inf-hw-componentes"
+            ],
+            "conteudo": "Hardware é a parte física e tangível do computador. Divide-se em núcleo (interno) e periferia (externa). No núcleo estão a CPU (processador, que executa instruções), a memória RAM (volátil, perde o conteúdo ao desligar) e a memória de armazenamento (HD/SSD, persistente). Na periferia ficam os dispositivos de entrada (teclado, mouse, scanner), saída (monitor, impressora) e entrada/saída (touchpad, tela touch). Critério de prova: se o item pergunta onde algo fica, descubra se é núcleo ou periferia; se pergunta volatilidade, lembre que RAM ≠ HD."
+          },
+          {
+            "id": "software",
+            "titulo": "O que é software",
+            "objetivosCobertos": [
+              "inf-hw-software"
+            ],
+            "conteudo": "Software é o conjunto de instruções (intangível) que faz o hardware funcionar. Divide-se em sistema operacional (Windows, Linux, macOS — gerencia recursos e faz a ponte com o hardware) e aplicativos (Word, navegador, planilha). Não confunda: o sistema operacional é software, não hardware; o aplicativo é software, não parte física. Armadilha tipica: tratar software como se fosse componente físico. Em item de C/E, 'Windows é hardware' é falso; 'Windows é software' é verdadeiro."
+          },
+          {
+            "id": "sistemas-operacionais",
+            "titulo": "Sistemas operacionais",
+            "objetivosCobertos": [
+              "inf-hw-sistemas"
+            ],
+            "conteudo": "O sistema operacional (SO) é o software-base que gerencia hardware, memória, arquivos e processos, e oferece interface para os aplicativos. Exemplos: Windows, Linux (e distribuições como Ubuntu), macOS. Conceitos recorrentes: multitarefa (vários processos ao mesmo tempo), gerenciamento de memória, sistemas de arquivos e permissões. Em concurso de nível médio, cobra-se o papel do SO e a distinção SO × aplicativo; não se exigem comandos avançados."
+          },
+          {
+            "id": "armadilhas-inf",
+            "titulo": "Armadilhas de banca",
+            "objetivosCobertos": [
+              "inf-hw-componentes",
+              "inf-hw-software",
+              "inf-hw-sistemas"
+            ],
+            "conteudo": "1) Dizer que software é parte física. 2) Trocar RAM (volátil) por HD (persistente) na questão de volatilidade. 3) Classificar sistema operacional como hardware. 4) Achar que periférico de entrada/saída (touchpad) é só entrada. Ao errar, classifique: conceitual (não sabe a definição), interpretação (leu mal o enunciado) ou atenção (confundiu os termos)."
+          },
+          {
+            "id": "roteiro-inf",
+            "titulo": "Roteiro de decisão",
+            "objetivosCobertos": [
+              "inf-hw-componentes",
+              "inf-hw-software",
+              "inf-hw-sistemas"
+            ],
+            "conteudo": "1) É físico (hardware) ou instrução (software)? 2) Se hardware, é núcleo ou periferia? 3) Se memória, é volátil (RAM) ou persistente (HD/SSD)? 4) O sistema operacional é o software que intermedia tudo. Esse roteiro cobre a maior parte dos itens de noções de hardware/software em concursos."
+          }
+        ],
+        "pontosChave": [
+          "Hardware = parte física; software = instruções.",
+          "RAM é volátil; HD/SSD são persistentes.",
+          "SO (Windows/Linux/macOS) é software, não hardware.",
+          "Periféricos ficam na entrada/saída."
+        ],
+        "armadilhasDeBanca": [
+          "Chamar software de componente físico.",
+          "Trocar RAM por HD em volatilidade.",
+          "Classificar sistema operacional como hardware."
+        ],
+        "fontes": [
+          {
+            "titulo": "Matemorfose — Noções de Hardware e Software (aula referência)",
+            "url": "https://www.youtube.com/watch?v=mzwDUdlZIJE",
+            "verificada": true,
+            "verificadoEm": "2026-07-16"
+          }
+        ]
+      },
+      "video": {
+        "aulaId": "aula-inf-01",
+        "duracaoTotalSegundos": 1634,
+        "inicioSegundos": 90,
+        "fimSegundos": 1293,
+        "objetivosCobertos": [
+          "inf-hw-componentes",
+          "inf-hw-software",
+          "inf-hw-sistemas"
+        ],
+        "fonte": "YouTube — Matemorfose com Prof. Leandro de Souza",
+        "fonteUrl": "https://www.youtube.com/watch?v=mzwDUdlZIJE",
+        "fonteVerificada": true,
+        "coberturaPedagogicaVerificada": true,
+        "verificadoEm": "2026-07-16",
+        "statusVerificacao": "aprovado",
+        "motivoSelecao": "ASR (yt-dlp pt) de mzwDUdlZIJE confirma, de ~90s a ~1293s, hardware (definição, núcleo vs periferia, CPU, memória, entrada/saída), software e sistemas operacionais (Windows/Linux/macOS, aplicativos). Trecho encerra antes do bloco final de perguntas. Segurança (phishing, criptografia) não é tema central deste trecho."
+      },
+      "checagem": {
+        "questionIds": [
+          "check-inf-hw-01",
+          "check-inf-hw-02",
+          "check-inf-hw-03",
+          "check-inf-hw-04"
+        ],
+        "quantidadeMinima": 3
+      },
+      "pratica": {
+        "questionIds": [
+          "inf-hw-p01",
+          "inf-hw-p02",
+          "inf-hw-p03",
+          "inf-hw-p04",
+          "inf-hw-p05"
+        ],
+        "quantidadeMinima": 5
+      },
+      "correcao": {
+        "agruparPorObjetivo": true,
+        "permitirNovaTentativa": true,
+        "classificacoesErro": [
+          "conceitual",
+          "interpretacao",
+          "atencao"
+        ]
+      },
+      "revisao": {
+        "habilitada": true,
+        "estrategia": "baseada-em-desempenho"
+      },
+      "statusEditorial": "publicada"
     }
   ],
   "checagens": [
@@ -701,6 +837,122 @@
         "correta": "Correto. 2³ = 8 linhas.",
         "incorreta": "Use 2^n, com n = número de simples distintas.",
         "leituraSecaoId": "tabela-verdade"
+      }
+    },
+    {
+      "id": "check-inf-hw-01",
+      "unitId": "unidade-inf-hardware-software-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "inf-hw-componentes"
+      ],
+      "enunciado": "Qual alternativa classifica corretamente CPU e mouse?",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "CPU é periférico; mouse é núcleo."
+        },
+        {
+          "id": "B",
+          "texto": "Ambos são hardware do núcleo."
+        },
+        {
+          "id": "C",
+          "texto": "CPU é núcleo; mouse é periférico de entrada."
+        }
+      ],
+      "respostaCorreta": "C",
+      "feedback": {
+        "correta": "Correto. CPU fica no núcleo; mouse é periférico externo de entrada.",
+        "incorreta": "Revise núcleo (interno) vs periferia (externa).",
+        "leituraSecaoId": "hardware-componentes"
+      }
+    },
+    {
+      "id": "check-inf-hw-02",
+      "unitId": "unidade-inf-hardware-software-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "inf-hw-componentes"
+      ],
+      "enunciado": "Sobre volatilidade, é correto afirmar:",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "HD retém dados sem energia; RAM perde ao desligar."
+        },
+        {
+          "id": "B",
+          "texto": "RAM e HD são igualmente voláteis."
+        },
+        {
+          "id": "C",
+          "texto": "RAM é persistente; HD é volátil."
+        }
+      ],
+      "respostaCorreta": "A",
+      "feedback": {
+        "correta": "Correto. RAM volátil; HD/SSD persistentes.",
+        "incorreta": "Não inverta RAM e HD na questão de volatilidade.",
+        "leituraSecaoId": "hardware-componentes"
+      }
+    },
+    {
+      "id": "check-inf-hw-03",
+      "unitId": "unidade-inf-hardware-software-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "inf-hw-software"
+      ],
+      "enunciado": "O sistema operacional Windows é:",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "Hardware do núcleo."
+        },
+        {
+          "id": "B",
+          "texto": "Software que gerencia o hardware."
+        },
+        {
+          "id": "C",
+          "texto": "Periférico de saída."
+        }
+      ],
+      "respostaCorreta": "B",
+      "feedback": {
+        "correta": "Correto. SO é software-base que intermedia hardware e aplicativos.",
+        "incorreta": "SO não é hardware nem periférico.",
+        "leituraSecaoId": "software"
+      }
+    },
+    {
+      "id": "check-inf-hw-04",
+      "unitId": "unidade-inf-hardware-software-01",
+      "origemQuestao": "autoral",
+      "objetivos": [
+        "inf-hw-sistemas"
+      ],
+      "enunciado": "Em um sistema operacional multitarefa, é correto dizer:",
+      "alternativas": [
+        {
+          "id": "A",
+          "texto": "Apenas um processo roda por vez, sem alternância."
+        },
+        {
+          "id": "B",
+          "texto": "Vários processos dividem a CPU por tempo."
+        },
+        {
+          "id": "C",
+          "texto": "O SO é um periférico de entrada."
+        }
+      ],
+      "respostaCorreta": "B",
+      "feedback": {
+        "correta": "Correto. Multitarefa alterna processos na CPU.",
+        "incorreta": "SO gerencia processos; não é periférico.",
+        "leituraSecaoId": "sistemas-operacionais"
       }
     }
   ]

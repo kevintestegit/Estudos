@@ -23,6 +23,14 @@
       "avisos": [],
       "pendenciasEditoriais": [],
       "dadosNaoVerificados": []
+    },
+    {
+      "unitId": "unidade-inf-hardware-software-01",
+      "status": "valida",
+      "erros": [],
+      "avisos": [],
+      "pendenciasEditoriais": [],
+      "dadosNaoVerificados": []
     }
   ],
   "falhou": false

@@ -4,8 +4,8 @@
   "totalAulasCronogramaUnicas": 52,
   "comVideo": 51,
   "indisponivel": 1,
-  "auditoriaAprovada": 3,
-  "auditoriaPendente": 48,
+  "auditoriaAprovada": 4,
+  "auditoriaPendente": 47,
   "auditoriaBloqueada": 1,
   "registros": [
     {
@@ -82,7 +82,7 @@
       "aulaId": "aula-inf-01",
       "materia": "Informática",
       "assunto": "Hardware, software e sistemas",
-      "unitIdCronograma": null,
+      "unitIdCronograma": "unidade-inf-hardware-software-01",
       "videoStatus": "video",
       "videoId": "mzwDUdlZIJE",
       "canal": "Matemorfose com Prof. Leandro de Souza",
@@ -90,8 +90,16 @@
       "duracaoTotalSegundos": null,
       "verificadoEm": "2026-07-14",
       "auditoriaPedagogica": {
-        "status": "pendente",
-        "nota": "Recurso público ok; trecho/objetivos de unidade ainda não auditados."
+        "status": "aprovada",
+        "unitId": "unidade-inf-hardware-software-01",
+        "inicioSegundos": 90,
+        "fimSegundos": 1293,
+        "objetivosCobertos": [
+          "inf-hw-componentes",
+          "inf-hw-software",
+          "inf-hw-sistemas"
+        ],
+        "evidencia": "reports/unidade-inf-hardware-evidence.json"
       }
     },
     {

@@ -143,10 +143,11 @@
       "tipo": "video",
       "url": "https://www.youtube.com/watch?v=mzwDUdlZIJE",
       "notas": "Aula pública diretamente dedicada a Hardware e software; título, canal, duração e página foram confirmados.",
-      "verificadoEm": "2026-07-14",
+      "verificadoEm": "2026-07-16",
       "videoId": "mzwDUdlZIJE",
       "canal": "Matemorfose com Prof. Leandro de Souza",
-      "tituloYoutube": "Informática para Concursos 2025 - Aula #01 - Noções de Hardware e Software"
+      "tituloYoutube": "Informática para Concursos 2025 - Aula #01 - Noções de Hardware e Software",
+      "duracaoTotalSegundos": 1634
     },
     {
       "id": "aula-inf-02",

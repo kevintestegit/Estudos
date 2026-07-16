@@ -1,0 +1,46 @@
+{
+  "unitId": "unidade-inf-hardware-software-01",
+  "aulaId": "aula-inf-01",
+  "videoId": "mzwDUdlZIJE",
+  "duracaoTotalSegundos": 1634,
+  "inicioSegundos": 90,
+  "fimSegundos": 1293,
+  "objetivosConfirmados": [
+    "inf-hw-componentes",
+    "inf-hw-software",
+    "inf-hw-sistemas"
+  ],
+  "metodo": "yt-dlp auto-sub pt",
+  "trechosChave": [
+    {
+      "t": 90,
+      "tema": "definição hardware/software"
+    },
+    {
+      "t": 871,
+      "tema": "periféricos"
+    },
+    {
+      "t": 893,
+      "tema": "CPU e memória"
+    },
+    {
+      "t": 403,
+      "tema": "sistemas operacionais"
+    },
+    {
+      "t": 1141,
+      "tema": "CPU"
+    },
+    {
+      "t": 1293,
+      "tema": "HD fonte"
+    }
+  ],
+  "verificadoEm": "2026-07-16",
+  "status": "aprovado",
+  "limitacoes": [
+    "Prática mistura item comum (com-inf-04) verificado e itens autorais do banco do portal.",
+    "Vídeo não foca segurança (phishing/criptografia); esse tema fica para unidade própria."
+  ]
+}

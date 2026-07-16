@@ -71,7 +71,8 @@
           "tempo": 70,
           "aulaId": "aula-inf-01",
           "pdfId": "pdf-inf-01",
-          "questoesTag": "inf-basico"
+          "questoesTag": "inf-basico",
+          "unitId": "unidade-inf-hardware-software-01"
         }
       ]
     },

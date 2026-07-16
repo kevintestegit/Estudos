@@ -1501,6 +1501,156 @@
       "concurso": "Material didático do portal",
       "ano": 2026,
       "dificuldade": "facil"
+    },
+    {
+      "id": "com-inf-04",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Informática",
+      "assunto": "Hardware, software e sistemas",
+      "tag": "inf-hardware",
+      "enunciado": "A memória RAM é volátil: seu conteúdo se perde quando o computador é desligado.",
+      "gabarito": "C",
+      "comentario": "CERTO. RAM é volátil; armazenamento permanente fica em SSD/HD.",
+      "fonte": "Elaboração própria (banco do portal)",
+      "origemQuestao": "autoral",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "facil",
+      "unitIds": [
+        "unidade-inf-hardware-software-01"
+      ],
+      "objetivos": [
+        "inf-hw-componentes",
+        "inf-hw-software"
+      ]
+    },
+    {
+      "id": "inf-hw-p01",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Informática",
+      "assunto": "Hardware, software e sistemas",
+      "tag": "inf-hardware",
+      "enunciado": "A memória RAM é classificada como volátil porque retém os dados apenas enquanto o computador recebe energia.",
+      "gabarito": "C",
+      "comentario": "CERTO. Memória volátil perde o conteúdo ao desligar; a RAM é o exemplo canônico.",
+      "fonte": "Elaboração própria (vídeo de referência Matemorfose)",
+      "fonteUrl": "https://www.youtube.com/watch?v=mzwDUdlZIJE",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "origemQuestao": "autoral",
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "facil",
+      "unitIds": [
+        "unidade-inf-hardware-software-01"
+      ],
+      "objetivos": [
+        "inf-hw-componentes"
+      ]
+    },
+    {
+      "id": "inf-hw-p02",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Informática",
+      "assunto": "Hardware, software e sistemas",
+      "tag": "inf-hardware",
+      "enunciado": "O processador (CPU) e a memória interna pertencem à parte interna do hardware, ao passo que mouse e impressora são hardware periférico.",
+      "gabarito": "C",
+      "comentario": "CERTO. CPU e memória ficam no núcleo; periféricos ficam na periferia (entrada/saída).",
+      "fonte": "Elaboração própria (vídeo de referência Matemorfose)",
+      "fonteUrl": "https://www.youtube.com/watch?v=mzwDUdlZIJE",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "origemQuestao": "autoral",
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "facil",
+      "unitIds": [
+        "unidade-inf-hardware-software-01"
+      ],
+      "objetivos": [
+        "inf-hw-componentes"
+      ]
+    },
+    {
+      "id": "inf-hw-p03",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Informática",
+      "assunto": "Hardware, software e sistemas",
+      "tag": "inf-software",
+      "enunciado": "Sistema operacional (Windows, Linux, macOS) é software, pois instrui o hardware a executar tarefas.",
+      "gabarito": "C",
+      "comentario": "CERTO. Sistema operacional pertence à camada de software, intermediando hardware e aplicativos.",
+      "fonte": "Elaboração própria (vídeo de referência Matemorfose)",
+      "fonteUrl": "https://www.youtube.com/watch?v=mzwDUdlZIJE",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "origemQuestao": "autoral",
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "facil",
+      "unitIds": [
+        "unidade-inf-hardware-software-01"
+      ],
+      "objetivos": [
+        "inf-hw-software"
+      ]
+    },
+    {
+      "id": "inf-hw-p04",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Informática",
+      "assunto": "Hardware, software e sistemas",
+      "tag": "inf-software",
+      "enunciado": "A distinção entre hardware e software é meramente conceitual: ambos são parte física do equipamento.",
+      "gabarito": "E",
+      "comentario": "ERRADO. Software é conjunto de instruções (intangível); hardware é a parte física. A afirmação confunde os dois.",
+      "fonte": "Elaboração própria (vídeo de referência Matemorfose)",
+      "fonteUrl": "https://www.youtube.com/watch?v=mzwDUdlZIJE",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "origemQuestao": "autoral",
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "media",
+      "unitIds": [
+        "unidade-inf-hardware-software-01"
+      ],
+      "objetivos": [
+        "inf-hw-software"
+      ]
+    },
+    {
+      "id": "inf-hw-p05",
+      "tipo": "ce",
+      "banca": "Elaboração própria",
+      "materia": "Informática",
+      "assunto": "Hardware, software e sistemas",
+      "tag": "inf-sistemas",
+      "enunciado": "Em um sistema operacional multitarefa, vários processos dividem a CPU por compartilhamento de tempo.",
+      "gabarito": "C",
+      "comentario": "CERTO. Multitarefa alterna processos na CPU; não roda um por vez sem alternância.",
+      "fonte": "Elaboração própria (vídeo de referência Matemorfose)",
+      "fonteUrl": "https://www.youtube.com/watch?v=mzwDUdlZIJE",
+      "fonteVerificada": true,
+      "fonteVerificadaEm": "2026-07-16",
+      "origemQuestao": "autoral",
+      "concurso": "Material didático do portal",
+      "ano": 2026,
+      "dificuldade": "facil",
+      "unitIds": [
+        "unidade-inf-hardware-software-01"
+      ],
+      "objetivos": [
+        "inf-hw-sistemas"
+      ]
     }
   ]
 }
