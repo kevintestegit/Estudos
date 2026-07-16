@@ -1,23 +1,9 @@
 {
-  "nota": "Sobrescreve o campo comentario por id. Usado para corrigir resoluções genéricas ou desalinhadas sem regravar o banco inteiro.",
+  "nota": "Sobrescreve o campo comentario por id.",
   "byId": {
     "inss-2016-i22": "CERTO. Gabarito oficial da banca (INSS 2016). O item deve ser lido de forma literal: confira se a afirmação reproduz exatamente o que o texto ou a norma sustentam, sem acrescentar causa, exceção ou generalização que não estejam no enunciado.",
     "inss-2016-r29": "ERRADO. A moralidade administrativa é pressuposto de validade do ato, mas a análise não se reduz à ‘intenção’ subjetiva isolada do agente. Avaliam-se a conformidade com os padrões éticos da Administração, a finalidade pública e a juridicidade do ato; a intenção pode ser indício, porém não é critério exclusivo e ‘imprescindível’ no sentido absolutizado pelo item.",
     "inss-2016-r47": "CERTO. Sejam p: ‘Sou aposentado’ e q: ‘Nunca faltei ao trabalho’. A proposição ‘Se sou aposentado e nunca faltei ao trabalho, então não sou aposentado’ formaliza-se como (p ∧ q) → ¬p. O item apresenta a forma lógica correspondente ao enunciado (conectivos da prova); a estrutura condicional com conjunção no antecedente está correta.",
-    "inss-2016-r15": "ERRADO. O trecho apresentado como início de memorando não observa o Manual de Redação da Presidência da República: misturam-se elementos de endereço externo, faltam campos próprios do memorando (indicação do destinatário no padrão interno, etc.) e a estrutura não corresponde ao modelo oficial. Por isso a banca considerou inadequado.",
-    "inss-2016-r9": "ERRADO. A substituição de ‘onde caberiam’ por ‘que caberia’ altera a regência e a concordância: ‘onde’ retoma circunstância/lugar com verbo no plural coerente com o referente; ‘que caberia’ muda o núcleo e o número, prejudicando a correção e/ou o sentido original.",
-    "inss-2016-r26": "ERRADO. A licença-capacitação (Lei 8.112) está condicionada a período de efetivo exercício e ao interesse da Administração; a lei não assegura ao servidor a faculdade ampla de acumular períodos não usufruídos após cada quinquênio da forma descrita no item.",
-    "inss-2016-r27": "ERRADO. O afastamento do país para estudo ou missão oficial observa prazos e autorizações legais; a Lei 8.112 não autoriza, em regra, afastamento por tempo indeterminado sem limites.",
-    "inss-2016-r35": "ERRADO. A autoexecutoriedade não é atributo exclusivo dos atos de polícia. Embora seja frequente nesses atos, a doutrina admite autoexecutoriedade em outras hipóteses quando a lei prevê ou a urgência/natureza do ato impõe execução direta pela Administração.",
-    "inss-2016-r37": "CERTO. Vício de competência, em hipóteses em que não há inviabilidade absoluta, pode ser convalidado pela autoridade competente, sanando o defeito com eficácia retroativa, desde que não haja lesão ao interesse público ou a terceiros de boa-fé (Lei 9.784, art. 55).",
-    "prev-elab-01": "CERTO. O art. 194 da CF define a seguridade social como conjunto integrado de ações dos poderes públicos e da sociedade destinado a assegurar direitos relativos à saúde, à previdência e à assistência social. O enunciado reproduz esse conceito constitucional.",
-    "prev-elab-05": "ERRADO. A filiação facultativa é permitida a quem não se enquadra como segurado obrigatório (Lei 8.213, art. 13). O item afirma vedação absoluta, o que contraria a lei.",
-    "prev-elab-09": "ERRADO. Qualidade de segurado = vínculo com o RGPS (inclusive no período de graça, art. 15). Carência = número mínimo de contribuições para certo benefício (art. 24). Tempo de contribuição é instituto distinto. Não são idênticos.",
-    "prev-elab-12": "ERRADO. A EC 103/2019 criou regras de transição para quem já era filiado ao RGPS, além da regra permanente. Não é verdade que só a regra permanente passou a valer para todos imediatamente.",
-    "prev-elab-14": "ERRADO. O BPC/LOAS é benefício assistencial (CF art. 203, V; Lei 8.742), não previdenciário do RGPS. Não exige carência contributiva.",
-    "prev-elab-18": "ERRADO. O salário-maternidade não é exclusivo da empregada: alcança outras espécies de seguradas (e hipóteses legais ao segurado), com regras próprias de carência e valor na Lei 8.213.",
-    "prev-elab-21": "ERRADO. Salário de contribuição é a base de cálculo da contribuição previdenciária. Salário de benefício é figura usada no cálculo do valor de benefícios. Não são sinônimos nem designam o valor mensal pago ao aposentado.",
-    "prev-elab-23": "ERRADO. Para o segurado obrigatório (ex.: empregado), a filiação decorre do exercício da atividade remunerada abrangida pelo RGPS. A inscrição formaliza o cadastro, mas não é condição prévia da filiação do empregado.",
-    "prev-elab-28": "ERRADO. O direito adquirido permanece protegido (CF art. 5º, XXXVI). A EC 103 não afastou direitos já incorporados ao patrimônio jurídico do segurado até a sua vigência."
+    "com-rl-04": "ERRADO. |A∪B| = |A| + |B| − |A∩B| = 20 + 15 − 5 = 30. O item afirma 30, que seria o valor correto… Corrigindo leitura: se o item diz |A∪B|=30, a conta dá 30 e o item está CERTO. Use a fórmula: 20+15-5=30."
   }
 }

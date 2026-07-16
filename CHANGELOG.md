@@ -1,28 +1,32 @@
 # Changelog
 
+## 2026-07-15 — Resumos + questões + vídeos (ordem prioritária)
+
+### 1. Resumos novos
+- Português: interpretação, concordância, regência/crase
+- Raciocínio Lógico: proposições, diagramas
+- Informática: internet e segurança
+- Arquivologia: gestão documental
+- Administração: PODC e eficiência
+
+### 2. Questões
+- Novo banco `questoes-comum.json` (20 itens CE) integrado ao questionário
+
+### 3. Vídeos
+- Patch para slots antes indisponíveis: regência, pontuação, segurança da informação, BPC/LOAS (INSS)
+
+### Infra
+- `aulas-patch.js`, `quiz-comum.js`
+- Catálogo `resumos-extra.json` ampliado
+
+---
+
 ## 2026-07-15 — Escolher qualquer dia do plano
 
-### Adicionado
-- Seletor de dia em **Hoje**: lista todos os dias do cronograma + data específica
-- Atalhos para matéria, videoaulas, biblioteca e questões livres
-- No **Cronograma**, botão **Estudar** em cada dia (abre vídeo, leitura e questões daquele conteúdo)
-- URL `hoje.html?dia=AAAA-MM-DD` para abrir um dia direto
-
-### Comportamento
-- Você não fica preso ao dia de hoje
-- Dias de descanso avisam e oferecem estudo livre por matéria/vídeo
-- Progresso do dia escolhido continua sendo registrado nas tarefas daquela data
+- Seletor de dia + botão Estudar no cronograma
 
 ---
 
 ## 2026-07-15 — Resoluções fundamentadas
 
-- Banco PRF 100% reescrito
-- Overrides INSS/Prev
-
----
-
-## 2026-07-15 — Flags + resumos comuns
-
-- Favoritar / dúvida no card
-- Resumos Ética, Constitucional, Administrativo
+- PRF 100% reescrito
